@@ -151,7 +151,6 @@ h2{font-size:22px;line-height:1.1;margin-top:1px}
 .chev{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:6px;border:1px solid var(--line-c);color:var(--ink-c);font-size:13px;transition:transform .15s}
 .home[open]>summary .chev{transform:rotate(180deg)}
 .detail{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:6px 16px 16px calc(16px + 150px + 16px)}
-@media (max-width:640px){.detail{padding-left:16px}.acts{margin-left:0;width:100%}.acts .btn{flex:1}.c1{flex-basis:100%}}
 .detail p{max-width:72ch;text-wrap:pretty;color:var(--ink-2)}
 .headtags{display:flex;flex-wrap:wrap;gap:4px 6px}
 .facts{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;font-size:14.5px;color:var(--ink-2);margin:0}
@@ -188,7 +187,6 @@ dialog.lb::backdrop{background:rgba(20,16,40,.86)}
 .lb-wrap img{max-width:100%;max-height:80vh;border-radius:10px;display:block}
 .lb-bar{display:flex;gap:8px;align-items:center;color:#fff;font-weight:700}
 .lb-bar .btn{background:rgba(255,255,255,.95)}
-@media (max-width:640px){.thumb{width:100%;height:170px}.gallery img{height:150px}}
 
 /* tables + résumé */
 .frame{overflow-x:auto}
@@ -242,7 +240,6 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
 @media (hover:none){.car-btn{opacity:.8;width:28px;height:28px;font-size:19px}}
 .car-n{position:absolute;right:6px;bottom:6px;padding:2px 7px;border-radius:999px;background:rgba(20,16,40,.62);color:#fff;font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;pointer-events:none}
 .rowcar{flex:none;width:168px;height:116px;border-radius:8px;border:1px solid var(--line)}
-@media (max-width:640px){.rowcar{width:100%;height:210px}}
 .card .car{width:100%;aspect-ratio:4/3}
 .pop .car{width:100%;height:130px;border-radius:6px}
 /* mini map: freeway outline (OpenStreetMap, drawn by miniMap) with the home's approximate spot, bottom-right of each row and card */
@@ -250,11 +247,68 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
 .mm-pin{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--pin);border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(39,33,75,.55),0 0 0 5px color-mix(in srgb,var(--pin) 28%,transparent)}
 .home>summary{position:relative;padding-right:82px}
 .card .cb>:not(.top){margin-right:58px}
-@media (max-width:640px){.home>summary{padding-right:16px}.home>summary .c3{padding-right:60px}.home>summary .acts{width:calc(100% - 100px)}}
 .hd{border:0;padding:0;border-radius:12px;width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--surface)}
 .hd::backdrop{background:rgba(20,16,40,.55)}
 .hd .hdbar{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;padding:8px;background:var(--surface);border-bottom:1px solid var(--line)}
 .hd .detail{padding-left:16px}
+
+#f-filters{display:none}
+/* phone (≤640px): everything scaled down so a listing is one short row and the list is reachable without a long scroll */
+@media (max-width:640px){
+  body{font-size:13px;padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}
+  .page{padding-block:8px 40px;gap:8px}
+  .head{gap:6px;padding:10px 12px 10px;border-radius:12px}
+  .bars{gap:3px}.bars span{height:3px}
+  .eyebrow{display:none}
+  h1{font-size:22px}
+  .headrow{gap:6px}
+  .view{gap:2px;padding:2px}.view button{min-height:26px;padding:2px 9px;font-size:12px;gap:4px}.view .n{font-size:10px}
+  .nova-badge{min-height:26px;padding:0 10px;font-size:11.5px;gap:5px}.nova-badge::before{width:6px;height:6px}
+  .status{display:none}
+  .take{font-size:12.5px;line-height:1.3}
+  .kpis{gap:5px;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .kpi{padding:6px 7px;border-radius:8px;gap:0}
+  .kpi .lab{font-size:8.5px;letter-spacing:.1em}.kpi .val{font-size:19px}.kpi .sub{font-size:10px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mod{border-radius:10px}
+  .band{padding:7px 10px;gap:8px}.tileno{width:24px;height:24px;font-size:13px;border-radius:6px}.step{display:none}.band h2{font-size:16px}.count{font-size:11px;padding:0 8px}
+  .intro{display:none}
+  /* filters fold behind the "Filters" button in the Showing row */
+  .mod:not(.show-filters) .citybar,.mod:not(.show-filters) .chipbar,.mod:not(.show-filters) .filters{display:none}
+  .citybar,.chipbar{padding:6px 10px;gap:4px 8px}.barlab{min-width:100%;font-size:9.5px;letter-spacing:.14em}
+  .citybar .view button{min-height:24px;padding:2px 8px;font-size:11.5px}
+  .chip{min-height:24px;padding:2px 8px;font-size:11.5px;gap:4px}.chip .n{font-size:10px}
+  .filters{gap:6px 8px;padding:8px 10px;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .filters .field.wide{grid-column:1/-1}
+  .field>span{font-size:9px;letter-spacing:.12em}.field select,.field input{font-size:13px;height:28px;padding:0 6px}
+  .foot{padding:5px 10px;font-size:12px;gap:6px}
+  #f-filters{display:inline-block}
+  .foot .btn{min-height:26px;padding:2px 9px;font-size:12px}
+  .check input{width:14px;height:14px}
+  .viewbar{padding:5px 10px;gap:6px 10px}
+  .strip{display:none}
+  /* a listing: photo · name/area/rent · ★ Pass · chevron, all on one row */
+  .home>summary{display:grid;grid-template-columns:78px minmax(0,1fr) auto auto;grid-template-areas:"ph c2 acts chev" "ph c3 acts chev" "ph c1 acts chev";align-items:center;column-gap:8px;row-gap:2px;padding:6px 8px 6px 8px}
+  .home>summary .rowcar{grid-area:ph;width:78px;height:62px;border-radius:6px}
+  .home>summary .car-btn{display:none}.home>summary .car-n{font-size:9px;padding:1px 5px;right:3px;bottom:3px}
+  .home>summary .c1{grid-area:c1;flex-direction:row;gap:4px}
+  .home>summary .c2{grid-area:c2;min-width:0}.main{font-size:13px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sub{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .home>summary .c3{grid-area:c3;gap:3px 6px;padding-right:0;font-size:12px}
+  .rent{font-size:12.5px}
+  .tag,.pill,.cpill{font-size:8.5px;padding:3px 5px;letter-spacing:.06em}
+  .home>summary .acts{grid-area:acts;flex-direction:column;gap:3px;margin:0;width:auto}
+  .home>summary .acts .btn{min-height:24px;padding:1px 7px;font-size:11px;border-radius:5px}
+  .home>summary .chev{grid-area:chev;width:18px;height:18px;font-size:11px}
+  .home>summary .mini{position:static;grid-area:chev;width:0;height:0;border:0;box-shadow:none;display:none}
+  .detail{padding:4px 10px 12px 10px;gap:8px}
+  .detail p,.facts,.contact,textarea.note{font-size:13px}
+  .facts{gap:3px 10px}.facts dt{font-size:9.5px}
+  .gallery img{height:120px}
+  .thumb{width:72px;height:54px}
+  .cards{gap:6px;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card .cb{padding:6px 7px;gap:3px}.card .cb .rent{font-size:13px}.card .cb .main{font-size:12px}.card .cb .sub{font-size:10px}.card .cb>:not(.top){margin-right:40px}.card .mini{width:36px;right:7px;bottom:6px}.card .car-btn{display:none}
+  table{font-size:12px}th,td{padding:5px 8px}
+  .pad{padding:10px;gap:8px}
+}
 </style>
 
 <div class="page">
@@ -312,7 +366,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
       <label class="field"><span>Nova (lb)</span><input type="number" id="f-nova" min="0" max="250" step="0.5" placeholder="49.5"></label>
       <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="city">City A–Z</option></select></label>
     </div>
-    <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><label class="check"><input type="checkbox" id="f-hidepass" checked> Hide passed</label><button type="button" class="btn" id="f-reset">Reset filters</button></div>
+    <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><label class="check"><input type="checkbox" id="f-hidepass" checked> Hide passed</label><button type="button" class="btn" id="f-filters" aria-expanded="false">Filters ▾</button><button type="button" class="btn" id="f-reset">Reset filters</button></div>
     <div class="viewbar"><div class="seg" role="group" aria-label="View"><button type="button" data-mode="list">List</button><button type="button" data-mode="map">Map</button></div>
       <label class="field" id="layout-field"><span>Layout</span><select id="f-layout"><option value="list">List view</option><option value="icons">Icon view</option></select></label></div>
     <div class="strip" id="strip-homes"><span class="c1">Nova</span><span class="c2">Home · area</span><span class="c3">Rent · size</span></div>
@@ -511,6 +565,7 @@ let qT;$('f-q').addEventListener('input',e=>{clearTimeout(qT);qT=setTimeout(()=>
 [['f-nova','nova'],['f-pmin','pmin'],['f-pmax','pmax']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
 [['f-dep','dep'],['f-beds','beds'],['f-baths','baths'],['f-sort','sort'],['f-type','type']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
 $('f-hidepass').addEventListener('change',e=>{F.hidepass=e.target.checked;changed();});
+$('f-filters').addEventListener('click',()=>{const m=$('homes'),on=m.classList.toggle('show-filters');$('f-filters').setAttribute('aria-expanded',on);$('f-filters').textContent=on?'Filters ▴':'Filters ▾';});
 $('f-reset').addEventListener('click',()=>{const nova=F.nova;F=Object.assign({},DEF,{cities:CITIES.map(c=>c.k),am:[],nova});changed();});
 document.querySelectorAll('.kpi').forEach(k=>k.addEventListener('click',()=>{
   const t=k.dataset.k;
