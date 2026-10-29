@@ -199,6 +199,38 @@ td .sub{display:block;font-size:12.5px}
 .pad{padding:14px 16px;display:grid;gap:12px}
 ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-width:80ch}
 .footer{font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);justify-self:start;padding:6px 12px;border-radius:999px}
+/* views: list / icons / map */
+.viewbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:8px 16px;border-bottom:1px solid var(--line-c)}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{cursor:pointer;border:0;background:none;min-height:34px;padding:4px 16px;font-weight:800;font-size:14px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:var(--white)}
+.viewbar .field{display:flex;align-items:center;gap:8px}
+.viewbar .field select{width:auto;height:34px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;padding:14px 16px}
+@media (max-width:900px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.cards{grid-template-columns:minmax(0,1fr)}}
+.card{position:relative;display:grid;grid-template-rows:auto 1fr;text-align:left;cursor:pointer;padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface);box-shadow:inset 0 4px 0 var(--city,transparent);font:inherit;color:inherit}
+.card:hover{box-shadow:inset 0 4px 0 var(--city,transparent),0 4px 14px rgba(39,33,75,.12)}
+.card:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.card.passed{opacity:.6}
+.card .pic{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--chip);display:block}
+.card .pic.none{display:grid;place-items:center;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.card .cb{display:grid;gap:6px;padding:10px 12px 12px;align-content:start}
+.card .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card .rent{font-size:17px}
+.card .tags{display:flex;flex-wrap:wrap;gap:4px}
+.card .stbadge{position:absolute;top:10px;left:10px}
+.mapwrap{position:relative}
+#map{height:min(72vh,640px);min-height:360px;background:var(--chip)}
+.mapnote{padding:7px 16px;font-size:13px;color:var(--muted);border-top:1px solid var(--line-c)}
+.pop{display:grid;gap:4px;width:210px;font-family:var(--f-sans,inherit)}
+.pop img{width:100%;height:120px;object-fit:cover;border-radius:6px}
+.pop .main{font-size:14.5px}
+.pop .btn{margin-top:4px}
+.hd{border:0;padding:0;border-radius:12px;width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--surface)}
+.hd::backdrop{background:rgba(20,16,40,.55)}
+.hd .hdbar{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;padding:8px;background:var(--surface);border-bottom:1px solid var(--line)}
+.hd .detail{padding-left:16px}
 </style>
 
 <div class="page">
@@ -257,8 +289,12 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
       <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="city">City A–Z</option></select></label>
     </div>
     <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><label class="check"><input type="checkbox" id="f-hidepass" checked> Hide passed</label><button type="button" class="btn" id="f-reset">Reset filters</button></div>
-    <div class="strip"><span class="c1">Nova</span><span class="c2">Home · area</span><span class="c3">Rent · size</span></div>
+    <div class="viewbar"><div class="seg" role="group" aria-label="View"><button type="button" data-mode="list">List</button><button type="button" data-mode="map">Map</button></div>
+      <label class="field" id="layout-field"><span>Layout</span><select id="f-layout"><option value="list">List view</option><option value="icons">Icon view</option></select></label></div>
+    <div class="strip" id="strip-homes"><span class="c1">Nova</span><span class="c2">Home · area</span><span class="c3">Rent · size</span></div>
     <div class="rows" id="list-homes"><div class="load"></div></div>
+    <div class="cards" id="cards-homes" hidden></div>
+    <div class="mapwrap" id="map-homes" hidden><div id="map" role="region" aria-label="Map of homes"></div><div class="mapnote" id="map-note"></div></div>
   </section>
 
   <!-- 2 · shortlist -->
@@ -303,6 +339,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
     <div class="frame"><table id="sources"></table></div>
   </section>
 
+  <dialog class="hd" id="hd" aria-label="Home details"><div class="hdbar"><button type="button" class="btn" id="hd-close">Close ✕</button></div><div id="hd-body"></div></dialog>
   <dialog class="lb" id="lb" aria-label="Photo viewer"><div class="lb-wrap"><img id="lb-img" alt="">
     <div class="lb-bar"><button type="button" class="btn" id="lb-prev" aria-label="Previous photo">‹</button><span id="lb-title"></span> · <span id="lb-n"></span><button type="button" class="btn" id="lb-next" aria-label="Next photo">›</button><button type="button" class="btn" id="lb-close">Close</button></div></div></dialog>
   <footer class="footer glass" id="foot">Live · personal home search</footer>
@@ -598,11 +635,88 @@ function render(){
   $('foot').textContent='Live · listings checked '+(last?day(last):'—');
   const lh=$('list-homes');lh.replaceChildren();
   if(!shown.length)lh.append(el('p','empty','No homes match these filters. Widen the price range or turn a city back on.'));
-  shown.forEach(h=>lh.append(row(h,'all')));
+  drawHomes(shown,lh);
   const ls=$('list-short');ls.replaceChildren();
   if(!short.length)ls.append(el('p','empty','Nothing here yet. Tap ★ on any home, or mark it Contacted, Toured or Applied.'));
   short.forEach(h=>ls.append(row(h,'short')));
   drawCosts(short,shown);drawSources();
+}
+/* ---------- list / icon / map views ---------- */
+// Coordinates looked up from the address (US Census geocoder) for homes saved without lat/lng.
+const GEO={"scottsdale-6552-e-2nd-st":[33.491124,-111.938869],"ahwatukee-leaseaz-3801-e-orchid-ln":[33.322656,-112.000146],"mesa-leaseaz-4737-s-element":[33.329046,-111.618979],"mesa-msr-838-e-10th-st":[33.432651,-111.81303],"mesa-1367-s-country-club-dr-unit-1193":[33.391336,-111.840006],"gilbert-4043-e-appaloosa-rd":[33.339004,-111.702976],"mesa-4725-e-brown-rd-55":[33.437237,-111.728859],"mesa-msr-7558-e-navarro-ave":[33.367967,-111.672133],"ahwatukee-rentler-13814-s-42nd-st":[33.321232,-111.995095],"scottsdale-7337-e-lewis-ave":[33.47557,-111.92276],"gilbert-1254-s-corrine-dr":[33.327795,-111.77937],"mesa-441-s-maple-81":[33.407735,-111.748152],"mesa-9233-e-neville-ave-1092":[33.368356,-111.633671],"mesa-avilla-lehi-crossing":[33.480861,-111.756718],"tempe-904-s-mariana-st-a":[33.418812,-111.918747],"scottsdale-8617-e-larkspur-dr":[33.5997,-111.894315],"mesa-6610-e-university-dr-unit-47":[33.422986,-111.688333],"chandler-1624-e-chicago-st":[33.300521,-111.814059],"chandler-281-s-california-st":[33.299224,-111.844029],"mesa-1322-s-sandal":[33.391265,-111.707972],"gilbert-2098-e-mallard-ct":[33.369243,-111.747004],"scottsdale-8292-e-cortez-dr":[33.592915,-111.902806],"gilbert-1819-e-cascade-dr":[33.372491,-111.749931],"ahwatukee-corsica-villas-euclid-avenue":[33.366901,-112.063323],"mesa-2232-w-lindner-ave-41":[33.37649,-111.881899],"gilbert-2992-e-ravenswood-dr":[33.220119,-111.724931],"scottsdale-16640-e-desert-vista-trl":[33.742769,-111.72017],"mesa-453-w-university-dr":[33.422309,-111.841689],"mesa-msr-9706-e-butte-st":[33.420955,-111.621654],"mesa-9819-e-kiva-ave":[33.377652,-111.623177],"chandler-900-s-94th-st-1132":[33.291693,-111.879391],"mesa-1367-s-country-club-dr-1057":[33.391336,-111.840006],"scottsdale-8316-e-indian-school-rd":[33.494932,-111.901861],"scottsdale-5741-e-aire-libre-ave":[33.63682,-111.956867],"mesa-zen-8708-e-portobello-ave":[33.360511,-111.646253],"ahwatukee-leaseaz-1819-w-nighthawk-way":[33.297713,-112.099074],"scottsdale-8713-e-orange-blossom-ln":[33.510786,-111.893483],"gilbert-2627-s-bahama-dr":[33.302691,-111.753775],"scottsdale-8044-e-krail-st":[33.53462,-111.907109],"chandler-900-s-94th-st-1184":[33.291693,-111.879391],"chandler-965-e-runaway-bay-pl":[33.214339,-111.824993],"mesa-456-n-horne":[33.423659,-111.814125],"scottsdale-8714-e-clarendon-ave":[33.4916,-111.893826],"mesa-505-north-lesueur":[33.424972,-111.820105],"scottsdale-5036-e-campo-bello-dr":[33.644065,-111.972287],"gilbert-1946-s-oak-st":[33.315249,-111.794941],"mesa-tricon-gateway":[33.327489,-111.633061],"chandler-1111-w-summit-pl-79":[33.35318,-111.860385],"chandler-760-e-indian-wells-place":[33.212906,-111.829445],"ahwatukee-verano-townhomes":[33.321101,-111.989134],"mesa-bb-living-burden-orchards":[33.478754,-111.752975],"scottsdale-11047-e-mirasol-cir":[33.632614,-111.841876],"scottsdale-10055-n-142nd-st-1330":[33.577604,-111.774364],"chandler-281-w-flamingo-dr":[33.275936,-111.846875],"mesa-msr-1761-w-peralta-ave":[33.357325,-111.871658],"chandler-2307-e-mahogany-pl":[33.230312,-111.800061],"mesa-bella-encanta":[33.389634,-111.618049],"gilbert-2498-s-betty-st":[33.305331,-111.699479],"mesa-4512-s-mole":[33.333645,-111.632574],"mesa-962-s-wildrose":[33.397507,-111.608495],"scottsdale-8240-e-turney-ave":[33.500032,-111.903655],"scottsdale-9750-e-gelding-dr":[33.61598,-111.871576],"gilbert-4021-e-catclaw-st":[33.338155,-111.703806],"mesa-61-n-hobson":[33.416564,-111.818399],"chandler-936-e-flint-st":[33.30899,-111.825854],"scottsdale-10591-e-saddlehorn-dr":[33.573506,-111.852765],"mesa-8317-e-impala-ave":[33.383083,-111.651757],"chandler-1449-e-ironwood-dr":[33.326269,-111.814702],"chandler-1935-w-mockingbird-dr":[33.265065,-111.877652],"mesa-msr-555-n-elm":[33.426008,-111.857751],"gilbert-4467-e-remington-dr":[33.288013,-111.693732],"gilbert-2325-e-lakecrest-dr":[33.375528,-111.740839],"mesa-avilla-enclave":[33.364748,-111.652884],"mesa-2024-s-baldwin-st-95":[33.378386,-111.626267],"mesa-536-n-hall-c":[33.425413,-111.794616],"ahwatukee-leaseaz-3915-e-gail-dr":[33.322285,-111.998297],"ahwatukee-8658-s-51st-st-2":[33.367837,-111.972254],"gilbert-4168-e-appaloosa-rd":[33.339134,-111.700452],"gilbert-4161-e-pinto-dr":[33.337928,-111.700797],"mesa-zen-5246-e-hilton-ave":[33.388665,-111.718137],"ahwatukee-5220-e-tamblo-dr":[33.338112,-111.973938],"mesa-zen-10054-e-olla-ave":[33.363807,-111.616638],"chandler-1072-e-newland-dr":[33.277416,-111.822974],"gilbert-town-germann":[33.279281,-111.776199],"mesa-1741-s-clearview-ave-66":[33.384107,-111.679369],"scottsdale-9705-e-mountain-view-rd-1015":[33.575459,-111.871805],"ahwatukee-corsica-villas-20th-street":[33.372498,-112.040307],"chandler-1097-e-chapman-dr":[33.278322,-111.822442],"gilbert-the-havenly":[33.335901,-111.728191]};
+let LV={mode:'list',layout:'list'};
+try{const s=JSON.parse(localStorage.getItem('jn-layout')||'null');if(s)LV=Object.assign(LV,s);}catch(e){}
+function setLV(k,v){LV[k]=v;try{localStorage.setItem('jn-layout',JSON.stringify(LV));}catch(e){}render();}
+document.querySelectorAll('.seg [data-mode]').forEach(b=>b.addEventListener('click',()=>setLV('mode',b.dataset.mode)));
+$('f-layout').addEventListener('change',e=>setLV('layout',e.target.value));
+const coord=h=>{const a=num(h.lat),b=num(h.lng);if(a!=null&&b!=null&&a&&b)return[a,b];return GEO[h.id]||null;};
+function card(h){
+  const v=dogVerdict(h),st=statusOf(h),ck=cityKey(h),fh=fit(h),ph=photosOf(h);
+  const c=el('button','card'+(st==='pass'?' passed':''));c.type='button';c.style.setProperty('--city',CITY_COLOR[ck]||'var(--c-other)');
+  c.setAttribute('aria-label',`Open ${h.name||h.address}`);
+  let pic;if(ph.length){pic=el('img','pic');pic.src=ph[0];pic.alt='';pic.loading='lazy';pic.decoding='async';pic.addEventListener('error',()=>pic.replaceWith(el('span','pic none','No photo')));}
+  else pic=el('span','pic none','No photo');
+  c.append(pic);
+  if(st&&st!=='pass')c.append(el('span','tag key stbadge',(ACTIVE.has(st)?'★ ':'')+STATUS_LABEL[st]));
+  const cb=el('span','cb');
+  const top=el('span','top');top.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')),el('span','cpill',ck));cb.append(top);
+  cb.append(el('span','main',h.name||h.address||'Rental'));
+  cb.append(el('span','sub',[bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null,sqftTxt(h),h.type||'House'].filter(Boolean).join(' · ')));
+  const tg=el('span','tags');tg.append(el('span','tag '+v.cls,v.short));
+  if(fh.tier||fh.hits>=3)tg.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
+  if(fh.c.pool)tg.append(el('span','pill good','Pool'));
+  cb.append(tg);c.append(cb);
+  c.addEventListener('click',()=>openHome(h));
+  return c;
+}
+let hdId=null;
+function openHome(h){hdId=h.id;fillHome();const d=$('hd');if(!d.open)d.showModal();}
+function fillHome(){const h=homes&&homes.find(x=>x.id===hdId);const b=$('hd-body');b.replaceChildren();if(!h)return;const r=row(h,'card');r.open=true;b.append(r);}
+$('hd-close').addEventListener('click',()=>$('hd').close());
+$('hd').addEventListener('click',e=>{if(e.target.id==='hd')$('hd').close();});
+$('hd').addEventListener('close',()=>{hdId=null;});
+function drawHomes(shown,lh){
+  const map=LV.mode==='map',icons=!map&&LV.layout==='icons';
+  document.querySelectorAll('.seg [data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===LV.mode));
+  $('f-layout').value=LV.layout;$('layout-field').hidden=map;
+  lh.hidden=map||icons;$('strip-homes').hidden=map||icons;$('cards-homes').hidden=!icons;$('map-homes').hidden=!map;
+  if(icons){const cg=$('cards-homes');cg.replaceChildren();
+    if(!shown.length)cg.append(el('p','empty','No homes match these filters. Widen the price range or turn a city back on.'));
+    shown.forEach(h=>cg.append(card(h)));}
+  else if(!map){if(!shown.length)lh.append(el('p','empty','No homes match these filters. Widen the price range or turn a city back on.'));
+    shown.forEach(h=>lh.append(row(h,'all')));}
+  else drawMap(shown);
+  if($('hd').open)fillHome();
+}
+let LM=null,LMlayer=null,leafletP=null;
+function loadLeaflet(){
+  if(window.L)return Promise.resolve();
+  if(leafletP)return leafletP;
+  const css=el('link');css.rel='stylesheet';css.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';document.head.append(css);
+  leafletP=new Promise((ok,no)=>{const s=el('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';s.onload=ok;s.onerror=()=>{leafletP=null;no();};document.head.append(s);});
+  return leafletP;
+}
+async function drawMap(shown){
+  try{await loadLeaflet();}catch(e){$('map-note').textContent='The map could not load. Check your connection and try again.';return;}
+  if(!LM){LM=L.map('map',{scrollWheelZoom:true});
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(LM);
+    LMlayer=L.layerGroup().addTo(LM);}
+  LMlayer.clearLayers();
+  const cs=getComputedStyle(document.documentElement),pts=[];let off=0;
+  shown.forEach(h=>{const ll=coord(h);if(!ll){off++;return;}pts.push(ll);
+    const st=statusOf(h),star=ACTIVE.has(st);
+    const col=cs.getPropertyValue((CITY_COLOR[cityKey(h)]||'var(--c-other)').slice(4,-1)).trim()||'#9A93B5';
+    const m=L.circleMarker(ll,{radius:star?10:7,color:star?'#B8901E':'#FFFFFF',weight:star?3:1.5,fillColor:col,fillOpacity:st==='pass'?.4:.92});
+    m.bindPopup(()=>{const p=el('div','pop');const ph=photosOf(h);
+      if(ph.length){const im=el('img');im.src=ph[0];im.alt='';im.addEventListener('error',()=>im.remove());p.append(im);}
+      p.append(el('span','main',h.name||h.address||'Rental'));
+      p.append(el('span','sub',[rentTxt(h)+(rentLo(h)!=null?'/mo':''),bedsTxt(h),sqftTxt(h)].filter(Boolean).join(' · ')));
+      const t=el('span','tags');t.append(el('span','tag '+dogVerdict(h).cls,dogVerdict(h).short));p.append(t);
+      const b=el('button','btn teal','Details');b.type='button';b.addEventListener('click',()=>openHome(h));p.append(b);return p;},{maxWidth:240});
+    m.bindTooltip(rentTxt(h),{direction:'top',offset:[0,-6]});
+    LMlayer.addLayer(m);});
+  $('map-note').textContent=`${pts.length} of ${shown.length} homes on the map`+(off?` · ${off} without a mappable address (switch to List to see them)`:'')+'. Gold ring = shortlisted.';
+  requestAnimationFrame(()=>{LM.invalidateSize();if(pts.length)LM.fitBounds(pts,{padding:[30,30],maxZoom:14});else LM.setView([33.45,-111.9],10);});
 }
 function drawCosts(short,shown){
   const t=$('costs');t.replaceChildren();
