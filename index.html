@@ -245,6 +245,12 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
 @media (max-width:640px){.rowcar{width:100%;height:210px}}
 .card .car{width:100%;aspect-ratio:4/3}
 .pop .car{width:100%;height:130px;border-radius:6px}
+/* mini map: freeway outline (OpenStreetMap) with the home's approximate spot, bottom-right of each row and card */
+.mini{position:absolute;right:12px;bottom:10px;width:54px;aspect-ratio:200/244;border-radius:5px;border:1px solid var(--line-strong);background:#F0EFF6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 244'%3E%3Crect width='200' height='244' fill='%23F0EFF6'/%3E%3Cpath d='M86 140L93 138 102 131 108 129 110 126 123 126 127 121 130 119 138 120 146 119 152 122 158 122 164 132 176 142 175 154 172 159 174 178 172 183 166 185 142 185 140 189 139 198 130 204 109 204 104 202 90 202 85 200 68 200 57 198 50 200 14 201 50 201 57 198 68 201 85 200 90 202 104 202 109 204 131 204 139 198 140 189 142 186 166 185 173 182 174 179 174 170 172 164 172 159 175 154 175 150 176 147 176 142 169 137 164 131 159 123 152 122 146 119 130 119 126 121 123 126 110 126 108 129 102 131 93 138 87 140 82 139 62 138 58 137 57 132 56 130 40 128-18 127M6 39L-23 39M79 238L57 202 56 178 58 167 58 152 55 149 43 149 38 144 35 142 20 142 36 143 43 149 54 150 57 151 58 154 58 167 56 178 57 202 79 238M6 39L31 39 37 37 56 37 65 42 81 46 85 49 86 52 85 82 89 86 90 91 86 102 85 161 84 173 85 185 87 102 90 91 89 86 85 82 86 51 85 49 83 46 65 41 56 37 37 37 31 39 6 39M31 128L40 128 56 130 57 132 58 137 62 138 82 139 86 140M60 160L64 160 218 160M33 136L33 129 31 128M11 142L15 141 10 142 8 140 8 128 6 122 6 94 6 122 8 128 8 140 11 142M46 41L46 49 43 61 43 77 41 79 33 85 31 108 33 85 41 79 43 77 43 61 46 48 46 38M31 128L33 129 33 141 35 143M4 18L6 32 4 82 6 87 6 93 6 87 5 82 6 30-3-20M2 6L4 18M137 160L64 160 60 159M140 160L137 160M141 160L140 160M153 160L141 160M184 160L153 160M190 160L184 160M196 160L190 160M202 160L196 160M208 160L202 160M209 160L208 160M215 160L209 160M84 195L85 185 84 195M1 39L6 39M54 139L53 135 54 149 58 152 58 159M54 141L54 139M57 159L60 160M23 128L31 128M33 129L33 130M33 128L33 129M33 126L33 128M33 126L33 120 31 115 31 109 31 115 33 120 33 126M19 128L23 128M33 137L33 136M33 138L33 137M33 140L33 138M33 141L33 140M33 142L33 141M35 143L33 142M36 143L35 143M54 145L54 141M-4 128L19 128M16 141L20 142 16 141M53 134L53 126 53 134M-14 39L1 39M0-4L2 6M0-5L0-4M-11-4L-7-4M-23-9L-15-4-11-4M-10-4L-15-5-23-9M-2-18L0-5M33 128L33 126M84 197L84 198M95 262L94 261 95 262M-17 39L-14 39M173 186L181 195M174 187L173 187M174 188L174 187M33 129L33 128M-23 39L-17 39M74 160L73 160M-10 128L-4 128M-16 127L-10 128M-18 127L-16 127M54 146L54 145M-1 200L-18 180M12 200L-1 200M12 201L14 201 12 200M-17 182L-1 200 12 201M33 130L33 129M177 190L174 188M179 191L177 190M217 160L215 160M218 160L217 160M-18 180L-17 182M-8-4L-10-4M-7-4L-8-4M54 148L54 146M57 158L57 159M181 194L179 191M19 128L18 128' fill='none' stroke='%238F88AC' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;box-shadow:0 1px 3px rgba(39,33,75,.18);pointer-events:none;z-index:1}
+.mm-pin{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--pin);border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(39,33,75,.55),0 0 0 5px color-mix(in srgb,var(--pin) 28%,transparent)}
+.home>summary{position:relative;padding-right:82px}
+.card .cb>:not(.top){margin-right:58px}
+@media (max-width:640px){.home>summary{padding-right:16px}.home>summary .c3{padding-right:60px}.home>summary .acts{width:calc(100% - 100px)}}
 .hd{border:0;padding:0;border-radius:12px;width:min(760px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:var(--surface)}
 .hd::backdrop{background:rgba(20,16,40,.55)}
 .hd .hdbar{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;padding:8px;background:var(--surface);border-bottom:1px solid var(--line)}
@@ -372,7 +378,7 @@ const CITIES=[
   {k:'Ahwatukee',c:'--c-ahwatukee'},{k:'Scottsdale',c:'--c-scottsdale'},{k:'Paradise Valley',c:'--c-pv'},{k:'Arcadia / Biltmore',c:'--c-arcadia'}];
 const CITY_COLOR=Object.fromEntries(CITIES.map(c=>[c.k,`var(${c.c})`]));
 const TYPES=['House','Townhome','Duplex','BTR community'];
-const AMEN=['Fenced yard','Private yard','Garage','In-unit W/D','Single-level','Dog park','Pool','Smart home','EV charging','Gated','Pet spa','Storage'];
+const AMEN=['Fenced yard','Private yard','Garage','In-unit W/D','Single-level','Dog park','Pool','Community pool','Smart home','EV charging','Gated','Storage'];
 const STATUSES=[['contacted','Contacted'],['toured','Toured'],['applied','Applied']];
 const NOVA={name:'Nova',breed:'Siberian Husky',weight:49.5};
 const pitch=h=>`Hi, I'm interested in renting ${h.address||h.name||'your home'}. I have one dog, Nova, a ${NOVA.weight} lb ${NOVA.breed}. Over the past two years every vet and pet professional who has met her has called her the calmest husky they've seen, and I can share her vet records and references. I'm glad to complete PetScreening, carry renter's insurance with pet liability, and talk about an added pet deposit. Would you consider her for this home? Thanks, Josh`;
@@ -391,6 +397,7 @@ let F=Object.assign({},DEF);
 try{const s=JSON.parse(localStorage.getItem('jn-filters')||'null');if(s)F=Object.assign({},DEF,s,s.v===2?{}:{sort:'fit',v:2});}catch(e){}
 if(F.nova==='')F.nova=String(NOVA.weight);
 if(typeof F.type!=='string')F.type='';
+F.am=(Array.isArray(F.am)?F.am:[]).filter(a=>AMEN.includes(a));
 const saveF=()=>{try{localStorage.setItem('jn-filters',JSON.stringify(F));}catch(e){}};
 let homes=null, db=null, canWrite=true, view='homes';
 const pending=new Map();
@@ -400,7 +407,11 @@ const rentLo=h=>num(h.rent_min)??num(h.rent_max);
 const rentHi=h=>num(h.rent_max)??num(h.rent_min);
 const statusOf=h=>pending.has(h.id)?pending.get(h.id):(h.status||'');
 const cityKey=h=>CITY_COLOR[h.city]?h.city:(/arcadia|biltmore|camelback/i.test((h.city||'')+' '+(h.area||''))?'Arcadia / Biltmore':/ahwatukee|south phoenix|south mountain/i.test((h.city||'')+' '+(h.area||''))?'Ahwatukee':h.city||'Other');
-const amenSet=h=>{const s=new Set(Array.isArray(h.amenities)?h.amenities:[]);if(h.fenced_yard===true)s.add('Fenced yard');if(num(h.garage_spaces)>0)s.add('Garage');return s;};
+// A listing's "pool" is often the community's; only a pool the notes don't call shared counts as the home's own.
+const COMMUNITY_POOL=/community[^.;]{0,30}pools?|resort[- ]style pool|shared pool|hoa pool|pools?, (playground|tennis|fitness)|community (with|has) [^.;]{0,20}pool/i, OWN_POOL=/private pool|own pool|backyard pool|pool in (the )?back|private pool\/spa/i;
+const hasYard=h=>h.fenced_yard===true||(Array.isArray(h.amenities)&&(h.amenities.includes('Fenced yard')||h.amenities.includes('Private yard')))||(/back ?yard/i.test(h.notes||'')&&!/no (back ?yard|real yard|private yard)/i.test(h.notes||''));
+const amenSet=h=>{const s=new Set(Array.isArray(h.amenities)?h.amenities:[]);if(h.fenced_yard===true)s.add('Fenced yard');if(hasYard(h))s.add('Private yard');if(num(h.garage_spaces)>0)s.add('Garage');
+  const n=h.notes||'';if(COMMUNITY_POOL.test(n)){s.add('Community pool');if(!OWN_POOL.test(n))s.delete('Pool');}else if(OWN_POOL.test(n))s.add('Pool');return s;};
 /* score: 0 no dogs · 0.5 Nova hits a rule · 1 unknown · 1.5 breed list unchecked · 2 dogs OK, breed not confirmed · 3 Nova confirmed OK */
 const smallOnly=h=>h.small_dogs_only===true||(h.small_dogs_only!==false&&/small dogs?\b|dogs must be small/i.test(h.pet_notes||''));
 function dogVerdict(h){
@@ -422,9 +433,9 @@ function fit(h){
   const c={
     beds:bl==null?null:bl<=3&&3<=bh,
     size:sl==null?null:sl<=2200&&sh>=1600,
-    yard:h.fenced_yard===true||am.has('Fenced yard')||am.has('Private yard')||/back ?yard/i.test(h.notes||'')?true:null,
+    yard:hasYard(h)?true:null,
     upgraded:UPGRADED.test([h.notes,h.specials,(h.amenities||[]).join(' ')].join(' '))?true:null,
-    pool:am.has('Pool')||/pool/i.test(h.notes||'')};
+    pool:am.has('Pool')};
   const core=[c.beds,c.size,c.yard,c.upgraded], hits=core.filter(x=>x===true).length, fails=core.filter(x=>x===false).length;
   const tier=hits===4?'strong':(c.beds&&c.size&&c.yard)?'close':null;
   return{c,hits,fails,tier,score:hits+(c.pool?0.5:0)-fails*0.25,
@@ -568,7 +579,7 @@ function row(h,mode,open){
   acts.firstChild.setAttribute('aria-pressed',ACTIVE.has(st));
   acts.append(sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
   const chev=el('span','chev','▾');chev.setAttribute('aria-hidden','true');
-  sum.append(th,c1,c2,c3,acts,chev);det.append(sum);
+  sum.append(th,c1,c2,c3,acts,chev);const mm=miniMap(h);if(mm)sum.append(mm);det.append(sum);
 
   function buildBody(){
   const body=el('div','detail');
@@ -601,7 +612,7 @@ function row(h,mode,open){
   fact('Monthly w/ Nova',monthly(h)!=null?money(monthly(h)):null);
   fact('Application',num(h.app_fee)!=null?money(h.app_fee):null);fact('Admin fee',num(h.admin_fee)!=null?money(h.admin_fee):null);
   fact('Available',h.available);fact('Manager',h.manager);fact('Special',h.specials);
-  fact('Garage',num(h.garage_spaces)!=null?h.garage_spaces+' spaces':null);fact('Built',h.year_built);
+  fact('Garage',[num(h.garage_spaces)>0?h.garage_spaces+(h.garage_spaces==1?' space':' spaces'):num(h.garage_spaces)===0?'None':amenSet(h).has('Garage')?'Yes':null,h.garage_note].filter(Boolean).join(' · ')||null);fact('Built',h.year_built);
   fact('Checked',[day(h.checked),h.source].filter(Boolean).join(' · '));
   body.append(facts);
   const am=amenSet(h);if(am.size){const a=el('div','am');[...am].forEach(x=>a.append(el('span',F.am.includes(x)?'hit':null,x)));body.append(a);}
@@ -704,6 +715,13 @@ function setLV(k,v){LV[k]=v;try{localStorage.setItem('jn-layout',JSON.stringify(
 document.querySelectorAll('.seg [data-mode]').forEach(b=>b.addEventListener('click',()=>setLV('mode',b.dataset.mode)));
 $('f-layout').addEventListener('change',e=>setLV('layout',e.target.value));
 const coord=h=>{const a=num(h.lat),b=num(h.lng);if(a!=null&&b!=null&&a&&b)return[a,b];return GEO[h.id]||null;};
+// Frame of the mini-map outline (lat/lng); the pin is placed by plain linear interpolation, same projection as the outline.
+const MM={n:33.76,s:33.19,w:-112.13,e:-111.57};
+function miniMap(h){const c=coord(h);if(!c||c[0]>MM.n||c[0]<MM.s||c[1]<MM.w||c[1]>MM.e)return null;
+  const w=el('span','mini'),p=el('span','mm-pin'),lab=`Approximate location: ${cityKey(h)}`;
+  w.setAttribute('role','img');w.setAttribute('aria-label',lab);w.title=lab;
+  p.style.left=((c[1]-MM.w)/(MM.e-MM.w)*100).toFixed(1)+'%';p.style.top=((MM.n-c[0])/(MM.n-MM.s)*100).toFixed(1)+'%';
+  p.style.setProperty('--pin',CITY_COLOR[cityKey(h)]||'var(--c-other)');w.append(p);return w;}
 function card(h){
   const v=dogVerdict(h),st=statusOf(h),ck=cityKey(h),fh=fit(h),ph=photosOf(h);
   const c=el('div','card'+(st==='pass'?' passed':''));c.style.setProperty('--city',CITY_COLOR[ck]||'var(--c-other)');
@@ -719,6 +737,7 @@ function card(h){
   if(fh.tier||fh.hits>=3)tg.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
   if(fh.c.pool)tg.append(el('span','pill good','Pool'));
   cb.append(tg);c.append(cb);
+  const mm=miniMap(h);if(mm)c.append(mm);
   cb.addEventListener('click',()=>openHome(h));
   return c;
 }
