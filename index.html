@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head><body>
+<title>Nova Homes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-title" content="Nova Homes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#27214B">
+<script src="local-db.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,700;8..60,800&family=Roboto+Mono:wght@500&display=swap">
+<style>
+/* Layout: Josh's Command Center structure (frosted header with rule bars, KPI tiles, numbered module sections with
+   tinted band, column strip and expandable rows) in the Harrow territory palette (navy, teal, gold, coral, lavender). Light-only. */
+:root{
+  color-scheme:light;
+  --bg-a:#E6E0F4; --bg-b:#E1E9F1; --bg-c:#D8EBE8;
+  --surface:#FFFFFF; --glass:rgba(255,255,255,.62); --ink:#211C3D; --ink-2:#3D3858; --muted:#6F6A86;
+  --line:#E3E1EC; --line-strong:#C3BED6; --chip:#F0EFF6;
+  --navy:#27214B; --teal:#2B7A8B; --gold:#B8901E; --coral:#C2603F; --sage:#4F8E7E; --plum:#6E4FA0; --white:#FFFFFF;
+  --good:#23804B; --good-bg:#D9F0E2; --warn:#946F0E; --warn-bg:#F6E8BE; --bad:#B93A2F; --bad-bg:#F9DCD7;
+  --c-tempe:#2C7A8C; --c-chandler:#C9A640; --c-gilbert:#D0704F; --c-mesa:#8FAE45;
+  --c-ahwatukee:#7DB0A2; --c-scottsdale:#8B6DB8; --c-pv:#27214B; --c-arcadia:#B85C8A; --c-other:#9A93B5;
+  --f-body:"Source Sans 3",system-ui,-apple-system,sans-serif;
+  --f-head:"Source Serif 4",Georgia,serif;
+  --f-mono:"Roboto Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:#E3DFF0 linear-gradient(165deg,var(--bg-a) 0%,var(--bg-b) 50%,var(--bg-c) 100%);min-height:100vh;color:var(--ink);font-family:var(--f-body);font-weight:500;font-size:15.5px;line-height:1.38;-webkit-font-smoothing:antialiased;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+b,strong{font-weight:800}
+a{color:var(--teal)}
+button,input,select,textarea{font:inherit;color:var(--ink)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.page{max-width:1240px;margin:0 auto;padding-block:26px 64px;display:grid;gap:22px}
+.glass{background:var(--glass);backdrop-filter:blur(1.4px) saturate(1.4);-webkit-backdrop-filter:blur(1.4px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 10px 28px -16px rgba(39,33,75,.35)}
+h1,h2{font-family:var(--f-head);font-weight:800;margin:0;text-wrap:balance;color:var(--navy)}
+p{margin:0}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+
+/* header */
+.head{display:grid;gap:14px;padding:22px 22px 20px;border-radius:16px;border:1px solid rgba(255,255,255,.75)}
+.bars{display:flex;gap:6px}.bars span{flex:1;height:4px;border-radius:2px}
+h1{font-size:clamp(32px,5.4vw,46px);line-height:.96;letter-spacing:-.01em}
+.take{font-size:17px;color:var(--ink-2);max-width:72ch;text-wrap:pretty}
+.headrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.view{display:inline-flex;flex-wrap:wrap;gap:3px;padding:3px;border-radius:999px;background:rgba(39,33,75,.06);border:1px solid rgba(39,33,75,.14)}
+.view button{all:unset;box-sizing:border-box;cursor:pointer;min-height:34px;display:inline-flex;align-items:center;gap:7px;padding:5px 15px;border-radius:999px;font-size:14.5px;font-weight:800;color:var(--ink-2)}
+.view button:hover{background:rgba(39,33,75,.07)}
+.view button[aria-pressed="true"]{background:var(--navy);color:var(--white)}
+.view button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.view .n{font-family:var(--f-mono);font-size:12px;opacity:.8}
+.nova-badge{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 16px;border-radius:999px;background:var(--teal);color:var(--white);font-weight:800;font-size:14.5px}
+.nova-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:#BFE6EC}
+.status{font-size:14px;font-weight:600;color:var(--ink-2)}
+
+/* KPI tiles */
+.kpis{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.kpi{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid;border-radius:10px;padding:12px 14px;display:grid;gap:2px;align-content:start;transition:transform .15s}
+.kpi:hover{transform:translateY(-1px)}
+.kpi:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.kpi[aria-pressed="true"]{box-shadow:inset 0 0 0 2px rgba(39,33,75,.6)}
+.kpi .lab{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+.kpi .val{font-family:var(--f-head);font-weight:800;font-size:34px;line-height:1.05;color:var(--navy);font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:14px;font-weight:600;color:var(--ink-2);overflow-wrap:anywhere}
+.kpi.k-navy{background:var(--navy);border-color:var(--navy)}.kpi.k-navy .lab,.kpi.k-navy .sub{color:#C9C4E0}.kpi.k-navy .val{color:var(--white)}
+.kpi.k-teal{background:rgba(167,217,224,.62);border-color:#7DB9C4}.kpi.k-teal .lab{color:#145361}
+.kpi.k-gold{background:rgba(236,218,160,.62);border-color:#D2B45E}.kpi.k-gold .lab{color:#6F540A}
+.kpi.k-lav{background:rgba(206,198,234,.66);border-color:#A79CD0}.kpi.k-lav .lab{color:#3E3473}
+.kpi.k-coral{background:rgba(240,190,170,.62);border-color:#D6937A}.kpi.k-coral .lab{color:#7A2E17}
+
+/* module sections */
+.mod{border:1px solid var(--line-c);border-radius:12px;overflow:hidden;scroll-margin-top:16px}
+.mod.m-navy{--line-c:#A79CD0;--ink-c:var(--navy);--band:rgba(186,176,226,.74);--strip:rgba(214,208,236,.65);--hover:rgba(214,208,236,.5)}
+.mod.m-teal{--line-c:#7DB9C4;--ink-c:#145361;--band:rgba(141,201,212,.74);--strip:rgba(178,220,227,.6);--hover:rgba(178,220,227,.45)}
+.mod.m-gold{--line-c:#D2B45E;--ink-c:#6F540A;--band:rgba(230,203,120,.72);--strip:rgba(240,224,170,.6);--hover:rgba(240,224,170,.45)}
+.mod.m-coral{--line-c:#D6937A;--ink-c:#7A2E17;--band:rgba(232,160,134,.72);--strip:rgba(244,198,180,.6);--hover:rgba(244,198,180,.45)}
+.mod.m-sage{--line-c:#93C2B5;--ink-c:#24584C;--band:rgba(150,200,186,.72);--strip:rgba(190,222,212,.6);--hover:rgba(190,222,212,.45)}
+.band{background:var(--band);padding:12px 16px;display:flex;align-items:center;gap:14px}
+.tileno{flex:none;width:34px;height:34px;border-radius:8px;background:var(--ink-c);color:var(--white);display:grid;place-items:center;font-family:var(--f-head);font-weight:800;font-size:18px}
+.band-text{flex:1;min-width:0}
+.step{font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-c)}
+h2{font-size:22px;line-height:1.1;margin-top:1px}
+.count{flex:none;background:var(--surface);border:1px solid var(--line-c);border-radius:999px;padding:1px 10px;font-size:13px;font-weight:700;color:var(--ink-c);white-space:nowrap}
+.intro{padding:10px 16px;font-size:14.5px;color:var(--ink-2);border-bottom:1px solid var(--line-c);text-wrap:pretty}
+.strip{display:flex;flex-wrap:wrap;gap:4px 16px;padding:7px 16px;background:var(--strip);border-bottom:1px solid var(--line-c);font-size:11px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.c1{flex:0 0 150px;min-width:0;display:flex;align-items:center}.c2{flex:2.2 1 280px;min-width:0}.c3{flex:1 1 220px;min-width:0}
+
+/* filters */
+.citybar,.chipbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid var(--line-c)}
+.barlab{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);min-width:78px}
+.citybar .view button{font-size:14px;padding:4px 13px;min-height:32px}
+.citybar .view button::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c)}
+.citybar .view button[aria-pressed="false"]{color:var(--muted)}
+.chip{cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:3px 12px;border-radius:999px;border:1px solid var(--line-strong);background:var(--surface);font-size:13.5px;font-weight:700;box-shadow:0 1px 2px rgba(39,33,75,.08)}
+.chip .n{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:var(--white)}
+.chip[aria-pressed="true"] .n{color:#D7EEF2}
+.chip.dog-good[aria-pressed="true"]{background:var(--good);border-color:var(--good)}
+.filters{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr));gap:10px 12px;padding:12px 16px;border-bottom:1px solid var(--line-c);background:rgba(255,255,255,.35)}
+.field{display:grid;gap:3px;min-width:0}
+.field>span{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.field select,.field input{font-size:15px;height:36px;width:100%;padding:0 8px;border:1px solid var(--line-strong);border-radius:7px;background:var(--surface)}
+.field.wide{grid-column:span 2}
+@media (max-width:420px){.field.wide{grid-column:auto}}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:8px 16px;border-bottom:1px solid var(--line-c);font-size:14px;color:var(--ink-2)}
+.foot b{color:var(--navy);font-variant-numeric:tabular-nums}
+.check{display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.check input{width:16px;height:16px;accent-color:var(--teal)}
+
+/* rows */
+.rows{display:grid}
+.home>summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:11px 16px;border-top:1px solid rgba(39,33,75,.1);box-shadow:inset 4px 0 0 var(--city,transparent)}
+.rows>.home:first-child>summary{border-top:0}
+.home>summary::-webkit-details-marker{display:none}
+.home>summary:hover,.home[open]>summary{background:var(--hover)}
+.home>summary:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
+.home.passed>summary{opacity:.6}
+.c2{display:grid;gap:1px}
+.main{font-weight:700;font-size:16px;color:var(--navy)}
+.sub{font-size:14px;font-weight:600;color:var(--muted)}
+.c3{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.rent{font-family:var(--f-mono);font-weight:500;color:var(--navy);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag,.pill,.cpill{display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;white-space:nowrap;line-height:1;padding:4px 8px}
+.pill{border-radius:999px;padding:3px 8px;background:var(--chip);color:var(--ink-2)}
+.tag.good,.pill.good{background:var(--good-bg);color:#145A32}
+.tag.warn,.pill.warn{background:var(--warn-bg);color:#5E4505}
+.tag.bad,.pill.bad{background:var(--bad-bg);color:#7E2018}
+.tag.key{background:var(--navy);color:var(--white)}
+.tag.ref{background:var(--chip);color:var(--muted)}
+.cpill{justify-self:start;margin-top:3px;border-radius:999px;padding:3px 7px;font-size:9.5px;color:var(--white);background:var(--city)}
+.acts{display:flex;gap:6px;flex:none;margin-left:auto}
+.btn{cursor:pointer;min-height:32px;padding:4px 13px;border-radius:7px;font-weight:800;font-size:14px;white-space:nowrap;border:1px solid var(--line-strong);background:var(--surface)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.star{border-color:var(--gold);color:#6F540A;background:#FBF4DF}
+.btn.star[aria-pressed="true"]{background:var(--gold);color:var(--white)}
+.btn.pass{border-color:#E8B7B1;color:var(--bad);background:#FFF8F6}
+.btn.pass[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:var(--white)}
+.btn.status[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.btn.teal{background:var(--teal);border-color:var(--teal);color:var(--white)}
+.chev{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:6px;border:1px solid var(--line-c);color:var(--ink-c);font-size:13px;transition:transform .15s}
+.home[open]>summary .chev{transform:rotate(180deg)}
+.detail{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:6px 16px 16px calc(16px + 150px + 16px)}
+@media (max-width:640px){.detail{padding-left:16px}.acts{margin-left:0;width:100%}.acts .btn{flex:1}.c1{flex-basis:100%}}
+.detail p{max-width:72ch;text-wrap:pretty;color:var(--ink-2)}
+.headtags{display:flex;flex-wrap:wrap;gap:4px 6px}
+.facts{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;font-size:14.5px;color:var(--ink-2);margin:0}
+.facts dt{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.facts dd{margin:0;color:var(--ink);overflow-wrap:anywhere}
+.am{display:flex;flex-wrap:wrap;gap:4px}
+.am span{font-size:12.5px;padding:1px 8px;border-radius:4px;background:var(--chip)}
+.am span.hit{background:#D7ECEF;color:#145361;font-weight:700}
+.contact{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:14.5px}
+.contact .sel{user-select:all;font-family:var(--f-mono);font-size:13.5px}
+.copy{cursor:pointer;border:1px solid var(--line-strong);background:var(--surface);border-radius:999px;padding:0 9px;font-size:12px;color:var(--muted);margin-left:4px}
+.links{display:flex;gap:10px;flex-wrap:wrap}
+.posting{font-weight:800;text-decoration:none}
+.posting:hover{text-decoration:underline}
+.statusrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+textarea.note{width:100%;max-width:72ch;min-height:64px;border:1px solid var(--line-strong);border-radius:8px;padding:7px 9px;font-size:14.5px;resize:vertical;background:var(--surface)}
+.saved{font-size:12.5px;color:var(--muted)}
+.empty{padding:14px 16px;color:var(--muted)}
+.load{margin:12px 16px;height:14px;border-radius:6px;background:rgba(39,33,75,.06)}
+
+/* photos + fit */
+.thumb{flex:none;width:92px;height:66px;border-radius:7px;object-fit:cover;background:var(--chip);border:1px solid var(--line)}
+.thumb.none{display:grid;place-items:center;font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.c1{flex-direction:column;align-items:flex-start;gap:4px}
+.tag.fit{background:#E7DDF7;color:#3E2A73}.tag.fit.strong{background:var(--plum);color:var(--white)}
+.gallery{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px;max-width:100%}
+.gallery button{all:unset;cursor:pointer;flex:none;scroll-snap-align:start;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.gallery button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.gallery img{display:block;height:180px;width:auto;max-width:78vw;object-fit:cover;background:var(--chip)}
+.fitlist{display:flex;flex-wrap:wrap;gap:4px 6px}
+dialog.lb{border:0;padding:0;background:transparent;max-width:min(96vw,1100px);width:100%}
+dialog.lb::backdrop{background:rgba(20,16,40,.86)}
+.lb-wrap{position:relative;display:grid;gap:8px;justify-items:center}
+.lb-wrap img{max-width:100%;max-height:80vh;border-radius:10px;display:block}
+.lb-bar{display:flex;gap:8px;align-items:center;color:#fff;font-weight:700}
+.lb-bar .btn{background:rgba(255,255,255,.95)}
+@media (max-width:640px){.thumb{width:100%;height:170px}.gallery img{height:150px}}
+
+/* tables + résumé */
+.frame{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 12px;text-align:left;border-bottom:1px solid rgba(39,33,75,.1);vertical-align:middle}
+th{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);white-space:nowrap;background:var(--strip)}
+td.n,th.n{text-align:right;white-space:nowrap;font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+td .sub{display:block;font-size:12.5px}
+.pad{padding:14px 16px;display:grid;gap:12px}
+ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-width:80ch}
+.footer{font-size:11.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);justify-self:start;padding:6px 12px;border-radius:999px}
+</style>
+
+<div class="page">
+  <header class="head glass" id="top">
+    <div class="bars" aria-hidden="true">
+      <span style="background:var(--c-tempe)"></span><span style="background:var(--c-chandler)"></span><span style="background:var(--c-gilbert)"></span><span style="background:var(--c-mesa)"></span>
+      <span style="background:var(--c-ahwatukee)"></span><span style="background:var(--c-scottsdale)"></span><span style="background:var(--c-pv)"></span><span style="background:var(--c-arcadia)"></span>
+    </div>
+    <p class="eyebrow">Live · houses &amp; townhomes only · Phoenix East Valley · Prepared for Josh</p>
+    <h1>Josh &amp; Nova Home Search</h1>
+    <div class="headrow">
+      <div class="view" role="group" aria-label="Choose view">
+        <button type="button" data-view="homes" aria-pressed="true">All homes <span class="n" id="vn-homes"></span></button>
+        <button type="button" data-view="shortlist" aria-pressed="false">Shortlist <span class="n" id="vn-short"></span></button>
+        <button type="button" data-view="costs" aria-pressed="false">Move-in costs</button>
+        <button type="button" data-view="notes" aria-pressed="false">Nova &amp; notes</button>
+      </div>
+      <span class="nova-badge">Nova · Siberian Husky · <span id="nova-wt">49.5</span> lb</span>
+      <span class="status" id="status" role="status"></span>
+    </div>
+    <p class="take" id="takeaway">Loading saved homes…</p>
+  </header>
+
+  <div class="kpis">
+    <button type="button" class="kpi k-lav" data-k="all"><span class="lab">Homes showing</span><span class="val" id="k-show">–</span><span class="sub" id="k-show-sub">–</span></button>
+    <button type="button" class="kpi k-lav" data-k="fit"><span class="lab">Fits your wants</span><span class="val" id="k-fit">–</span><span class="sub" id="k-fit-sub">3 bd · 1,600–2,200 sq ft · yard</span></button>
+    <button type="button" class="kpi k-teal" data-k="ok"><span class="lab">Nova likely OK</span><span class="val" id="k-dogs">–</span><span class="sub" id="k-dogs-sub">Tap to filter</span></button>
+    <button type="button" class="kpi k-gold" data-k="rent"><span class="lab">Median rent</span><span class="val" id="k-med">–</span><span class="sub" id="k-med-sub">Tap to sort by rent</span></button>
+    <button type="button" class="kpi k-coral" data-k="move"><span class="lab">Lowest move-in</span><span class="val" id="k-move">–</span><span class="sub" id="k-move-sub">Tap to sort by move-in</span></button>
+    <button type="button" class="kpi k-navy" data-k="short"><span class="lab">Shortlist</span><span class="val" id="k-short">–</span><span class="sub" id="k-short-sub">–</span></button>
+  </div>
+
+  <!-- 1 · all homes -->
+  <section class="mod m-navy glass" data-panel="homes" id="homes">
+    <div class="band"><div class="tileno">1</div><div class="band-text"><div class="step">Section 1 · Every saved listing</div><h2>Houses &amp; townhomes</h2></div><span class="count" id="c-homes">– homes</span></div>
+    <p class="intro">Checked against Nova (49.5 lb Siberian Husky). Nothing is hidden for its dog policy unless you pick a Nova filter, so you can still negotiate. Tap a home for deposit, pet costs, contact, links and your notes. <strong>★ Shortlist</strong> saves it; <strong>Pass</strong> hides it.</p>
+    <div class="citybar"><span class="barlab">Location</span><div class="view" role="group" aria-label="Cities (any combination)" id="f-city"></div><button type="button" class="chip" id="city-all">All</button></div>
+    <div class="chipbar"><span class="barlab">Your fit</span><div class="headtags" id="f-fit" role="group" aria-label="Fit to your wants">
+      <button type="button" class="chip" data-fit="">Any</button>
+      <button type="button" class="chip" data-fit="close">3 bd · 1,600–2,200 sq ft · yard</button>
+      <button type="button" class="chip" data-fit="strong">Strong fit (+ upgraded)</button></div></div>
+    <div class="chipbar"><span class="barlab">Nova</span><div class="headtags" id="f-dogs" role="group" aria-label="Dog policy">
+      <button type="button" class="chip" data-dogs="all">Show all (negotiate)</button>
+      <button type="button" class="chip dog-good" data-dogs="ok">Nova likely OK</button>
+      <button type="button" class="chip dog-good" data-dogs="open">Nova confirmed OK</button></div></div>
+    <div class="chipbar"><span class="barlab">Must have</span><div class="headtags" id="f-am"></div></div>
+    <div class="filters">
+      <label class="field wide"><span>Search</span><input type="search" id="f-q" placeholder="Name, street, manager, notes…" autocomplete="off"></label>
+      <label class="field"><span>Min rent</span><input type="number" id="f-pmin" min="0" step="100" placeholder="$0"></label>
+      <label class="field"><span>Max rent</span><input type="number" id="f-pmax" min="0" step="100" placeholder="Any"></label>
+      <label class="field"><span>Deposit</span><select id="f-dep"><option value="">Any</option><option value="500">$500 or less</option><option value="1000">$1,000 or less</option><option value="1500">$1,500 or less</option><option value="2500">$2,500 or less</option><option value="3500">$3,500 or less</option></select></label>
+      <label class="field"><span>Beds</span><select id="f-beds"><option value="0">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></label>
+      <label class="field"><span>Baths</span><select id="f-baths"><option value="0">Any</option><option value="1.5">1.5+</option><option value="2">2+</option><option value="2.5">2.5+</option><option value="3">3+</option></select></label>
+      <label class="field"><span>Type</span><select id="f-type"><option value="">All types</option><option>House</option><option>Townhome</option><option>Duplex</option><option>BTR community</option></select></label>
+      <label class="field"><span>Nova (lb)</span><input type="number" id="f-nova" min="0" max="250" step="0.5" placeholder="49.5"></label>
+      <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="city">City A–Z</option></select></label>
+    </div>
+    <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><label class="check"><input type="checkbox" id="f-hidepass" checked> Hide passed</label><button type="button" class="btn" id="f-reset">Reset filters</button></div>
+    <div class="strip"><span class="c1">Nova</span><span class="c2">Home · area</span><span class="c3">Rent · size</span></div>
+    <div class="rows" id="list-homes"><div class="load"></div></div>
+  </section>
+
+  <!-- 2 · shortlist -->
+  <section class="mod m-gold glass" data-panel="shortlist" id="shortlist" hidden>
+    <div class="band"><div class="tileno">2</div><div class="band-text"><div class="step">Section 2 · Saved to your database</div><h2>Shortlist &amp; in progress</h2></div><span class="count" id="c-short">– homes</span></div>
+    <p class="intro">Homes you starred, contacted, toured or applied to. Status and notes sync to your phone and computer.</p>
+    <div class="strip"><span class="c1">Nova</span><span class="c2">Home · status</span><span class="c3">Rent · size</span></div>
+    <div class="rows" id="list-short"></div>
+  </section>
+
+  <!-- 3 · costs -->
+  <section class="mod m-coral glass" data-panel="costs" id="costs-mod" hidden>
+    <div class="band"><div class="tileno">3</div><div class="band-text"><div class="step">Section 3 · Cash to move in</div><h2>Move-in costs</h2></div><span class="count" id="c-costs">– homes</span></div>
+    <p class="intro">First month + security deposit + Nova's pet deposit and fee + application and admin fees, at the lowest listed rent. Shortlisted homes first, then the rest of your filtered list. "est." means at least one fee isn't published.</p>
+    <div class="frame"><table id="costs"></table></div>
+  </section>
+
+  <!-- 4 · Nova & notes -->
+  <section class="mod m-teal glass" data-panel="notes" id="nova" hidden>
+    <div class="band"><div class="tileno">4</div><div class="band-text"><div class="step">Section 4 · Use when negotiating</div><h2>Nova's pet résumé</h2></div><span class="count">49.5 lb husky</span></div>
+    <div class="pad">
+      <dl class="facts">
+        <dt>Dog</dt><dd>Nova · Siberian Husky · 49.5 lb</dd>
+        <dt>Temperament</dt><dd>Every vet and pet professional who has met her in the past two years has called her the calmest husky they've seen.</dd>
+        <dt>Bring</dt><dd>Vet records and vaccination history, a vet or groomer reference letter, a PetScreening profile, and renter's insurance with pet liability.</dd>
+        <dt>Offer</dt><dd>A meet-and-greet with the owner, an added refundable pet deposit (Arizona caps total refundable deposits at 1.5 months' rent), or a pet addendum.</dd>
+        <dt>Ask</dt><dd>Husky bans usually come from the owner's insurance carrier. Ask whether the owner would accept your renter's policy naming them, or whether the ban is the manager's own rule.</dd>
+      </dl>
+      <p class="sub">Each home has a Copy Nova pitch button that fills in that home's address.</p>
+    </div>
+  </section>
+  <section class="mod m-sage glass" data-panel="notes" hidden>
+    <div class="band"><div class="tileno">5</div><div class="band-text"><div class="step">Section 5 · Reference</div><h2>How this list is built</h2></div></div>
+    <div class="pad">
+      <ul class="list">
+        <li>Houses, townhomes, duplexes and build-to-rent home communities only. No apartment complexes.</li>
+        <li>Each home is checked against Nova: weight limits, "small dogs only" rules, and whether the manager's restricted-breed list names huskies. "Nova confirmed OK" means the breed list was read and huskies aren't on it, or there is no breed list.</li>
+        <li>Individual house listings go fast. Each home shows the date it was checked; open the listing before calling.</li>
+        <li>Move-in cost uses the lowest listed rent and only published fees. Arizona caps refundable deposits at 1.5 months' rent.</li>
+      </ul>
+    </div>
+    <div class="frame"><table id="sources"></table></div>
+  </section>
+
+  <dialog class="lb" id="lb" aria-label="Photo viewer"><div class="lb-wrap"><img id="lb-img" alt="">
+    <div class="lb-bar"><button type="button" class="btn" id="lb-prev" aria-label="Previous photo">‹</button><span id="lb-title"></span> · <span id="lb-n"></span><button type="button" class="btn" id="lb-next" aria-label="Next photo">›</button><button type="button" class="btn" id="lb-close">Close</button></div></div></dialog>
+  <footer class="footer glass" id="foot">Live · personal home search</footer>
+</div>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const el=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;};
+const CITIES=[
+  {k:'Tempe',c:'--c-tempe'},{k:'Chandler',c:'--c-chandler'},{k:'Gilbert',c:'--c-gilbert'},{k:'Mesa',c:'--c-mesa'},
+  {k:'Ahwatukee',c:'--c-ahwatukee'},{k:'Scottsdale',c:'--c-scottsdale'},{k:'Paradise Valley',c:'--c-pv'},{k:'Arcadia / Biltmore',c:'--c-arcadia'}];
+const CITY_COLOR=Object.fromEntries(CITIES.map(c=>[c.k,`var(${c.c})`]));
+const TYPES=['House','Townhome','Duplex','BTR community'];
+const AMEN=['Fenced yard','Private yard','Garage','In-unit W/D','Single-level','Dog park','Pool','Smart home','EV charging','Gated','Pet spa','Storage'];
+const STATUSES=[['contacted','Contacted'],['toured','Toured'],['applied','Applied']];
+const NOVA={name:'Nova',breed:'Siberian Husky',weight:49.5};
+const pitch=h=>`Hi, I'm interested in renting ${h.address||h.name||'your home'}. I have one dog, Nova, a ${NOVA.weight} lb ${NOVA.breed}. Over the past two years every vet and pet professional who has met her has called her the calmest husky they've seen, and I can share her vet records and references. I'm glad to complete PetScreening, carry renter's insurance with pet liability, and talk about an added pet deposit. Would you consider her for this home? Thanks, Josh`;
+const STATUS_LABEL={shortlist:'Shortlisted',contacted:'Contacted',toured:'Toured',applied:'Applied',pass:'Passed'};
+const ACTIVE=new Set(['shortlist','contacted','toured','applied']);
+
+const money=v=>v==null||isNaN(v)?'—':'$'+Math.round(v).toLocaleString('en-US');
+const kfmt=v=>v>=10000?'$'+(v/1000).toFixed(1).replace(/\.0$/,'')+'K':money(v);
+const num=v=>typeof v==='number'&&isFinite(v)?v:(v!=null&&v!==''&&isFinite(+v)?+v:null);
+const day=s=>{if(!s)return'';const d=new Date(/^\d{4}-\d{2}-\d{2}$/.test(s)?s+'T12:00':s);return isNaN(d)?s:d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});};
+const safeUrl=u=>{try{const x=new URL(u);return /^https?:$/.test(x.protocol)?x.href:null;}catch(e){return null;}};
+
+/* ---------- state ---------- */
+const DEF={q:'',cities:CITIES.map(c=>c.k),dogs:'all',nova:String(NOVA.weight),pmin:'',pmax:'',dep:'',beds:'0',baths:'0',type:'',am:[],sort:'fit',fit:'',hidepass:true,v:2};
+let F=Object.assign({},DEF);
+try{const s=JSON.parse(localStorage.getItem('jn-filters')||'null');if(s)F=Object.assign({},DEF,s,s.v===2?{}:{sort:'fit',v:2});}catch(e){}
+if(F.nova==='')F.nova=String(NOVA.weight);
+if(typeof F.type!=='string')F.type='';
+const saveF=()=>{try{localStorage.setItem('jn-filters',JSON.stringify(F));}catch(e){}};
+let homes=null, db=null, canWrite=true, view='homes';
+const pending=new Map();
+
+/* ---------- derived ---------- */
+const rentLo=h=>num(h.rent_min)??num(h.rent_max);
+const rentHi=h=>num(h.rent_max)??num(h.rent_min);
+const statusOf=h=>pending.has(h.id)?pending.get(h.id):(h.status||'');
+const cityKey=h=>CITY_COLOR[h.city]?h.city:(/arcadia|biltmore|camelback/i.test((h.city||'')+' '+(h.area||''))?'Arcadia / Biltmore':/ahwatukee|south phoenix|south mountain/i.test((h.city||'')+' '+(h.area||''))?'Ahwatukee':h.city||'Other');
+const amenSet=h=>{const s=new Set(Array.isArray(h.amenities)?h.amenities:[]);if(h.fenced_yard===true)s.add('Fenced yard');if(num(h.garage_spaces)>0)s.add('Garage');return s;};
+/* score: 0 no dogs · 0.5 Nova hits a rule · 1 unknown · 1.5 breed list unchecked · 2 dogs OK, breed not confirmed · 3 Nova confirmed OK */
+const smallOnly=h=>h.small_dogs_only===true||(h.small_dogs_only!==false&&/small dogs?\b|dogs must be small/i.test(h.pet_notes||''));
+function dogVerdict(h){
+  const nova=num(F.nova), lim=num(h.dog_weight_limit), d=h.dogs||'Unknown', hk=h.husky||'';
+  if(d==='Not allowed')return{cls:'bad',text:'No dogs · negotiate',short:'No dogs',score:0};
+  if(hk==='Banned')return{cls:'bad',text:'Huskies on breed list · negotiate',short:'Husky ban',score:0.5};
+  if(nova&&lim&&nova>lim)return{cls:'bad',text:`Over ${lim} lb limit · negotiate`,short:`${lim} lb max`,score:0.5};
+  if(smallOnly(h))return{cls:'bad',text:'Small dogs only · negotiate',short:'Small dogs',score:0.5};
+  if(d==='Unknown')return{cls:'warn',text:'Dog policy unknown · ask',short:'Ask',score:1};
+  const cleared=hk==='Not on list'||hk==='No breed list';
+  if(h.breed_restrictions===true&&!cleared)return{cls:'warn',text:'Breed list · ask about huskies',short:'Breed list',score:1.5};
+  if(cleared)return{cls:'good',text:d==='Restricted'||h.breed_restrictions?'Nova fits the rules':'Nova welcome',short:'Nova OK ✓',score:3};
+  return{cls:'good',text:'Dogs welcome · confirm breed',short:'Dogs OK',score:2};
+}
+/* Josh's target: 3 bd, 1,600–2,200 sq ft, backyard, upgraded interior; pool is a bonus */
+const UPGRADED=/quartz|granite|stainless|renovat|remodel|upgrad|updated|new (kitchen|appliances|flooring|cabinets)|luxury vinyl|\blvp\b|designer|modern finishes|smart home/i;
+function fit(h){
+  const bl=num(h.beds_min),bh=num(h.beds_max)??bl, sl=num(h.sqft_min)??num(h.sqft_max), sh=num(h.sqft_max)??sl, am=amenSet(h);
+  const c={
+    beds:bl==null?null:bl<=3&&3<=bh,
+    size:sl==null?null:sl<=2200&&sh>=1600,
+    yard:h.fenced_yard===true||am.has('Fenced yard')||am.has('Private yard')||/back ?yard/i.test(h.notes||'')?true:null,
+    upgraded:UPGRADED.test([h.notes,h.specials,(h.amenities||[]).join(' ')].join(' '))?true:null,
+    pool:am.has('Pool')||/pool/i.test(h.notes||'')};
+  const core=[c.beds,c.size,c.yard,c.upgraded], hits=core.filter(x=>x===true).length, fails=core.filter(x=>x===false).length;
+  const tier=hits===4?'strong':(c.beds&&c.size&&c.yard)?'close':null;
+  return{c,hits,fails,tier,score:hits+(c.pool?0.5:0)-fails*0.25,
+    label:tier==='strong'?'Strong fit'+(c.pool?' + pool':''):tier==='close'?'Close fit · check interior':`${hits}/4 of your wants`};
+}
+const photosOf=h=>Array.isArray(h.photos)?h.photos.filter(u=>typeof u==='string'&&/^(https:|\/_blob\/|photos\/)/.test(u)):[];
+function moveIn(h){
+  const r=rentLo(h);if(r==null)return{total:null,est:true};
+  const parts=[num(h.deposit_min),num(h.pet_deposit),num(h.pet_fee),num(h.app_fee),num(h.admin_fee)];
+  const est=num(h.deposit_min)==null||(h.dogs!=='Not allowed'&&num(h.pet_deposit)==null&&num(h.pet_fee)==null)||num(h.app_fee)==null;
+  return{total:r+parts.reduce((a,v)=>a+(v||0),0),est};
+}
+const monthly=h=>{const r=rentLo(h);return r==null?null:r+(num(h.pet_rent)||0);};
+const bedsTxt=h=>{const a=num(h.beds_min),b=num(h.beds_max);if(a==null&&b==null)return null;const f=v=>v===0?'Studio':v;return a!=null&&b!=null&&a!==b?`${f(a)}–${b} bd`:`${f(a??b)} bd`;};
+const sqftTxt=h=>{const a=num(h.sqft_min),b=num(h.sqft_max);if(a==null&&b==null)return null;return a&&b&&a!==b?`${a.toLocaleString()}–${b.toLocaleString()} sq ft`:`${(a||b).toLocaleString()} sq ft`;};
+const rentTxt=h=>{const a=rentLo(h),b=rentHi(h);if(a==null)return'Call for rent';return b&&b!==a?`${money(a)}–${Math.round(b).toLocaleString('en-US')}`:money(a);};
+
+function passes(h){
+  if(F.hidepass&&statusOf(h)==='pass')return false;
+  if(!F.cities.includes(cityKey(h)))return false;
+  if(F.type&&(h.type||'House')!==F.type)return false;
+  if(F.fit){const t=fit(h).tier;if(!t||(F.fit==='strong'&&t!=='strong'))return false;}
+  const v=dogVerdict(h);
+  if(F.dogs==='ok'&&v.score<2)return false;
+  if(F.dogs==='open'&&v.score<3)return false;
+  const lo=rentLo(h),hi=rentHi(h);
+  if(F.pmax!==''&&lo!=null&&lo>+F.pmax)return false;
+  if(F.pmin!==''&&hi!=null&&hi<+F.pmin)return false;
+  if(F.dep!==''&&num(h.deposit_min)!=null&&num(h.deposit_min)>+F.dep)return false;
+  if(+F.beds>0){const b=num(h.beds_max)??num(h.beds_min);if(b!=null&&b<+F.beds)return false;}
+  if(+F.baths>0){const b=num(h.baths);if(b!=null&&b<+F.baths)return false;}
+  if(F.am.length){const s=amenSet(h);if(!F.am.every(a=>s.has(a)))return false;}
+  if(F.q){const hay=[h.name,h.address,h.area,h.city,h.manager,h.notes,h.pet_notes,h.my_note,(h.amenities||[]).join(' ')].join(' ').toLowerCase();
+    if(!F.q.toLowerCase().split(/\s+/).filter(Boolean).every(w=>hay.includes(w)))return false;}
+  return true;
+}
+function sorter(a,b){
+  const big=1e9;
+  switch(F.sort){
+    case'rent-desc':return(rentHi(b)??-1)-(rentHi(a)??-1);
+    case'movein':return(moveIn(a).total??big)-(moveIn(b).total??big);
+    case'deposit':return(num(a.deposit_min)??big)-(num(b.deposit_min)??big);
+    case'dog':return dogVerdict(b).score-dogVerdict(a).score||(rentLo(a)??big)-(rentLo(b)??big);
+    case'sqft':return(num(b.sqft_max)??num(b.sqft_min)??-1)-(num(a.sqft_max)??num(a.sqft_min)??-1);
+    case'city':return cityKey(a).localeCompare(cityKey(b))||(rentLo(a)??big)-(rentLo(b)??big);
+    case'fit':return fit(b).score-fit(a).score||dogVerdict(b).score-dogVerdict(a).score||(rentLo(a)??big)-(rentLo(b)??big);
+    default:return(rentLo(a)??big)-(rentLo(b)??big);
+  }
+}
+
+/* ---------- filter controls ---------- */
+function drawControls(){
+  const cc={};(homes||[]).forEach(h=>{cc[cityKey(h)]=(cc[cityKey(h)]||0)+1;});
+  const fc=$('f-city');fc.replaceChildren();
+  CITIES.forEach(({k})=>{const b=el('button');b.type='button';b.style.setProperty('--c',CITY_COLOR[k]);b.setAttribute('aria-pressed',F.cities.includes(k));
+    b.append(k+' ',el('span','n',String(cc[k]||0)));
+    b.addEventListener('click',()=>{F.cities=F.cities.includes(k)?F.cities.filter(x=>x!==k):[...F.cities,k];changed();});fc.append(b);});
+  const am=$('f-am');am.replaceChildren();
+  AMEN.forEach(a=>{const b=el('button','chip',a);b.type='button';b.setAttribute('aria-pressed',F.am.includes(a));
+    b.addEventListener('click',()=>{F.am=F.am.includes(a)?F.am.filter(x=>x!==a):[...F.am,a];changed();});am.append(b);});
+  document.querySelectorAll('#f-dogs .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.dogs===F.dogs));
+  document.querySelectorAll('#f-fit .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.fit===F.fit));
+  $('f-q').value=F.q;$('f-nova').value=F.nova;$('f-pmin').value=F.pmin;$('f-pmax').value=F.pmax;$('f-type').value=F.type;
+  $('f-dep').value=F.dep;$('f-beds').value=F.beds;$('f-baths').value=F.baths;$('f-sort').value=F.sort;$('f-hidepass').checked=F.hidepass;
+  $('nova-wt').textContent=F.nova||NOVA.weight;
+  document.querySelectorAll('.kpi').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.k==='ok'&&F.dogs==='ok')||(k.dataset.k==='rent'&&F.sort==='rent-asc'&&false)||(k.dataset.k==='move'&&F.sort==='movein')||(k.dataset.k==='short'&&view==='shortlist')));
+}
+function changed(){saveF();drawControls();render();}
+document.querySelectorAll('#f-dogs .chip').forEach(b=>b.addEventListener('click',()=>{F.dogs=b.dataset.dogs;changed();}));
+document.querySelectorAll('#f-fit .chip').forEach(b=>b.addEventListener('click',()=>{F.fit=b.dataset.fit;changed();}));
+$('city-all').addEventListener('click',()=>{F.cities=CITIES.map(c=>c.k);changed();});
+let qT;$('f-q').addEventListener('input',e=>{clearTimeout(qT);qT=setTimeout(()=>{F.q=e.target.value.trim();saveF();render();},180);});
+[['f-nova','nova'],['f-pmin','pmin'],['f-pmax','pmax']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
+[['f-dep','dep'],['f-beds','beds'],['f-baths','baths'],['f-sort','sort'],['f-type','type']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
+$('f-hidepass').addEventListener('change',e=>{F.hidepass=e.target.checked;changed();});
+$('f-reset').addEventListener('click',()=>{const nova=F.nova;F=Object.assign({},DEF,{cities:CITIES.map(c=>c.k),am:[],nova});changed();});
+document.querySelectorAll('.kpi').forEach(k=>k.addEventListener('click',()=>{
+  const t=k.dataset.k;
+  if(t==='all'){setView('homes');}
+  if(t==='fit'){F.fit=F.fit?'':'close';F.sort='fit';setView('homes');changed();}
+  if(t==='ok'){F.dogs=F.dogs==='ok'?'all':'ok';setView('homes');changed();}
+  if(t==='rent'){F.sort='rent-asc';setView('homes');changed();}
+  if(t==='move'){setView('costs');F.sort='movein';changed();}
+  if(t==='short'){setView('shortlist');drawControls();}
+}));
+
+/* ---------- row ---------- */
+const openRows=new Set();
+function copyBtn(val,label,host){const b=el('button','copy','Copy');b.type='button';b.setAttribute('aria-label','Copy '+label);
+  b.addEventListener('click',async e=>{e.preventDefault();try{await navigator.clipboard.writeText(val);b.textContent='Copied';}catch(err){const s=host.querySelector('.sel');if(s){const r=document.createRange();r.selectNodeContents(s);const g=getSelection();g.removeAllRanges();g.addRange(r);}b.textContent='Selected';}setTimeout(()=>b.textContent='Copy',1600);});return b;}
+function row(h,mode){
+  const v=dogVerdict(h), st=statusOf(h), ck=cityKey(h), key=mode+':'+h.id;
+  const det=el('details','home'+(st==='pass'?' passed':''));det.style.setProperty('--city',CITY_COLOR[ck]||'var(--c-other)');
+  if(openRows.has(key))det.open=true;
+  det.addEventListener('toggle',()=>det.open?openRows.add(key):openRows.delete(key));
+  const sum=el('summary');
+  const ph=photosOf(h), fh=fit(h);
+  let th;if(ph.length){th=el('img','thumb');th.src=ph[0];th.alt='';th.loading='lazy';th.decoding='async';th.addEventListener('error',()=>th.replaceWith(el('span','thumb none','No photo')));}
+  else th=el('span','thumb none','No photo');
+  const c1=el('span','c1');c1.append(el('span','tag '+v.cls,v.short));
+  if(fh.tier||fh.hits>=3)c1.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
+  const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
+  c2.append(el('span','sub',[ck,h.area,h.type||'House',mode==='short'&&st?STATUS_LABEL[st]:null].filter(Boolean).join(' · ')));
+  const c3=el('span','c3');c3.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')));
+  [bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null].filter(Boolean).forEach(t=>c3.append(el('span','pill',t)));
+  if(st&&st!=='pass'&&mode!=='short')c3.append(el('span','tag key',STATUS_LABEL[st]));
+  const acts=el('span','acts');
+  const sb=(cls,label,val,aria)=>{const b=el('button','btn '+cls,label);b.type='button';b.setAttribute('aria-pressed',st===val);b.setAttribute('aria-label',aria);
+    if(!db||!canWrite)b.disabled=true;
+    b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setStatus(h,st===val?'':val);});return b;};
+  acts.append(sb('star','★',st==='shortlist'?'shortlist':'shortlist',`Shortlist ${h.name||h.address}`));
+  acts.firstChild.setAttribute('aria-pressed',ACTIVE.has(st));
+  acts.append(sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
+  const chev=el('span','chev','▾');chev.setAttribute('aria-hidden','true');
+  sum.append(th,c1,c2,c3,acts,chev);det.append(sum);
+
+  const body=el('div','detail');
+  if(ph.length){const g=el('div','gallery');g.setAttribute('aria-label',`Photos of ${h.name||h.address}`);
+    ph.forEach((u,i)=>{const b=el('button');b.type='button';b.setAttribute('aria-label',`Open photo ${i+1} of ${ph.length}`);
+      const im=el('img');im.src=u;im.alt='';im.loading='lazy';im.decoding='async';im.addEventListener('error',()=>b.remove());
+      b.append(im);b.addEventListener('click',()=>openLB(ph,i,h.name||h.address));g.append(b);});body.append(g);}
+  const fl=el('div','fitlist');const mark=(ok,yes,unk,no)=>el('span','pill '+(ok===true?'good':ok===false?'bad':'warn'),ok===true?'✓ '+yes:ok===false?'✗ '+no:'? '+unk);
+  fl.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.label),
+    mark(fh.c.beds,'3 bd','Beds unknown',bedsTxt(h)||'Not 3 bd'),mark(fh.c.size,sqftTxt(h)||'Size fits','Sq ft unknown',(sqftTxt(h)||'')+' · outside 1,600–2,200'),
+    mark(fh.c.yard,'Backyard','Yard not listed','No yard'),mark(fh.c.upgraded,'Upgraded interior','Interior · check photos','Dated'));
+  if(fh.c.pool)fl.append(el('span','pill good','★ Pool'));
+  body.append(fl);
+  const ht=el('div','headtags');ht.append(el('span','tag '+v.cls,v.text));
+  const cp=el('span','cpill',ck);ht.append(cp);
+  if(h.fenced_yard===true)ht.append(el('span','pill good','Fenced yard'));
+  if(sqftTxt(h))ht.append(el('span','pill',sqftTxt(h)));
+  if(h.specials)ht.append(el('span','pill warn','Special'));
+  body.append(ht);
+  if(h.address&&h.address!==h.name)body.append(el('p',null,h.address));
+  if(h.notes)body.append(el('p',null,h.notes));
+  const facts=el('dl','facts');const fact=(k,val)=>{if(val==null||val==='')return;facts.append(el('dt',null,k),el('dd',null,String(val)));};
+  fact('Deposit',h.deposit||(num(h.deposit_min)!=null?money(h.deposit_min):'Not listed · ask'));
+  const pet=[num(h.pet_deposit)!=null?money(h.pet_deposit)+' deposit':null,num(h.pet_fee)!=null?money(h.pet_fee)+' fee':null,num(h.pet_rent)!=null?money(h.pet_rent)+'/mo pet rent':null].filter(Boolean).join(' · ');
+  fact('Nova costs',pet||(h.dogs==='Not allowed'?'No dogs listed':'Not listed · ask'));
+  fact('Pet rules',h.pet_notes);
+  const HK={'Banned':'On the breed list','Not on list':'Not on the breed list','No breed list':'No breed restrictions'};
+  fact('Huskies',h.husky?(HK[h.husky]||'Not confirmed · ask')+(h.husky_note?' · '+h.husky_note:''):(h.breed_restrictions?'Breed list not checked · ask':null));
+  const mi=moveIn(h);fact('Move-in',mi.total!=null?money(mi.total)+(mi.est?' est.':''):null);
+  fact('Monthly w/ Nova',monthly(h)!=null?money(monthly(h)):null);
+  fact('Application',num(h.app_fee)!=null?money(h.app_fee):null);fact('Admin fee',num(h.admin_fee)!=null?money(h.admin_fee):null);
+  fact('Available',h.available);fact('Manager',h.manager);fact('Special',h.specials);
+  fact('Garage',num(h.garage_spaces)!=null?h.garage_spaces+' spaces':null);fact('Built',h.year_built);
+  fact('Checked',[day(h.checked),h.source].filter(Boolean).join(' · '));
+  body.append(facts);
+  const am=amenSet(h);if(am.size){const a=el('div','am');[...am].forEach(x=>a.append(el('span',F.am.includes(x)?'hit':null,x)));body.append(a);}
+  const ct=el('div','contact');
+  const addC=(label,val)=>{if(!val)return;const w=el('span');w.append(el('span','eyebrow',label+' '),el('span','sel',val));w.append(copyBtn(val,label.toLowerCase(),w));ct.append(w);};
+  addC('Phone',h.phone);addC('Email',h.email);
+  if(!h.phone&&!h.email)ct.append(el('span','sub','No direct contact published · use the website'));
+  body.append(ct);
+  const links=el('div','links');const web=safeUrl(h.website),lst=safeUrl(h.listing_url);
+  if(web){const a=el('a','posting','Property website →');a.href=web;a.target='_blank';a.rel='noopener';links.append(a);}
+  if(lst&&lst!==web){const a=el('a','posting','Open the listing →');a.href=lst;a.target='_blank';a.rel='noopener';links.append(a);}
+  body.append(links);
+  const sr=el('div','statusrow');sr.append(el('span','eyebrow','Status'));
+  STATUSES.forEach(([k,label])=>{const b=el('button','btn status',label);b.type='button';b.setAttribute('aria-pressed',st===k);if(!db||!canWrite)b.disabled=true;b.addEventListener('click',()=>setStatus(h,st===k?'':k));sr.append(b);});
+  const pt=el('textarea','note');pt.readOnly=true;pt.value=pitch(h);pt.hidden=true;pt.setAttribute('aria-label','Message about Nova');
+  const pb=el('button','btn teal','Copy Nova pitch');pb.type='button';
+  pb.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(pitch(h));pb.textContent='Copied';}catch(e){pt.hidden=false;pt.select();pb.textContent='Select & copy below';}setTimeout(()=>pb.textContent='Copy Nova pitch',1800);});
+  sr.append(pb);body.append(sr,pt);
+  const ta=el('textarea','note');ta.id='note-'+mode+'-'+h.id;ta.placeholder='Your notes: call notes, questions to ask, tour impressions…';ta.value=h.my_note||'';
+  if(!db||!canWrite)ta.disabled=true;
+  const sv=el('span','saved',h.note_at?'Saved '+day(h.note_at):'');
+  let nT;ta.addEventListener('input',()=>{clearTimeout(nT);sv.textContent='Saving…';nT=setTimeout(()=>{nT=null;saveNote(h,ta.value,sv);},900);});
+  ta.addEventListener('blur',()=>{if(nT){clearTimeout(nT);nT=null;saveNote(h,ta.value,sv);}});
+  body.append(ta,sv);
+  det.append(body);
+  return det;
+}
+
+/* ---------- photo viewer ---------- */
+const LB={list:[],i:0};
+function openLB(list,i,title){LB.list=list;LB.i=i;$('lb-title').textContent=title;showLB();$('lb').showModal();}
+function showLB(){$('lb-img').src=LB.list[LB.i];$('lb-n').textContent=`${LB.i+1} / ${LB.list.length}`;}
+$('lb-prev').addEventListener('click',()=>{LB.i=(LB.i-1+LB.list.length)%LB.list.length;showLB();});
+$('lb-next').addEventListener('click',()=>{LB.i=(LB.i+1)%LB.list.length;showLB();});
+$('lb-close').addEventListener('click',()=>$('lb').close());
+$('lb').addEventListener('click',e=>{if(e.target.id==='lb')$('lb').close();});
+$('lb').addEventListener('keydown',e=>{if(e.key==='ArrowLeft')$('lb-prev').click();if(e.key==='ArrowRight')$('lb-next').click();});
+
+/* ---------- writes ---------- */
+async function setStatus(h,status){
+  if(!db)return;pending.set(h.id,status);render();
+  try{await db.doc('homes/'+h.id).update({status,status_at:new Date().toISOString()});}
+  catch(e){pending.delete(h.id);render();$('status').textContent='Could not save that change. Check your connection and try again.';}
+}
+const noteSaving=new Map();
+async function saveNote(h,val,sv){
+  if(!db||val===(h.my_note||''))return void(sv.textContent=h.note_at?'Saved '+day(h.note_at):'');
+  if(noteSaving.get(h.id))return;noteSaving.set(h.id,true);
+  try{await db.doc('homes/'+h.id).update({my_note:val,note_at:new Date().toISOString()});sv.textContent='Saved';}
+  catch(e){sv.textContent='Not saved · try again';}
+  finally{noteSaving.delete(h.id);}
+}
+
+/* ---------- render ---------- */
+function median(a){if(!a.length)return null;const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2;}
+function render(){
+  if(!homes)return;
+  const shown=homes.filter(passes).sort(sorter);
+  const short=homes.filter(h=>ACTIVE.has(statusOf(h))).sort(sorter);
+  $('shown').textContent=shown.length;$('total').textContent=homes.length;
+  $('vn-homes').textContent=shown.length;$('vn-short').textContent=short.length;
+  $('c-homes').textContent=shown.length+' of '+homes.length;$('c-short').textContent=short.length+' homes';
+  $('k-show').textContent=shown.length;$('k-show-sub').textContent=`of ${homes.length} houses & townhomes`;
+  const fits=shown.map(fit);$('k-fit').textContent=fits.filter(f=>f.tier).length;
+  $('k-fit-sub').textContent=`${fits.filter(f=>f.tier==='strong').length} strong · ${fits.filter(f=>f.tier&&f.c.pool).length} with a pool`;
+  $('k-dogs').textContent=shown.filter(h=>dogVerdict(h).score>=2).length;
+  $('k-dogs-sub').textContent=`${shown.filter(h=>dogVerdict(h).score>=3).length} confirmed · ${shown.filter(h=>dogVerdict(h).cls==='bad').length} to negotiate`;
+  const rents=shown.map(rentLo).filter(v=>v!=null);const med=median(rents);
+  $('k-med').textContent=med==null?'–':kfmt(med);$('k-med-sub').textContent=rents.length?`${money(Math.min(...rents))} lowest`:'–';
+  const mvAll=shown.map(h=>({h,m:moveIn(h)})).filter(x=>x.m.total!=null).sort((a,b)=>a.m.total-b.m.total);
+  const mv=mvAll.find(x=>num(x.h.deposit_min)!=null)||mvAll[0];
+  $('k-move').textContent=mv?kfmt(mv.m.total):'–';$('k-move-sub').textContent=mv?(mv.h.name||mv.h.address)+(mv.m.est?' · est.':''):'–';
+  $('k-short').textContent=short.length;
+  const by={};short.forEach(h=>{const s=statusOf(h);by[s]=(by[s]||0)+1;});
+  $('k-short-sub').textContent=short.length?Object.entries(by).map(([k,n])=>`${n} ${STATUS_LABEL[k].toLowerCase()}`).join(' · '):'Tap ★ on a home';
+  const last=homes.map(h=>h.checked).filter(Boolean).sort().pop();
+  const conf=homes.filter(h=>dogVerdict(h).score>=3).length,neg=homes.filter(h=>dogVerdict(h).cls==='bad').length;
+  $('takeaway').textContent=`${homes.length} houses & townhomes across ${new Set(homes.map(cityKey)).size} areas. ${conf} confirmed OK for Nova, ${neg} need a negotiation.`+(last?` Listings checked ${day(last)}.`:'');
+  $('foot').textContent='Live · listings checked '+(last?day(last):'—');
+  const lh=$('list-homes');lh.replaceChildren();
+  if(!shown.length)lh.append(el('p','empty','No homes match these filters. Widen the price range or turn a city back on.'));
+  shown.forEach(h=>lh.append(row(h,'all')));
+  const ls=$('list-short');ls.replaceChildren();
+  if(!short.length)ls.append(el('p','empty','Nothing here yet. Tap ★ on any home, or mark it Contacted, Toured or Applied.'));
+  short.forEach(h=>ls.append(row(h,'short')));
+  drawCosts(short,shown);drawSources();
+}
+function drawCosts(short,shown){
+  const t=$('costs');t.replaceChildren();
+  const thead=el('thead');const hr=el('tr');['Home','Rent','Deposit','Pet dep + fee','App + admin','Move-in','Monthly w/ Nova','Nova'].forEach((x,i)=>hr.append(el('th',i&&i<7?'n':null,x)));thead.append(hr);t.append(thead);
+  const tb=el('tbody');const ids=new Set();const rows=[...short,...shown.filter(h=>!ACTIVE.has(statusOf(h)))].filter(h=>!ids.has(h.id)&&ids.add(h.id));
+  $('c-costs').textContent=rows.length+' homes';
+  rows.forEach(h=>{const tr=el('tr');const v=dogVerdict(h);const mi=moveIn(h);
+    const n=el('td');n.append(document.createTextNode((ACTIVE.has(statusOf(h))?'★ ':'')+(h.name||h.address)));n.append(el('span','sub',cityKey(h)+(h.area?' · '+h.area:'')));tr.append(n);
+    const petSum=(num(h.pet_deposit)||0)+(num(h.pet_fee)||0),feeSum=(num(h.app_fee)||0)+(num(h.admin_fee)||0);
+    [rentLo(h),num(h.deposit_min),num(h.pet_deposit)==null&&num(h.pet_fee)==null?null:petSum,num(h.app_fee)==null&&num(h.admin_fee)==null?null:feeSum].forEach(x=>tr.append(el('td','n',money(x))));
+    tr.append(el('td','n',mi.total==null?'—':money(mi.total)+(mi.est?' est.':'')));
+    tr.append(el('td','n',money(monthly(h))));
+    const dt=el('td');dt.append(el('span','tag '+v.cls,v.short));tr.append(dt);tb.append(tr);});
+  if(!rows.length){const tr=el('tr');const td=el('td',null,'No homes match the current filters.');td.colSpan=8;tr.append(td);tb.append(tr);}
+  t.append(tb);
+}
+function drawSources(){
+  const t=$('sources');t.replaceChildren();const g={};
+  homes.forEach(h=>{const k=cityKey(h);g[k]=g[k]||{n:0,ok:0,src:new Set()};g[k].n++;if(dogVerdict(h).score>=2)g[k].ok++;String(h.source||'').split(/[,;]/).map(s=>s.trim()).filter(Boolean).forEach(s=>g[k].src.add(s));});
+  const thead=el('thead');const hr=el('tr');['Area','Homes','Nova OK','Sources'].forEach((x,i)=>hr.append(el('th',i===1||i===2?'n':null,x)));thead.append(hr);t.append(thead);
+  const tb=el('tbody');CITIES.map(c=>c.k).filter(k=>g[k]).forEach(k=>{const tr=el('tr');tr.append(el('td',null,k),el('td','n',String(g[k].n)),el('td','n',String(g[k].ok)),el('td',null,[...g[k].src].slice(0,5).join(', ')));tb.append(tr);});
+  t.append(tb);
+}
+
+/* ---------- views ---------- */
+const VIEWS=['homes','shortlist','costs','notes'];
+function setView(v){if(!VIEWS.includes(v))v='homes';view=v;
+  document.querySelectorAll('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==v);
+  document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===v));
+  try{history.replaceState(null,'','#'+v);}catch(e){}
+  try{localStorage.setItem('jn-view',v);}catch(e){}}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{setView(b.dataset.view);drawControls();}));
+let start=(location.hash||'').slice(1);if(!VIEWS.includes(start)){try{start=localStorage.getItem('jn-view')||'homes';}catch(e){start='homes';}}
+setView(start);drawControls();
+
+/* ---------- boot ---------- */
+(async()=>{
+  const [dbNs,userNs]=await Promise.all([window.claude?.use?.('db'),window.claude?.use?.('user')]);
+  db=dbNs;
+  if(userNs){try{const w=await userNs.can('data.write');if(w===false)canWrite=false;}catch(e){}}
+  if(!db){$('list-homes').replaceChildren(el('p','empty','Open this page in Claude while signed in to load the saved homes.'));$('takeaway').textContent='Not connected to the listing database.';return;}
+  db.collection('homes').onSnapshot(snap=>{
+    homes=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()}));
+    homes.forEach(h=>{if(pending.has(h.id)&&pending.get(h.id)===(h.status||''))pending.delete(h.id);});
+    if(!homes.length){$('list-homes').replaceChildren(el('p','empty','No homes saved yet. Ask Claude to add houses and townhomes and they will appear here.'));$('takeaway').textContent='Listing database is empty.';return;}
+    drawControls();render();
+  },()=>{$('status').textContent='Lost the connection to the listing database. Reload the page.';});
+})();
+})();
+</script>
+
+</body></html>
