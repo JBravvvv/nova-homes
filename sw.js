@@ -1,5 +1,5 @@
 // Network-first for the page and data so updates show up; cache-first for photos and icons.
-const C='nova-homes-v1';
+const C='nova-homes-v2';
 self.addEventListener('install',e=>self.skipWaiting());
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
 self.addEventListener('fetch',e=>{
