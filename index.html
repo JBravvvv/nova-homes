@@ -846,7 +846,8 @@ setView(start);drawControls();
   if(userNs){try{const w=await userNs.can('data.write');if(w===false)canWrite=false;}catch(e){}}
   if(!db){$('list-homes').replaceChildren(el('p','empty','Open this page in Claude while signed in to load the saved homes.'));$('takeaway').textContent='Not connected to the listing database.';return;}
   db.collection('homes').onSnapshot(snap=>{
-    homes=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()}));
+    // Listings Josh chose to hide (rented, delisted, possible scam) keep a `hidden` reason in the data and never show.
+    homes=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()})).filter(h=>!h.hidden);
     homes.forEach(h=>{if(pending.has(h.id)&&pending.get(h.id)===(h.status||''))pending.delete(h.id);});
     if(!homes.length){$('list-homes').replaceChildren(el('p','empty','No homes saved yet. Ask Claude to add houses and townhomes and they will appear here.'));$('takeaway').textContent='Listing database is empty.';return;}
     drawControls();render();
