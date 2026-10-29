@@ -33,6 +33,7 @@
   --f-mono:"Roboto Mono",ui-monospace,"SF Mono",Menlo,monospace;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:#E3DFF0 linear-gradient(165deg,var(--bg-a) 0%,var(--bg-b) 50%,var(--bg-c) 100%);min-height:100vh;color:var(--ink);font-family:var(--f-body);font-weight:500;font-size:15.5px;line-height:1.38;-webkit-font-smoothing:antialiased;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
@@ -517,7 +518,7 @@ function carousel(ph,cls,title){
   if(!ph.length){w.classList.add('none');w.textContent='No photo';return w;}
   const t=el('div','car-track'),n=el('span','car-n');w.append(t);
   let filled=0,cur=0,sT,gT;
-  const upd=()=>{const tot=t.children.length;if(!tot){w.replaceChildren('No photo');w.classList.add('none');return;}
+  const upd=()=>{const tot=t.children.length;if(!tot){if(filled<ph.length){add(filled+2);return;}w.replaceChildren('No photo');w.classList.add('none');return;}
     n.textContent=`${Math.min(cur+1,tot)} / ${filled<ph.length?ph.length:tot}`;
     for(let i=cur;i<=cur+2&&i<tot;i++)t.children[i].loading='eager';};
   const add=k=>{for(;filled<Math.min(k,ph.length);filled++){const im=el('img');im.src=ph[filled];im.alt='';im.loading='lazy';im.decoding='async';im.draggable=false;
@@ -531,6 +532,7 @@ function carousel(ph,cls,title){
         cur=(cur+d+tot)%tot;upd();const x=cur*t.clientWidth;t.scrollTo({left:x,behavior:'smooth'});
         clearTimeout(gT);gT=setTimeout(()=>{if(Math.abs(t.scrollLeft-x)>2)t.scrollLeft=x;},700);});return b;};
     w.append(mk('prev',-1,'Previous'),mk('next',1,'Next'));
+    ['touchstart','wheel','pointerdown'].forEach(ev=>t.addEventListener(ev,()=>clearTimeout(gT),{passive:true}));
     t.addEventListener('scroll',()=>{fill();clearTimeout(sT);sT=setTimeout(()=>{const W=t.clientWidth;if(W){cur=Math.round(t.scrollLeft/W);upd();}},150);},{passive:true});
     ['pointerenter','touchstart','focusin'].forEach(ev=>w.addEventListener(ev,()=>{fill();upd();},{passive:true,once:true}));
     n.textContent=`1 / ${ph.length}`;
@@ -542,11 +544,12 @@ function carousel(ph,cls,title){
 const openRows=new Set();
 function copyBtn(val,label,host){const b=el('button','copy','Copy');b.type='button';b.setAttribute('aria-label','Copy '+label);
   b.addEventListener('click',async e=>{e.preventDefault();try{await navigator.clipboard.writeText(val);b.textContent='Copied';}catch(err){const s=host.querySelector('.sel');if(s){const r=document.createRange();r.selectNodeContents(s);const g=getSelection();g.removeAllRanges();g.addRange(r);}b.textContent='Selected';}setTimeout(()=>b.textContent='Copy',1600);});return b;}
-function row(h,mode){
+function row(h,mode,open){
   const v=dogVerdict(h), st=statusOf(h), ck=cityKey(h), key=mode+':'+h.id;
   const det=el('details','home'+(st==='pass'?' passed':''));det.style.setProperty('--city',CITY_COLOR[ck]||'var(--c-other)');
-  if(openRows.has(key))det.open=true;
-  det.addEventListener('toggle',()=>det.open?openRows.add(key):openRows.delete(key));
+  // The detail body (full gallery, facts, notes) is built the first time the row opens, not for every row up front.
+  let bodyBuilt=false;const ensureBody=()=>{if(bodyBuilt)return;bodyBuilt=true;det.append(buildBody());};
+  det.addEventListener('toggle',()=>{if(det.open){openRows.add(key);ensureBody();}else openRows.delete(key);});
   const sum=el('summary');
   const ph=photosOf(h), fh=fit(h);
   const th=carousel(ph,'rowcar',h.name||h.address);
@@ -567,6 +570,7 @@ function row(h,mode){
   const chev=el('span','chev','▾');chev.setAttribute('aria-hidden','true');
   sum.append(th,c1,c2,c3,acts,chev);det.append(sum);
 
+  function buildBody(){
   const body=el('div','detail');
   if(ph.length){const g=el('div','gallery');g.setAttribute('aria-label',`Photos of ${h.name||h.address}`);
     ph.forEach((u,i)=>{const b=el('button');b.type='button';b.setAttribute('aria-label',`Open photo ${i+1} of ${ph.length}`);
@@ -622,7 +626,9 @@ function row(h,mode){
   let nT;ta.addEventListener('input',()=>{clearTimeout(nT);sv.textContent='Saving…';nT=setTimeout(()=>{nT=null;saveNote(h,ta.value,sv);},900);});
   ta.addEventListener('blur',()=>{if(nT){clearTimeout(nT);nT=null;saveNote(h,ta.value,sv);}});
   body.append(ta,sv);
-  det.append(body);
+  return body;
+  }
+  if(open||openRows.has(key)){det.open=true;ensureBody();}
   return det;
 }
 
@@ -642,19 +648,22 @@ async function setStatus(h,status){
   try{await db.doc('homes/'+h.id).update({status,status_at:new Date().toISOString()});}
   catch(e){pending.delete(h.id);render();$('status').textContent='Could not save that change. Check your connection and try again.';}
 }
-const noteSaving=new Map();
+const noteSaving=new Map(),noteQueued=new Map();
 async function saveNote(h,val,sv){
   if(!db||val===(h.my_note||''))return void(sv.textContent=h.note_at?'Saved '+day(h.note_at):'');
-  if(noteSaving.get(h.id))return;noteSaving.set(h.id,true);
+  if(noteSaving.get(h.id)){noteQueued.set(h.id,[val,sv]);return;}noteSaving.set(h.id,true);
   try{await db.doc('homes/'+h.id).update({my_note:val,note_at:new Date().toISOString()});sv.textContent='Saved';}
   catch(e){sv.textContent='Not saved · try again';}
-  finally{noteSaving.delete(h.id);}
+  finally{noteSaving.delete(h.id);const q=noteQueued.get(h.id);if(q){noteQueued.delete(h.id);saveNote(h,q[0],q[1]);}}
 }
 
 /* ---------- render ---------- */
 function median(a){if(!a.length)return null;const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2;}
 function render(){
   if(!homes)return;
+  // Saves and snapshots re-render rows and the details dialog; put the cursor back in the note being typed.
+  const ae=document.activeElement;
+  const keep=ae&&ae.tagName==='TEXTAREA'&&ae.id.startsWith('note-')?{id:ae.id,v:ae.value,s:ae.selectionStart,e:ae.selectionEnd}:null;
   const shown=homes.filter(passes).sort(sorter);
   const short=homes.filter(h=>ACTIVE.has(statusOf(h))).sort(sorter);
   $('shown').textContent=shown.length;$('total').textContent=homes.length;
@@ -677,20 +686,21 @@ function render(){
   const conf=homes.filter(h=>dogVerdict(h).score>=3).length,neg=homes.filter(h=>dogVerdict(h).cls==='bad').length;
   $('takeaway').textContent=`${homes.length} houses & townhomes across ${new Set(homes.map(cityKey)).size} areas. ${conf} confirmed OK for Nova, ${neg} need a negotiation.`+(last?` Listings checked ${day(last)}.`:'');
   $('foot').textContent='Live · listings checked '+(last?day(last):'—');
-  const lh=$('list-homes');lh.replaceChildren();
-  if(!shown.length)lh.append(el('p','empty','No homes match these filters. Widen the price range or turn a city back on.'));
-  drawHomes(shown,lh);
+  drawHomes(shown);
   const ls=$('list-short');ls.replaceChildren();
   if(!short.length)ls.append(el('p','empty','Nothing here yet. Tap ★ on any home, or mark it Contacted, Toured or Applied.'));
   short.forEach(h=>ls.append(row(h,'short')));
   drawCosts(short,shown);drawSources();
+  if(keep){const t=document.getElementById(keep.id);
+    if(t&&t!==ae){if(t.value!==keep.v){t.value=keep.v;t.dispatchEvent(new Event('input'));}
+      t.focus({preventScroll:true});try{t.setSelectionRange(keep.s,keep.e);}catch(e){}}}
 }
 /* ---------- list / icon / map views ---------- */
 // Coordinates looked up from the address (US Census geocoder) for homes saved without lat/lng.
 const GEO={"scottsdale-6552-e-2nd-st":[33.491124,-111.938869],"ahwatukee-leaseaz-3801-e-orchid-ln":[33.322656,-112.000146],"mesa-leaseaz-4737-s-element":[33.329046,-111.618979],"mesa-msr-838-e-10th-st":[33.432651,-111.81303],"mesa-1367-s-country-club-dr-unit-1193":[33.391336,-111.840006],"gilbert-4043-e-appaloosa-rd":[33.339004,-111.702976],"mesa-4725-e-brown-rd-55":[33.437237,-111.728859],"mesa-msr-7558-e-navarro-ave":[33.367967,-111.672133],"ahwatukee-rentler-13814-s-42nd-st":[33.321232,-111.995095],"scottsdale-7337-e-lewis-ave":[33.47557,-111.92276],"gilbert-1254-s-corrine-dr":[33.327795,-111.77937],"mesa-441-s-maple-81":[33.407735,-111.748152],"mesa-9233-e-neville-ave-1092":[33.368356,-111.633671],"mesa-avilla-lehi-crossing":[33.480861,-111.756718],"tempe-904-s-mariana-st-a":[33.418812,-111.918747],"scottsdale-8617-e-larkspur-dr":[33.5997,-111.894315],"mesa-6610-e-university-dr-unit-47":[33.422986,-111.688333],"chandler-1624-e-chicago-st":[33.300521,-111.814059],"chandler-281-s-california-st":[33.299224,-111.844029],"mesa-1322-s-sandal":[33.391265,-111.707972],"gilbert-2098-e-mallard-ct":[33.369243,-111.747004],"scottsdale-8292-e-cortez-dr":[33.592915,-111.902806],"gilbert-1819-e-cascade-dr":[33.372491,-111.749931],"ahwatukee-corsica-villas-euclid-avenue":[33.366901,-112.063323],"mesa-2232-w-lindner-ave-41":[33.37649,-111.881899],"gilbert-2992-e-ravenswood-dr":[33.220119,-111.724931],"scottsdale-16640-e-desert-vista-trl":[33.742769,-111.72017],"mesa-453-w-university-dr":[33.422309,-111.841689],"mesa-msr-9706-e-butte-st":[33.420955,-111.621654],"mesa-9819-e-kiva-ave":[33.377652,-111.623177],"chandler-900-s-94th-st-1132":[33.291693,-111.879391],"mesa-1367-s-country-club-dr-1057":[33.391336,-111.840006],"scottsdale-8316-e-indian-school-rd":[33.494932,-111.901861],"scottsdale-5741-e-aire-libre-ave":[33.63682,-111.956867],"mesa-zen-8708-e-portobello-ave":[33.360511,-111.646253],"ahwatukee-leaseaz-1819-w-nighthawk-way":[33.297713,-112.099074],"scottsdale-8713-e-orange-blossom-ln":[33.510786,-111.893483],"gilbert-2627-s-bahama-dr":[33.302691,-111.753775],"scottsdale-8044-e-krail-st":[33.53462,-111.907109],"chandler-900-s-94th-st-1184":[33.291693,-111.879391],"chandler-965-e-runaway-bay-pl":[33.214339,-111.824993],"mesa-456-n-horne":[33.423659,-111.814125],"scottsdale-8714-e-clarendon-ave":[33.4916,-111.893826],"mesa-505-north-lesueur":[33.424972,-111.820105],"scottsdale-5036-e-campo-bello-dr":[33.644065,-111.972287],"gilbert-1946-s-oak-st":[33.315249,-111.794941],"mesa-tricon-gateway":[33.327489,-111.633061],"chandler-1111-w-summit-pl-79":[33.35318,-111.860385],"chandler-760-e-indian-wells-place":[33.212906,-111.829445],"ahwatukee-verano-townhomes":[33.321101,-111.989134],"mesa-bb-living-burden-orchards":[33.478754,-111.752975],"scottsdale-11047-e-mirasol-cir":[33.632614,-111.841876],"scottsdale-10055-n-142nd-st-1330":[33.577604,-111.774364],"chandler-281-w-flamingo-dr":[33.275936,-111.846875],"mesa-msr-1761-w-peralta-ave":[33.357325,-111.871658],"chandler-2307-e-mahogany-pl":[33.230312,-111.800061],"mesa-bella-encanta":[33.389634,-111.618049],"gilbert-2498-s-betty-st":[33.305331,-111.699479],"mesa-4512-s-mole":[33.333645,-111.632574],"mesa-962-s-wildrose":[33.397507,-111.608495],"scottsdale-8240-e-turney-ave":[33.500032,-111.903655],"scottsdale-9750-e-gelding-dr":[33.61598,-111.871576],"gilbert-4021-e-catclaw-st":[33.338155,-111.703806],"mesa-61-n-hobson":[33.416564,-111.818399],"chandler-936-e-flint-st":[33.30899,-111.825854],"scottsdale-10591-e-saddlehorn-dr":[33.573506,-111.852765],"mesa-8317-e-impala-ave":[33.383083,-111.651757],"chandler-1449-e-ironwood-dr":[33.326269,-111.814702],"chandler-1935-w-mockingbird-dr":[33.265065,-111.877652],"mesa-msr-555-n-elm":[33.426008,-111.857751],"gilbert-4467-e-remington-dr":[33.288013,-111.693732],"gilbert-2325-e-lakecrest-dr":[33.375528,-111.740839],"mesa-avilla-enclave":[33.364748,-111.652884],"mesa-2024-s-baldwin-st-95":[33.378386,-111.626267],"mesa-536-n-hall-c":[33.425413,-111.794616],"ahwatukee-leaseaz-3915-e-gail-dr":[33.322285,-111.998297],"ahwatukee-8658-s-51st-st-2":[33.367837,-111.972254],"gilbert-4168-e-appaloosa-rd":[33.339134,-111.700452],"gilbert-4161-e-pinto-dr":[33.337928,-111.700797],"mesa-zen-5246-e-hilton-ave":[33.388665,-111.718137],"ahwatukee-5220-e-tamblo-dr":[33.338112,-111.973938],"mesa-zen-10054-e-olla-ave":[33.363807,-111.616638],"chandler-1072-e-newland-dr":[33.277416,-111.822974],"gilbert-town-germann":[33.279281,-111.776199],"mesa-1741-s-clearview-ave-66":[33.384107,-111.679369],"scottsdale-9705-e-mountain-view-rd-1015":[33.575459,-111.871805],"ahwatukee-corsica-villas-20th-street":[33.372498,-112.040307],"chandler-1097-e-chapman-dr":[33.278322,-111.822442],"gilbert-the-havenly":[33.335901,-111.728191]};
 let LV={mode:'list',layout:'list'};
 try{const s=JSON.parse(localStorage.getItem('jn-layout')||'null');if(s)LV=Object.assign(LV,s);}catch(e){}
-function setLV(k,v){LV[k]=v;try{localStorage.setItem('jn-layout',JSON.stringify(LV));}catch(e){}render();}
+function setLV(k,v){LV[k]=v;try{localStorage.setItem('jn-layout',JSON.stringify(LV));}catch(e){}showMode();}
 document.querySelectorAll('.seg [data-mode]').forEach(b=>b.addEventListener('click',()=>setLV('mode',b.dataset.mode)));
 $('f-layout').addEventListener('change',e=>setLV('layout',e.target.value));
 const coord=h=>{const a=num(h.lat),b=num(h.lng);if(a!=null&&b!=null&&a&&b)return[a,b];return GEO[h.id]||null;};
@@ -714,26 +724,37 @@ function card(h){
 }
 let hdId=null;
 function openHome(h){hdId=h.id;fillHome();const d=$('hd');if(!d.open)d.showModal();}
-function fillHome(){const h=homes&&homes.find(x=>x.id===hdId);const b=$('hd-body');b.replaceChildren();if(!h)return;const r=row(h,'card');r.open=true;b.append(r);}
+function fillHome(){const h=homes&&homes.find(x=>x.id===hdId);const b=$('hd-body');b.replaceChildren();if(!h)return;b.append(row(h,'card',true));}
 $('hd-close').addEventListener('click',()=>$('hd').close());
 $('hd').addEventListener('click',e=>{if(e.target.id==='hd')$('hd').close();});
 $('hd').addEventListener('close',()=>{hdId=null;});
-function drawHomes(shown,lh){
-  const map=LV.mode==='map',icons=!map&&LV.layout==='icons';
+// render() hands over the filtered homes; only the view on screen is built now, the others when first switched to.
+let lastShown=null;const built={list:false,icons:false,map:false};
+function drawHomes(shown){
+  lastShown=shown;built.list=built.icons=built.map=false;
+  showMode();
+  if($('hd').open)fillHome();
+}
+function showMode(){
+  const map=LV.mode==='map',icons=!map&&LV.layout==='icons',lh=$('list-homes');
   document.querySelectorAll('.seg [data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===LV.mode));
   $('f-layout').value=LV.layout;$('layout-field').hidden=map;
   lh.hidden=map||icons;$('strip-homes').hidden=map||icons;$('cards-homes').hidden=!icons;$('map-homes').hidden=!map;
-  if(icons){const cg=$('cards-homes');cg.replaceChildren();
-    if(!shown.length)cg.append(el('p','empty','No homes match these filters. Widen the price range or turn a city back on.'));
+  const shown=lastShown;if(!shown)return;
+  const none=()=>el('p','empty','No homes match these filters. Widen the price range or turn a city back on.');
+  if(icons&&!built.icons){built.icons=true;const cg=$('cards-homes');cg.replaceChildren();
+    if(!shown.length)cg.append(none());
     shown.forEach(h=>cg.append(card(h)));}
-  else if(!map){if(!shown.length)lh.append(el('p','empty','No homes match these filters. Widen the price range or turn a city back on.'));
+  else if(!map&&!icons&&!built.list){built.list=true;lh.replaceChildren();
+    if(!shown.length)lh.append(none());
     shown.forEach(h=>lh.append(row(h,'all')));}
-  else drawMap(shown);
-  if($('hd').open)fillHome();
+  else if(map){if(!built.map){built.map=true;drawMap(shown);}else setTimeout(showMap,0);}
 }
-let LM=null,LMlayer=null,leafletP=null,LMpts=[];
+let LM=null,LMlayer=null,leafletP=null,LMpts=[],LMfitted=false,LMkey='';
 // Fit the map to the pins once its section is on screen (a hidden section has no size to fit into).
-function fitMap(){if(!LM||!$('map').offsetWidth)return;LM.invalidateSize();if(LMpts.length)LM.fitBounds(LMpts,{padding:[30,30],maxZoom:14});else LM.setView([33.45,-111.9],10);}
+function fitMap(){if(!LM||!$('map').offsetWidth)return;LM.invalidateSize();LMfitted=true;if(LMpts.length)LM.fitBounds(LMpts,{padding:[30,30],maxZoom:14});else LM.setView([33.45,-111.9],10);}
+// Coming back to the map keeps your zoom and pan; it only re-fits after the pins changed (or if it never got to fit).
+function showMap(){if(!LM||!$('map').offsetWidth)return;LM.invalidateSize();if(!LMfitted)fitMap();}
 function loadLeaflet(){
   if(window.L)return Promise.resolve();
   if(leafletP)return leafletP;
@@ -741,16 +762,17 @@ function loadLeaflet(){
   return leafletP;
 }
 async function drawMap(shown){
-  try{await loadLeaflet();}catch(e){$('map-note').textContent='The map could not load. Check your connection and try again.';return;}
+  try{await loadLeaflet();}catch(e){built.map=false;$('map-note').textContent='The map could not load. Check your connection and try again.';return;}
   if(!LM){LM=L.map('map',{scrollWheelZoom:true});
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(LM);
     LMlayer=L.layerGroup().addTo(LM);}
+  let openId=null;LMlayer.eachLayer(l=>{if(l.isPopupOpen())openId=l._hid;});
   LMlayer.clearLayers();
   const cs=getComputedStyle(document.documentElement),pts=[];let off=0;
   shown.forEach(h=>{const ll=coord(h);if(!ll){off++;return;}pts.push(ll);
     const st=statusOf(h),star=ACTIVE.has(st);
     const col=cs.getPropertyValue((CITY_COLOR[cityKey(h)]||'var(--c-other)').slice(4,-1)).trim()||'#9A93B5';
-    const m=L.circleMarker(ll,{radius:star?10:7,color:star?'#B8901E':'#FFFFFF',weight:star?3:1.5,fillColor:col,fillOpacity:st==='pass'?.4:.92});
+    const m=L.circleMarker(ll,{radius:star?10:7,color:star?'#B8901E':'#FFFFFF',weight:star?3:1.5,fillColor:col,fillOpacity:st==='pass'?.4:.92});m._hid=h.id;
     m.bindPopup(()=>{const p=el('div','pop');const ph=photosOf(h);
       if(ph.length){const cr=carousel(ph,'',h.name||h.address);L.DomEvent.disableClickPropagation(cr);L.DomEvent.disableScrollPropagation(cr);p.append(cr);}
       p.append(el('span','main',h.name||h.address||'Rental'));
@@ -760,7 +782,8 @@ async function drawMap(shown){
     m.bindTooltip(rentTxt(h),{direction:'top',offset:[0,-6]});
     LMlayer.addLayer(m);});
   $('map-note').textContent=`${pts.length} of ${shown.length} homes on the map`+(off?` · ${off} without a mappable address (switch to List to see them)`:'')+'. Gold ring = shortlisted.';
-  LMpts=pts;setTimeout(fitMap,0);
+  const key=pts.map(p=>p.join(',')).join(';');if(key!==LMkey){LMkey=key;LMfitted=false;}LMpts=pts;
+  setTimeout(()=>{showMap();if(openId)LMlayer.eachLayer(l=>{if(l._hid===openId)l.openPopup();});},0);
 }
 function drawCosts(short,shown){
   const t=$('costs');t.replaceChildren();
@@ -792,7 +815,7 @@ function setView(v){if(!VIEWS.includes(v))v='homes';view=v;
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===v));
   try{history.replaceState(null,'','#'+v);}catch(e){}
   try{localStorage.setItem('jn-view',v);}catch(e){}
-  if(v==='homes'&&LV.mode==='map')setTimeout(fitMap,0);}
+  if(v==='homes'&&LV.mode==='map')showMode();}
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{setView(b.dataset.view);drawControls();}));
 let start=(location.hash||'').slice(1);if(!VIEWS.includes(start)){try{start=localStorage.getItem('jn-view')||'homes';}catch(e){start='homes';}}
 setView(start);drawControls();
