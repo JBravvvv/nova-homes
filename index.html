@@ -176,6 +176,7 @@ a.btn.apply{display:inline-flex;align-items:center;text-decoration:none;backgrou
 .links{display:flex;gap:10px;flex-wrap:wrap}
 .posting{font-weight:800;text-decoration:none}
 .posting:hover{text-decoration:underline}
+.posting.minor{font-weight:500;opacity:.7;font-size:12px}
 .statusrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 textarea.note{width:100%;max-width:72ch;min-height:64px;border:1px solid var(--line-strong);border-radius:8px;padding:7px 9px;font-size:14.5px;resize:vertical;background:var(--surface)}
 .saved{font-size:12.5px;color:var(--muted)}
@@ -746,6 +747,8 @@ function row(h,mode,open){
   const apl=applyLink(h,'posting','Apply online →');if(apl)links.append(apl);
   if(web){const a=el('a','posting','Property website →');a.href=web;a.target='_blank';a.rel='noopener';links.append(a);}
   if(lst&&lst!==web){const a=el('a','posting','Open the listing →');a.href=lst;a.target='_blank';a.rel='noopener';links.append(a);}
+  // Zumper is kept only to double-check availability; photos and details now come from the listing above
+  const zm=safeUrl(h.zumper_url);if(zm&&zm!==lst){const a=el('a','posting minor','Zumper copy (availability check only) →');a.href=zm;a.target='_blank';a.rel='noopener';links.append(a);}
   body.append(links);
   const sr=el('div','statusrow');sr.append(el('span','eyebrow','Status'));
   STATUSES.forEach(([k,label])=>{const b=el('button','btn status',label);b.type='button';b.setAttribute('aria-pressed',st===k);if(!db||!canWrite)b.disabled=true;b.addEventListener('click',()=>setStatus(h,st===k?'':k));sr.append(b);});

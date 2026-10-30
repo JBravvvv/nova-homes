@@ -1,0 +1,1469 @@
+{
+ "hides": [
+  [
+   "ahwatukee-11226-s-tomi-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-1135-e-cottonwood-ln",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-1136-e-hiddenview-dr",
+   "Zillow: not listed for rent; Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-1138-e-amberwood-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-1220-e-silverwood-dr",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "ahwatukee-13010-s-wakial-loop",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-14609-s-47th-pl",
+   "Zillow: not listed for rent; Realtor.com: pending (updated 2026-10-27)"
+  ],
+  [
+   "ahwatukee-15049-s-39th-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-15461-s-47th-pl",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "ahwatukee-15918-s-11th-way",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "ahwatukee-16002-s-30th-pl",
+   "Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-16226-s-37th-way",
+   "Zillow: not listed for rent; Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-16417-s-2nd-pl",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-16432-s-16th-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-16806-s-37th-way",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "ahwatukee-3013-w-glenhaven-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-3225-e-briarwood-ter",
+   "Zillow: not listed for rent; Realtor.com: pending (updated 2026-10-27)"
+  ],
+  [
+   "ahwatukee-3441-e-wildwood-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-3925-e-tonto-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-3926-e-graythorn-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-4352-e-cherokee-st",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "ahwatukee-4354-e-dry-creek-rd",
+   "Zillow: not for rent (recently sold)"
+  ],
+  [
+   "ahwatukee-4408-e-ute-st",
+   "Realtor.com: pending (updated 2026-10-23); Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-451-w-mountain-sage-dr",
+   "Realtor.com: pending (updated 2026-10-27)"
+  ],
+  [
+   "ahwatukee-4520-e-glenhaven-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-4548-e-shomi-st",
+   "Realtor.com: pending (updated 2026-10-15)"
+  ],
+  [
+   "ahwatukee-4749-e-thunderhill-pl",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "ahwatukee-4829-e-olney-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "ahwatukee-4850-e-paseo-way",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "ahwatukee-8845-s-48th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "arcadia-1645-e-cheery-lynn-rd",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "arcadia-3000-n-37th-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "arcadia-3302-e-pinchot-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "arcadia-3708-e-pinchot-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "arcadia-3944-e-earll-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "arcadia-4242-e-montecito-ave",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "arcadia-4406-n-dromedary-rd",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "arcadia-5201-n-18th-pl",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "chandler-1132-e-linda-ln",
+   "Zumper: no longer available"
+  ],
+  [
+   "chandler-1173-n-jay-pl",
+   "Zumper: no longer available"
+  ],
+  [
+   "chandler-1310-n-blackstone-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "chandler-170-s-maple-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "chandler-4823-w-chicago-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "chandler-6133-s-wilson-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "chandler-tricon-hudson-crossing",
+   "Zumper: no longer available"
+  ],
+  [
+   "gilbert-1345-n-brittany-ln",
+   "Zumper: no longer available"
+  ],
+  [
+   "gilbert-1454-n-birch-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "gilbert-2627-s-bahama-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "gilbert-3262-e-milky-way",
+   "Zumper: no longer available"
+  ],
+  [
+   "gilbert-3301-e-loma-vista-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "gilbert-3580-s-ranger-trl",
+   "Zumper: no longer available"
+  ],
+  [
+   "gilbert-3668-e-orchid-ln",
+   "Zumper: no longer available"
+  ],
+  [
+   "gilbert-417-e-cantebria-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "gilbert-72-n-cholla-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "gilbert-881-s-pheasant-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "mesa-2107-s-gordon",
+   "Zumper: no longer available"
+  ],
+  [
+   "mesa-5801-e-casper-rd",
+   "Zumper: no longer available"
+  ],
+  [
+   "mesa-6951-e-lomita-ave",
+   "Zumper: no longer available"
+  ],
+  [
+   "mesa-7414-e-knowles-ave",
+   "Zumper: no longer available"
+  ],
+  [
+   "mesa-7453-e-florian-ave",
+   "Zumper: no longer available"
+  ],
+  [
+   "mesa-848-s-saranac-ave",
+   "Zillow: not for rent (recently sold)"
+  ],
+  [
+   "mesa-8705-e-portobello-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "mesa-msr-1761-w-peralta-ave",
+   "Zumper: no longer available"
+  ],
+  [
+   "pv-5750-n-scottsdale-rd-villa",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-10511-e-sahuaro-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-10984-e-yucca-st",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "scottsdale-11260-n-92nd-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-11530-e-desert-willow-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "scottsdale-11782-n-112th-way",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-15607-n-65th-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-2018-n-81st-pl",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-2377-n-79th-pl",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-2627-n-70th-pl",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-3502-n-supai-way",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-4414-n-87th-pl",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "scottsdale-5036-e-campo-bello-dr",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "scottsdale-5623-e-grandview-rd",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-5995-n-78th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-6108-e-vernon-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-6123-e-harvard-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-6249-e-beck-ln",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-6332-e-earll-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-6601-e-paradise-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-6750-e-sheridan-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-6857-e-osborn-rd",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-7244-e-coronado-rd",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-7260-e-softwind-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-7521-e-mcknight-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-7720-e-catalina-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-7830-e-belleview-st",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "scottsdale-8143-e-mulberry-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-8207-e-mitchell-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-8308-e-buena-terra-way",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-8413-e-orange-blossom-ln",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-8476-e-chaparral-rd",
+   "Zumper: no longer available"
+  ],
+  [
+   "scottsdale-8513-e-rancho-vista-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-8563-e-garfield-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-984-n-85th-pl",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-9907-e-wood-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "scottsdale-scottsdale-hayden-townhomes",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1006-w-10th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1018-e-marigold-ln",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1022-w-elna-rae-st",
+   "Realtor.com: pending (updated 2026-10-19); Zumper: no longer available"
+  ],
+  [
+   "tempe-1023-w-5th-st-unit-1001",
+   "Realtor.com: pending (updated 2026-10-21)"
+  ],
+  [
+   "tempe-1023-w-5th-st-unit-1017",
+   "Realtor.com: pending (updated 2026-10-16)"
+  ],
+  [
+   "tempe-103-e-palmcroft-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1041-e-campus-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1041-e-fairmont-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1047-w-elna-rae-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1084-e-susan-ln",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1110-w-hermosa-dr",
+   "Realtor.com: pending (updated 2026-10-25)"
+  ],
+  [
+   "tempe-1115-e-fremont-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1127-s-una-ave",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-1134-w-hermosa-dr",
+   "Realtor.com: pending (updated 2026-10-19)"
+  ],
+  [
+   "tempe-1145-w-12th-pl",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1203-e-hermosa-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1204-w-7th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1207-s-roosevelt-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1242-w-9th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1301-w-4th-st-apt-1010",
+   "Realtor.com: pending (updated 2026-10-19)"
+  ],
+  [
+   "tempe-1306-w-12th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-133-w-ranch-rd",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-1343-w-3rd-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1420-n-rose-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-1435-e-cedar-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1436-s-kenneth-pl",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1443-e-cedar-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1445-e-hudson-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-15-w-geneva-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-1518-w-5th-pl",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-1627-e-fremont-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1646-e-hermosa-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1702-e-el-parque-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1732-e-hermosa-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-1893-e-la-donna-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-1901-s-farmer-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-1903-e-balboa-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-1904-e-manhatton-dr",
+   "Realtor.com: pending (updated 2026-09-30); Zumper: no longer available"
+  ],
+  [
+   "tempe-1912-e-balboa-dr",
+   "Zillow: not for rent (shows sold)"
+  ],
+  [
+   "tempe-1921-e-laguna-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1921-e-wesleyan-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1922-e-balboa-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1923-e-duke-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1941-e-la-vieve-ln",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-1944-e-richards-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-1985-e-carson-dr",
+   "Zillow: not for rent (recently sold)"
+  ],
+  [
+   "tempe-1988-e-oxford-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-2045-e-orange-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-211-e-hermosa-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-212-e-minton-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-2131-e-geneva-dr",
+   "Realtor.com: pending (updated 2026-10-20); Zumper: no longer available"
+  ],
+  [
+   "tempe-2149-e-alameda-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-2153-e-ellis-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-232-s-roosevelt-st",
+   "Realtor.com: pending (updated 2026-10-12)"
+  ],
+  [
+   "tempe-2329-e-concorda-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-233-e-huntington-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-2401-e-rio-salado-pkwy",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-2430-e-hermosa-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-2452-e-manhatton-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-2508-e-loyola-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-2514-e-pebble-beach-dr",
+   "Zillow: not for rent (recently sold)"
+  ],
+  [
+   "tempe-2605-e-lemon-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-2606-s-jentilly-ln",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-2634-s-cottonwood-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-2715-s-rita-ln",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-280-s-evergreen-rd-unit-1247",
+   "Realtor.com: pending (updated 2026-10-07)"
+  ],
+  [
+   "tempe-3127-s-fairfield-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-3312-s-ventura-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-3320-s-juniper-st",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-3613-s-kenneth-pl",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-3802-s-grandview-ave",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-406-w-7th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-408-e-la-jolla-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-4112-s-grandview-ave",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-414-w-hermosa-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-4417-s-newberry-rd",
+   "Realtor.com: pending (updated 2026-10-01); Zumper: no longer available"
+  ],
+  [
+   "tempe-445-e-beatryce-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-4527-s-forest-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-453-w-larona-ln",
+   "Realtor.com: pending (updated 2026-10-05)"
+  ],
+  [
+   "tempe-472-w-calle-monte-vista-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-4820-s-roberts-rd",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-5107-s-terrace-rd",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-515-e-vista-del-cerro-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-519-w-pebble-beach-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-533-e-pebble-beach-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-5915-s-parkside-dr",
+   "Zillow: not for rent (recently sold)"
+  ],
+  [
+   "tempe-606-s-evergreen-rd",
+   "Realtor.com: pending (updated 2026-10-19)"
+  ],
+  [
+   "tempe-6103-s-college-ave",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-611-e-la-jolla-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-6122-s-roosevelt-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-617-e-la-jolla-dr",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-6200-s-colonial-way",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-630-e-julie-dr",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-641-s-roosevelt-st",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-6508-s-mcallister-ave",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-6519-s-elm-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-6728-s-wilson-st",
+   "Realtor.com: pending (updated 2026-10-27)"
+  ],
+  [
+   "tempe-6818-s-jentilly-ln",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-6818-s-terrace-rd",
+   "Zillow: not for rent (recently sold)"
+  ],
+  [
+   "tempe-715-w-18th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-7440-s-juniper-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-801-e-campus-dr",
+   "Zillow: listed for sale, not rent"
+  ],
+  [
+   "tempe-820-w-14th-st",
+   "Zillow: not listed for rent"
+  ],
+  [
+   "tempe-824-w-9th-st",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-826-w-12th-st",
+   "Realtor.com: pending (updated 2026-10-23)"
+  ],
+  [
+   "tempe-901-s-smith-rd",
+   "Zumper: no longer available"
+  ],
+  [
+   "tempe-904-w-malibu-dr",
+   "Zumper: no longer available"
+  ]
+ ],
+ "flags": [
+  [
+   "ahwatukee-13836-s-40th-st-1003",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "ahwatukee-4805-e-kachina-trl-9",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "ahwatukee-corsica-villas-20th-street",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "ahwatukee-corsica-villas-euclid-avenue",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "ahwatukee-frye-rd-near-s-47th-st",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "ahwatukee-verano-townhomes",
+   "conflict",
+   "Live: Greystar listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "arcadia-3139-n-20th-st",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "chandler-1111-w-summit-pl-79",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "chandler-1260-w-lark-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-1328-w-brooks-street",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-133-w-jasper-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-1608-w-barrow-drive",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-1872-e-san-tan-st",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-217-s-132nd-st",
+   "conflict",
+   "Live: Zillow $2,249, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-2504-e-commonwealth-cir",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-304-w-alamo-drive",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-520-e-kent-ave",
+   "conflict",
+   "Live: Zillow $2,185, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-5643-w-cindy-st",
+   "conflict",
+   "Live: Zumper $2,265, Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-936-e-flint-st",
+   "conflict",
+   "Live: Zumper $2,199, AppFolio listing live \u00b7 Not live: Zillow: listed for sale, not rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "chandler-village-of-chandler",
+   "conflict",
+   "Live: RentCafe listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-1326-s-owl-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-1469-s-colt-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-1472-s-colt-dr",
+   "conflict",
+   "Live: Zillow $2,175, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-1517-e-commerce-ave",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-1791-e-del-rio-st",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-213-n-honeysuckle-lane",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-2241-s-buckaroo-trl",
+   "conflict",
+   "Live: Zillow $2,135, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-3521-e-hopkins-rd",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-3580-e-waterman-street",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-4151-e-trigger-way",
+   "conflict",
+   "Live: Zillow $2,200, AMH listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-661-s-catalina-st",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-957-s-pheasant-dr",
+   "conflict",
+   "Live: Zillow $2,355, Progress listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "gilbert-amh-enclave-madera-parc",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "gilbert-town-germann",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "mesa-10041-e-impala-ave",
+   "conflict",
+   "Live: Zillow $2,145, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-10111-e-capri-avenue",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-10214-e-isleta-ave",
+   "conflict",
+   "Live: Zillow $2,285, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-1038-w-hickory-st",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-11333-e-elena-ave",
+   "conflict",
+   "Live: Zillow $2,115, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-11339-e-quintana-ave",
+   "conflict",
+   "Live: Zillow $2,145, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-11436-e-prairie-ave",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-1531-e-hilton-ave",
+   "conflict",
+   "Live: Zumper $2,495, Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-1641-w-6th-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-1706-n-hunt-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-2048-s-87th-st",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-2131-e-3rd-dr",
+   "conflict",
+   "Live: Zillow $1,875, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-2256-w-lindner-ave-26",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "mesa-231-n-harris-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-2323-w-osage-avenue",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-2910-s-98th-st",
+   "conflict",
+   "Live: Zillow $2,195, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-306-n-sandal",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-3755-e-broadway-rd-39",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "mesa-4330-e-birchwood-circle",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-441-s-maple-81",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "mesa-4512-s-mole",
+   "conflict",
+   "Live: Zumper $2,350, AppFolio listing live \u00b7 Not live: Zillow: listed for sale, not rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-453-w-university-dr",
+   "conflict",
+   "Live: AppFolio listing live \u00b7 Not live: Zillow: listed for sale, not rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-4534-e-grove-ave",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-561-e-franklin-ave",
+   "conflict",
+   "Live: Zillow $1,895, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-5829-e-hoover-ave",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-710-n-oracle",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-8718-e-kilarea-ave",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-8742-e-kiva-ave",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-921-w-university-dr-1182",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "mesa-9251-e-kiowa-ave",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-9426-e-juanita-ave",
+   "conflict",
+   "Live: Zillow $2,595, Invitation Homes listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-9665-e-olla-ave",
+   "conflict",
+   "Live: Zillow $2,575, AMH listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-9825-e-osage-ave",
+   "conflict",
+   "Live: Zillow $2,259, Tricon listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-avilla-enclave",
+   "conflict",
+   "Live: RentCafe listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-avilla-lehi-crossing",
+   "conflict",
+   "Live: RentCafe listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-bb-living-burden-orchards",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "mesa-bella-encanta",
+   "conflict",
+   "Live: manager site listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-tricon-eastridge-manor-peralta",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "mesa-tricon-gateway",
+   "conflict",
+   "Live: Tricon listing live \u00b7 Not live: Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "mesa-zen-8708-e-portobello-ave",
+   "conflict",
+   "Live: Zumper $2,100, AppFolio listing live \u00b7 Not live: Zillow: listed for sale, not rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "pv-5353-e-sanna-st",
+   "conflict",
+   "Live: Zumper $24,995, AppFolio listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "pv-6708-e-san-miguel-ave",
+   "conflict",
+   "Live: AppFolio listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-10055-n-142nd-st-1330",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-10161-e-becker-ln",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-16640-e-desert-vista-trl",
+   "conflict",
+   "Live: AppFolio listing live \u00b7 Not live: Zillow: listed for sale, not rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-30507-n-167th-st",
+   "conflict",
+   "Live: Zumper $1,999, AppFolio listing live \u00b7 Not live: Zillow: listed for sale, not rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-5741-e-aire-libre-ave",
+   "conflict",
+   "Live: AppFolio listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-6502-e-paradise-ln",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-6611-e-1st-st",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-6802-e-5th-st",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-6944-e-redfield-rd",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-6990-e-6th-st",
+   "conflict",
+   "Live: Zumper $3,399, AppFolio listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-7280-e-arlington-rd",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-7544-n-via-de-la-siesta",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-7770-e-camelback-rd-unit-6",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-7948-e-vista-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-8120-e-amelia-ave",
+   "conflict",
+   "Live: Zumper $3,295, Propertyware listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-8240-e-turney-ave",
+   "conflict",
+   "Live: AppFolio listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-8323-e-sells-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-8331-e-cactus-wren-rd",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "scottsdale-8713-e-orange-blossom-ln",
+   "conflict",
+   "Live: Zumper $5,500, AppFolio listing live \u00b7 Not live: Zillow: not listed for rent (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "scottsdale-8782-e-mustang-trl-15",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1020-e-redfield-rd-1020",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1020-e-spence-ave-1003",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1110-s-una-ave",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1246-e-barbara-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1427-s-newberry-ln",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1739-n-palm-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1933-e-auburn-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-1973-e-don-carlos-ave-1",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-2017-e-meadow-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-2027-e-university-dr-118",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-2027-e-university-dr-130",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-2401-e-rio-salado-pkwy-1019",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-318-e-hermosa-dr",
+   "conflict",
+   "Live: Invitation Homes listing live \u00b7 Not live: Zillow: not listed for rent; Zumper: no longer available (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "tempe-330-s-farmer-ave-133",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-330-s-farmer-ave-331",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-40-w-sarah-ln",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-407-w-7th-st-3",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-419-w-7th-st-1",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-6510-s-hazelton-ln-103",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-817-w-18th-st",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-818-w-elna-rae-st",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-8315-s-taylor-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-915-w-diamond-dr",
+   "conflict",
+   "Live: Zumper $2,850, AppFolio listing live \u00b7 Not live: Zillow: not for rent (recently sold) (checked 2026-10-30) \u00b7 confirm with the manager before applying"
+  ],
+  [
+   "tempe-9203-s-heather-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-925-s-ash-ave-1003",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-925-s-ash-ave-b",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-930-e-weber-dr",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-942-s-ash-ave-108",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-949-s-mcclintock-dr-2",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-959-s-ash-ave-925",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ],
+  [
+   "tempe-farmer-lofts",
+   "unconfirmed",
+   "No site could confirm it is still for rent; call before applying (checked 2026-10-30)"
+  ]
+ ]
+}
