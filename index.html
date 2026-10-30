@@ -243,7 +243,10 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
 .card .car{width:100%;aspect-ratio:4/3}
 .pop .car{width:100%;height:130px;border-radius:6px}
 /* mini map: freeway outline (OpenStreetMap, drawn by miniMap) with the home's approximate spot, bottom-right of each row and card */
-.mini{position:absolute;right:12px;bottom:10px;width:54px;aspect-ratio:200/244;border-radius:5px;border:1px solid var(--line-strong);background:#F0EFF6 no-repeat;box-shadow:0 1px 3px rgba(39,33,75,.18);pointer-events:none;z-index:1}
+.mini{position:absolute;right:12px;bottom:10px;width:54px;aspect-ratio:200/244;border-radius:5px;border:1px solid var(--line-strong);background:#F0EFF6 no-repeat;box-shadow:0 1px 3px rgba(39,33,75,.18);cursor:zoom-in;z-index:1}
+.mini:hover,.mini:focus-visible{outline:2px solid var(--accent,#5B4FD6);outline-offset:1px}
+.hd.mmd .hdbar{justify-content:space-between;align-items:center;gap:8px}.mmd-t{font-weight:600;font-size:14px;padding-left:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#mmd-map{width:100%;height:min(70vh,560px)}
 .mm-pin{position:absolute;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:var(--pin);border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(39,33,75,.55),0 0 0 5px color-mix(in srgb,var(--pin) 28%,transparent)}
 .home>summary{position:relative;padding-right:82px}
 .card .cb>:not(.top){margin-right:58px}
@@ -287,7 +290,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
   .viewbar{padding:5px 10px;gap:6px 10px}
   .strip{display:none}
   /* a listing: photo · name/area/rent · ★ Pass · chevron, all on one row */
-  .home>summary{display:grid;grid-template-columns:78px minmax(0,1fr) auto auto;grid-template-areas:"ph c2 acts chev" "ph c3 acts chev" "ph c1 acts chev";align-items:center;column-gap:8px;row-gap:2px;padding:6px 8px 6px 8px}
+  .home>summary{display:grid;grid-template-columns:78px minmax(0,1fr) auto auto;grid-template-areas:"ph c2 acts mm" "ph c3 acts mm" "ph c1 acts chev";align-items:center;column-gap:8px;row-gap:2px;padding:6px 8px 6px 8px}
   .home>summary .rowcar{grid-area:ph;width:78px;height:62px;border-radius:6px}
   .home>summary .car-btn{display:none}.home>summary .car-n{font-size:9px;padding:1px 5px;right:3px;bottom:3px}
   .home>summary .c1{grid-area:c1;flex-direction:row;gap:4px}
@@ -298,7 +301,9 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
   .home>summary .acts{grid-area:acts;flex-direction:column;gap:3px;margin:0;width:auto}
   .home>summary .acts .btn{min-height:24px;padding:1px 7px;font-size:11px;border-radius:5px}
   .home>summary .chev{grid-area:chev;width:18px;height:18px;font-size:11px}
-  .home>summary .mini{position:static;grid-area:chev;width:0;height:0;border:0;box-shadow:none;display:none}
+  .home>summary .mini{position:relative;right:auto;bottom:auto;grid-area:mm;width:28px;align-self:end;justify-self:center;border-radius:4px}
+  .home>summary .mini .mm-pin{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;box-shadow:0 0 0 1px rgba(39,33,75,.55),0 0 0 3px color-mix(in srgb,var(--pin) 28%,transparent)}
+  .home>summary .chev{justify-self:center}
   .detail{padding:4px 10px 12px 10px;gap:8px}
   .detail p,.facts,.contact,textarea.note{font-size:13px}
   .facts{gap:3px 10px}.facts dt{font-size:9.5px}
@@ -363,6 +368,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
       <label class="field"><span>Beds</span><select id="f-beds"><option value="0">Any</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select></label>
       <label class="field"><span>Baths</span><select id="f-baths"><option value="0">Any</option><option value="1.5">1.5+</option><option value="2">2+</option><option value="2.5">2.5+</option><option value="3">3+</option></select></label>
       <label class="field"><span>Type</span><select id="f-type"><option value="">All types</option><option>House</option><option>Townhome</option><option>Duplex</option><option>BTR community</option></select></label>
+      <label class="field wide"><span>Rental company</span><select id="f-co"><option value="">All companies</option></select></label>
       <label class="field"><span>Nova (lb)</span><input type="number" id="f-nova" min="0" max="250" step="0.5" placeholder="49.5"></label>
       <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="city">City A–Z</option></select></label>
     </div>
@@ -418,6 +424,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
   </section>
 
   <dialog class="hd" id="hd" aria-label="Home details"><div class="hdbar"><button type="button" class="btn" id="hd-close">Close ✕</button></div><div id="hd-body"></div></dialog>
+  <dialog class="hd mmd" id="mmd" aria-label="Location map"><div class="hdbar"><span class="mmd-t" id="mmd-t"></span><button type="button" class="btn" id="mmd-close">Close ✕</button></div><div id="mmd-map"></div></dialog>
   <dialog class="lb" id="lb" aria-label="Photo viewer"><div class="lb-wrap"><img id="lb-img" alt="">
     <div class="lb-bar"><button type="button" class="btn" id="lb-prev" aria-label="Previous photo">‹</button><span id="lb-title"></span> · <span id="lb-n"></span><button type="button" class="btn" id="lb-next" aria-label="Next photo">›</button><button type="button" class="btn" id="lb-close">Close</button></div></div></dialog>
   <footer class="footer glass" id="foot">Live · personal home search</footer>
@@ -446,11 +453,12 @@ const day=s=>{if(!s)return'';const d=new Date(/^\d{4}-\d{2}-\d{2}$/.test(s)?s+'T
 const safeUrl=u=>{try{const x=new URL(u);return /^https?:$/.test(x.protocol)?x.href:null;}catch(e){return null;}};
 
 /* ---------- state ---------- */
-const DEF={q:'',cities:CITIES.map(c=>c.k),dogs:'all',nova:String(NOVA.weight),pmin:'',pmax:'',dep:'',beds:'0',baths:'0',type:'',am:[],sort:'fit',fit:'',hidepass:true,v:2};
+const DEF={q:'',cities:CITIES.map(c=>c.k),dogs:'all',nova:String(NOVA.weight),pmin:'',pmax:'',dep:'',beds:'0',baths:'0',type:'',co:'',am:[],sort:'fit',fit:'',hidepass:true,v:2};
 let F=Object.assign({},DEF);
 try{const s=JSON.parse(localStorage.getItem('jn-filters')||'null');if(s)F=Object.assign({},DEF,s,s.v===2?{}:{sort:'fit',v:2});}catch(e){}
 if(F.nova==='')F.nova=String(NOVA.weight);
 if(typeof F.type!=='string')F.type='';
+if(typeof F.co!=='string')F.co='';
 F.am=(Array.isArray(F.am)?F.am:[]).filter(a=>AMEN.includes(a));
 const saveF=()=>{try{localStorage.setItem('jn-filters',JSON.stringify(F));}catch(e){}};
 let homes=null, db=null, canWrite=true, view='homes';
@@ -507,10 +515,26 @@ const bedsTxt=h=>{const a=num(h.beds_min),b=num(h.beds_max);if(a==null&&b==null)
 const sqftTxt=h=>{const a=num(h.sqft_min),b=num(h.sqft_max);if(a==null&&b==null)return null;return a&&b&&a!==b?`${a.toLocaleString()}–${b.toLocaleString()} sq ft`:`${(a||b).toLocaleString()} sq ft`;};
 const rentTxt=h=>{const a=rentLo(h),b=rentHi(h);if(a==null)return'Call for rent';return b&&b!==a?`${money(a)}–${Math.round(b).toLocaleString('en-US')}`:money(a);};
 
+// Rental company = the listed manager, with spellings of one company grouped. When a listing names no manager,
+// the big single-family operators are recognised from `source` instead.
+const CO_ALIAS=[[/firstkey/i,'FirstKey Homes'],[/stratton/i,'Brewer & Stratton (Stratton Vantage)'],[/keyrenter premier/i,'Keyrenter Premier'],
+  [/keyrenter gilbert/i,'Keyrenter Gilbert'],[/^amh\b|american homes 4 rent/i,'AMH (American Homes 4 Rent)'],[/^on ?q\b/i,'On Q Property Management'],
+  [/invitation homes/i,'Invitation Homes'],[/progress residential/i,'Progress Residential'],[/tricon/i,'Tricon Residential'],
+  [/main street renewal|^msr\b/i,'Main Street Renewal'],[/\brpm\b|real property management/i,'Real Property Management (RPM)'],
+  [/leaseaz|service star/i,'Service Star Realty (LeaseAZ)'],[/rent arizona|market edge/i,'Rent Arizona (Market Edge Realty)'],
+  [/^ppg\b/i,'PPG Property Management'],[/zen ?rent/i,'Zen Rent Property Management'],[/^avail\b/i,'Avail (self-managed landlord)']];
+const CO_OPERATORS=/invitation homes|progress residential|\bamh\b|american homes 4 rent|firstkey|tricon|main street renewal|resihome/i;
+const coName=m=>{for(const[rx,n]of CO_ALIAS)if(rx.test(m))return n;return m;};
+const coOf=h=>{const m=(h.manager||'').trim();
+  if(m&&!/not named|^showing agent$/i.test(m))return coName(m);
+  const op=(h.source||'').split(',').map(x=>x.trim()).find(x=>CO_OPERATORS.test(x));return op?coName(op):'';};
+const CO_NONE='__none',CO_OTHER='__other';
+let coCount={};
 function passes(h){
   if(F.hidepass&&statusOf(h)==='pass')return false;
   if(!F.cities.includes(cityKey(h)))return false;
   if(F.type&&(h.type||'House')!==F.type)return false;
+  if(F.co){const c=coOf(h);if(F.co===CO_NONE?c!=='':F.co===CO_OTHER?!(c&&coCount[c]===1):c!==F.co)return false;}
   if(F.fit){const t=fit(h).tier;if(!t||(F.fit==='strong'&&t!=='strong'))return false;}
   const v=dogVerdict(h);
   if(F.dogs==='ok'&&v.score<2)return false;
@@ -554,6 +578,13 @@ function drawControls(){
   document.querySelectorAll('#f-fit .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.fit===F.fit));
   $('f-q').value=F.q;$('f-nova').value=F.nova;$('f-pmin').value=F.pmin;$('f-pmax').value=F.pmax;$('f-type').value=F.type;
   $('f-dep').value=F.dep;$('f-beds').value=F.beds;$('f-baths').value=F.baths;$('f-sort').value=F.sort;$('f-hidepass').checked=F.hidepass;
+  const co=$('f-co');coCount={};(homes||[]).forEach(h=>{const c=coOf(h);if(c)coCount[c]=(coCount[c]||0)+1;});
+  const coRows=Object.entries(coCount).filter(([,n])=>n>1).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+  const one=Object.values(coCount).filter(n=>n===1).length,none=(homes||[]).filter(h=>!coOf(h)).length;
+  co.replaceChildren(new Option('All companies',''),...coRows.map(([c,n])=>new Option(`${c} (${n})`,c)),
+    new Option(`Other: one listing each (${one})`,CO_OTHER),new Option(`Company not named (${none})`,CO_NONE));
+  if(F.co&&![...co.options].some(o=>o.value===F.co))co.append(new Option(F.co+' (0)',F.co));
+  co.value=F.co;
   $('nova-wt').textContent=F.nova||NOVA.weight;
   document.querySelectorAll('.kpi').forEach(k=>k.setAttribute('aria-pressed',(k.dataset.k==='ok'&&F.dogs==='ok')||(k.dataset.k==='rent'&&F.sort==='rent-asc'&&false)||(k.dataset.k==='move'&&F.sort==='movein')||(k.dataset.k==='short'&&view==='shortlist')));
 }
@@ -563,7 +594,7 @@ document.querySelectorAll('#f-fit .chip').forEach(b=>b.addEventListener('click',
 $('city-all').addEventListener('click',()=>{F.cities=CITIES.map(c=>c.k);changed();});
 let qT;$('f-q').addEventListener('input',e=>{clearTimeout(qT);qT=setTimeout(()=>{F.q=e.target.value.trim();saveF();render();},180);});
 [['f-nova','nova'],['f-pmin','pmin'],['f-pmax','pmax']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
-[['f-dep','dep'],['f-beds','beds'],['f-baths','baths'],['f-sort','sort'],['f-type','type']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
+[['f-dep','dep'],['f-beds','beds'],['f-baths','baths'],['f-sort','sort'],['f-type','type'],['f-co','co']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
 $('f-hidepass').addEventListener('change',e=>{F.hidepass=e.target.checked;changed();});
 $('f-filters').addEventListener('click',()=>{const m=$('homes'),on=m.classList.toggle('show-filters');$('f-filters').setAttribute('aria-expanded',on);$('f-filters').textContent=on?'Filters ▴':'Filters ▾';});
 $('f-reset').addEventListener('click',()=>{const nova=F.nova;F=Object.assign({},DEF,{cities:CITIES.map(c=>c.k),am:[],nova});changed();});
@@ -772,7 +803,7 @@ $('f-layout').addEventListener('change',e=>setLV('layout',e.target.value));
 const coord=h=>{const a=num(h.lat),b=num(h.lng);if(a!=null&&b!=null&&a&&b)return[a,b];return GEO[h.id]||null;};
 // Frame of the mini-map outline (lat/lng); the pin is placed by plain linear interpolation, same projection as the outline.
 // MM.zs: zoom levels tried in order, closest first.
-const MM={n:33.76,s:33.19,w:-112.13,e:-111.57,zs:[4,3.5,3,2.5,2]};
+const MM={n:33.76,s:33.19,w:-112.13,e:-111.57,zs:[2.8,2.45,2.1,1.75,1.4]};
 // Freeway outline from OpenStreetMap, in a 200x244 box over the MM frame.
 const MM_PATH='M86 140L93 138 102 131 108 129 110 126 123 126 127 121 130 119 138 120 146 119 152 122 158 122 164 132 176 142 175 154 172 159 174 178 172 183 166 185 142 185 140 189 139 198 130 204 109 204 104 202 90 202 85 200 68 200 57 198 50 200 14 201 50 201 57 198 68 201 85 200 90 202 104 202 109 204 131 204 139 198 140 189 142 186 166 185 173 182 174 179 174 170 172 164 172 159 175 154 175 150 176 147 176 142 169 137 164 131 159 123 152 122 146 119 130 119 126 121 123 126 110 126 108 129 102 131 93 138 87 140 82 139 62 138 58 137 57 132 56 130 40 128-18 127M6 39L-23 39M79 238L57 202 56 178 58 167 58 152 55 149 43 149 38 144 35 142 20 142 36 143 43 149 54 150 57 151 58 154 58 167 56 178 57 202 79 238M6 39L31 39 37 37 56 37 65 42 81 46 85 49 86 52 85 82 89 86 90 91 86 102 85 161 84 173 85 185 87 102 90 91 89 86 85 82 86 51 85 49 83 46 65 41 56 37 37 37 31 39 6 39M31 128L40 128 56 130 57 132 58 137 62 138 82 139 86 140M60 160L64 160 218 160M33 136L33 129 31 128M11 142L15 141 10 142 8 140 8 128 6 122 6 94 6 122 8 128 8 140 11 142M46 41L46 49 43 61 43 77 41 79 33 85 31 108 33 85 41 79 43 77 43 61 46 48 46 38M31 128L33 129 33 141 35 143M4 18L6 32 4 82 6 87 6 93 6 87 5 82 6 30-3-20M2 6L4 18M137 160L64 160 60 159M140 160L137 160M141 160L140 160M153 160L141 160M184 160L153 160M190 160L184 160M196 160L190 160M202 160L196 160M208 160L202 160M209 160L208 160M215 160L209 160M84 195L85 185 84 195M1 39L6 39M54 139L53 135 54 149 58 152 58 159M54 141L54 139M57 159L60 160M23 128L31 128M33 129L33 130M33 128L33 129M33 126L33 128M33 126L33 120 31 115 31 109 31 115 33 120 33 126M19 128L23 128M33 137L33 136M33 138L33 137M33 140L33 138M33 141L33 140M33 142L33 141M35 143L33 142M36 143L35 143M54 145L54 141M-4 128L19 128M16 141L20 142 16 141M53 134L53 126 53 134M-14 39L1 39M0-4L2 6M0-5L0-4M-11-4L-7-4M-23-9L-15-4-11-4M-10-4L-15-5-23-9M-2-18L0-5M33 128L33 126M84 197L84 198M95 262L94 261 95 262M-17 39L-14 39M173 186L181 195M174 187L173 187M174 188L174 187M33 129L33 128M-23 39L-17 39M74 160L73 160M-10 128L-4 128M-16 127L-10 128M-18 127L-16 127M54 146L54 145M-1 200L-18 180M12 200L-1 200M12 201L14 201 12 200M-17 182L-1 200 12 201M33 130L33 129M177 190L174 188M179 191L177 190M217 160L215 160M218 160L217 160M-18 180L-17 182M-8-4L-10-4M-7-4L-8-4M54 148L54 146M57 158L57 159M181 194L179 191M19 128L18 128';
 const MM_SEG=MM_PATH.split('M').slice(1).flatMap(sub=>{const n=sub.match(/-?\d+(\.\d+)?/g).map(Number),o=[];for(let i=2;i+1<n.length;i+=2)o.push([n[i-2],n[i-1],n[i],n[i+1]]);return o;});
@@ -784,7 +815,9 @@ const mmRoad=(x0,y0,x1,y1)=>MM_SEG.reduce((a,[ax,ay,bx,by])=>{const dx=bx-ax,dy=
 const mmBg=z=>{const k='--mm'+String(z).replace('.','_');if(!mmBg[k]){mmBg[k]=1;document.documentElement.style.setProperty(k,`url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 244'><path d='${MM_PATH}' fill='none' stroke='#8F88AC' stroke-width='${(9/z).toFixed(2)}' stroke-linecap='round' stroke-linejoin='round'/></svg>`)}")`);}return `var(${k})`;};
 function miniMap(h){const c=coord(h);if(!c||c[0]>MM.n||c[0]<MM.s||c[1]<MM.w||c[1]>MM.e)return null;
   const w=el('span','mini'),p=el('span','mm-pin'),lab=`Approximate location: ${cityKey(h)}`;
-  w.setAttribute('role','img');w.setAttribute('aria-label',lab);w.title=lab;
+  w.setAttribute('role','button');w.tabIndex=0;w.setAttribute('aria-label',lab+'. Open a larger map');w.title=lab+' (click for a larger map)';
+  const go=e=>{e.preventDefault();e.stopPropagation();openMiniMap(h);};
+  w.addEventListener('click',go);w.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')go(e);});
   // The box shows 1/z of the outline, centred on the home and kept inside the outline. Use the closest zoom that still shows
   // at least half a box-width of road, so no map is just an empty square.
   const x=(c[1]-MM.w)/(MM.e-MM.w),y=(MM.n-c[0])/(MM.n-MM.s);let z,f,ox,oy;
@@ -816,6 +849,21 @@ let hdId=null;
 function openHome(h){hdId=h.id;fillHome();const d=$('hd');if(!d.open)d.showModal();}
 function fillHome(){const h=homes&&homes.find(x=>x.id===hdId);const b=$('hd-body');b.replaceChildren();if(!h)return;b.append(row(h,'card',true));}
 $('hd-close').addEventListener('click',()=>$('hd').close());
+// Pop-out map for one listing: a full, pannable street map showing only that home.
+let MMD=null,MMDlayer=null;
+async function openMiniMap(h){const ll=coord(h);if(!ll)return;const d=$('mmd');
+  $('mmd-t').textContent=[h.address||h.name,cityKey(h)].filter(Boolean).join(' · ');
+  if(!d.open)d.showModal();
+  try{await loadLeaflet();}catch(e){$('mmd-map').textContent='The map could not load. Check your connection and try again.';return;}
+  if(!MMD){MMD=L.map('mmd-map',{scrollWheelZoom:true});
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(MMD);
+    MMDlayer=L.layerGroup().addTo(MMD);}
+  MMDlayer.clearLayers();
+  const cs=getComputedStyle(document.documentElement),col=cs.getPropertyValue((CITY_COLOR[cityKey(h)]||'var(--c-other)').slice(4,-1)).trim()||'#9A93B5';
+  L.circleMarker(ll,{radius:11,color:'#fff',weight:3,fillColor:col,fillOpacity:1}).bindTooltip(h.address||h.name||'This home').addTo(MMDlayer);
+  MMD.invalidateSize();MMD.setView(ll,14);requestAnimationFrame(()=>{MMD.invalidateSize();MMD.setView(ll,14);});}
+$('mmd-close').addEventListener('click',()=>$('mmd').close());
+$('mmd').addEventListener('click',e=>{if(e.target===$('mmd'))$('mmd').close();});
 $('hd').addEventListener('click',e=>{if(e.target.id==='hd')$('hd').close();});
 $('hd').addEventListener('close',()=>{hdId=null;});
 // render() hands over the filtered homes; only the view on screen is built now, the others when first switched to.
