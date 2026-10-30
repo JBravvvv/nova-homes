@@ -148,6 +148,16 @@ h2{font-size:22px;line-height:1.1;margin-top:1px}
 .btn.pass[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:var(--white)}
 .btn.status[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
 .btn.teal{background:var(--teal);border-color:var(--teal);color:var(--white)}
+.btn.sfav{border-color:#E7A3B6;color:#B0284F;background:#FFF5F8}
+.btn.sfav[aria-pressed="true"]{background:#C2335C;border-color:#C2335C;color:var(--white)}
+.home.sortable>summary{position:relative;padding-left:34px}
+.grip{position:absolute;left:4px;top:50%;transform:translateY(-50%);width:24px;height:44px;display:grid;place-items:center;border-radius:6px;color:var(--muted);font-size:18px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.grip:hover,.grip:focus-visible{background:var(--chip);color:var(--ink-2);outline:none}
+.home.dragging{opacity:.85;box-shadow:0 8px 24px rgba(39,33,75,.25);position:relative;z-index:2}
+.home.dragging .grip{cursor:grabbing}
+.sgrp{margin:14px 16px 4px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sgrp.sf{color:#B0284F}
+.sgroup:has(+.sgrp){padding-bottom:6px}
 a.btn.apply{display:inline-flex;align-items:center;text-decoration:none;background:var(--teal);border-color:var(--teal);color:var(--white)}
 .chev{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:6px;border:1px solid var(--line-c);color:var(--ink-c);font-size:13px;transition:transform .15s}
 .home[open]>summary .chev{transform:rotate(180deg)}
@@ -305,6 +315,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
   .home>summary .mini{position:relative;right:auto;bottom:auto;grid-area:mm;width:28px;align-self:end;justify-self:center;border-radius:4px}
   .home>summary .mini .mm-pin{width:7px;height:7px;margin:-3.5px 0 0 -3.5px;box-shadow:0 0 0 1px rgba(39,33,75,.55),0 0 0 3px color-mix(in srgb,var(--pin) 28%,transparent)}
   .home>summary .chev{justify-self:center}
+  .home.sortable>summary{padding-left:26px}.grip{left:1px;width:22px}.sgrp{margin:10px 8px 3px;font-size:11px}
   .detail{padding:4px 10px 12px 10px;gap:8px}
   .detail p,.facts,.contact,textarea.note{font-size:13px}
   .facts{gap:3px 10px}.facts dt{font-size:9.5px}
@@ -657,6 +668,7 @@ function row(h,mode,open){
   const th=carousel(ph,'rowcar',h.name||h.address);
   const c1=el('span','c1');c1.append(el('span','tag '+v.cls,v.short));
   if(fh.tier||fh.hits>=3)c1.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
+  const av=h.avail_check;if(av){const t=el('span','tag '+(av.verdict==='confirmed'?'good':'warn'),av.verdict==='confirmed'?'✓ Live '+day(av.date):'⚠ Not confirmed');t.title=av.summary||'';c1.append(t);}
   const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
   c2.append(el('span','sub',[ck,h.area,h.type||'House',mode==='short'&&st?STATUS_LABEL[st]:null].filter(Boolean).join(' · ')));
   const c3=el('span','c3');c3.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')));
@@ -671,6 +683,22 @@ function row(h,mode,open){
   acts.append(sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
   const ap=applyLink(h,'btn apply','Apply');if(ap){ap.addEventListener('click',e=>e.stopPropagation());acts.append(ap);}
   const chev=el('span','chev','▾');chev.setAttribute('aria-hidden','true');
+  if(mode==='short'){
+    const sf=el('button','btn sfav',h.superfav?'♥':'♡');sf.type='button';sf.setAttribute('aria-pressed',!!h.superfav);
+    sf.setAttribute('aria-label',(h.superfav?'Remove super-favorite: ':'Super-favorite ')+(h.name||h.address));sf.title=h.superfav?'Remove from Super-favorites':'Super-favorite';
+    if(!db||!canWrite)sf.disabled=true;
+    sf.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setUser(h,{superfav:!h.superfav,short_rank:null});});
+    acts.insertBefore(sf,acts.children[1]||null);
+    det.classList.add('sortable');det.dataset.id=h.id;
+    const grip=el('span','grip','⠿');grip.setAttribute('role','button');grip.tabIndex=0;grip.title='Drag to reorder';
+    grip.setAttribute('aria-label',`Reorder ${h.name||h.address}: drag, or use the up and down arrow keys`);
+    grip.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();});
+    grip.addEventListener('pointerdown',e=>dragRow(e,det,grip));
+    grip.addEventListener('keydown',e=>{if(e.key!=='ArrowUp'&&e.key!=='ArrowDown')return;e.preventDefault();e.stopPropagation();
+      const g=det.parentElement,sib=e.key==='ArrowUp'?det.previousElementSibling:det.nextElementSibling;if(!sib)return;
+      g.insertBefore(det,e.key==='ArrowUp'?sib:sib.nextElementSibling);saveOrder(g,h.id);});
+    sum.append(grip);
+  }
   sum.append(th,c1,c2,c3,acts,chev);const mm=miniMap(h);if(mm)sum.append(mm);det.append(sum);
 
   function buildBody(){
@@ -706,6 +734,7 @@ function row(h,mode,open){
   fact('Available',h.available);fact('Manager',h.manager);fact('Special',h.specials);
   fact('Garage',[num(h.garage_spaces)>0?h.garage_spaces+(h.garage_spaces==1?' space':' spaces'):num(h.garage_spaces)===0?'None':amenSet(h).has('Garage')?'Yes':null,h.garage_note].filter(Boolean).join(' · ')||null);fact('Built',h.year_built);
   fact('Checked',[day(h.checked),h.source].filter(Boolean).join(' · '));
+  if(h.avail_check)fact('Still for rent?',(h.avail_check.verdict==='confirmed'?'✓ ':'⚠ ')+h.avail_check.summary);
   body.append(facts);
   const am=amenSet(h);if(am.size){const a=el('div','am');[...am].forEach(x=>a.append(el('span',F.am.includes(x)?'hit':null,x)));body.append(a);}
   const ct=el('div','contact');
@@ -752,6 +781,35 @@ async function setStatus(h,status){
   try{await db.doc('homes/'+h.id).update({status,status_at:new Date().toISOString()});}
   catch(e){pending.delete(h.id);render();$('status').textContent='Could not save that change. Check your connection and try again.';}
 }
+// Shortlist page only: super-favorite flag and hand-set order (short_rank), saved like status
+async function setUser(h,fields){
+  if(!db)return;Object.assign(h,fields);render();
+  try{await db.doc('homes/'+h.id).update(fields);}
+  catch(e){$('status').textContent='Could not save that change. Check your connection and try again.';}
+}
+async function saveOrder(g,focusId){
+  const ids=[...g.querySelectorAll(':scope>.home')].map(d=>d.dataset.id),byId=new Map(homes.map(h=>[h.id,h]));
+  const ch=ids.map((id,i)=>[byId.get(id),i]).filter(([h,i])=>h&&h.short_rank!==i);
+  ch.forEach(([h,i])=>h.short_rank=i);
+  try{await Promise.all(ch.map(([h,i])=>db.doc('homes/'+h.id).update({short_rank:i})));}
+  catch(e){$('status').textContent='Could not save the new order. Check your connection and try again.';}
+  render();
+  if(focusId){const d=document.querySelector(`#list-short .home[data-id="${focusId}"] .grip`);if(d)d.focus({preventScroll:false});}
+}
+function dragRow(e,det,grip){
+  if(e.button>0||!db||!canWrite)return;e.preventDefault();e.stopPropagation();
+  // Listen on window: moving the row in the DOM drops pointer capture on the grip.
+  const g=det.parentElement,pid=e.pointerId;det.classList.add('dragging');
+  let raf=0;
+  const move=ev=>{if(ev.pointerId!==pid)return;ev.preventDefault();const y=ev.clientY;
+    let before=null;for(const s of g.querySelectorAll(':scope>.home')){if(s===det)continue;const r=s.getBoundingClientRect();if(y<r.top+r.height/2){before=s;break;}}
+    if(before!==det.nextElementSibling&&!(before===null&&det===g.lastElementChild))g.insertBefore(det,before);
+    cancelAnimationFrame(raf);if(y<70||y>innerHeight-70)raf=requestAnimationFrame(()=>scrollBy(0,y<70?-14:14));};
+  const end=ev=>{if(ev.pointerId!==pid)return;if(ev.type==='pointerup')move(ev);
+    removeEventListener('pointermove',move);removeEventListener('pointerup',end);removeEventListener('pointercancel',end);
+    cancelAnimationFrame(raf);det.classList.remove('dragging');saveOrder(g);};
+  addEventListener('pointermove',move,{passive:false});addEventListener('pointerup',end);addEventListener('pointercancel',end);
+}
 const noteSaving=new Map(),noteQueued=new Map();
 async function saveNote(h,val,sv){
   if(!db||val===(h.my_note||''))return void(sv.textContent=h.note_at?'Saved '+day(h.note_at):'');
@@ -793,7 +851,11 @@ function render(){
   drawHomes(shown);
   const ls=$('list-short');ls.replaceChildren();
   if(!short.length)ls.append(el('p','empty','Nothing here yet. Tap ★ on any home, or mark it Contacted, Toured or Applied.'));
-  short.forEach(h=>ls.append(row(h,'short')));
+  const rk=h=>num(h.short_rank)??1e9,ordered=a=>a.map((h,i)=>[h,i]).sort((x,y)=>rk(x[0])-rk(y[0])||x[1]-y[1]).map(x=>x[0]);
+  const sfav=ordered(short.filter(h=>h.superfav)),rest=ordered(short.filter(h=>!h.superfav));
+  const group=(cls,title,list)=>{if(!list.length)return;if(title)ls.append(el('h3','sgrp '+cls,title));const g=el('div','sgroup');list.forEach(h=>g.append(row(h,'short')));ls.append(g);};
+  group('sf',`♥ Super-favorites · ${sfav.length}`,sfav);
+  if(short.length)group('rest',sfav.length?`Shortlist · ${rest.length}`:'',rest);
   drawCosts(short,shown);drawSources();
   if(keep){const t=document.getElementById(keep.id);
     if(t&&t!==ae){if(t.value!==keep.v){t.value=keep.v;t.dispatchEvent(new Event('input'));}
