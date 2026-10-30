@@ -148,6 +148,7 @@ h2{font-size:22px;line-height:1.1;margin-top:1px}
 .btn.pass[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:var(--white)}
 .btn.status[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
 .btn.teal{background:var(--teal);border-color:var(--teal);color:var(--white)}
+a.btn.apply{display:inline-flex;align-items:center;text-decoration:none;background:var(--teal);border-color:var(--teal);color:var(--white)}
 .chev{flex:none;width:22px;height:22px;display:grid;place-items:center;border-radius:6px;border:1px solid var(--line-c);color:var(--ink-c);font-size:13px;transition:transform .15s}
 .home[open]>summary .chev{transform:rotate(180deg)}
 .detail{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:6px 16px 16px calc(16px + 150px + 16px)}
@@ -451,6 +452,10 @@ const kfmt=v=>v>=10000?'$'+(v/1000).toFixed(1).replace(/\.0$/,'')+'K':money(v);
 const num=v=>typeof v==='number'&&isFinite(v)?v:(v!=null&&v!==''&&isFinite(+v)?+v:null);
 const day=s=>{if(!s)return'';const d=new Date(/^\d{4}-\d{2}-\d{2}$/.test(s)?s+'T12:00':s);return isNaN(d)?s:d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});};
 const safeUrl=u=>{try{const x=new URL(u);return /^https?:$/.test(x.protocol)?x.href:null;}catch(e){return null;}};
+// Quick apply: apply_url is the manager's own application (apply_onpage = the Apply button sits on that listing page)
+function applyLink(h,cls,label){const u=safeUrl(h.apply_url);if(!u)return null;const a=el('a',cls,label);a.href=u;a.target='_blank';a.rel='noopener';
+  a.title=h.apply_onpage?`Opens the ${h.apply_via||'manager'} listing; tap Apply now there`:`Start the ${h.apply_via||'online'} application`;
+  a.setAttribute('aria-label',`Apply for ${h.name||h.address} (${h.apply_via||'online'})`);return a;}
 
 /* ---------- state ---------- */
 const DEF={q:'',cities:CITIES.map(c=>c.k),dogs:'all',nova:String(NOVA.weight),pmin:'',pmax:'',dep:'',beds:'0',baths:'0',type:'',co:'',am:[],sort:'fit',fit:'',hidepass:true,v:2};
@@ -664,6 +669,7 @@ function row(h,mode,open){
   acts.append(sb('star','★',st==='shortlist'?'shortlist':'shortlist',`Shortlist ${h.name||h.address}`));
   acts.firstChild.setAttribute('aria-pressed',ACTIVE.has(st));
   acts.append(sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
+  const ap=applyLink(h,'btn apply','Apply');if(ap){ap.addEventListener('click',e=>e.stopPropagation());acts.append(ap);}
   const chev=el('span','chev','▾');chev.setAttribute('aria-hidden','true');
   sum.append(th,c1,c2,c3,acts,chev);const mm=miniMap(h);if(mm)sum.append(mm);det.append(sum);
 
@@ -708,6 +714,7 @@ function row(h,mode,open){
   if(!h.phone&&!h.email)ct.append(el('span','sub','No direct contact published · use the website'));
   body.append(ct);
   const links=el('div','links');const web=safeUrl(h.website),lst=safeUrl(h.listing_url);
+  const apl=applyLink(h,'posting','Apply online →');if(apl)links.append(apl);
   if(web){const a=el('a','posting','Property website →');a.href=web;a.target='_blank';a.rel='noopener';links.append(a);}
   if(lst&&lst!==web){const a=el('a','posting','Open the listing →');a.href=lst;a.target='_blank';a.rel='noopener';links.append(a);}
   body.append(links);
