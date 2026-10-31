@@ -1,0 +1,74 @@
+# Install as .github/workflows/live-sync.yml in JBravvvv/nova-homes.
+# Scans rental sources for new houses/townhomes/duplexes, appends them to homes.json,
+# always rewrites data/live-sync.json (so the page can show "last checked"), commits
+# when homes.json changed, and then deploys Pages itself (pushes made with GITHUB_TOKEN
+# do not trigger deploy.yml).
+name: Live sync new listings
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */2 * * *"   # every 2 hours
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Scan sources and append new homes
+        id: scan
+        run: |
+          mkdir -p data
+          python3 scripts/live_sync.py homes.json --write --log data/live-sync.json
+          if git diff --quiet -- homes.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "### live-sync" >> "$GITHUB_STEP_SUMMARY"
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json; d=json.load(open("data/live-sync.json"))
+          print(f"- ran_at: {d['ran_at']}  candidates: {d.get('candidates')}  new: {d.get('new')}")
+          for k,v in d["sources"].items():
+              print(f"- {'OK' if v['ok'] else 'ERR'} {k}: {v['found']} {v.get('error') or ''}")
+          PY
+
+      - name: Commit and push (only when homes.json changed)
+        if: steps.scan.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add homes.json data/live-sync.json
+          git commit -m "live-sync: add new listings ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git pull --rebase origin main
+          git push origin HEAD:main
+
+      # data/live-sync.json is rewritten every run; when nothing new was found it is
+      # NOT committed (to avoid a commit every 2 hours) but it IS deployed with the site
+      # below, so the live page still shows the latest "last checked" time.
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4
