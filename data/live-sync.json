@@ -1,24 +1,24 @@
 {
- "ran_at": "2026-10-31T17:04:51Z",
+ "ran_at": "2026-10-31T17:15:33Z",
  "sources": {
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Invitation Homes": {
-   "ok": true,
-   "found": 8,
-   "error": null
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "Progress Residential": {
    "ok": true,
    "found": 33,
+   "error": null
+  },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 8,
    "error": null
   },
   "AMH": {
@@ -26,17 +26,17 @@
    "found": 36,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 4,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
+  },
   "AppFolio": {
    "ok": true,
    "found": 204,
    "error": null,
    "note": "21 manager sites; 0 failed"
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -45,7 +45,7 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 84,
+   "found": 86,
    "error": null
   },
   "Redfin": {
@@ -57,7 +57,7 @@
    "ok": true,
    "found": 5,
    "error": null,
-   "note": "147 new postings seen, 15 detail pages fetched"
+   "note": "146 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,17 +75,17 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3004,
+ "candidates": 3007,
  "dropped": {
-  "in_homes": 2942,
+  "in_homes": 2945,
   "bad": 62,
   "merged": 0
  },
  "new": 0,
  "verified": {
-  "confirmed": 2553,
-  "not_seen": 279,
-  "unchanged": 343
+  "confirmed": 2554,
+  "not_seen": 280,
+  "unchanged": 341
  },
  "homes_total": 3427,
  "added": [],
