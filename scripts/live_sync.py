@@ -58,7 +58,7 @@ import urllib.parse
 import urllib.request
 
 TIMEOUT = 25
-DEADLINE_S = 270          # whole run budget (~4.5 min)
+DEADLINE_S = 600          # whole run budget (10 min; every source is read in full so each home can be re-verified)
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/129.0 Safari/537.36")
 T0 = time.monotonic()
@@ -348,15 +348,21 @@ ZILLOW_TYPES = {"SINGLE_FAMILY": "House", "TOWNHOUSE": "Townhome", "MULTI_FAMILY
 
 def src_zillow(ctx):
     out = []
-    pages = {"tempe-az": 2, "chandler-az": 2, "gilbert-az": 2, "mesa-az": 2, "scottsdale-az": 2}
-    for area in ZILLOW_AREAS:
-        for page in range(1, pages.get(area, 1) + 1):
-            qs = {"pagination": ({"currentPage": page} if page > 1 else {}), "isMapVisible": False,
-                  "filterState": {"sort": {"value": "days"}, "fr": {"value": True}, "fsba": {"value": False},
-                                  "fsbo": {"value": False}, "nc": {"value": False}, "cmsn": {"value": False},
-                                  "auc": {"value": False}, "fore": {"value": False}, "apa": {"value": False},
-                                  "apco": {"value": False}, "con": {"value": False}, "land": {"value": False},
-                                  "manu": {"value": False}}}
+    # every page of every area (Zillow caps a search at 20 pages / 800 homes, so Scottsdale is split by rent)
+    passes = [(a, None) for a in ZILLOW_AREAS if a != "scottsdale-az"] + [("scottsdale-az", {"max": 3999}), ("scottsdale-az", {"min": 4000})]
+    incomplete = []
+    for area, mp in passes:
+        for page in range(1, 21):
+            if time_left() < 60:
+                incomplete.append(area); break
+            fs = {"sort": {"value": "days"}, "fr": {"value": True}, "fsba": {"value": False},
+                  "fsbo": {"value": False}, "nc": {"value": False}, "cmsn": {"value": False},
+                  "auc": {"value": False}, "fore": {"value": False}, "apa": {"value": False},
+                  "apco": {"value": False}, "con": {"value": False}, "land": {"value": False},
+                  "manu": {"value": False}}
+            if mp:
+                fs["mp"] = {"value": mp}
+            qs = {"pagination": ({"currentPage": page} if page > 1 else {}), "isMapVisible": False, "filterState": fs}
             url = f"https://www.zillow.com/{area}/rentals/?searchQueryState=" + urllib.parse.quote(json.dumps(qs, separators=(",", ":")))
             body = get(url)
             if "px-captcha" in body or "Press & Hold" in body:
@@ -405,9 +411,14 @@ def src_zillow(ctx):
                     listing_url=r.get("detailUrl") or "", photos=photos, manager=r.get("brokerName") or "",
                     available=date_only(r.get("availabilityDate")), source="Zillow",
                     specials=(hi.get("priceReduction") and f"Price reduced {hi['priceReduction']}") or ""))
-            total_pages = find_key(d, "totalPages") or 1
-            if page >= int(total_pages or 1):
+            total_pages = int(find_key(d, "totalPages") or 1)
+            if page >= total_pages:
+                if total_pages >= 20 and (find_key(d, "totalResultCount") or 0) > 800:
+                    incomplete.append(area)
                 break
+    ctx["complete"]["Zillow"] = not incomplete
+    if incomplete:
+        ctx["notes"]["Zillow"] = "not every page read for: " + ", ".join(sorted(set(incomplete)))
     return out
 
 
@@ -485,14 +496,35 @@ REDFIN_TYPES = {6: "House", 13: "Townhome", 4: "Duplex"}
 
 def src_redfin(ctx):
     out = []
-    for name, (w, s, e, n) in REDFIN_BOXES.items():
+    incomplete = []
+    # Redfin answers at most 350 homes per query and ignores page_number, so a box with more
+    # matches is split into quadrants until each answers in full.
+    boxes = [(name, box, 0) for name, box in REDFIN_BOXES.items()]
+    seen_ids = set()
+    while boxes:
+        name, (w, s, e, n), depth = boxes.pop()
+        if time_left() < 45:
+            incomplete.append(name); continue
         poly = f"{w} {s},{e} {s},{e} {n},{w} {n},{w} {s}"
         url = ("https://www.redfin.com/stingray/api/v1/search/rentals?al=1&isRentals=true&num_homes=350"
                "&ord=days-on-redfin-asc&page_number=1&status=1&uipt=1,3,4&v=8&market=phoenix&poly=" + urllib.parse.quote(poly))
         body = get(url, headers={"Accept": "application/json"})
         body = body[body.find("{"):]
         d = json.loads(body)
-        for h in d.get("homes") or []:
+        batch = d.get("homes") or []
+        if (d.get("numMatchedHomes") or 0) > len(batch) and len(batch) >= 350:
+            if depth < 4:
+                mx, my = (w + e) / 2, (s + n) / 2
+                boxes += [(name, (w, s, mx, my), depth + 1), (name, (mx, s, e, my), depth + 1),
+                          (name, (w, my, mx, n), depth + 1), (name, (mx, my, e, n), depth + 1)]
+                continue
+            incomplete.append(name)
+        for h in batch:
+            pid = (h.get("homeData") or {}).get("propertyId")
+            if pid and pid in seen_ids:
+                continue
+            if pid:
+                seen_ids.add(pid)
             hd = h.get("homeData") or {}
             rx = h.get("rentalExtension") or {}
             typ = REDFIN_TYPES.get(hd.get("propertyType"))
@@ -536,6 +568,9 @@ def src_redfin(ctx):
                 listing_url=("https://www.redfin.com" + hd["url"]) if hd.get("url") else "",
                 photos=photos, phone=rx.get("desktopPhone") or "", manager=rx.get("mlsName") or "",
                 available=date_only(rx.get("dateAvailable")), notes=(rx.get("description") or "")[:600], source="Redfin"))
+    ctx["complete"]["Redfin"] = not incomplete
+    if incomplete:
+        ctx["notes"]["Redfin"] = "not read in full: " + ", ".join(sorted(set(incomplete)))
     return out
 
 
@@ -950,7 +985,81 @@ def build_ctx(homes):
                 mgr.setdefault(m.group(1), {}).setdefault(h["manager"], 0)
                 mgr[m.group(1)][h["manager"]] += 1
     return {"seen_addr": seen_addr, "seen_url": seen_url, "appfolio_subs": subs,
-            "appfolio_mgr": {s: max(c, key=c.get) for s, c in mgr.items()}, "notes": {}}
+            "appfolio_mgr": {s: max(c, key=c.get) for s, c in mgr.items()}, "notes": {}, "complete": {}}
+
+
+def cand_keys(address):
+    """Every dedupe key an address answers to (same street+unit, or street alone when either side has no unit)."""
+    full, base, has_unit = addr_keys(address)
+    st, z = base.split("|")
+    unit = full.split("#")[1].split("|")[0]
+    cands = {norm(address), full, f"{st}#{unit}|"}
+    if has_unit:
+        cands |= {f"{st}|{z}/nounit", f"{st}|/nounit"}
+    else:
+        cands |= {f"{st}|{z}", f"{st}|"}
+    return cands
+
+
+SRC_HOSTS = {"Zillow": "zillow.com", "Redfin": "redfin.com", "Invitation Homes": "invitationhomes.com",
+             "Progress Residential": "rentprogress.com", "AMH": "amh.com", "Tricon Residential": "triconresidential.com",
+             "Zumper": "zumper.com", "Rentable": "rentable.co", "Craigslist": "craigslist.org"}
+
+
+ENUMERATING = {"Zillow", "Redfin", "Invitation Homes", "Progress Residential", "AMH", "Tricon Residential", "AppFolio"}
+
+
+def home_sources(h):
+    """Which Live Sync sources list this home (by its source names and the hosts of its links)."""
+    out = set()
+    srcs = (h.get("source") or "")
+    urls = [h.get("listing_url") or "", h.get("zillow_url") or "", h.get("zumper_url") or ""] + list((h.get("links") or {}).values())
+    for name, host in SRC_HOSTS.items():
+        if name.lower() in srcs.lower() or any(host in (u or "") for u in urls):
+            out.add(name)
+    if any("appfolio.com" in (u or "") for u in urls):
+        out.add("AppFolio")
+    return out
+
+
+def verify_homes(homes, results, status, ctx, today):
+    """Re-check every shown home against today's full inventories. Seen anywhere -> confirmed live today.
+    Not seen, while a source that lists it was read in full today -> 'not_seen' (never hidden, never invented)."""
+    seen_keys, seen_urls, seen_by = set(), set(), {}
+    for name, recs in results.items():
+        for r in recs:
+            ks = cand_keys(r["address"]) if r.get("address") else set()
+            seen_keys |= ks
+            for k in ks:
+                seen_by.setdefault(k, name)
+            for u in (r.get("listing_url"), r.get("zumper_url")):
+                if u:
+                    seen_urls.add(u.rstrip("/"))
+    # only sources that list their whole inventory can say a home is gone
+    complete = {n for n in ENUMERATING if status.get(n, {}).get("ok") and ctx["complete"].get(n, True)}
+    counts = {"confirmed": 0, "not_seen": 0, "unchanged": 0}
+    for h in homes:
+        if h.get("hidden") or not h.get("address"):
+            continue
+        ks = cand_keys(h["address"])
+        urls = {(h.get(k) or "").rstrip("/") for k in ("listing_url", "zillow_url", "zumper_url")} - {""}
+        hit = ks & seen_keys
+        src = seen_by[next(iter(hit))] if hit else next((n for n in SRC_HOSTS if any(SRC_HOSTS[n] in u for u in urls & seen_urls)), None)
+        if hit or (urls & seen_urls):
+            h["avail_check"] = {"date": today, "verdict": "confirmed", "summary": f"Live: found on {src} by Live Sync {today}", "source": "live_sync"}
+            counts["confirmed"] += 1
+            continue
+        covered = home_sources(h) & complete
+        if covered:
+            prev = (h.get("avail_check") or {})
+            last = prev.get("date") if prev.get("verdict") == "confirmed" else (prev.get("last_confirmed") if prev else None)
+            h["avail_check"] = {"date": today, "verdict": "not_seen",
+                                "summary": f"Not seen on {', '.join(sorted(covered))} by Live Sync {today}" + (f"; last confirmed {last}" if last else "") + " — check the listing before visiting",
+                                "last_confirmed": last, "source": "live_sync"}
+            counts["not_seen"] += 1
+        else:
+            counts["unchanged"] += 1
+    return counts
 
 
 def merge(a, b):
@@ -1043,20 +1152,22 @@ def run(homes_path, write, log_path):
             r.pop(k, None)
         new.append(r)
 
+    verified = verify_homes(homes, results, status, ctx, today)
     summary = {"ran_at": now, "sources": status, "candidates": sum(len(v) for v in results.values()),
-               "dropped": dropped, "new": len(new), "homes_total": len(homes) + (len(new) if write else 0),
-               "added": [r["id"] for r in new] if write else [], "wrote": bool(write and new)}
+               "dropped": dropped, "new": len(new), "verified": verified,
+               "homes_total": len(homes) + (len(new) if write else 0),
+               "added": [r["id"] for r in new] if write else [], "wrote": bool(write)}
 
-    if write and new:
-        body = raw.rstrip()
-        if not body.endswith(b"]"):
-            raise RuntimeError("homes.json does not end with ']'")
-        head = body[:-1].rstrip()
-        sep = b"," if head.rstrip().endswith(b"}") else b""
-        add = ",".join(json.dumps(r, separators=(",", ":"), ensure_ascii=True) for r in new).encode("utf-8")
-        with open(homes_path, "wb") as f:
-            f.write(head + sep + add + b"]")
-        json.loads(open(homes_path, "rb").read())  # sanity: still valid JSON
+    if write:
+        if not isinstance(homes, list):
+            raise RuntimeError("homes.json is not a list")
+        homes.extend(new)
+        tmp = homes_path + ".tmp"
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(homes, f, separators=(",", ":"), ensure_ascii=True)
+        json.loads(open(tmp, "rb").read())  # sanity: still valid JSON
+        import os
+        os.replace(tmp, homes_path)
     if log_path:
         import os
         os.makedirs(os.path.dirname(os.path.abspath(log_path)), exist_ok=True)
@@ -1064,7 +1175,7 @@ def run(homes_path, write, log_path):
             json.dump(summary, f, indent=1)
             f.write("\n")
 
-    print(f"live_sync: {summary['candidates']} candidates, {len(new)} new "
+    print(f"live_sync: {summary['candidates']} candidates, {len(new)} new, verified {verified} "
           f"(dropped {dropped}) in {time.monotonic()-T0:.0f}s", file=sys.stderr)
     for name in list(dict(SOURCES)) + list(SKIPPED):
         s = status[name]
