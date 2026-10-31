@@ -715,7 +715,7 @@ function row(h,mode,open){
   const th=carousel(ph,'rowcar',h.name||h.address);
   const c1=el('span','c1');c1.append(el('span','tag '+v.cls,v.short));
   if(fh.tier||fh.hits>=3)c1.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
-  const av=h.avail_check;if(av){const t=el('span','tag '+(av.verdict==='confirmed'?'good':'warn'),av.verdict==='confirmed'?'✓ Live '+day(av.date):'⚠ Not confirmed');t.title=av.summary||'';c1.append(t);}
+  const av=h.avail_check;if(av){const t=el('span','tag '+(av.verdict==='confirmed'?'good':'warn'),av.verdict==='confirmed'?'✓ Live '+day(av.date):av.verdict==='not_seen'?'⚠ Not seen '+day(av.date):'⚠ Not confirmed');t.title=av.summary||'';c1.append(t);}
   if(isNew(h)){const nt=el('span','tag new','New'+(h.new_since?' · '+day(h.new_since):''));nt.title='Found by Live Sync';c1.append(nt);}
   const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
   c2.append(el('span','sub',[ck,h.area,h.type||'House',mode==='short'&&st?STATUS_LABEL[st]:null].filter(Boolean).join(' · ')));

@@ -429,12 +429,22 @@ TRULIA_TYPES = {"single-family home": "House", "townhouse": "Townhome", "multi-f
 
 def src_trulia(ctx):
     out = []
+    # every page of every area: Trulia carries Zillow's inventory and still answers from the runner when Zillow 403s
+    incomplete, seen_urls = [], set()
     for area in TRULIA_AREAS:
-        body = get(f"https://www.trulia.com/for_rent/{area}/SINGLE-FAMILY_HOME,TOWNHOUSE_type/date;d_sort/")
+      for page in range(1, 41):
+        if time_left() < 60:
+            incomplete.append(area); break
+        body = get(f"https://www.trulia.com/for_rent/{area}/SINGLE-FAMILY_HOME,TOWNHOUSE_type/date;d_sort/" + (f"{page}_p/" if page > 1 else ""))
         d = next_data(body)
         if not d:
             raise RuntimeError("no __NEXT_DATA__ (blocked?)")
         homes = find_key(d, "homes") or []
+        fresh = [h for h in homes if isinstance(h, dict) and h.get("url") and h["url"] not in seen_urls]
+        seen_urls.update(h["url"] for h in fresh)
+        if not fresh:
+            break
+        total_pages = find_key(d, "totalPages") or find_key(d, "pageCount")
         for h in homes:
             if not isinstance(h, dict) or h.get("__typename") != "HOME_Property":
                 continue
@@ -479,6 +489,13 @@ def src_trulia(ctx):
                 photos=photos, manager=mgr, source="Trulia",
                 pet_notes="Trulia tag: Pet friendly" if "PET_FRIENDLY" in tags else "",
                 notes=(h.get("description") or "")[:600] if isinstance(h.get("description"), str) else ""))
+        if (total_pages and page >= int(total_pages)) or len(homes) < 30:
+            break
+        if page == 40:
+            incomplete.append(area)
+    ctx["complete"]["Trulia"] = not incomplete
+    if incomplete:
+        ctx["notes"]["Trulia"] = "not every page read for: " + ", ".join(sorted(set(incomplete)))
     return out
 
 
@@ -1003,10 +1020,10 @@ def cand_keys(address):
 
 SRC_HOSTS = {"Zillow": "zillow.com", "Redfin": "redfin.com", "Invitation Homes": "invitationhomes.com",
              "Progress Residential": "rentprogress.com", "AMH": "amh.com", "Tricon Residential": "triconresidential.com",
-             "Zumper": "zumper.com", "Rentable": "rentable.co", "Craigslist": "craigslist.org"}
+             "Zumper": "zumper.com", "Rentable": "rentable.co", "Craigslist": "craigslist.org", "Trulia": "trulia.com"}
 
 
-ENUMERATING = {"Zillow", "Redfin", "Invitation Homes", "Progress Residential", "AMH", "Tricon Residential", "AppFolio"}
+ENUMERATING = {"Zillow", "Trulia", "Redfin", "Invitation Homes", "Progress Residential", "AMH", "Tricon Residential", "AppFolio"}
 
 
 def home_sources(h):
@@ -1019,6 +1036,8 @@ def home_sources(h):
             out.add(name)
     if any("appfolio.com" in (u or "") for u in urls):
         out.add("AppFolio")
+    if "Zillow" in out:
+        out.add("Trulia")   # Trulia lists Zillow's rental inventory
     return out
 
 
@@ -1148,6 +1167,7 @@ def run(homes_path, write, log_path):
         r["checked"] = today
         r["id"] = make_id(r, ids)
         r["new_since"] = now
+        r["avail_check"] = {"date": today, "verdict": "confirmed", "summary": f"Live: found on {r['source']} by Live Sync {today}", "source": "live_sync"}
         for k in NEVER_WRITE:
             r.pop(k, None)
         new.append(r)
