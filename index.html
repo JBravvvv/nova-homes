@@ -524,7 +524,7 @@ const amenSet=h=>{const s=new Set(Array.isArray(h.amenities)?h.amenities:[]);if(
   const n=h.notes||'';if(COMMUNITY_POOL.test(n)){s.add('Community pool');if(!OWN_POOL.test(n))s.delete('Pool');}else if(OWN_POOL.test(n))s.add('Pool');
   // Checked facts (scripts/facts.py: Zillow's own fields plus the listing text) win over the scraped amenity words.
   const f=h.facts;if(f){const set=(k,label)=>{if(f[k]===true)s.add(label);else if(f[k]===false)s.delete(label);};
-    set('private_pool','Pool');set('community_pool','Community pool');set('single_level','Single-level');set('garage','Garage');set('fenced_yard','Fenced yard');set('private_yard','Private yard');set('in_unit_wd','In-unit W/D');set('gated','Gated');set('basement','Basement');}
+    set('private_pool','Pool');if(f.private_pool!==true)s.delete('Pool');set('community_pool','Community pool');set('single_level','Single-level');set('garage','Garage');set('fenced_yard','Fenced yard');set('private_yard','Private yard');set('in_unit_wd','In-unit W/D');set('gated','Gated');set('basement','Basement');}
   return s;};
 const AMEN_LABEL={'Pool':'Private pool'};
 /* score: 0 no dogs · 0.5 Nova hits a rule · 1 unknown · 1.5 breed list unchecked · 2 dogs OK, breed not confirmed · 3 Nova confirmed OK */
