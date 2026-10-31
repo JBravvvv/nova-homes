@@ -1,24 +1,29 @@
 {
- "ran_at": "2026-10-31T02:48:06Z",
+ "ran_at": "2026-10-31T10:24:22Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 8,
    "error": null
   },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Progress Residential": {
    "ok": true,
-   "found": 22,
+   "found": 20,
    "error": null
   },
   "AMH": {
    "ok": true,
    "found": 36,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 1126,
    "error": null
   },
   "AppFolio": {
@@ -27,37 +32,32 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Zillow": {
+  "Redfin": {
    "ok": true,
-   "found": 582,
+   "found": 1124,
    "error": null
   },
   "Rentable": {
    "ok": true,
-   "found": 79,
+   "found": 86,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "9 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 149,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
+  },
   "Craigslist": {
    "ok": true,
-   "found": 4,
+   "found": 5,
    "error": null,
-   "note": "148 new postings seen, 15 detail pages fetched"
+   "note": "149 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,17 +75,37 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2213,
+ "candidates": 1635,
  "dropped": {
-  "in_homes": 2161,
-  "bad": 50,
+  "in_homes": 1577,
+  "bad": 36,
   "merged": 0
  },
- "new": 2,
- "homes_total": 2242,
+ "new": 22,
+ "homes_total": 2283,
  "added": [
-  "mesa-2247-leisure-world",
-  "scottsdale-11928-n-111-th-way"
+  "tempe-1025-w-10th-st",
+  "chandler-5750-w-folley-st",
+  "chandler-1441-e-germann-rd-unit-1",
+  "mesa-4613-e-glade-cir",
+  "scottsdale-4640-n-66th-st",
+  "scottsdale-17394-n-77th-st",
+  "scottsdale-7519-e-princeton-ave",
+  "scottsdale-5139-e-fellars-dr",
+  "tempe-6618-s-palm-dr",
+  "chandler-2363-w-comstock-dr",
+  "chandler-300-w-el-alba-way",
+  "chandler-771-e-laredo-st",
+  "chandler-2074-w-butler-dr",
+  "gilbert-3746-s-star-canyon-dr",
+  "gilbert-1779-s-cole-dr",
+  "mesa-514-s-bellview",
+  "mesa-4941-e-colby-st",
+  "scottsdale-525-n-miller-rd-unit-scottsdale",
+  "scottsdale-11000-n-77th-pl-1087",
+  "scottsdale-7832-e-oak-st",
+  "scottsdale-5107-e-village-dr",
+  "scottsdale-5119-e-shady-glen-ave"
  ],
  "wrote": true
 }
