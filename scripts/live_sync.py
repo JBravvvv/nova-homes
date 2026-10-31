@@ -1023,7 +1023,9 @@ SRC_HOSTS = {"Zillow": "zillow.com", "Redfin": "redfin.com", "Invitation Homes":
              "Zumper": "zumper.com", "Rentable": "rentable.co", "Craigslist": "craigslist.org", "Trulia": "trulia.com"}
 
 
-ENUMERATING = {"Zillow", "Trulia", "Redfin", "Invitation Homes", "Progress Residential", "AMH", "Tricon Residential", "AppFolio"}
+# sources whose read is the whole inventory (the manager feeds only list a page or a few homes, so they confirm but never say "gone")
+ENUMERATING = {"Zillow", "Trulia", "Redfin", "AppFolio"}
+MIN_FULL = {"Zillow": 1500, "Trulia": 1500, "Redfin": 1500, "AppFolio": 100}   # fewer found than this = a partial read
 
 
 def home_sources(h):
@@ -1055,7 +1057,8 @@ def verify_homes(homes, results, status, ctx, today):
                 if u:
                     seen_urls.add(u.rstrip("/"))
     # only sources that list their whole inventory can say a home is gone
-    complete = {n for n in ENUMERATING if status.get(n, {}).get("ok") and ctx["complete"].get(n, True)}
+    complete = {n for n in ENUMERATING if status.get(n, {}).get("ok") and ctx["complete"].get(n, True)
+                and status[n].get("found", 0) >= MIN_FULL.get(n, 0)}
     counts = {"confirmed": 0, "not_seen": 0, "unchanged": 0}
     for h in homes:
         if h.get("hidden") or not h.get("address"):
@@ -1069,8 +1072,11 @@ def verify_homes(homes, results, status, ctx, today):
             counts["confirmed"] += 1
             continue
         covered = home_sources(h) & complete
+        prev = (h.get("avail_check") or {})
+        if covered and prev.get("verdict") == "confirmed" and prev.get("date") == today:
+            counts["unchanged"] += 1      # already seen live today by a fuller run; a thinner one cannot undo that
+            continue
         if covered:
-            prev = (h.get("avail_check") or {})
             last = prev.get("date") if prev.get("verdict") == "confirmed" else (prev.get("last_confirmed") if prev else None)
             h["avail_check"] = {"date": today, "verdict": "not_seen",
                                 "summary": f"Not seen on {', '.join(sorted(covered))} by Live Sync {today}" + (f"; last confirmed {last}" if last else "") + " — check the listing before visiting",
