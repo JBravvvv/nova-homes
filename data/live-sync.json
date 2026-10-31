@@ -1,24 +1,14 @@
 {
- "ran_at": "2026-10-31T17:15:33Z",
+ "ran_at": "2026-10-31T21:35:57Z",
  "sources": {
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 33,
-   "error": null
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 8,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 30,
    "error": null
   },
   "AMH": {
@@ -26,38 +16,48 @@
    "found": 36,
    "error": null
   },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Tricon Residential": {
    "ok": true,
-   "found": 4,
+   "found": 3,
    "error": null,
-   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
+   "note": "9 in-area homes in sitemap, 3 not yet in homes.json"
+  },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "AppFolio": {
    "ok": true,
-   "found": 204,
+   "found": 203,
    "error": null,
    "note": "21 manager sites; 0 failed"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2484,
+   "error": null
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 80,
+   "error": null
   },
   "Zumper": {
    "ok": true,
    "found": 149,
    "error": null
   },
-  "Rentable": {
-   "ok": true,
-   "found": 86,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2482,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
-   "found": 5,
+   "found": 4,
    "error": null,
-   "note": "146 new postings seen, 15 detail pages fetched"
+   "note": "150 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,19 +75,25 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3007,
+ "candidates": 2997,
  "dropped": {
-  "in_homes": 2945,
+  "in_homes": 2930,
   "bad": 62,
   "merged": 0
  },
- "new": 0,
+ "new": 5,
  "verified": {
-  "confirmed": 2554,
-  "not_seen": 280,
-  "unchanged": 341
+  "confirmed": 2552,
+  "not_seen": 164,
+  "unchanged": 459
  },
- "homes_total": 3427,
- "added": [],
+ "homes_total": 3432,
+ "added": [
+  "scottsdale-17835-n-51st-way",
+  "mesa-5814-e-lockwood-st",
+  "scottsdale-8625-e-belleview-place",
+  "tempe-232-w-los-arboles-dr",
+  "scottsdale-6565-e-thomas-rd-1066"
+ ],
  "wrote": true
 }
