@@ -255,6 +255,9 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
 .mapwrap{position:relative}
 #map{height:min(72vh,640px);min-height:360px;background:var(--chip)}
 .mapnote{padding:7px 16px;font-size:13px;color:var(--muted);border-top:1px solid var(--line-c)}
+.maptools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 12px;border-bottom:1px solid var(--line-c);font-size:13px;color:var(--muted)}
+.maptools #b-draw[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+#map.drawing{cursor:crosshair}#map.drawing .leaflet-interactive{cursor:crosshair}
 .pop{display:grid;gap:4px;width:210px;font-family:var(--f-sans,inherit)}
 .pop img{width:100%;height:120px;object-fit:cover;border-radius:6px}
 .pop .main{font-size:14.5px}
@@ -406,7 +409,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
       <label class="field"><span>Type</span><select id="f-type"><option value="">All types</option><option>House</option><option>Townhome</option><option>Duplex</option><option>BTR community</option></select></label>
       <label class="field wide"><span>Rental company</span><select id="f-co"><option value="">All companies</option></select></label>
       <label class="field"><span>Nova (lb)</span><input type="number" id="f-nova" min="0" max="250" step="0.5" placeholder="49.5"></label>
-      <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="dist">Closest to Old Town (Whiskey Row)</option><option value="city">City A–Z</option></select></label>
+      <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="dist">Closest to Old Town (Whiskey Row)</option><option value="newest">Newest listings first</option><option value="city">City A–Z</option></select></label>
     </div>
     <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><button type="button" class="btn" id="f-filters" aria-expanded="false">Filters ▾</button><button type="button" class="btn" id="f-new" hidden>New homes only ✕</button><button type="button" class="btn" id="f-reset">Reset filters</button></div>
     <div class="viewbar"><div class="seg" role="group" aria-label="View"><button type="button" data-mode="list">List</button><button type="button" data-mode="map">Map</button></div>
@@ -414,7 +417,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
     <div class="strip" id="strip-homes"><span class="c1">Nova</span><span class="c2">Home · area</span><span class="c3">Rent · size</span></div>
     <div class="rows" id="list-homes"><div class="load"></div></div>
     <div class="cards" id="cards-homes" hidden></div>
-    <div class="mapwrap" id="map-homes" hidden><div id="map" role="region" aria-label="Map of homes"></div><div class="mapnote" id="map-note"></div></div>
+    <div class="mapwrap" id="map-homes" hidden><div class="maptools"><button type="button" class="btn teal" id="b-draw">Draw boundary</button><button type="button" class="btn" id="b-clear" hidden>Clear boundaries</button><span id="b-msg">Draw a boundary to keep only the homes inside it. Tap the 4 corners of an area on the map; press Draw boundary again for another area.</span></div><div id="map" role="region" aria-label="Map of homes"></div><div class="mapnote" id="map-note"></div></div>
   </section>
 
   <!-- 2 · shortlist -->
@@ -501,13 +504,16 @@ function applyLink(h,cls,label){const u=safeUrl(h.apply_url);if(!u)return null;c
   a.setAttribute('aria-label',`Apply for ${h.name||h.address} (${h.apply_via||'online'})`);return a;}
 
 /* ---------- state ---------- */
-const DEF={q:'',cities:CITIES.map(c=>c.k),dogs:'all',nova:String(NOVA.weight),pmin:'',pmax:'',dep:'',beds:'0',baths:'0',type:'',co:'',am:[],sort:'fit',fit:'',hidepass:true,v:2};
+const DEF={q:'',cities:CITIES.map(c=>c.k),dogs:'all',nova:String(NOVA.weight),pmin:'',pmax:'',dep:'',beds:'0',baths:'0',type:'',co:'',am:[],bounds:[],sort:'fit',fit:'',hidepass:true,v:2};
 let F=Object.assign({},DEF);
 try{const s=JSON.parse(localStorage.getItem('jn-filters')||'null');if(s)F=Object.assign({},DEF,s,s.v===2?{}:{sort:'fit',v:2});}catch(e){}
 if(F.nova==='')F.nova=String(NOVA.weight);
 if(typeof F.type!=='string')F.type='';
 if(typeof F.co!=='string')F.co='';
 F.am=(Array.isArray(F.am)?F.am:[]).filter(a=>AMEN.includes(a));
+F.bounds=(Array.isArray(F.bounds)?F.bounds:[]).filter(p=>Array.isArray(p)&&p.length>=3);
+// point in polygon (ray casting) for the map boundaries
+const inPoly=([y,x],poly)=>{let inside=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const[yi,xi]=poly[i],[yj,xj]=poly[j];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))inside=!inside;}return inside;};
 const saveF=()=>{try{localStorage.setItem('jn-filters',JSON.stringify(F));}catch(e){}};
 let homes=null, db=null, canWrite=true, view='homes';
 const pending=new Map();
@@ -560,6 +566,8 @@ const photosOf=h=>Array.isArray(h.photos)?h.photos.filter(u=>typeof u==='string'
 // Zillow photos are linked straight from Zillow's image CDN at the size each spot needs (row strip 768 px, gallery 960, viewer 1536).
 const ZP=/^https:\/\/photos\.zillowstatic\.com\/fp\/([0-9a-f]{32})-[a-z_0-9]+\.jpg$/;
 const pSize=(u,s)=>{const m=ZP.exec(u);return m?`https://photos.zillowstatic.com/fp/${m[1]}-${s}.jpg`:u;};
+// When a home first appeared here: Live Sync's new_since, else the day it was first scanned.
+const listedTs=h=>{const d=h.new_since||h.checked;const t=d?new Date(d).getTime():0;return isNaN(t)?0:t;};
 const NEW_MS=3*864e5;const isNew=h=>!!(h.new_since&&(Date.now()-new Date(h.new_since))<NEW_MS)||SYNC.fresh.has(h.id);
 function moveIn(h){
   const r=rentLo(h);if(r==null)return{total:null,est:true};
@@ -590,6 +598,7 @@ let coCount={};
 function passes(h){
   if(statusOf(h)==='pass')return false; // passed homes live only in the Passed on tab
   if(F.newOnly&&!isNew(h))return false;
+  if((F.bounds||[]).length){const ll=coord(h);if(!ll||!F.bounds.some(poly=>inPoly(ll,poly)))return false;}
   if(!F.cities.includes(cityKey(h)))return false;
   if(F.type&&(h.type||'House')!==F.type)return false;
   if(F.co){const c=coOf(h);if(F.co===CO_NONE?c!=='':F.co===CO_OTHER?!(c&&coCount[c]===1):c!==F.co)return false;}
@@ -616,6 +625,7 @@ function sorter(a,b){
   const big=1e9;
   switch(F.sort){
     case'dist':return(miles(a)??big)-(miles(b)??big);
+    case'newest':return listedTs(b)-listedTs(a)||(rentLo(a)??big)-(rentLo(b)??big);
     case'rent-desc':return(rentHi(b)??-1)-(rentHi(a)??-1);
     case'movein':return(moveIn(a).total??big)-(moveIn(b).total??big);
     case'deposit':return(num(a.deposit_min)??big)-(num(b.deposit_min)??big);
@@ -635,6 +645,10 @@ function drawControls(){
     b.append(k+' ',el('span','n',String(cc[k]||0)));
     b.addEventListener('click',()=>{F.cities=F.cities.includes(k)?F.cities.filter(x=>x!==k):[...F.cities,k];changed();});fc.append(b);});
   const am=$('f-am');am.replaceChildren();
+  {const b=el('button','chip','New listings');b.type='button';b.setAttribute('aria-pressed',!!F.newOnly);b.title='Homes found in the last 3 days';
+    b.addEventListener('click',()=>{F.newOnly=!F.newOnly;changed();});am.append(b);}
+  if((F.bounds||[]).length){const b=el('button','chip',`Inside ${F.bounds.length===1?'my boundary':F.bounds.length+' boundaries'} ✕`);b.type='button';b.setAttribute('aria-pressed',true);b.title='Only homes inside the areas drawn on the map. Click to clear.';
+    b.addEventListener('click',()=>{F.bounds=[];changed();drawBounds();});am.append(b);}
   AMEN.forEach(a=>{const b=el('button','chip',AMEN_LABEL[a]||a);b.type='button';b.setAttribute('aria-pressed',F.am.includes(a));
     b.addEventListener('click',()=>{F.am=F.am.includes(a)?F.am.filter(x=>x!==a):[...F.am,a];changed();});am.append(b);});
   document.querySelectorAll('#f-dogs .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.dogs===F.dogs));
@@ -660,7 +674,9 @@ let qT;$('f-q').addEventListener('input',e=>{clearTimeout(qT);qT=setTimeout(()=>
 [['f-dep','dep'],['f-beds','beds'],['f-baths','baths'],['f-sort','sort'],['f-type','type'],['f-co','co']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
 $('f-filters').addEventListener('click',()=>{const m=$('homes'),on=m.classList.toggle('show-filters');$('f-filters').setAttribute('aria-expanded',on);$('f-filters').textContent=on?'Filters ▴':'Filters ▾';});
 $('f-new').addEventListener('click',()=>{F.newOnly=false;changed();});
-$('f-reset').addEventListener('click',()=>{const nova=F.nova;F=Object.assign({},DEF,{cities:CITIES.map(c=>c.k),am:[],nova});changed();});
+$('b-draw').addEventListener('click',()=>{DRAW?stopDraw():startDraw();if(!DRAW)drawMsg('Drawing cancelled.');});
+$('b-clear').addEventListener('click',()=>{F.bounds=[];stopDraw();changed();drawMsg('Boundaries cleared.');});
+$('f-reset').addEventListener('click',()=>{const nova=F.nova;F=Object.assign({},DEF,{cities:CITIES.map(c=>c.k),am:[],bounds:[],nova});changed();drawBounds();});
 document.querySelectorAll('.kpi').forEach(k=>k.addEventListener('click',()=>{
   const t=k.dataset.k;
   if(t==='all'){setView('homes');}
@@ -1021,6 +1037,21 @@ function showMode(){
   else if(map){if(!built.map){built.map=true;drawMap(shown);}else setTimeout(showMap,0);}
 }
 let LM=null,LMlayer=null,leafletP=null,LMpts=[],LMfitted=false,LMkey='';
+/* ---------- boundaries: tap 4 corners to fence an area; any number of areas; homes outside every area are filtered out ---------- */
+let BLayer=null,DRAW=null;   // DRAW = corners of the boundary being drawn
+function drawBounds(){if(!BLayer)return;BLayer.clearLayers();
+  (F.bounds||[]).forEach((poly,i)=>{const pg=L.polygon(poly,{color:'#1F4E79',weight:2,fillColor:'#1F4E79',fillOpacity:.08});pg.bindTooltip('Boundary '+(i+1)+' · click to remove',{sticky:true});
+    pg.on('click',e=>{L.DomEvent.stop(e);if(DRAW)return;F.bounds=F.bounds.filter((_,j)=>j!==i);changed();drawBounds();});BLayer.addLayer(pg);});
+  if(DRAW&&DRAW.length){DRAW.forEach(ll=>BLayer.addLayer(L.circleMarker(ll,{radius:6,color:'#B8901E',fillColor:'#FFD55A',fillOpacity:1})));
+    if(DRAW.length>1)BLayer.addLayer(L.polyline(DRAW,{color:'#B8901E',weight:2,dashArray:'6 4'}));}
+  const clr=$('b-clear');if(clr)clr.hidden=!(F.bounds||[]).length;}
+function drawMsg(t){const m=$('b-msg');if(m)m.textContent=t;}
+function startDraw(){DRAW=[];$('b-draw').setAttribute('aria-pressed',true);$('map').classList.add('drawing');drawMsg('Tap corner 1 of 4 on the map.');drawBounds();}
+function stopDraw(){DRAW=null;$('b-draw').setAttribute('aria-pressed',false);$('map').classList.remove('drawing');drawBounds();}
+function mapClick(e){if(!DRAW)return;LM.closePopup();DRAW.push([e.latlng.lat,e.latlng.lng]);
+  if(DRAW.length<4){drawMsg(`Tap corner ${DRAW.length+1} of 4.`);drawBounds();return;}
+  F.bounds=[...(F.bounds||[]),DRAW];stopDraw();changed();
+  drawMsg(`Boundary ${F.bounds.length} saved · ${homes.filter(passes).length} homes inside. Press Draw boundary again to add another area.`);}
 // Fit the map to the pins once its section is on screen (a hidden section has no size to fit into).
 function fitMap(){if(!LM||!$('map').offsetWidth)return;LM.invalidateSize();LMfitted=true;if(LMpts.length)LM.fitBounds(LMpts,{padding:[30,30],maxZoom:14});else LM.setView([33.45,-111.9],10);}
 // Coming back to the map keeps your zoom and pan; it only re-fits after the pins changed (or if it never got to fit).
@@ -1035,7 +1066,7 @@ async function drawMap(shown){
   try{await loadLeaflet();}catch(e){built.map=false;$('map-note').textContent='The map could not load. Check your connection and try again.';return;}
   if(!LM){LM=L.map('map',{scrollWheelZoom:true});
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(LM);
-    LMlayer=L.layerGroup().addTo(LM);}
+    LMlayer=L.layerGroup().addTo(LM);BLayer=L.layerGroup().addTo(LM);LM.on('click',mapClick);drawBounds();}
   let openId=null;LMlayer.eachLayer(l=>{if(l.isPopupOpen())openId=l._hid;});
   LMlayer.clearLayers();
   const cs=getComputedStyle(document.documentElement),pts=[];let off=0;
