@@ -73,6 +73,12 @@ h1{font-size:clamp(32px,5.4vw,46px);line-height:.96;letter-spacing:-.01em}
 .syncmsg{font-size:14px;font-weight:600;color:var(--ink-2);padding:8px 12px;border-radius:8px;background:rgba(39,33,75,.05);border:1px solid rgba(39,33,75,.12)}
 .syncmsg[hidden]{display:none}
 .tag.new{background:#FFE9A8;color:#5A4300}
+.sitelinks{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}.sitelinks .eyebrow{width:100%}
+.sitelinks .site{display:inline-flex;align-items:center;min-height:30px;padding:0 11px;border-radius:999px;border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--navy);background:var(--white);text-decoration:none}
+.sitelinks .site:hover{background:var(--chip)}.sitelinks .site.find{font-weight:500;opacity:.65;border-style:dashed}.sitelinks .site.apply{background:var(--teal);border-color:var(--teal);color:var(--white)}
+
+/* Josh: everything 30% larger (desktop widths; the phone layout keeps its compact size) */
+@media (min-width:641px){html{zoom:1.3}}
 
 /* KPI tiles */
 .kpis{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
@@ -400,7 +406,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
       <label class="field"><span>Type</span><select id="f-type"><option value="">All types</option><option>House</option><option>Townhome</option><option>Duplex</option><option>BTR community</option></select></label>
       <label class="field wide"><span>Rental company</span><select id="f-co"><option value="">All companies</option></select></label>
       <label class="field"><span>Nova (lb)</span><input type="number" id="f-nova" min="0" max="250" step="0.5" placeholder="49.5"></label>
-      <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="city">City A–Z</option></select></label>
+      <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="dist">Closest to Old Town (Whiskey Row)</option><option value="city">City A–Z</option></select></label>
     </div>
     <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><button type="button" class="btn" id="f-filters" aria-expanded="false">Filters ▾</button><button type="button" class="btn" id="f-new" hidden>New homes only ✕</button><button type="button" class="btn" id="f-reset">Reset filters</button></div>
     <div class="viewbar"><div class="seg" role="group" aria-label="View"><button type="button" data-mode="list">List</button><button type="button" data-mode="map">Map</button></div>
@@ -515,7 +521,12 @@ const cityKey=h=>CITY_COLOR[h.city]?h.city:(/arcadia|biltmore|camelback/i.test((
 const COMMUNITY_POOL=/community[^.;]{0,30}pools?|resort[- ]style pool|shared pool|hoa pool|pools?, (playground|tennis|fitness)|community (with|has) [^.;]{0,20}pool/i, OWN_POOL=/private pool|own pool|backyard pool|pool in (the )?back|private pool\/spa/i;
 const hasYard=h=>h.fenced_yard===true||(Array.isArray(h.amenities)&&(h.amenities.includes('Fenced yard')||h.amenities.includes('Private yard')))||(/back ?yard/i.test(h.notes||'')&&!/no (back ?yard|real yard|private yard)/i.test(h.notes||''));
 const amenSet=h=>{const s=new Set(Array.isArray(h.amenities)?h.amenities:[]);if(h.fenced_yard===true)s.add('Fenced yard');if(hasYard(h))s.add('Private yard');if(num(h.garage_spaces)>0)s.add('Garage');
-  const n=h.notes||'';if(COMMUNITY_POOL.test(n)){s.add('Community pool');if(!OWN_POOL.test(n))s.delete('Pool');}else if(OWN_POOL.test(n))s.add('Pool');return s;};
+  const n=h.notes||'';if(COMMUNITY_POOL.test(n)){s.add('Community pool');if(!OWN_POOL.test(n))s.delete('Pool');}else if(OWN_POOL.test(n))s.add('Pool');
+  // Checked facts (scripts/facts.py: Zillow's own fields plus the listing text) win over the scraped amenity words.
+  const f=h.facts;if(f){const set=(k,label)=>{if(f[k]===true)s.add(label);else if(f[k]===false)s.delete(label);};
+    set('private_pool','Pool');set('community_pool','Community pool');set('single_level','Single-level');set('garage','Garage');set('fenced_yard','Fenced yard');set('private_yard','Private yard');set('in_unit_wd','In-unit W/D');set('gated','Gated');}
+  return s;};
+const AMEN_LABEL={'Pool':'Private pool'};
 /* score: 0 no dogs · 0.5 Nova hits a rule · 1 unknown · 1.5 breed list unchecked · 2 dogs OK, breed not confirmed · 3 Nova confirmed OK */
 const smallOnly=h=>h.small_dogs_only===true||(h.small_dogs_only!==false&&/small dogs?\b|dogs must be small/i.test(h.pet_notes||''));
 function dogVerdict(h){
@@ -597,9 +608,14 @@ function passes(h){
     if(!F.q.toLowerCase().split(/\s+/).filter(Boolean).every(w=>hay.includes(w)))return false;}
   return true;
 }
+// Distance is measured from Dierks Bentley's Whiskey Row, 4420 N Saddlebag Trl, Old Town Scottsdale (Census geocoder, 2026-10-30).
+const WR=[33.501356,-111.922247];
+const miles=h=>{const c=coord(h);if(!c)return null;const R=3958.8,r=Math.PI/180,dl=(c[0]-WR[0])*r,dg=(c[1]-WR[1])*r,a=Math.sin(dl/2)**2+Math.cos(WR[0]*r)*Math.cos(c[0]*r)*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(a));};
+const milesTxt=h=>{const m=miles(h);return m==null?null:(m<10?m.toFixed(1):Math.round(m))+' mi to Old Town';};
 function sorter(a,b){
   const big=1e9;
   switch(F.sort){
+    case'dist':return(miles(a)??big)-(miles(b)??big);
     case'rent-desc':return(rentHi(b)??-1)-(rentHi(a)??-1);
     case'movein':return(moveIn(a).total??big)-(moveIn(b).total??big);
     case'deposit':return(num(a.deposit_min)??big)-(num(b.deposit_min)??big);
@@ -619,7 +635,7 @@ function drawControls(){
     b.append(k+' ',el('span','n',String(cc[k]||0)));
     b.addEventListener('click',()=>{F.cities=F.cities.includes(k)?F.cities.filter(x=>x!==k):[...F.cities,k];changed();});fc.append(b);});
   const am=$('f-am');am.replaceChildren();
-  AMEN.forEach(a=>{const b=el('button','chip',a);b.type='button';b.setAttribute('aria-pressed',F.am.includes(a));
+  AMEN.forEach(a=>{const b=el('button','chip',AMEN_LABEL[a]||a);b.type='button';b.setAttribute('aria-pressed',F.am.includes(a));
     b.addEventListener('click',()=>{F.am=F.am.includes(a)?F.am.filter(x=>x!==a):[...F.am,a];changed();});am.append(b);});
   document.querySelectorAll('#f-dogs .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.dogs===F.dogs));
   document.querySelectorAll('#f-fit .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.fit===F.fit));
@@ -704,7 +720,7 @@ function row(h,mode,open){
   const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
   c2.append(el('span','sub',[ck,h.area,h.type||'House',mode==='short'&&st?STATUS_LABEL[st]:null].filter(Boolean).join(' · ')));
   const c3=el('span','c3');c3.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')));
-  [bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null].filter(Boolean).forEach(t=>c3.append(el('span','pill',t)));
+  [bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null,F.sort==='dist'?milesTxt(h):null].filter(Boolean).forEach(t=>c3.append(el('span','pill',t)));
   if(st&&st!=='pass'&&mode!=='short')c3.append(el('span','tag key',STATUS_LABEL[st]));
   const acts=el('span','acts');
   const sb=(cls,label,val,aria)=>{const b=el('button','btn '+cls,label);b.type='button';b.setAttribute('aria-pressed',st===val);b.setAttribute('aria-label',aria);
@@ -768,7 +784,7 @@ function row(h,mode,open){
   fact('Checked',[day(h.checked),h.source].filter(Boolean).join(' · '));
   if(h.avail_check)fact('Still for rent?',(h.avail_check.verdict==='confirmed'?'✓ ':'⚠ ')+h.avail_check.summary);
   body.append(facts);
-  const am=amenSet(h);if(am.size){const a=el('div','am');[...am].forEach(x=>a.append(el('span',F.am.includes(x)?'hit':null,x)));body.append(a);}
+  const am=amenSet(h);if(am.size){const a=el('div','am');[...am].forEach(x=>a.append(el('span',F.am.includes(x)?'hit':null,AMEN_LABEL[x]||x)));body.append(a);}
   const ct=el('div','contact');
   const addC=(label,val)=>{if(!val)return;const w=el('span');w.append(el('span','eyebrow',label+' '),el('span','sel',val));w.append(copyBtn(val,label.toLowerCase(),w));ct.append(w);};
   addC('Phone',h.phone);addC('Email',h.email);
@@ -781,6 +797,15 @@ function row(h,mode,open){
   // Zumper is kept only to double-check availability; photos and details now come from the listing above
   const zm=safeUrl(h.zumper_url);if(zm&&zm!==lst){const a=el('a','posting minor','Zumper copy (availability check only) →');a.href=zm;a.target='_blank';a.rel='noopener';links.append(a);}
   body.append(links);
+  // Every site this home is on, so the right page is always one tap away (links checked by scripts/site_links.py; "Find on" = that site's own search, not yet confirmed).
+  const L=h.links||{};const sites=[['zillow','Zillow'],['trulia','Trulia'],['redfin','Redfin'],['realtor','Realtor.com'],['homes','Homes.com'],['hotpads','HotPads'],['apartments','Apartments.com'],['manager','Property manager']];
+  const q=encodeURIComponent('"'+((h.address||'').split(',')[0])+'"');
+  const find={zillow:`https://www.zillow.com/homes/${encodeURIComponent((h.address||'').replace(/[,#]/g,' ').replace(/\s+/g,'-'))}_rb/`,trulia:`https://duckduckgo.com/?q=site%3Atrulia.com+${q}`,redfin:`https://duckduckgo.com/?q=site%3Aredfin.com+${q}`,realtor:`https://duckduckgo.com/?q=site%3Arealtor.com+${q}`,homes:`https://duckduckgo.com/?q=site%3Ahomes.com+${q}`,hotpads:`https://duckduckgo.com/?q=site%3Ahotpads.com+${q}`,apartments:`https://duckduckgo.com/?q=site%3Aapartments.com+${q}`};
+  const sl=el('div','sitelinks');sl.append(el('span','eyebrow','On each site'));
+  sites.forEach(([k,label])=>{const u=safeUrl(L[k]);const a=el('a',u?'site':'site find',u?label+' →':'Find on '+label);a.href=u||find[k];if(!u&&!find[k])return;a.target='_blank';a.rel='noopener';if(!u)a.title='Not confirmed on '+label+' yet: opens a search for this address';sl.append(a);});
+  const apl2=applyLink(h,'site apply','Apply online →');if(apl2)sl.append(apl2);
+  const zm2=safeUrl(h.zumper_url||(/zumper\.com/.test(lst||'')?lst:''));if(zm2){const a=el('a','site find','Zumper (availability check only) →');a.href=zm2;a.target='_blank';a.rel='noopener';sl.append(a);}
+  body.append(sl);
   const sr=el('div','statusrow');sr.append(el('span','eyebrow','Status'));
   STATUSES.forEach(([k,label])=>{const b=el('button','btn status',label);b.type='button';b.setAttribute('aria-pressed',st===k);if(!db||!canWrite)b.disabled=true;b.addEventListener('click',()=>setStatus(h,st===k?'':k));sr.append(b);});
   const pt=el('textarea','note');pt.readOnly=true;pt.value=pitch(h);pt.hidden=true;pt.setAttribute('aria-label','Message about Nova');
