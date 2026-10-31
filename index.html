@@ -63,6 +63,16 @@ h1{font-size:clamp(32px,5.4vw,46px);line-height:.96;letter-spacing:-.01em}
 .nova-badge{display:inline-flex;align-items:center;gap:8px;min-height:38px;padding:0 16px;border-radius:999px;background:var(--teal);color:var(--white);font-weight:800;font-size:14.5px}
 .nova-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:#BFE6EC}
 .status{font-size:14px;font-weight:600;color:var(--ink-2)}
+.syncwrap{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.sync{all:unset;box-sizing:border-box;cursor:pointer;min-height:38px;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:999px;background:var(--navy);color:var(--white);font-weight:800;font-size:14.5px;white-space:nowrap}
+.sync:hover{filter:brightness(1.15)}.sync:focus-visible,.sync-cfg:focus-visible{outline:2px solid var(--teal);outline-offset:2px}.sync[disabled]{opacity:.75;cursor:progress}
+.sync::before{content:"";width:8px;height:8px;border-radius:50%;background:#7EE0C8}.sync.busy::before{animation:syncpulse 1s infinite}
+@keyframes syncpulse{50%{opacity:.15}}
+.sync-cfg{all:unset;box-sizing:border-box;cursor:pointer;width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(39,33,75,.18);color:var(--ink-2);font-size:16px}
+.sync-cfg:hover{background:rgba(39,33,75,.07)}
+.syncmsg{font-size:14px;font-weight:600;color:var(--ink-2);padding:8px 12px;border-radius:8px;background:rgba(39,33,75,.05);border:1px solid rgba(39,33,75,.12)}
+.syncmsg[hidden]{display:none}
+.tag.new{background:#FFE9A8;color:#5A4300}
 
 /* KPI tiles */
 .kpis{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
@@ -126,6 +136,8 @@ h2{font-size:22px;line-height:1.1;margin-top:1px}
 .home>summary:hover,.home[open]>summary{background:var(--hover)}
 .home>summary:focus-visible{outline:2px solid var(--teal);outline-offset:-2px}
 .home.passed>summary{opacity:.6}
+#list-pass .home.passed>summary{opacity:1}
+
 .c2{display:grid;gap:1px}
 .main{font-weight:700;font-size:16px;color:var(--navy)}
 .sub{font-size:14px;font-weight:600;color:var(--muted)}
@@ -146,6 +158,7 @@ h2{font-size:22px;line-height:1.1;margin-top:1px}
 .btn.star[aria-pressed="true"]{background:var(--gold);color:var(--white)}
 .btn.pass{border-color:#E8B7B1;color:var(--bad);background:#FFF8F6}
 .btn.pass[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:var(--white)}
+.btn.pass.undo[aria-pressed="true"]{background:var(--navy);border-color:var(--navy)}
 .btn.status[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
 .btn.teal{background:var(--teal);border-color:var(--teal);color:var(--white)}
 .btn.sfav{border-color:#E7A3B6;color:#B0284F;background:#FFF5F8}
@@ -280,6 +293,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
   .view{gap:2px;padding:2px}.view button{min-height:26px;padding:2px 9px;font-size:12px;gap:4px}.view .n{font-size:10px}
   .nova-badge{min-height:26px;padding:0 10px;font-size:11.5px;gap:5px}.nova-badge::before{width:6px;height:6px}
   .status{display:none}
+  .sync{min-height:26px;padding:0 10px;font-size:11.5px;gap:5px}.sync::before{width:6px;height:6px}.sync-cfg{width:26px;height:26px;font-size:13px}.syncmsg{font-size:12px;padding:6px 8px}
   .take{font-size:12.5px;line-height:1.3}
   .kpis{gap:5px;grid-template-columns:repeat(3,minmax(0,1fr))}
   .kpi{padding:6px 7px;border-radius:8px;gap:0}
@@ -343,10 +357,13 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
         <button type="button" data-view="shortlist" aria-pressed="false">Shortlist <span class="n" id="vn-short"></span></button>
         <button type="button" data-view="costs" aria-pressed="false">Move-in costs</button>
         <button type="button" data-view="notes" aria-pressed="false">Nova &amp; notes</button>
+        <button type="button" data-view="passed" aria-pressed="false">Passed on <span class="n" id="vn-pass"></span></button>
       </div>
       <span class="nova-badge">Nova · Siberian Husky · <span id="nova-wt">49.5</span> lb</span>
       <span class="status" id="status" role="status"></span>
+      <span class="syncwrap"><button type="button" class="sync" id="live-sync" title="Scan the rental sites now and pull in any homes listed since the last check">Live Sync</button><button type="button" class="sync-cfg" id="sync-cfg" title="Live Sync settings" aria-label="Live Sync settings">⚙</button></span>
     </div>
+    <p class="syncmsg" id="syncmsg" role="status" hidden></p>
     <p class="take" id="takeaway">Loading saved homes…</p>
   </header>
 
@@ -385,7 +402,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
       <label class="field"><span>Nova (lb)</span><input type="number" id="f-nova" min="0" max="250" step="0.5" placeholder="49.5"></label>
       <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="city">City A–Z</option></select></label>
     </div>
-    <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><label class="check"><input type="checkbox" id="f-hidepass" checked> Hide passed</label><button type="button" class="btn" id="f-filters" aria-expanded="false">Filters ▾</button><button type="button" class="btn" id="f-reset">Reset filters</button></div>
+    <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><button type="button" class="btn" id="f-filters" aria-expanded="false">Filters ▾</button><button type="button" class="btn" id="f-new" hidden>New homes only ✕</button><button type="button" class="btn" id="f-reset">Reset filters</button></div>
     <div class="viewbar"><div class="seg" role="group" aria-label="View"><button type="button" data-mode="list">List</button><button type="button" data-mode="map">Map</button></div>
       <label class="field" id="layout-field"><span>Layout</span><select id="f-layout"><option value="list">List view</option><option value="icons">Icon view</option></select></label></div>
     <div class="strip" id="strip-homes"><span class="c1">Nova</span><span class="c2">Home · area</span><span class="c3">Rent · size</span></div>
@@ -400,6 +417,14 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
     <p class="intro">Homes you starred, contacted, toured or applied to. Status and notes sync to your phone and computer.</p>
     <div class="strip"><span class="c1">Nova</span><span class="c2">Home · status</span><span class="c3">Rent · size</span></div>
     <div class="rows" id="list-short"></div>
+  </section>
+
+  <!-- 2b · passed on -->
+  <section class="mod m-sage glass" data-panel="passed" id="passed-mod" hidden>
+    <div class="band"><div class="tileno">✗</div><div class="band-text"><div class="step">Out of the search</div><h2>Passed on</h2></div><span class="count" id="c-pass">– homes</span></div>
+    <p class="intro">Homes you passed on. They stay out of every list, map and cost table until you tap <b>Undo</b> here.</p>
+    <div class="strip"><span class="c1">Nova</span><span class="c2">Home</span><span class="c3">Rent · size</span></div>
+    <div class="rows" id="list-pass"></div>
   </section>
 
   <!-- 3 · costs -->
@@ -521,6 +546,10 @@ function fit(h){
     label:tier==='strong'?'Strong fit'+(c.pool?' + pool':''):tier==='close'?'Close fit · check interior':`${hits}/4 of your wants`};
 }
 const photosOf=h=>Array.isArray(h.photos)?h.photos.filter(u=>typeof u==='string'&&/^(https:|\/_blob\/|photos\/)/.test(u)):[];
+// Zillow photos are linked straight from Zillow's image CDN at the size each spot needs (row strip 768 px, gallery 960, viewer 1536).
+const ZP=/^https:\/\/photos\.zillowstatic\.com\/fp\/([0-9a-f]{32})-[a-z_0-9]+\.jpg$/;
+const pSize=(u,s)=>{const m=ZP.exec(u);return m?`https://photos.zillowstatic.com/fp/${m[1]}-${s}.jpg`:u;};
+const NEW_MS=3*864e5;const isNew=h=>!!(h.new_since&&(Date.now()-new Date(h.new_since))<NEW_MS)||SYNC.fresh.has(h.id);
 function moveIn(h){
   const r=rentLo(h);if(r==null)return{total:null,est:true};
   const parts=[num(h.deposit_min),num(h.pet_deposit),num(h.pet_fee),num(h.app_fee),num(h.admin_fee)];
@@ -548,7 +577,8 @@ const coOf=h=>{const m=(h.manager||'').trim();
 const CO_NONE='__none',CO_OTHER='__other';
 let coCount={};
 function passes(h){
-  if(F.hidepass&&statusOf(h)==='pass')return false;
+  if(statusOf(h)==='pass')return false; // passed homes live only in the Passed on tab
+  if(F.newOnly&&!isNew(h))return false;
   if(!F.cities.includes(cityKey(h)))return false;
   if(F.type&&(h.type||'House')!==F.type)return false;
   if(F.co){const c=coOf(h);if(F.co===CO_NONE?c!=='':F.co===CO_OTHER?!(c&&coCount[c]===1):c!==F.co)return false;}
@@ -594,7 +624,7 @@ function drawControls(){
   document.querySelectorAll('#f-dogs .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.dogs===F.dogs));
   document.querySelectorAll('#f-fit .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.fit===F.fit));
   $('f-q').value=F.q;$('f-nova').value=F.nova;$('f-pmin').value=F.pmin;$('f-pmax').value=F.pmax;$('f-type').value=F.type;
-  $('f-dep').value=F.dep;$('f-beds').value=F.beds;$('f-baths').value=F.baths;$('f-sort').value=F.sort;$('f-hidepass').checked=F.hidepass;
+  $('f-dep').value=F.dep;$('f-beds').value=F.beds;$('f-baths').value=F.baths;$('f-sort').value=F.sort;
   const co=$('f-co');coCount={};(homes||[]).forEach(h=>{const c=coOf(h);if(c)coCount[c]=(coCount[c]||0)+1;});
   const coRows=Object.entries(coCount).filter(([,n])=>n>1).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
   const one=Object.values(coCount).filter(n=>n===1).length,none=(homes||[]).filter(h=>!coOf(h)).length;
@@ -612,8 +642,8 @@ $('city-all').addEventListener('click',()=>{F.cities=CITIES.map(c=>c.k);changed(
 let qT;$('f-q').addEventListener('input',e=>{clearTimeout(qT);qT=setTimeout(()=>{F.q=e.target.value.trim();saveF();render();},180);});
 [['f-nova','nova'],['f-pmin','pmin'],['f-pmax','pmax']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
 [['f-dep','dep'],['f-beds','beds'],['f-baths','baths'],['f-sort','sort'],['f-type','type'],['f-co','co']].forEach(([id,k])=>$(id).addEventListener('change',e=>{F[k]=e.target.value;changed();}));
-$('f-hidepass').addEventListener('change',e=>{F.hidepass=e.target.checked;changed();});
 $('f-filters').addEventListener('click',()=>{const m=$('homes'),on=m.classList.toggle('show-filters');$('f-filters').setAttribute('aria-expanded',on);$('f-filters').textContent=on?'Filters ▴':'Filters ▾';});
+$('f-new').addEventListener('click',()=>{F.newOnly=false;changed();});
 $('f-reset').addEventListener('click',()=>{const nova=F.nova;F=Object.assign({},DEF,{cities:CITIES.map(c=>c.k),am:[],nova});changed();});
 document.querySelectorAll('.kpi').forEach(k=>k.addEventListener('click',()=>{
   const t=k.dataset.k;
@@ -635,7 +665,7 @@ function carousel(ph,cls,title){
   const upd=()=>{const tot=t.children.length;if(!tot){if(filled<ph.length){add(filled+2);return;}w.replaceChildren('No photo');w.classList.add('none');return;}
     n.textContent=`${Math.min(cur+1,tot)} / ${filled<ph.length?ph.length:tot}`;
     for(let i=cur;i<=cur+2&&i<tot;i++)t.children[i].loading='eager';};
-  const add=k=>{for(;filled<Math.min(k,ph.length);filled++){const im=el('img');im.src=ph[filled];im.alt='';im.loading='lazy';im.decoding='async';im.draggable=false;
+  const add=k=>{for(;filled<Math.min(k,ph.length);filled++){const im=el('img');im.src=pSize(ph[filled],'cc_ft_768');im.referrerPolicy='no-referrer';im.alt='';im.loading='lazy';im.decoding='async';im.draggable=false;
     im.addEventListener('error',()=>{im.remove();upd();});t.append(im);}};
   add(2);
   const fill=()=>{if(filled<ph.length)add(ph.length);};
@@ -670,6 +700,7 @@ function row(h,mode,open){
   const c1=el('span','c1');c1.append(el('span','tag '+v.cls,v.short));
   if(fh.tier||fh.hits>=3)c1.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
   const av=h.avail_check;if(av){const t=el('span','tag '+(av.verdict==='confirmed'?'good':'warn'),av.verdict==='confirmed'?'✓ Live '+day(av.date):'⚠ Not confirmed');t.title=av.summary||'';c1.append(t);}
+  if(isNew(h)){const nt=el('span','tag new','New'+(h.new_since?' · '+day(h.new_since):''));nt.title='Found by Live Sync';c1.append(nt);}
   const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
   c2.append(el('span','sub',[ck,h.area,h.type||'House',mode==='short'&&st?STATUS_LABEL[st]:null].filter(Boolean).join(' · ')));
   const c3=el('span','c3');c3.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')));
@@ -681,7 +712,7 @@ function row(h,mode,open){
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setStatus(h,st===val?'':val);});return b;};
   acts.append(sb('star','★',st==='shortlist'?'shortlist':'shortlist',`Shortlist ${h.name||h.address}`));
   acts.firstChild.setAttribute('aria-pressed',ACTIVE.has(st));
-  acts.append(sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
+  acts.append(mode==='passed'?sb('pass undo','Undo','pass',`Put ${h.name||h.address} back in the search`):sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
   const ap=applyLink(h,'btn apply','Apply');if(ap){ap.addEventListener('click',e=>e.stopPropagation());acts.append(ap);}
   const chev=el('span','chev','▾');chev.setAttribute('aria-hidden','true');
   if(mode==='short'){
@@ -706,7 +737,7 @@ function row(h,mode,open){
   const body=el('div','detail');
   if(ph.length){const g=el('div','gallery');g.setAttribute('aria-label',`Photos of ${h.name||h.address}`);
     ph.forEach((u,i)=>{const b=el('button');b.type='button';b.setAttribute('aria-label',`Open photo ${i+1} of ${ph.length}`);
-      const im=el('img');im.src=u;im.alt='';im.loading='lazy';im.decoding='async';im.addEventListener('error',()=>b.remove());
+      const im=el('img');im.src=pSize(u,'cc_ft_960');im.referrerPolicy='no-referrer';im.alt='';im.loading='lazy';im.decoding='async';im.addEventListener('error',()=>b.remove());
       b.append(im);b.addEventListener('click',()=>openLB(ph,i,h.name||h.address));g.append(b);});body.append(g);}
   const fl=el('div','fitlist');const mark=(ok,yes,unk,no)=>el('span','pill '+(ok===true?'good':ok===false?'bad':'warn'),ok===true?'✓ '+yes:ok===false?'✗ '+no:'? '+unk);
   fl.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.label),
@@ -771,7 +802,7 @@ function row(h,mode,open){
 /* ---------- photo viewer ---------- */
 const LB={list:[],i:0};
 function openLB(list,i,title){LB.list=list;LB.i=i;$('lb-title').textContent=title;showLB();$('lb').showModal();}
-function showLB(){$('lb-img').src=LB.list[LB.i];$('lb-n').textContent=`${LB.i+1} / ${LB.list.length}`;}
+function showLB(){$('lb-img').referrerPolicy='no-referrer';$('lb-img').src=pSize(LB.list[LB.i],'cc_ft_1536');$('lb-n').textContent=`${LB.i+1} / ${LB.list.length}`;}
 $('lb-prev').addEventListener('click',()=>{LB.i=(LB.i-1+LB.list.length)%LB.list.length;showLB();});
 $('lb-next').addEventListener('click',()=>{LB.i=(LB.i+1)%LB.list.length;showLB();});
 $('lb-close').addEventListener('click',()=>$('lb').close());
@@ -826,11 +857,15 @@ async function saveNote(h,val,sv){
 function median(a){if(!a.length)return null;const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2;}
 function render(){
   if(!homes)return;
+  $('f-new').hidden=!F.newOnly;
   // Saves and snapshots re-render rows and the details dialog; put the cursor back in the note being typed.
   const ae=document.activeElement;
   const keep=ae&&ae.tagName==='TEXTAREA'&&ae.id.startsWith('note-')?{id:ae.id,v:ae.value,s:ae.selectionStart,e:ae.selectionEnd}:null;
   const shown=homes.filter(passes).sort(sorter);
   const short=homes.filter(h=>ACTIVE.has(statusOf(h))).sort(sorter);
+  const passed=homes.filter(h=>statusOf(h)==='pass').sort(sorter);
+  $('vn-pass').textContent=passed.length;$('c-pass').textContent=passed.length+' homes';
+  const lp=$('list-pass');lp.replaceChildren();if(!passed.length)lp.append(el('p','empty','Nothing passed on yet.'));passed.forEach(h=>lp.append(row(h,'passed')));
   $('shown').textContent=shown.length;$('total').textContent=homes.length;
   $('vn-homes').textContent=shown.length;$('vn-short').textContent=short.length;
   $('c-homes').textContent=shown.length+' of '+homes.length;$('c-short').textContent=short.length+' homes';
@@ -1019,7 +1054,7 @@ function drawSources(){
 }
 
 /* ---------- views ---------- */
-const VIEWS=['homes','shortlist','costs','notes'];
+const VIEWS=['homes','shortlist','costs','notes','passed'];
 function setView(v){if(!VIEWS.includes(v))v='homes';view=v;
   document.querySelectorAll('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==v);
   document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.view===v));
@@ -1029,6 +1064,50 @@ function setView(v){if(!VIEWS.includes(v))v='homes';view=v;
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>{setView(b.dataset.view);drawControls();}));
 let start=(location.hash||'').slice(1);if(!VIEWS.includes(start)){try{start=localStorage.getItem('jn-view')||'homes';}catch(e){start='homes';}}
 setView(start);drawControls();
+
+/* ---------- Live Sync: ask GitHub to scan the rental sites now (scripts/live_sync.py), then pull the fresh homes.json ---------- */
+const SYNC={fresh:new Set(),owner:'JBravvvv',repo:'nova-homes',wf:'live-sync.yml'};
+const syncBtn=$('live-sync'),syncMsg=$('syncmsg');
+const ghTok=()=>{try{return localStorage.getItem('nh-gh-token')||'';}catch(e){return'';}};
+const fmtAgo=t=>{if(!t)return'not yet';const m=Math.round((Date.now()-new Date(t))/6e4);return m<2?'just now':m<60?m+' min ago':m<1440?Math.round(m/60)+' h ago':day(t);};
+const say=m=>{syncMsg.textContent=m;syncMsg.hidden=!m;};
+async function syncStatus(){try{const r=await fetch('data/live-sync.json',{cache:'no-store'});return r.ok?await r.json():null;}catch(e){return null;}}
+async function ghRun(tok,since){
+  const H={Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'};
+  const base=`https://api.github.com/repos/${SYNC.owner}/${SYNC.repo}/actions/workflows/${SYNC.wf}`;
+  const d=await fetch(base+'/dispatches',{method:'POST',headers:H,body:JSON.stringify({ref:'main'})});
+  if(d.status===401||d.status===403)throw new Error('GitHub did not accept the saved token (status '+d.status+'). Open ⚙ to replace it.');
+  if(d.status!==204)throw new Error('GitHub returned '+d.status+' when starting the scan.');
+  for(let i=0;i<48;i++){await new Promise(r=>setTimeout(r,15000));
+    const r=await fetch(base+`/runs?per_page=1&created=%3E%3D${since.toISOString().slice(0,19)}Z`,{headers:H});
+    const j=r.ok?await r.json():null;const run=j&&j.workflow_runs&&j.workflow_runs[0];
+    syncBtn.textContent=run?`Scanning… ${run.status==='in_progress'?'running':run.status.replace('_',' ')} · ${Math.round((Date.now()-since)/6e4)} min`:'Scanning… starting';
+    if(run&&run.status==='completed'){if(run.conclusion!=='success')throw new Error('The scan run failed on GitHub ('+run.conclusion+').');await new Promise(r=>setTimeout(r,25000));return run;}}
+  throw new Error('The scan is taking more than 12 minutes; press Live Sync again in a bit to pull its results.');
+}
+async function liveSync(){
+  if(syncBtn.disabled)return;const before=new Set(homes?homes.map(h=>h.id):[]);const t0=new Date();
+  syncBtn.disabled=true;syncBtn.classList.add('busy');say('');
+  const tok=ghTok();let ran=false,err='';
+  try{if(tok){syncBtn.textContent='Scanning…';await ghRun(tok,t0);ran=true;}else syncBtn.textContent='Checking…';}
+  catch(e){err=e.message||String(e);}
+  let list=null;try{list=window.nhReload?await window.nhReload():null;}catch(e){err=err||'Could not reload the homes list.';}
+  const st=await syncStatus();
+  const fresh=(list||[]).filter(h=>!h.hidden&&(!before.has(h.id)||(h.new_since&&(Date.now()-new Date(h.new_since))<NEW_MS)));
+  fresh.forEach(h=>SYNC.fresh.add(h.id));
+  syncBtn.disabled=false;syncBtn.classList.remove('busy');syncBtn.textContent='Live Sync';
+  const n=fresh.length,last=st&&st.ran_at;
+  let msg=err?err+' · ':'';
+  msg+=n?`${n} new home${n>1?'s':''} found, shown first with a New tag. `:'No new homes since the last scan. ';
+  msg+=ran?'A fresh scan of the rental sites just finished.':`Last automatic scan: ${fmtAgo(last)}${st&&st.sources?` (${Object.values(st.sources).filter(x=>x.ok).length} sites answered)`:''}.`;
+  if(!tok)msg+=' Scans run every 2 hours on their own; to run one right now, add a GitHub token under ⚙.';
+  say(msg);
+  if(n)F.newOnly=true;render();
+  if(n){const first=document.querySelector('.home');if(first)first.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function setToken(){const cur=ghTok();const v=prompt('Live Sync can start a scan on demand with a GitHub fine-grained token for JBravvvv/nova-homes (permission: Actions read & write). It is kept only on this device. Leave empty to remove it.',cur);if(v===null)return;
+  try{v.trim()?localStorage.setItem('nh-gh-token',v.trim()):localStorage.removeItem('nh-gh-token');}catch(e){}say(v.trim()?'Token saved on this device. Live Sync now starts a scan when pressed.':'Token removed. Live Sync will pull the latest automatic scan.');}
+syncBtn.addEventListener('click',liveSync);$('sync-cfg').addEventListener('click',setToken);
 
 /* ---------- boot ---------- */
 (async()=>{

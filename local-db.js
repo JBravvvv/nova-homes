@@ -15,6 +15,8 @@
     doc:path=>({async update(fields){const id=path.split('/')[1];user[id]=Object.assign({},user[id],fields);
       localStorage.setItem(KEY,JSON.stringify(user));setTimeout(emit,0);}})
   };
+  // Live Sync re-reads homes.json past every cache and pushes the new list to the page.
+  window.nhReload=async()=>{const r=await fetch('homes.json?t='+Date.now(),{cache:'no-store'});const list=await r.json();await ready;homes=list;emit();return list;};
   window.claude={use:async n=>n==='db'?db:null};
   if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 })();
