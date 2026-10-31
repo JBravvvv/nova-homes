@@ -483,7 +483,7 @@ const CITIES=[
   {k:'Ahwatukee',c:'--c-ahwatukee'},{k:'Scottsdale',c:'--c-scottsdale'},{k:'Paradise Valley',c:'--c-pv'},{k:'Arcadia / Biltmore',c:'--c-arcadia'}];
 const CITY_COLOR=Object.fromEntries(CITIES.map(c=>[c.k,`var(${c.c})`]));
 const TYPES=['House','Townhome','Duplex','BTR community'];
-const AMEN=['Fenced yard','Private yard','Garage','In-unit W/D','Single-level','Dog park','Pool','Community pool','Smart home','EV charging','Gated','Storage'];
+const AMEN=['Fenced yard','Private yard','Garage','In-unit W/D','Single-level','Dog park','Pool','Community pool','Smart home','EV charging','Gated','Storage','Basement'];
 const STATUSES=[['contacted','Contacted'],['toured','Toured'],['applied','Applied']];
 const NOVA={name:'Nova',breed:'Siberian Husky',weight:49.5};
 const pitch=h=>`Hi, I'm interested in renting ${h.address||h.name||'your home'}. I have one dog, Nova, a ${NOVA.weight} lb ${NOVA.breed}. Over the past two years every vet and pet professional who has met her has called her the calmest husky they've seen, and I can share her vet records and references. I'm glad to complete PetScreening, carry renter's insurance with pet liability, and talk about an added pet deposit. Would you consider her for this home? Thanks, Josh`;
@@ -524,7 +524,7 @@ const amenSet=h=>{const s=new Set(Array.isArray(h.amenities)?h.amenities:[]);if(
   const n=h.notes||'';if(COMMUNITY_POOL.test(n)){s.add('Community pool');if(!OWN_POOL.test(n))s.delete('Pool');}else if(OWN_POOL.test(n))s.add('Pool');
   // Checked facts (scripts/facts.py: Zillow's own fields plus the listing text) win over the scraped amenity words.
   const f=h.facts;if(f){const set=(k,label)=>{if(f[k]===true)s.add(label);else if(f[k]===false)s.delete(label);};
-    set('private_pool','Pool');set('community_pool','Community pool');set('single_level','Single-level');set('garage','Garage');set('fenced_yard','Fenced yard');set('private_yard','Private yard');set('in_unit_wd','In-unit W/D');set('gated','Gated');}
+    set('private_pool','Pool');set('community_pool','Community pool');set('single_level','Single-level');set('garage','Garage');set('fenced_yard','Fenced yard');set('private_yard','Private yard');set('in_unit_wd','In-unit W/D');set('gated','Gated');set('basement','Basement');}
   return s;};
 const AMEN_LABEL={'Pool':'Private pool'};
 /* score: 0 no dogs · 0.5 Nova hits a rule · 1 unknown · 1.5 breed list unchecked · 2 dogs OK, breed not confirmed · 3 Nova confirmed OK */
