@@ -1,16 +1,6 @@
 {
- "ran_at": "2026-11-01T09:17:33Z",
+ "ran_at": "2026-11-01T16:49:25Z",
  "sources": {
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 8,
@@ -18,7 +8,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 24,
+   "found": 32,
    "error": null
   },
   "AMH": {
@@ -26,22 +16,37 @@
    "found": 36,
    "error": null
   },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
+  },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "AppFolio": {
    "ok": true,
    "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
+  "Redfin": {
    "ok": true,
-   "found": 93,
+   "found": 2481,
    "error": null
   },
-  "Tricon Residential": {
+  "Rentable": {
    "ok": true,
-   "found": 6,
-   "error": null,
-   "note": "12 in-area homes in sitemap, 6 not yet in homes.json"
+   "found": 85,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -52,12 +57,7 @@
    "ok": true,
    "found": 6,
    "error": null,
-   "note": "149 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2481,
-   "error": null
+   "note": "150 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,33 +75,25 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3006,
+ "candidates": 3003,
  "dropped": {
-  "in_homes": 2931,
+  "in_homes": 2936,
   "bad": 62,
   "merged": 0
  },
- "new": 13,
+ "new": 5,
  "verified": {
-  "confirmed": 2550,
-  "not_seen": 162,
-  "unchanged": 472
+  "confirmed": 2569,
+  "not_seen": 158,
+  "unchanged": 470
  },
- "homes_total": 3449,
+ "homes_total": 3454,
  "added": [
-  "arcadia-6834-n-17th-pl",
-  "arcadia-3728-e-piccadilly-rd",
-  "scottsdale-5060-e-gallop-way",
-  "mesa-1203-e-kramer-cir",
-  "mesa-50-n-beverly",
-  "mesa-1045-e-university-dr",
-  "mesa-465-w-ivyglen-st-8",
-  "mesa-840-s-fontana",
-  "mesa-158-s-robson",
-  "mesa-8554-e-kiva-ave",
-  "mesa-4753-s-mole",
-  "mesa-4759-s-nageli",
-  "scottsdale-10876-e-volterra-ct-na"
+  "mesa-4220-e-main-st-unit-a5",
+  "tempe-1205-w-6th-st",
+  "tempe-4569-s-mill-ave",
+  "mesa-1314-s-quinn",
+  "mesa-2144-e-diamond-ave"
  ],
  "wrote": true
 }
