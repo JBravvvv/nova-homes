@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-01T16:49:25Z",
+ "ran_at": "2026-11-01T22:02:45Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,12 +8,12 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 32,
+   "found": 36,
    "error": null
   },
   "AMH": {
    "ok": true,
-   "found": 36,
+   "found": 35,
    "error": null
   },
   "Trulia": {
@@ -21,11 +21,10 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Tricon Residential": {
+  "Redfin": {
    "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
+   "found": 2485,
+   "error": null
   },
   "Zillow": {
    "ok": false,
@@ -34,23 +33,24 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 201,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Redfin": {
+  "Tricon Residential": {
    "ok": true,
-   "found": 2481,
-   "error": null
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 85,
-   "error": null
+   "found": 3,
+   "error": null,
+   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
+   "error": null
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 80,
    "error": null
   },
   "Craigslist": {
@@ -75,25 +75,27 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3003,
+ "candidates": 3004,
  "dropped": {
-  "in_homes": 2936,
+  "in_homes": 2935,
   "bad": 62,
   "merged": 0
  },
- "new": 5,
+ "new": 7,
  "verified": {
-  "confirmed": 2569,
-  "not_seen": 158,
-  "unchanged": 470
+  "confirmed": 2563,
+  "not_seen": 156,
+  "unchanged": 483
  },
- "homes_total": 3454,
+ "homes_total": 3461,
  "added": [
-  "mesa-4220-e-main-st-unit-a5",
-  "tempe-1205-w-6th-st",
-  "tempe-4569-s-mill-ave",
-  "mesa-1314-s-quinn",
-  "mesa-2144-e-diamond-ave"
+  "scottsdale-15850-n-thompson-peak-pkwy-unit-1644310p",
+  "scottsdale-14971-n-100th-way",
+  "mesa-2436-e-javelina-ave",
+  "gilbert-3863-s-bandit-rd",
+  "scottsdale-7157-e-rancho-vista-dr",
+  "scottsdale-7020-e-mighty-saguaro-way",
+  "scottsdale-7441-e-century-dr"
  ],
  "wrote": true
 }
