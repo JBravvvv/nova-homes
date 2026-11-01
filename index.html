@@ -73,6 +73,7 @@ h1{font-size:clamp(32px,5.4vw,46px);line-height:.96;letter-spacing:-.01em}
 .syncmsg{font-size:14px;font-weight:600;color:var(--ink-2);padding:8px 12px;border-radius:8px;background:rgba(39,33,75,.05);border:1px solid rgba(39,33,75,.12)}
 .syncmsg[hidden]{display:none}
 .tag.new{background:#FFE9A8;color:#5A4300}
+.tag.ideal{background:#E3F1EA;color:#1D5A3C;border:1px dashed #6FAF8E}.tag.ideal.full{background:#1F7A4D;color:#fff;border-color:#1F7A4D}.chip.ideal[aria-pressed=true]{background:#1F7A4D;border-color:#1F7A4D;color:#fff}
 .sitelinks{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}.sitelinks .eyebrow{width:100%}
 .sitelinks .site{display:inline-flex;align-items:center;min-height:30px;padding:0 11px;border-radius:999px;border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--navy);background:var(--white);text-decoration:none}
 .sitelinks .site:hover{background:var(--chip)}.sitelinks .site.find{font-weight:500;opacity:.65;border-style:dashed}.sitelinks .site.apply{background:var(--teal);border-color:var(--teal);color:var(--white)}
@@ -409,7 +410,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
       <label class="field"><span>Type</span><select id="f-type"><option value="">All types</option><option>House</option><option>Townhome</option><option>Duplex</option><option>BTR community</option></select></label>
       <label class="field wide"><span>Rental company</span><select id="f-co"><option value="">All companies</option></select></label>
       <label class="field"><span>Nova (lb)</span><input type="number" id="f-nova" min="0" max="250" step="0.5" placeholder="49.5"></label>
-      <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="dist">Closest to Old Town (Whiskey Row)</option><option value="newest">Newest listings first</option><option value="city">City A–Z</option></select></label>
+      <label class="field"><span>Sort by</span><select id="f-sort"><option value="fit">Best fit for me</option><option value="rent-asc">Rent, low to high</option><option value="rent-desc">Rent, high to low</option><option value="movein">Lowest move-in</option><option value="deposit">Lowest deposit</option><option value="dog">Best for Nova</option><option value="sqft">Most sq ft</option><option value="dist">Closest to Old Town (Whiskey Row)</option><option value="newest">Newest listings first</option><option value="ideal">Best ideal match</option><option value="city">City A–Z</option></select></label>
     </div>
     <div class="foot"><span>Showing <b id="shown">0</b> of <b id="total">0</b></span><button type="button" class="btn" id="f-filters" aria-expanded="false">Filters ▾</button><button type="button" class="btn" id="f-new" hidden>New homes only ✕</button><button type="button" class="btn" id="f-reset">Reset filters</button></div>
     <div class="viewbar"><div class="seg" role="group" aria-label="View"><button type="button" data-mode="list">List</button><button type="button" data-mode="map">Map</button></div>
@@ -598,6 +599,7 @@ let coCount={};
 function passes(h){
   if(statusOf(h)==='pass')return false; // passed homes live only in the Passed on tab
   if(F.newOnly&&!isNew(h))return false;
+  if(F.ideal&&!ideal(h))return false;
   if((F.bounds||[]).length){const ll=coord(h);if(!ll||!F.bounds.some(poly=>inPoly(ll,poly)))return false;}
   if(!F.cities.includes(cityKey(h)))return false;
   if(F.type&&(h.type||'House')!==F.type)return false;
@@ -620,11 +622,32 @@ function passes(h){
 // Distance is measured from Dierks Bentley's Whiskey Row, 4420 N Saddlebag Trl, Old Town Scottsdale (Census geocoder, 2026-10-30).
 const WR=[33.501356,-111.922247];
 const miles=h=>{const c=coord(h);if(!c)return null;const R=3958.8,r=Math.PI/180,dl=(c[0]-WR[0])*r,dg=(c[1]-WR[1])*r,a=Math.sin(dl/2)**2+Math.cos(WR[0]*r)*Math.cos(c[0]*r)*Math.sin(dg/2)**2;return 2*R*Math.asin(Math.sqrt(a));};
-const milesTxt=h=>{const m=miles(h);return m==null?null:(m<10?m.toFixed(1):Math.round(m))+' mi to Old Town';};
+// Drive time to Whiskey Row: road-routed minutes (OSRM, no traffic) from scripts/drive_times.py; homes added later get an estimate from straight-line miles (fit on 3,227 routed homes, typical error about 1.5 min).
+const driveMin=h=>typeof h.drive_min==='number'?h.drive_min:(m=>m==null?null:3.8+1.81*m)(miles(h));
+const milesTxt=h=>{const m=miles(h),d=driveMin(h);return m==null?null:(typeof h.drive_min==='number'?'':'≈')+Math.round(d)+' min drive · '+(m<10?m.toFixed(1):Math.round(m))+' mi to Old Town';};
+/* Josh's ideal home (2026-11-01). Either:
+   A) Scottsdale, within 12 min of Whiskey Row / Bottled Blonde: updated interior, private pool, grass or rock area for Nova; single story preferred,
+      but a basement or mostly-ground-floor layout is fine (no true two-story).
+   B) Gilbert / Chandler / Tempe, 10-25 min away: updated interior, private pool, grass or rock area, single story.
+   Location, drive time and a confirmed private pool are required. A home known to fail another point is out; a point nobody has confirmed yet
+   is listed on the tag ("check …") so it can be looked at in the photos. */
+const IDEAL_CHECK={updated_interior:'updated interior',dog_ground:'grass/rock area',ground_living:'story count',single_level:'story count'};
+function ideal(h){
+  const f=h.facts||{},d=driveMin(h),ck=cityKey(h);if(d==null||f.private_pool!==true)return null;
+  let prof,need;
+  if(ck==='Scottsdale'&&d<=12){prof='Scottsdale';need=['ground_living','updated_interior','dog_ground'];}
+  else if(['Gilbert','Chandler','Tempe'].includes(ck)&&d>=10&&d<=25){prof='South pocket';need=['single_level','updated_interior','dog_ground'];}
+  else return null;
+  if(need.some(k=>f[k]===false))return null;
+  const check=[...new Set(need.filter(k=>f[k]!==true).map(k=>IDEAL_CHECK[k]))];
+  return {prof,full:!check.length,check,single:f.single_level===true};
+}
+const idealTag=h=>{const i=ideal(h);if(!i)return null;const t=el('span','tag ideal'+(i.full?' full':''),i.full?'★ Ideal':'Ideal? check '+i.check.join(', '));
+  t.title=`${i.prof} profile · about ${Math.round(driveMin(h))} min to Whiskey Row · private pool`+(i.full?' · every point confirmed':' · not yet confirmed: '+i.check.join(', '));return t;};
 function sorter(a,b){
   const big=1e9;
   switch(F.sort){
-    case'dist':return(miles(a)??big)-(miles(b)??big);
+    case'dist':return(driveMin(a)??big)-(driveMin(b)??big);
     case'newest':return listedTs(b)-listedTs(a)||(rentLo(a)??big)-(rentLo(b)??big);
     case'rent-desc':return(rentHi(b)??-1)-(rentHi(a)??-1);
     case'movein':return(moveIn(a).total??big)-(moveIn(b).total??big);
@@ -632,6 +655,7 @@ function sorter(a,b){
     case'dog':return dogVerdict(b).score-dogVerdict(a).score||(rentLo(a)??big)-(rentLo(b)??big);
     case'sqft':return(num(b.sqft_max)??num(b.sqft_min)??-1)-(num(a.sqft_max)??num(a.sqft_min)??-1);
     case'city':return cityKey(a).localeCompare(cityKey(b))||(rentLo(a)??big)-(rentLo(b)??big);
+    case'ideal':return((ideal(b)?(ideal(b).full?2:1)+(ideal(b).single?.5:0):0)-(ideal(a)?(ideal(a).full?2:1)+(ideal(a).single?.5:0):0))||(driveMin(a)??big)-(driveMin(b)??big);
     case'fit':return fit(b).score-fit(a).score||dogVerdict(b).score-dogVerdict(a).score||(rentLo(a)??big)-(rentLo(b)??big);
     default:return(rentLo(a)??big)-(rentLo(b)??big);
   }
@@ -647,6 +671,8 @@ function drawControls(){
   const am=$('f-am');am.replaceChildren();
   {const b=el('button','chip','New listings');b.type='button';b.setAttribute('aria-pressed',!!F.newOnly);b.title='Homes found in the last 3 days';
     b.addEventListener('click',()=>{F.newOnly=!F.newOnly;changed();});am.append(b);}
+  {const b=el('button','chip ideal','★ Ideal home');b.type='button';b.setAttribute('aria-pressed',!!F.ideal);b.title='Scottsdale within 12 min of Whiskey Row, or Gilbert/Chandler/Tempe 10-25 min away; private pool; updated; grass or rock area; no true two-story. Turns on Best ideal match sort.';
+    b.addEventListener('click',()=>{F.ideal=!F.ideal;if(F.ideal)F.sort='ideal';else if(F.sort==='ideal')F.sort=DEF.sort;changed();});am.append(b);}
   if((F.bounds||[]).length){const b=el('button','chip',`Inside ${F.bounds.length===1?'my boundary':F.bounds.length+' boundaries'} ✕`);b.type='button';b.setAttribute('aria-pressed',true);b.title='Only homes inside the areas drawn on the map. Click to clear.';
     b.addEventListener('click',()=>{F.bounds=[];changed();drawBounds();});am.append(b);}
   AMEN.forEach(a=>{const b=el('button','chip',AMEN_LABEL[a]||a);b.type='button';b.setAttribute('aria-pressed',F.am.includes(a));
@@ -732,11 +758,12 @@ function row(h,mode,open){
   const c1=el('span','c1');c1.append(el('span','tag '+v.cls,v.short));
   if(fh.tier||fh.hits>=3)c1.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
   const av=h.avail_check;if(av){const t=el('span','tag '+(av.verdict==='confirmed'?'good':'warn'),av.verdict==='confirmed'?'✓ Live '+day(av.date):av.verdict==='not_seen'?'⚠ Not seen '+day(av.date):'⚠ Not confirmed');t.title=av.summary||'';c1.append(t);}
+  {const it=idealTag(h);if(it)c1.append(it);}
   if(isNew(h)){const nt=el('span','tag new','New'+(h.new_since?' · '+day(h.new_since):''));nt.title='Found by Live Sync';c1.append(nt);}
   const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
   c2.append(el('span','sub',[ck,h.area,h.type||'House',mode==='short'&&st?STATUS_LABEL[st]:null].filter(Boolean).join(' · ')));
   const c3=el('span','c3');c3.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')));
-  [bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null,F.sort==='dist'?milesTxt(h):null].filter(Boolean).forEach(t=>c3.append(el('span','pill',t)));
+  [bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null,(F.sort==='dist'||F.sort==='ideal'||F.ideal)?milesTxt(h):null].filter(Boolean).forEach(t=>c3.append(el('span','pill',t)));
   if(st&&st!=='pass'&&mode!=='short')c3.append(el('span','tag key',STATUS_LABEL[st]));
   const acts=el('span','acts');
   const sb=(cls,label,val,aria)=>{const b=el('button','btn '+cls,label);b.type='button';b.setAttribute('aria-pressed',st===val);b.setAttribute('aria-label',aria);
@@ -984,10 +1011,11 @@ function card(h){
   const cb=el('button','cb');cb.type='button';cb.setAttribute('aria-label',`Open ${h.name||h.address}`);
   const top=el('span','top');top.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')),el('span','cpill',ck));cb.append(top);
   cb.append(el('span','main',h.name||h.address||'Rental'));
-  cb.append(el('span','sub',[bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null,sqftTxt(h),h.type||'House'].filter(Boolean).join(' · ')));
+  cb.append(el('span','sub',[bedsTxt(h),num(h.baths)!=null?`${h.baths} ba`:null,sqftTxt(h),h.type||'House',(F.ideal||F.sort==='dist'||F.sort==='ideal')&&driveMin(h)!=null?Math.round(driveMin(h))+' min drive':null].filter(Boolean).join(' · ')));
   const tg=el('span','tags');tg.append(el('span','tag '+v.cls,v.short));
   if(fh.tier||fh.hits>=3)tg.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
   if(fh.c.pool)tg.append(el('span','pill good','Pool'));
+  {const it=idealTag(h);if(it)tg.prepend(it);}
   cb.append(tg);c.append(cb);
   const mm=miniMap(h);if(mm)c.append(mm);
   cb.addEventListener('click',()=>openHome(h));
