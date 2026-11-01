@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-10-31T21:35:57Z",
+ "ran_at": "2026-11-01T01:11:28Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,7 +8,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 30,
+   "found": 25,
    "error": null
   },
   "AMH": {
@@ -25,7 +25,12 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "9 in-area homes in sitemap, 3 not yet in homes.json"
+   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2485,
+   "error": null
   },
   "Zillow": {
    "ok": false,
@@ -34,30 +39,25 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 203,
+   "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Redfin": {
+  "Zumper": {
    "ok": true,
-   "found": 2484,
+   "found": 150,
    "error": null
   },
   "Rentable": {
    "ok": true,
-   "found": 80,
-   "error": null
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 149,
+   "found": 77,
    "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "150 new postings seen, 15 detail pages fetched"
+   "note": "151 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,25 +75,24 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2997,
+ "candidates": 2990,
  "dropped": {
-  "in_homes": 2930,
+  "in_homes": 2924,
   "bad": 62,
   "merged": 0
  },
- "new": 5,
+ "new": 4,
  "verified": {
-  "confirmed": 2552,
-  "not_seen": 164,
-  "unchanged": 459
+  "confirmed": 2555,
+  "not_seen": 171,
+  "unchanged": 454
  },
- "homes_total": 3432,
+ "homes_total": 3436,
  "added": [
-  "scottsdale-17835-n-51st-way",
-  "mesa-5814-e-lockwood-st",
-  "scottsdale-8625-e-belleview-place",
-  "tempe-232-w-los-arboles-dr",
-  "scottsdale-6565-e-thomas-rd-1066"
+  "mesa-530-s-alma-school-rd-lot-86",
+  "chandler-2091-e-flintlock-way",
+  "scottsdale-8651-e-royal-palm-235",
+  "mesa-5058-s-111th-st"
  ],
  "wrote": true
 }
