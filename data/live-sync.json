@@ -1,6 +1,16 @@
 {
- "ran_at": "2026-11-01T01:11:28Z",
+ "ran_at": "2026-11-01T09:17:33Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 8,
@@ -8,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 25,
+   "found": 24,
    "error": null
   },
   "AMH": {
@@ -16,48 +26,38 @@
    "found": 36,
    "error": null
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2485,
-   "error": null
-  },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "AppFolio": {
    "ok": true,
    "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
+  "Rentable": {
+   "ok": true,
+   "found": 93,
+   "error": null
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 6,
+   "error": null,
+   "note": "12 in-area homes in sitemap, 6 not yet in homes.json"
+  },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Rentable": {
-   "ok": true,
-   "found": 77,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
-   "found": 4,
+   "found": 6,
    "error": null,
-   "note": "151 new postings seen, 15 detail pages fetched"
+   "note": "149 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2481,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,24 +75,33 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2990,
+ "candidates": 3006,
  "dropped": {
-  "in_homes": 2924,
+  "in_homes": 2931,
   "bad": 62,
   "merged": 0
  },
- "new": 4,
+ "new": 13,
  "verified": {
-  "confirmed": 2555,
-  "not_seen": 171,
-  "unchanged": 454
+  "confirmed": 2550,
+  "not_seen": 162,
+  "unchanged": 472
  },
- "homes_total": 3436,
+ "homes_total": 3449,
  "added": [
-  "mesa-530-s-alma-school-rd-lot-86",
-  "chandler-2091-e-flintlock-way",
-  "scottsdale-8651-e-royal-palm-235",
-  "mesa-5058-s-111th-st"
+  "arcadia-6834-n-17th-pl",
+  "arcadia-3728-e-piccadilly-rd",
+  "scottsdale-5060-e-gallop-way",
+  "mesa-1203-e-kramer-cir",
+  "mesa-50-n-beverly",
+  "mesa-1045-e-university-dr",
+  "mesa-465-w-ivyglen-st-8",
+  "mesa-840-s-fontana",
+  "mesa-158-s-robson",
+  "mesa-8554-e-kiva-ave",
+  "mesa-4753-s-mole",
+  "mesa-4759-s-nageli",
+  "scottsdale-10876-e-volterra-ct-na"
  ],
  "wrote": true
 }
