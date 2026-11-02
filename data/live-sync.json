@@ -1,12 +1,7 @@
 {
- "ran_at": "2026-11-02T20:29:40Z",
+ "ran_at": "2026-11-02T20:33:17Z",
  "sources": {
   "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
@@ -15,6 +10,11 @@
    "ok": true,
    "found": 7,
    "error": null
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "Progress Residential": {
    "ok": true,
@@ -34,14 +34,8 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 82,
+   "found": 87,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -59,6 +53,12 @@
    "found": 2433,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
+  },
   "Realtor.com": {
    "ok": false,
    "found": 0,
@@ -75,25 +75,25 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2941,
+ "candidates": 2946,
  "dropped": {
-  "in_homes": 2074,
+  "in_homes": 2079,
   "bad": 60,
   "merged": 0,
   "under_floor": 807
  },
  "new": 0,
  "verified": {
-  "confirmed": 2579,
+  "confirmed": 2582,
   "not_seen": 94,
-  "unchanged": 1539,
+  "unchanged": 1536,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 1321,
-  "rent": 88,
-  "available": 84
+  "photos": 1185,
+  "rent": 65,
+  "available": 46
  },
  "homes_total": 4464,
  "added": [],
