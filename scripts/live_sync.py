@@ -571,7 +571,7 @@ def src_redfin(ctx):
             rid = rx.get("rentalId")
             for rg in ((hd.get("photosInfo") or {}).get("photoRanges") or []):
                 for pos in range(int(rg.get("startPos", 0)), int(rg.get("endPos", -1)) + 1):
-                    if rid and len(photos) < 60:
+                    if rid and len(photos) < 100:
                         photos.append(f"https://ssl.cdn-redfin.com/photo/rent/{rid}/bigphoto/{pos}_{rg.get('version','1')}.jpg")
             rr = rx.get("rentPriceRange") or {}
             br = rx.get("bedRange") or {}
@@ -1176,7 +1176,7 @@ def update_homes(homes, results, now):
                 changes.append(f"rent ${h['rent_min']:,} → ${r['rent_min']:,}")
                 h["rent_min"], h["rent_max"] = r["rent_min"], r.get("rent_max") or r["rent_min"]
                 counts["rent"] += 1
-            if re.fullmatch(r"\d{4}-\d{2}-\d{2}", r.get("available") or "") and r["available"] != h.get("available"):
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2}", r.get("available") or "") and r["available"] not in (h.get("available") or ""):
                 changes.append(f"available {h.get('available') or '—'} → {r['available']}")
                 h["available"] = r["available"]
                 counts["available"] += 1
