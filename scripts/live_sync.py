@@ -89,6 +89,7 @@ ZIP_CITY = {z: c for c, zs in CITY_ZIPS.items() for z in zs.split()}
 CITIES = set(CITY_ZIPS)
 ID_PREFIX = {"Ahwatukee": "ahwatukee", "Arcadia / Biltmore": "arcadia", "Paradise Valley": "pv"}
 TYPES = {"House", "Townhome", "Duplex"}
+RENT_FLOOR = 2200   # Josh 2026-11-02: no rentals under $2,200/mo
 LOCALITY_CITY = {"tempe": "Tempe", "chandler": "Chandler", "gilbert": "Gilbert", "mesa": "Mesa",
                  "scottsdale": "Scottsdale", "paradise valley": "Paradise Valley"}
 
@@ -1143,6 +1144,10 @@ def run(homes_path, write, log_path):
                 continue
             if r.get("rent_min") is not None and not (500 <= r["rent_min"] <= 20000):
                 dropped["bad"] += 1      # placeholder prices like $0 / $1
+                continue
+            hi = max(x for x in (r.get("rent_min"), r.get("rent_max")) if x is not None) if r.get("rent_min") is not None or r.get("rent_max") is not None else None
+            if hi is not None and hi < RENT_FLOOR:
+                dropped["under_floor"] = dropped.get("under_floor", 0) + 1   # Josh: nothing under $2,200 (2026-11-02)
                 continue
             if "zumper.com" in (r.get("listing_url") or ""):
                 r["zumper_url"], r["listing_url"] = r["listing_url"], ""

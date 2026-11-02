@@ -74,6 +74,9 @@ h1{font-size:clamp(32px,5.4vw,46px);line-height:.96;letter-spacing:-.01em}
 .syncmsg[hidden]{display:none}
 .tag.new{background:#FFE9A8;color:#5A4300}
 .toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;max-width:min(560px,calc(100vw - 32px));padding:10px 14px;border-radius:10px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+/* tags never spill into the next column: they wrap inside it (Josh 2026-11-02) */
+.tag,.pill{max-width:100%}
+.c1 .tag,.card .tag{white-space:normal;line-height:1.25;text-align:left;justify-content:flex-start}
 .tag.syncq{background:#E6E1F7;color:#3A2F7A}
 .haslist{display:flex;flex-wrap:wrap;gap:4px 6px}
 .jtools{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -349,7 +352,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
   .home>summary{display:grid;grid-template-columns:78px minmax(0,1fr) auto auto;grid-template-areas:"ph c2 acts mm" "ph c3 acts mm" "ph c1 acts chev";align-items:center;column-gap:8px;row-gap:2px;padding:6px 8px 6px 8px}
   .home>summary .rowcar{grid-area:ph;width:78px;height:62px;border-radius:6px}
   .home>summary .car-btn{display:none}.home>summary .car-n{font-size:9px;padding:1px 5px;right:3px;bottom:3px}
-  .home>summary .c1{grid-area:c1;flex-direction:row;gap:4px}
+  .home>summary .c1{grid-area:c1;flex-direction:row;flex-wrap:wrap;gap:4px}
   .home>summary .c2{grid-area:c2;min-width:0}.main{font-size:13px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sub{font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .home>summary .c3{grid-area:c3;gap:3px 6px;padding-right:0;font-size:12px}
   .rent{font-size:12.5px}
@@ -513,6 +516,7 @@ const NOVA={name:'Nova',breed:'Siberian Husky',weight:49.5};
 const pitch=h=>`Hi, I'm interested in renting ${h.address||h.name||'your home'}. I have one dog, Nova, a ${NOVA.weight} lb ${NOVA.breed}. Over the past two years every vet and pet professional who has met her has called her the calmest husky they've seen, and I can share her vet records and references. I'm glad to complete PetScreening, carry renter's insurance with pet liability, and talk about an added pet deposit. Would you consider her for this home? Thanks, Josh`;
 const STATUS_LABEL={shortlist:'Shortlisted',contacted:'Contacted',toured:'Toured',applied:'Applied',pass:'Passed'};
 const ACTIVE=new Set(['shortlist','contacted','toured','applied']);
+const RENT_FLOOR=2200;
 
 const money=v=>v==null||isNaN(v)?'—':'$'+Math.round(v).toLocaleString('en-US');
 const kfmt=v=>v>=10000?'$'+(v/1000).toFixed(1).replace(/\.0$/,'')+'K':money(v);
@@ -662,7 +666,7 @@ function ideal(h){
   const check=[...new Set(need.filter(k=>f[k]!==true).map(k=>IDEAL_CHECK[k]))];
   return {prof,full:!check.length,check,single:f.single_level===true};
 }
-const idealTag=h=>{const i=ideal(h);if(!i)return null;const t=el('span','tag ideal'+(i.full?' full':''),i.full?'★ Ideal':'Ideal? check '+i.check.join(', '));
+const idealTag=h=>{const i=ideal(h);if(!i)return null;const SHORT={'updated interior':'interior','grass/rock area':'yard','story count':'stories'};const t=el('span','tag ideal'+(i.full?' full':''),i.full?'★ Ideal':'Ideal? check '+i.check.map(c=>SHORT[c]||c).join(' · '));
   t.title=`${i.prof} profile · about ${Math.round(driveMin(h))} min to Whiskey Row · private pool`+(i.full?' · every point confirmed':' · not yet confirmed: '+i.check.join(', '));return t;};
 function sorter(a,b){
   const big=1e9;
@@ -1319,7 +1323,9 @@ function joshTools(h){
     const all=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()})).filter(h=>!h.hidden||h.hidden==='rented');
     all.forEach(h=>{const m=Object.assign({},h.facts_josh);Object.entries(h.fact_set||{}).forEach(([k,v])=>{if(v===null)delete m[k];else m[k]=v;});
       h.josh_marks=m;if(Object.keys(m).length){h.facts_auto=h.facts||{};h.facts=Object.assign({},h.facts,m);}});
-    homes=all.filter(h=>!isRented(h));rentedList=all.filter(isRented);
+    // Josh's rent floor (2026-11-02): homes whose whole rent range is under $2,200 never show, unless he already shortlisted or contacted them. Unknown rent stays.
+    const under=h=>{const r=rentHi(h);return r!=null&&r<RENT_FLOOR&&!ACTIVE.has(statusOf(h));};
+    homes=all.filter(h=>!isRented(h)&&!under(h));rentedList=all.filter(h=>isRented(h)&&!under(h));
     homes.forEach(h=>{if(pending.has(h.id)&&pending.get(h.id)===(h.status||''))pending.delete(h.id);});
     if(!homes.length){$('list-homes').replaceChildren(el('p','empty','No homes saved yet. Ask Claude to add houses and townhomes and they will appear here.'));$('takeaway').textContent='Listing database is empty.';return;}
     drawControls();render();
