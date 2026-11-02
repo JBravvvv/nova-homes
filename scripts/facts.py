@@ -54,6 +54,7 @@ UPD_WEAK=re.compile(r"granite|stainless|fresh(ly)? paint|new paint|new carpet|ti
 GROUND=re.compile(r"(grass(y)?|lawn|turf|sod)\b|desert landscap|rock (yard|landscap|area)|\bgravel\b|landscaped (back ?)?yard|xeriscap|(large|big|spacious|huge|ample|plenty of|room for|lots of) (back ?)?(yard|grass|lawn)|(yard|grass) (space|area) for|dog run",re.I)
 GROUND_NEG=re.compile(r"no (grass|lawn|yard space)|(all|entirely|fully) (hardscape|concrete|pavers)|pool (takes up|fills) (the |most of the |all of the )?(back)?yard",re.I)
 MAINFLOOR=re.compile(r"(primary|master|owner'?s?)( bedroom| suite| bed| retreat)?[^.;]{0,25}(downstairs|on the (main|first|ground) (floor|level)|main[- ](floor|level)|first[- ]floor|ground[- ](floor|level))|(downstairs|main[- ]level|first[- ]floor|ground[- ]floor) (primary|master|owner)|(only|just) (a |the |one )?(bonus room|loft|game room|bedroom|office) (is )?upstairs|upstairs (is )?(only )?(a |the )?(bonus room|loft|game room)",re.I)
+GARTXT=re.compile(r"\b(1|2|3|4|one|two|three|four)[- ]car garage|garage spaces?:\s*[1-9]|attached garage|garage parking",re.I)   # explicit wording beats Zillow's rental default hasGarage=false
 NOYARD=re.compile(r"no (back ?yard|yard|private yard|real yard)|without a (back ?)?yard|shared yard|common area only",re.I)
 changed=0
 for h in homes:
@@ -97,6 +98,7 @@ for h in homes:
     # garage
     g=h.get('garage_spaces')
     if zt and zt.get('gar') not in (None,'','0'): f['garage']=True; why['garage']=f"Zillow: {zt['gar']}-car garage"
+    elif GARTXT.search(txt) and not re.search(r"no garage|carport only",txt,re.I): f['garage']=True; why['garage']='text: '+GARTXT.search(txt).group(0)
     elif zt and (zt.get('hg')=='false' or (zt.get('gar')=='0')): f['garage']=False; why['garage']='Zillow: no garage'
     elif zt and zt.get('park') and not any('garage' in p.lower() for p in zt['park']) and any(p.lower() in ('carport','open','none','assigned','street') or 'carport' in p.lower() for p in zt['park']): f['garage']=False; why['garage']='Zillow parking: '+', '.join(zt['park'])
     elif isinstance(g,(int,float)) and g>0: f['garage']=True; why['garage']=f'listing: {g} garage spaces'
