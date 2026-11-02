@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-01T22:02:45Z",
+ "ran_at": "2026-11-02T01:30:38Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,7 +8,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 36,
+   "found": 26,
    "error": null
   },
   "AMH": {
@@ -21,21 +21,10 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2485,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "AppFolio": {
-   "ok": true,
-   "found": 201,
-   "error": null,
-   "note": "21 manager sites; 0 failed"
   },
   "Tricon Residential": {
    "ok": true,
@@ -43,21 +32,32 @@
    "error": null,
    "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
   },
-  "Zumper": {
+  "AppFolio": {
    "ok": true,
-   "found": 150,
-   "error": null
+   "found": 201,
+   "error": null,
+   "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 80,
+   "found": 81,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2485,
+   "error": null
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
    "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 6,
    "error": null,
-   "note": "150 new postings seen, 15 detail pages fetched"
+   "note": "148 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,27 +75,21 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3004,
+ "candidates": 2995,
  "dropped": {
-  "in_homes": 2935,
+  "in_homes": 2931,
   "bad": 62,
-  "merged": 0
+  "merged": 1
  },
- "new": 7,
+ "new": 1,
  "verified": {
-  "confirmed": 2563,
-  "not_seen": 156,
-  "unchanged": 483
+  "confirmed": 2564,
+  "not_seen": 180,
+  "unchanged": 465
  },
- "homes_total": 3461,
+ "homes_total": 3462,
  "added": [
-  "scottsdale-15850-n-thompson-peak-pkwy-unit-1644310p",
-  "scottsdale-14971-n-100th-way",
-  "mesa-2436-e-javelina-ave",
-  "gilbert-3863-s-bandit-rd",
-  "scottsdale-7157-e-rancho-vista-dr",
-  "scottsdale-7020-e-mighty-saguaro-way",
-  "scottsdale-7441-e-century-dr"
+  "chandler-5066-w-mercury-way"
  ],
  "wrote": true
 }
