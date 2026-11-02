@@ -362,7 +362,7 @@ def src_zillow(ctx):
                   "apco": {"value": False}, "con": {"value": False}, "land": {"value": False},
                   "manu": {"value": False}}
             if mp:
-                fs["mp"] = {"value": mp}
+                fs["mp"] = mp   # Zillow ignores {"value": ...} for rent (found 2026-11-02); it takes {"min", "max"} directly
             qs = {"pagination": ({"currentPage": page} if page > 1 else {}), "isMapVisible": False, "filterState": fs}
             url = f"https://www.zillow.com/{area}/rentals/?searchQueryState=" + urllib.parse.quote(json.dumps(qs, separators=(",", ":")))
             body = get(url)
