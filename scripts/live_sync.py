@@ -572,7 +572,7 @@ def src_redfin(ctx):
             for rg in ((hd.get("photosInfo") or {}).get("photoRanges") or []):
                 for pos in range(int(rg.get("startPos", 0)), int(rg.get("endPos", -1)) + 1):
                     if rid and len(photos) < 60:
-                        photos.append(f"https://ssl.cdn-redfin.com/photo/rent/{rid}/islphoto/genIsl.{pos}_{rg.get('version','1')}.jpg")
+                        photos.append(f"https://ssl.cdn-redfin.com/photo/rent/{rid}/bigphoto/{pos}_{rg.get('version','1')}.jpg")
             rr = rx.get("rentPriceRange") or {}
             br = rx.get("bedRange") or {}
             bt = rx.get("bathRange") or {}
@@ -1117,6 +1117,9 @@ def verify_homes(homes, results, status, ctx, today, now):
 def photo_key(u):
     """The same picture at another size counts once (Zillow size suffixes, query strings)."""
     u = (u or "").split("?")[0]
+    m = re.search(r"cdn-redfin\.com/photo/rent/([0-9a-f-]+)/\w+/(?:genIsl\.)?(\d+)_", u)
+    if m:
+        return "redfin:" + m.group(1) + ":" + m.group(2)
     return re.sub(r"-[a-z]{1,3}_[a-z0-9_]+\.(jpg|jpeg|webp|png)$", "", u) if "zillowstatic.com" in u else u
 
 
@@ -1152,7 +1155,11 @@ def update_homes(homes, results, now):
             continue
         changes = []
         have = {photo_key(p) for p in h.get("photos") or []}
-        best = max(recs, key=lambda r: len({photo_key(p) for p in r.get("photos") or []}))
+        host = lambda ps: (ps[0].split("/")[2] if ps and "//" in ps[0] else "")
+        cur_host = host(h.get("photos") or [])
+        # a fuller set from the same photo site (new pictures added to the listing); another site's set only when we have almost none
+        pool = [r for r in recs if r.get("photos") and (host(r["photos"]) == cur_host or len(have) < 5)]
+        best = max(pool, key=lambda r: len({photo_key(p) for p in r["photos"]}), default={})
         got = {photo_key(p) for p in best.get("photos") or []}
         if len(got) > len(have):
             changes.append(f"photos {len(have)} → {len(got)} ({best['source']})")
@@ -1160,7 +1167,8 @@ def update_homes(homes, results, now):
             if best.get("photo_count_listing"):
                 h["photo_count_listing"] = best["photo_count_listing"]
             counts["photos"] += 1
-        own = [r for r in recs if r.get("source") == primary_source(h)]
+        lu = (h.get("listing_url") or "").rstrip("/")
+        own = [r for r in recs if lu and (r.get("listing_url") or "").rstrip("/") == lu]   # the home's own listing page, not a neighbour unit
         if own:
             r = own[0]
             if r.get("rent_min") and h.get("rent_min") and r["rent_min"] != h["rent_min"]:
@@ -1168,7 +1176,7 @@ def update_homes(homes, results, now):
                 changes.append(f"rent ${h['rent_min']:,} → ${r['rent_min']:,}")
                 h["rent_min"], h["rent_max"] = r["rent_min"], r.get("rent_max") or r["rent_min"]
                 counts["rent"] += 1
-            if r.get("available") and r["available"] != h.get("available"):
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2}", r.get("available") or "") and r["available"] != h.get("available"):
                 changes.append(f"available {h.get('available') or '—'} → {r['available']}")
                 h["available"] = r["available"]
                 counts["available"] += 1
