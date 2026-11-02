@@ -1,36 +1,30 @@
 {
- "ran_at": "2026-11-02T01:30:38Z",
+ "ran_at": "2026-11-02T09:32:04Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 8,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 26,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 35,
-   "error": null
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Tricon Residential": {
+  "Invitation Homes": {
    "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
+   "found": 7,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 29,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 35,
+   "error": null
   },
   "AppFolio": {
    "ok": true,
@@ -40,13 +34,14 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 81,
+   "found": 92,
    "error": null
   },
-  "Redfin": {
+  "Tricon Residential": {
    "ok": true,
-   "found": 2485,
-   "error": null
+   "found": 3,
+   "error": null,
+   "note": "11 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -55,9 +50,14 @@
   },
   "Craigslist": {
    "ok": true,
-   "found": 6,
+   "found": 5,
    "error": null,
-   "note": "148 new postings seen, 15 detail pages fetched"
+   "note": "149 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2484,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,21 +75,20 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2995,
+ "candidates": 3006,
  "dropped": {
-  "in_homes": 2931,
+  "in_homes": 2130,
   "bad": 62,
-  "merged": 1
+  "merged": 0,
+  "under_floor": 814
  },
- "new": 1,
+ "new": 0,
  "verified": {
-  "confirmed": 2564,
-  "not_seen": 180,
-  "unchanged": 465
+  "confirmed": 2617,
+  "not_seen": 96,
+  "unchanged": 1496
  },
- "homes_total": 3462,
- "added": [
-  "chandler-5066-w-mercury-way"
- ],
+ "homes_total": 4461,
+ "added": [],
  "wrote": true
 }
