@@ -1,0 +1,69 @@
+# Install as .github/workflows/home-request.yml in JBravvvv/nova-homes.
+# The page's Rented / Sync / "What it has" buttons start this with the GitHub token saved under ⚙.
+# It applies the request to homes.json (scripts/home_request.py), logs it in data/requests.json,
+# commits, and deploys Pages itself (pushes made with GITHUB_TOKEN do not trigger deploy.yml).
+name: Home request
+
+on:
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: "rented | unrented | facts | sync"
+        required: true
+      id:
+        description: "home id"
+        required: true
+      data:
+        description: "JSON payload"
+        required: false
+        default: "{}"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Apply the request
+        env:
+          KIND: ${{ inputs.kind }}
+          HOME_ID: ${{ inputs.id }}
+          DATA: ${{ inputs.data }}
+        run: |
+          python3 scripts/home_request.py homes.json data/requests.json >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit and push
+        env:
+          KIND: ${{ inputs.kind }}
+          HOME_ID: ${{ inputs.id }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add homes.json data/requests.json
+          git commit -m "home-request: $KIND $HOME_ID"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main && git push origin HEAD:main && break
+            sleep $((i * 5))
+          done
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploy
+        uses: actions/deploy-pages@v4

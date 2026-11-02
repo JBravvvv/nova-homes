@@ -73,6 +73,26 @@ h1{font-size:clamp(32px,5.4vw,46px);line-height:.96;letter-spacing:-.01em}
 .syncmsg{font-size:14px;font-weight:600;color:var(--ink-2);padding:8px 12px;border-radius:8px;background:rgba(39,33,75,.05);border:1px solid rgba(39,33,75,.12)}
 .syncmsg[hidden]{display:none}
 .tag.new{background:#FFE9A8;color:#5A4300}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;max-width:min(560px,calc(100vw - 32px));padding:10px 14px;border-radius:10px;background:var(--navy);color:#fff;font-size:14px;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.tag.syncq{background:#E6E1F7;color:#3A2F7A}
+.haslist{display:flex;flex-wrap:wrap;gap:4px 6px}
+.jtools{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.btn.rented{border-color:var(--bad);color:#7E2018}
+.btn[aria-expanded=true]{background:var(--chip)}
+.jpanel{border:1px solid var(--line-strong);border-radius:9px;padding:10px 12px;display:grid;gap:8px;background:var(--surface)}
+.jpanel p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.jpanel .opts{display:flex;flex-wrap:wrap;gap:6px}
+.jpanel .opts label{display:inline-flex;gap:6px;align-items:center;font-size:14px;padding:4px 10px;border:1px solid var(--line-strong);border-radius:999px;cursor:pointer}
+.jpanel .opts label:has(input:checked){background:var(--good-bg);border-color:var(--good);color:#145A32}
+.jpanel textarea{font:inherit;font-size:14px;min-height:54px;padding:6px 8px;border:1px solid var(--line-strong);border-radius:7px;resize:vertical}
+.factrow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.factrow:last-of-type{border-bottom:0}
+.factrow .now{font-size:12px;color:var(--muted);margin-left:6px}
+.factrow .seg button{all:unset;cursor:pointer;padding:4px 10px;font-size:13px;font-weight:700}
+.factrow .seg button+button{border-left:1px solid var(--line-strong)}
+.factrow .seg button.yes[aria-pressed=true]{background:var(--good);color:#fff}
+.factrow .seg button.no[aria-pressed=true]{background:var(--bad);color:#fff}
+.jpanel .go{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .tag.ideal{background:#E3F1EA;color:#1D5A3C;border:1px dashed #6FAF8E}.tag.ideal.full{background:#1F7A4D;color:#fff;border-color:#1F7A4D}.chip.ideal[aria-pressed=true]{background:#1F7A4D;border-color:#1F7A4D;color:#fff}
 .sitelinks{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}.sitelinks .eyebrow{width:100%}
 .sitelinks .site{display:inline-flex;align-items:center;min-height:30px;padding:0 11px;border-radius:999px;border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--navy);background:var(--white);text-decoration:none}
@@ -432,7 +452,7 @@ ul.list{margin:0;padding-left:18px;display:grid;gap:6px;color:var(--ink-2);max-w
   <!-- 2b · passed on -->
   <section class="mod m-sage glass" data-panel="passed" id="passed-mod" hidden>
     <div class="band"><div class="tileno">✗</div><div class="band-text"><div class="step">Out of the search</div><h2>Passed on</h2></div><span class="count" id="c-pass">– homes</span></div>
-    <p class="intro">Homes you passed on. They stay out of every list, map and cost table until you tap <b>Undo</b> here.</p>
+    <p class="intro">Homes you passed on or marked rented. They stay out of every list, map and cost table until you tap <b>Undo</b> here.</p>
     <div class="strip"><span class="c1">Nova</span><span class="c2">Home</span><span class="c3">Rent · size</span></div>
     <div class="rows" id="list-pass"></div>
   </section>
@@ -555,8 +575,8 @@ function fit(h){
   const c={
     beds:bl==null?null:bl<=3&&3<=bh,
     size:sl==null?null:sl<=2200&&sh>=1600,
-    yard:hasYard(h)?true:null,
-    upgraded:UPGRADED.test([h.notes,h.specials,(h.amenities||[]).join(' ')].join(' '))?true:null,
+    yard:hasYard(h)||(h.facts||{}).private_yard===true||(h.facts||{}).fenced_yard===true?true:(h.facts||{}).private_yard===false?false:null,
+    upgraded:(h.facts||{}).updated_interior!=null?(h.facts||{}).updated_interior:UPGRADED.test([h.notes,h.specials,(h.amenities||[]).join(' ')].join(' '))?true:null,
     pool:am.has('Pool')};
   const core=[c.beds,c.size,c.yard,c.upgraded], hits=core.filter(x=>x===true).length, fails=core.filter(x=>x===false).length;
   const tier=hits===4?'strong':(c.beds&&c.size&&c.yard)?'close':null;
@@ -760,6 +780,7 @@ function row(h,mode,open){
   const av=h.avail_check;if(av){const t=el('span','tag '+(av.verdict==='confirmed'?'good':'warn'),av.verdict==='confirmed'?'✓ Live '+day(av.date):av.verdict==='not_seen'?'⚠ Not seen '+day(av.date):'⚠ Not confirmed');t.title=av.summary||'';c1.append(t);}
   {const it=idealTag(h);if(it)c1.append(it);}
   if(isNew(h)){const nt=el('span','tag new','New'+(h.new_since?' · '+day(h.new_since):''));nt.title='Found by Live Sync';c1.append(nt);}
+  if(syncOpen(h)){const t=el('span','tag syncq','⟳ Sync asked');t.title='You asked Claude to recheck this listing';c1.append(t);}
   const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
   c2.append(el('span','sub',[ck,h.area,h.type||'House',mode==='short'&&st?STATUS_LABEL[st]:null].filter(Boolean).join(' · ')));
   const c3=el('span','c3');c3.append(el('span','rent',rentTxt(h)+(rentLo(h)!=null?'/mo':'')));
@@ -771,7 +792,9 @@ function row(h,mode,open){
     b.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();setStatus(h,st===val?'':val);});return b;};
   acts.append(sb('star','★',st==='shortlist'?'shortlist':'shortlist',`Shortlist ${h.name||h.address}`));
   acts.firstChild.setAttribute('aria-pressed',ACTIVE.has(st));
-  acts.append(mode==='passed'?sb('pass undo','Undo','pass',`Put ${h.name||h.address} back in the search`):sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
+  if(mode==='rented'){const u=el('button','btn pass undo','Undo');u.type='button';u.setAttribute('aria-label',`${h.name||h.address} is not rented: put it back in the search`);
+    if(!db||!canWrite)u.disabled=true;u.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();markRented(h,false);});acts.append(u);}
+  else acts.append(mode==='passed'?sb('pass undo','Undo','pass',`Put ${h.name||h.address} back in the search`):sb('pass','Pass','pass',`Pass on ${h.name||h.address}`));
   const ap=applyLink(h,'btn apply','Apply');if(ap){ap.addEventListener('click',e=>e.stopPropagation());acts.append(ap);}
   const chev=el('span','chev','▾');chev.setAttribute('aria-hidden','true');
   if(mode==='short'){
@@ -804,6 +827,8 @@ function row(h,mode,open){
     mark(fh.c.yard,'Backyard','Yard not listed','No yard'),mark(fh.c.upgraded,'Upgraded interior','Interior · check photos','Dated'));
   if(fh.c.pool)fl.append(el('span','pill good','★ Pool'));
   body.append(fl);
+  const hl=hasList(h);if(hl)body.append(hl);
+  body.append(joshTools(h));
   const ht=el('div','headtags');ht.append(el('span','tag '+v.cls,v.text));
   const cp=el('span','cpill',ck);ht.append(cp);
   if(h.fenced_yard===true)ht.append(el('span','pill good','Fenced yard'));
@@ -932,8 +957,9 @@ function render(){
   const shown=homes.filter(passes).sort(sorter);
   const short=homes.filter(h=>ACTIVE.has(statusOf(h))).sort(sorter);
   const passed=homes.filter(h=>statusOf(h)==='pass').sort(sorter);
-  $('vn-pass').textContent=passed.length;$('c-pass').textContent=passed.length+' homes';
-  const lp=$('list-pass');lp.replaceChildren();if(!passed.length)lp.append(el('p','empty','Nothing passed on yet.'));passed.forEach(h=>lp.append(row(h,'passed')));
+  const out=passed.length+rentedList.length;$('vn-pass').textContent=out;$('c-pass').textContent=out+' homes';
+  const lp=$('list-pass');lp.replaceChildren();if(!out)lp.append(el('p','empty','Nothing passed on or rented yet.'));passed.forEach(h=>lp.append(row(h,'passed')));
+  if(rentedList.length){lp.append(el('h3','sgrp',`Rented · ${rentedList.length}`));[...rentedList].sort(sorter).forEach(h=>lp.append(row(h,'rented')));}
   $('shown').textContent=shown.length;$('total').textContent=homes.length;
   $('vn-homes').textContent=shown.length;$('vn-short').textContent=short.length;
   $('c-homes').textContent=shown.length+' of '+homes.length;$('c-short').textContent=short.length+' homes';
@@ -1191,7 +1217,95 @@ async function liveSync(){
 }
 function setToken(){const cur=ghTok();const v=prompt('Live Sync can start a scan on demand with a GitHub fine-grained token for JBravvvv/nova-homes (permission: Actions read & write). It is kept only on this device. Leave empty to remove it.',cur);if(v===null)return;
   try{v.trim()?localStorage.setItem('nh-gh-token',v.trim()):localStorage.removeItem('nh-gh-token');}catch(e){}say(v.trim()?'Token saved on this device. Live Sync now starts a scan when pressed.':'Token removed. Live Sync will pull the latest automatic scan.');}
-syncBtn.addEventListener('click',liveSync);$('sync-cfg').addEventListener('click',setToken);
+syncBtn.addEventListener('click',liveSync);$('sync-cfg').addEventListener('click',()=>{setToken();flushOutbox().then(r=>{if(r&&r.sent)say(`Sent ${r.sent} waiting request${r.sent>1?'s':''} (Rented / Sync / marks) to GitHub.`);});});
+setTimeout(()=>flushOutbox(),4000);
+
+/* ---------- Josh's own marks: Rented, Sync, "What it has" (2026-11-02) ----------
+   Each one saves on this device at once and is sent to GitHub (workflow home-request.yml → scripts/home_request.py), which writes it
+   into homes.json for every device and logs it in data/requests.json. Sync requests wait there for Claude to recheck the listing.
+   Without a GitHub token (⚙ next to Live Sync) requests wait in this device's outbox and go out once a token is saved. */
+const FACT_LABEL=[['private_pool','Private pool'],['single_level','Single story'],['basement','Basement'],['ground_living','Mostly ground floor'],
+  ['updated_interior','Updated interior'],['dog_ground','Grass / rock area for Nova'],['private_yard','Backyard'],['fenced_yard','Fenced yard'],
+  ['garage','Garage'],['in_unit_wd','In-unit washer/dryer'],['community_pool','Community pool'],['gated','Gated community']];
+const SYNC_WANTS=[['photos','Photos missing'],['description','Description missing'],['renovated','Interior looks renovated'],['pool','There is a pool'],
+  ['yard','Grass / rock yard'],['stories','Story count'],['details','Rent, beds or size wrong'],['other','Something else']];
+let rentedList=[];
+const isRented=h=>h.rented!==undefined?!!h.rented:h.hidden==='rented';
+const syncOpen=h=>{const r=[h.sync_local,h.sync_req].filter(Boolean).sort((a,b)=>a.at<b.at?1:-1)[0];return !!r&&!(h.sync_done&&h.sync_done.at>=r.at);};
+// A short note pinned to the bottom of the screen (the header status line is hidden on phones).
+let toastT;const tell=m=>{let t=$('toast');if(!t){t=el('div','toast');t.id='toast';t.setAttribute('role','status');document.body.append(t);}
+  t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,7000);};
+const OUTBOX='nh-outbox';
+const outbox=()=>{try{return JSON.parse(localStorage.getItem(OUTBOX)||'[]');}catch(e){return[];}};
+const saveOutbox=q=>{try{localStorage.setItem(OUTBOX,JSON.stringify(q));}catch(e){}};
+let flushing=false;
+async function flushOutbox(){
+  const tok=ghTok();if(flushing||!tok||!outbox().length)return null;flushing=true;let sent=0;
+  try{for(let q=outbox();q.length;q=outbox()){const r=q[0];
+      const d=await fetch(`https://api.github.com/repos/${SYNC.owner}/${SYNC.repo}/actions/workflows/home-request.yml/dispatches`,{method:'POST',
+        headers:{Authorization:'Bearer '+tok,Accept:'application/vnd.github+json'},body:JSON.stringify({ref:'main',inputs:{kind:r.kind,id:r.id,data:JSON.stringify(r.data||{})}})});
+      if(d.status!==204)throw new Error(d.status===401||d.status===403?'GitHub did not accept the saved token (status '+d.status+'). Open ⚙ to replace it.':'GitHub returned '+d.status+'.');
+      saveOutbox(outbox().slice(1));sent++;}
+    return {sent};}
+  catch(e){return {sent,err:e.message||String(e)};}
+  finally{flushing=false;}
+}
+async function sendReq(kind,h,data,done){
+  saveOutbox([...outbox(),{kind,id:h.id,data:data||{},at:new Date().toISOString()}]);
+  if(!ghTok())return tell(done+' Saved on this device only: add your GitHub token under ⚙ (next to Live Sync) and it will reach your other devices and Claude.');
+  tell(done+' Sending…');const r=await flushOutbox();
+  tell(done+(r&&r.err?' Not sent yet: '+r.err+' It stays queued and goes out next time.':' Sent: every device has it within about 2 minutes.'));
+}
+async function markRented(h,on){
+  if(!db||!canWrite)return;const nm=h.name||h.address;
+  await db.doc('homes/'+h.id).update({rented:on?new Date().toISOString():''});
+  sendReq(on?'rented':'unrented',h,null,on?`${nm} is marked rented and off every list (Undo is in the Passed on tab).`:`${nm} is back in the search.`);
+}
+// green = has it, red = doesn't (checked facts plus your own marks)
+function hasList(h){
+  const f=h.facts||{},m=h.josh_marks||{},w=el('div','haslist');
+  FACT_LABEL.forEach(([k,l])=>{if(f[k]!==true&&f[k]!==false)return;const p=el('span','pill '+(f[k]?'good':'bad'),(f[k]?'✓ ':'✗ ')+l+(k in m?' · you':''));
+    p.title=k in m?'You marked this':((h.facts_why||{})[k]||'From the listing');w.append(p);});
+  return w.childNodes.length?w:null;
+}
+function joshTools(h){
+  const wrap=el('div','jwrap'),bar=el('div','jtools'),off=!db||!canWrite;wrap.append(bar);
+  bar.append(el('span','eyebrow','Listing'));
+  const btn=(cls,t)=>{const b=el('button','btn '+cls,t);b.type='button';b.disabled=off;bar.append(b);return b;};
+  const rb=btn('rented',isRented(h)?'Not rented · undo':'Rented');rb.title='Take this home off the site because it is rented';
+  rb.addEventListener('click',()=>markRented(h,!isRented(h)));
+  const sb=btn('',syncOpen(h)?'⟳ Sync asked · add more':'⟳ Sync');sb.title='Tell Claude this listing is incomplete or something is clearly in the photos';
+  const hb=btn('','What it has ▾');hb.title='Mark pool, single story, basement and more yourself';
+  const panel=(b,fill)=>{const p=el('div','jpanel');p.hidden=true;wrap.append(p);b.setAttribute('aria-expanded','false');
+    b.addEventListener('click',()=>{const o=p.hidden;[...wrap.querySelectorAll('.jpanel')].forEach(x=>x.hidden=true);[...bar.querySelectorAll('[aria-expanded]')].forEach(x=>x.setAttribute('aria-expanded','false'));
+      if(o){p.replaceChildren();fill(p);p.hidden=false;b.setAttribute('aria-expanded','true');}});return p;};
+  panel(sb,p=>{
+    p.append(el('p',null,'Tell Claude what is missing or wrong. Claude rechecks the listing and its photos and fills in what it can confirm.'));
+    const o=el('div','opts'),picks=new Set();
+    SYNC_WANTS.forEach(([k,l])=>{const lb=el('label'),cb=el('input');cb.type='checkbox';cb.addEventListener('change',()=>cb.checked?picks.add(k):picks.delete(k));lb.append(cb,document.createTextNode(l));o.append(lb);});
+    const ta=el('textarea');ta.placeholder='Optional: what you see (e.g. "pool and new kitchen in photos 3–6")';ta.setAttribute('aria-label','Note for Claude');
+    const go=el('div','go'),send=el('button','btn teal','Send to Claude');send.type='button';
+    send.addEventListener('click',async()=>{const note=ta.value.trim();if(!picks.size&&!note){tell('Pick what is missing, or write a note, then Send.');return;}
+      const req={at:new Date().toISOString(),wants:[...picks],note};p.hidden=true;sb.setAttribute('aria-expanded','false');
+      await db.doc('homes/'+h.id).update({sync_local:req});sendReq('sync',h,{wants:req.wants,note},`Sync asked for ${h.name||h.address}.`);});
+    go.append(send);p.append(o,ta,go);});
+  panel(hb,p=>{
+    p.append(el('p',null,'Tap what this home has (or doesn’t). Apply turns it green everywhere: the must-have filters, Ideal home and the list. Tap a choice again to clear your mark.'));
+    const f=h.facts||{},auto=h.facts_auto||h.facts||{},m=h.josh_marks||{},stage={};
+    FACT_LABEL.forEach(([k,l])=>{stage[k]=k in m?m[k]:undefined;
+      const r=el('div','factrow'),nm=el('span',null,l);const a=auto[k];if(a===true||a===false)nm.append(el('span','now',a?'listing: yes':'listing: no'));
+      const seg=el('span','seg'),y=el('button','yes','Has it'),n=el('button','no','No');y.type=n.type='button';seg.append(y,n);
+      const paint=()=>{const v=stage[k]!==undefined?stage[k]:a;y.setAttribute('aria-pressed',v===true);n.setAttribute('aria-pressed',v===false);};
+      y.addEventListener('click',()=>{stage[k]=stage[k]===true?undefined:true;paint();});n.addEventListener('click',()=>{stage[k]=stage[k]===false?undefined:false;paint();});
+      paint();r.append(nm,seg);p.append(r);});
+    const go=el('div','go'),ap=el('button','btn teal','Apply');ap.type='button';
+    ap.addEventListener('click',async()=>{const ch={};FACT_LABEL.forEach(([k])=>{const was=k in m?m[k]:undefined;if(stage[k]!==was)ch[k]=stage[k]===undefined?null:stage[k];});
+      if(!Object.keys(ch).length){tell('Nothing changed.');return;}
+      await db.doc('homes/'+h.id).update({fact_set:Object.assign({},h.fact_set,ch)});
+      sendReq('facts',h,{facts:ch},`Saved ${Object.keys(ch).length} mark${Object.keys(ch).length>1?'s':''} for ${h.name||h.address}.`);});
+    go.append(ap);p.append(go);});
+  return wrap;
+}
 
 /* ---------- boot ---------- */
 (async()=>{
@@ -1201,7 +1315,11 @@ syncBtn.addEventListener('click',liveSync);$('sync-cfg').addEventListener('click
   if(!db){$('list-homes').replaceChildren(el('p','empty','Open this page in Claude while signed in to load the saved homes.'));$('takeaway').textContent='Not connected to the listing database.';return;}
   db.collection('homes').onSnapshot(snap=>{
     // Listings Josh chose to hide (rented, delisted, possible scam) keep a `hidden` reason in the data and never show.
-    homes=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()})).filter(h=>!h.hidden);
+    // Homes marked rented (here or on another device) move to the Passed on tab; Josh's own fact marks win over the checked facts.
+    const all=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()})).filter(h=>!h.hidden||h.hidden==='rented');
+    all.forEach(h=>{const m=Object.assign({},h.facts_josh);Object.entries(h.fact_set||{}).forEach(([k,v])=>{if(v===null)delete m[k];else m[k]=v;});
+      h.josh_marks=m;if(Object.keys(m).length){h.facts_auto=h.facts||{};h.facts=Object.assign({},h.facts,m);}});
+    homes=all.filter(h=>!isRented(h));rentedList=all.filter(isRented);
     homes.forEach(h=>{if(pending.has(h.id)&&pending.get(h.id)===(h.status||''))pending.delete(h.id);});
     if(!homes.length){$('list-homes').replaceChildren(el('p','empty','No homes saved yet. Ask Claude to add houses and townhomes and they will appear here.'));$('takeaway').textContent='Listing database is empty.';return;}
     drawControls();render();
