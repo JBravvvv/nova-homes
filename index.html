@@ -783,6 +783,9 @@ function row(h,mode,open){
   if(fh.tier||fh.hits>=3)c1.append(el('span','tag fit'+(fh.tier==='strong'?' strong':''),fh.tier==='strong'?'Strong fit':fh.tier==='close'?'Close fit':`${fh.hits}/4 wants`));
   const av=h.avail_check;if(av){const t=el('span','tag '+(av.verdict==='confirmed'?'good':'warn'),av.verdict==='confirmed'?'✓ Live '+day(av.date):av.verdict==='not_seen'?'⚠ Not seen '+day(av.date):'⚠ Not confirmed');t.title=av.summary||'';c1.append(t);}
   {const it=idealTag(h);if(it)c1.append(it);}
+  if(h.hidden==='gone'){const t=el('span','tag warn','✗ Gone '+day(h.gone&&h.gone.since));t.title=(h.gone&&h.gone.summary)||'';c1.append(t);}
+  if(h.back_on_market&&(Date.now()-new Date(h.back_on_market.at))<NEW_MS){const t=el('span','tag new','Back '+day(h.back_on_market.at));t.title='Live Sync found it listed again on '+(h.back_on_market.source||'a rental site');c1.append(t);}
+  if(h.listing_update&&(Date.now()-new Date(h.listing_update.at))<NEW_MS){const t=el('span','tag new','Updated '+day(h.listing_update.at));t.title='Live Sync: '+h.listing_update.changes.join('; ');c1.append(t);}
   if(isNew(h)){const nt=el('span','tag new','New'+(h.new_since?' · '+day(h.new_since):''));nt.title='Found by Live Sync';c1.append(nt);}
   if(syncOpen(h)){const t=el('span','tag syncq','⟳ Sync asked');t.title='You asked Claude to recheck this listing';c1.append(t);}
   const c2=el('span','c2');c2.append(el('span','main',h.name||h.address||'Rental'));
@@ -961,9 +964,10 @@ function render(){
   const shown=homes.filter(passes).sort(sorter);
   const short=homes.filter(h=>ACTIVE.has(statusOf(h))).sort(sorter);
   const passed=homes.filter(h=>statusOf(h)==='pass').sort(sorter);
-  const out=passed.length+rentedList.length;$('vn-pass').textContent=out;$('c-pass').textContent=out+' homes';
+  const out=passed.length+rentedList.length+goneList.length;$('vn-pass').textContent=out;$('c-pass').textContent=out+' homes';
   const lp=$('list-pass');lp.replaceChildren();if(!out)lp.append(el('p','empty','Nothing passed on or rented yet.'));passed.forEach(h=>lp.append(row(h,'passed')));
   if(rentedList.length){lp.append(el('h3','sgrp',`Rented · ${rentedList.length}`));[...rentedList].sort(sorter).forEach(h=>lp.append(row(h,'rented')));}
+  if(goneList.length){lp.append(el('h3','sgrp',`Gone off the market · ${goneList.length}`));lp.append(el('p','empty','Live Sync stopped finding these on every site that listed them. If one comes back, Live Sync puts it back in the search.'));[...goneList].sort(sorter).forEach(h=>lp.append(row(h,'gone')));}
   $('shown').textContent=shown.length;$('total').textContent=homes.length;
   $('vn-homes').textContent=shown.length;$('vn-short').textContent=short.length;
   $('c-homes').textContent=shown.length+' of '+homes.length;$('c-short').textContent=short.length+' homes';
@@ -1213,6 +1217,12 @@ async function liveSync(){
   const n=fresh.length,last=st&&st.ran_at;
   let msg=err?err+' · ':'';
   msg+=n?`${n} new home${n>1?'s':''} found, shown first with a New tag. `:'No new homes since the last scan. ';
+  if(st&&st.verified){const v=st.verified,u=st.updated||{},bits=[];
+    if(v.gone)bits.push(`${v.gone} gone off the market (moved to Passed on)`);if(v.back)bits.push(`${v.back} back on the market`);
+    if(u.photos)bits.push(`${u.photos} with new photos`);if(u.rent)bits.push(`${u.rent} price change${u.rent>1?'s':''}`);if(u.available)bits.push(`${u.available} new move-in date${u.available>1?'s':''}`);
+    msg+=`Checked ${v.confirmed} homes still listed`+(bits.length?'; '+bits.join(', '):'')+'. ';
+    const down=Object.entries(st.sources||{}).filter(([k,x])=>!x.ok&&k!=='HotPads'&&k!=='FirstKey Homes').map(([k])=>k); // those two are skipped by design, not blocked
+    if(down.length)msg+=`${down.join(', ')} blocked the scan, so homes listed only there were not rechecked. `;}
   msg+=ran?'A fresh scan of the rental sites just finished.':`Last automatic scan: ${fmtAgo(last)}${st&&st.sources?` (${Object.values(st.sources).filter(x=>x.ok).length} sites answered)`:''}.`;
   if(!tok)msg+=' Scans run every 2 hours on their own; to run one right now, add a GitHub token under ⚙.';
   say(msg);
@@ -1233,7 +1243,7 @@ const FACT_LABEL=[['private_pool','Private pool'],['single_level','Single story'
   ['garage','Garage'],['in_unit_wd','In-unit washer/dryer'],['community_pool','Community pool'],['gated','Gated community']];
 const SYNC_WANTS=[['photos','Photos missing'],['description','Description missing'],['renovated','Interior looks renovated'],['pool','There is a pool'],
   ['yard','Grass / rock yard'],['stories','Story count'],['details','Rent, beds or size wrong'],['other','Something else']];
-let rentedList=[];
+let rentedList=[],goneList=[];
 const isRented=h=>h.rented!==undefined?!!h.rented:h.hidden==='rented';
 const syncOpen=h=>{const r=[h.sync_local,h.sync_req].filter(Boolean).sort((a,b)=>a.at<b.at?1:-1)[0];return !!r&&!(h.sync_done&&h.sync_done.at>=r.at);};
 // A short note pinned to the bottom of the screen (the header status line is hidden on phones).
@@ -1320,12 +1330,13 @@ function joshTools(h){
   db.collection('homes').onSnapshot(snap=>{
     // Listings Josh chose to hide (rented, delisted, possible scam) keep a `hidden` reason in the data and never show.
     // Homes marked rented (here or on another device) move to the Passed on tab; Josh's own fact marks win over the checked facts.
-    const all=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()})).filter(h=>!h.hidden||h.hidden==='rented');
+    const all=snap.docs.filter(d=>d.exists).map(d=>({id:d.id,...d.data()})).filter(h=>!h.hidden||h.hidden==='rented'||h.hidden==='gone');
     all.forEach(h=>{const m=Object.assign({},h.facts_josh);Object.entries(h.fact_set||{}).forEach(([k,v])=>{if(v===null)delete m[k];else m[k]=v;});
       h.josh_marks=m;if(Object.keys(m).length){h.facts_auto=h.facts||{};h.facts=Object.assign({},h.facts,m);}});
     // Josh's rent floor (2026-11-02): homes whose whole rent range is under $2,200 never show, unless he already shortlisted or contacted them. Unknown rent stays.
     const under=h=>{const r=rentHi(h);return r!=null&&r<RENT_FLOOR&&!ACTIVE.has(statusOf(h));};
-    homes=all.filter(h=>!isRented(h)&&!under(h));rentedList=all.filter(h=>isRented(h)&&!under(h));
+    const gone=h=>h.hidden==='gone'&&!ACTIVE.has(statusOf(h)); // Live Sync took it off the market; homes you are acting on stay, tagged
+    homes=all.filter(h=>!isRented(h)&&!under(h)&&!gone(h));rentedList=all.filter(h=>isRented(h)&&!under(h));goneList=all.filter(h=>!isRented(h)&&gone(h));
     homes.forEach(h=>{if(pending.has(h.id)&&pending.get(h.id)===(h.status||''))pending.delete(h.id);});
     if(!homes.length){$('list-homes').replaceChildren(el('p','empty','No homes saved yet. Ask Claude to add houses and townhomes and they will appear here.'));$('takeaway').textContent='Listing database is empty.';return;}
     drawControls();render();

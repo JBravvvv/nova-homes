@@ -571,7 +571,7 @@ def src_redfin(ctx):
             rid = rx.get("rentalId")
             for rg in ((hd.get("photosInfo") or {}).get("photoRanges") or []):
                 for pos in range(int(rg.get("startPos", 0)), int(rg.get("endPos", -1)) + 1):
-                    if rid and len(photos) < 20:
+                    if rid and len(photos) < 60:
                         photos.append(f"https://ssl.cdn-redfin.com/photo/rent/{rid}/islphoto/genIsl.{pos}_{rg.get('version','1')}.jpg")
             rr = rx.get("rentPriceRange") or {}
             br = rx.get("bedRange") or {}
@@ -1044,9 +1044,22 @@ def home_sources(h):
     return out
 
 
-def verify_homes(homes, results, status, ctx, today):
+GONE_RUNS = 2          # misses in a row before a home is taken off the site ...
+GONE_HOURS = 20       # ... spread over at least this long, so one thin read never removes anything
+
+
+def hours_since(iso, now):
+    try:
+        return (dt.datetime.fromisoformat(now.replace("Z", "+00:00")) - dt.datetime.fromisoformat(iso.replace("Z", "+00:00"))).total_seconds() / 3600
+    except Exception:
+        return 0
+
+
+def verify_homes(homes, results, status, ctx, today, now):
     """Re-check every shown home against today's full inventories. Seen anywhere -> confirmed live today.
-    Not seen, while a source that lists it was read in full today -> 'not_seen' (never hidden, never invented)."""
+    Not seen, while a source that lists it was read in full -> 'not_seen'. When EVERY source that lists the
+    home was read in full and missed it GONE_RUNS times over GONE_HOURS+, it is taken off the site
+    (hidden='gone'); seen again later -> put back. Never invented: a source that could not be read decides nothing."""
     seen_keys, seen_urls, seen_by = set(), set(), {}
     for name, recs in results.items():
         for r in recs:
@@ -1060,15 +1073,19 @@ def verify_homes(homes, results, status, ctx, today):
     # only sources that list their whole inventory can say a home is gone
     complete = {n for n in ENUMERATING if status.get(n, {}).get("ok") and ctx["complete"].get(n, True)
                 and status[n].get("found", 0) >= MIN_FULL.get(n, 0)}
-    counts = {"confirmed": 0, "not_seen": 0, "unchanged": 0}
+    counts = {"confirmed": 0, "not_seen": 0, "unchanged": 0, "gone": 0, "back": 0}
     for h in homes:
-        if h.get("hidden") or not h.get("address"):
+        if (h.get("hidden") and h.get("hidden") != "gone") or not h.get("address"):
             continue
         ks = cand_keys(h["address"])
         urls = {(h.get(k) or "").rstrip("/") for k in ("listing_url", "zillow_url", "zumper_url")} - {""}
         hit = ks & seen_keys
         src = seen_by[next(iter(hit))] if hit else next((n for n in SRC_HOSTS if any(SRC_HOSTS[n] in u for u in urls & seen_urls)), None)
         if hit or (urls & seen_urls):
+            if h.get("hidden") == "gone":
+                h.pop("hidden", None)
+                h["back_on_market"] = {"at": now, "source": src, "was_gone": (h.pop("gone", None) or {}).get("since")}
+                counts["back"] += 1
             h["avail_check"] = {"date": today, "verdict": "confirmed", "summary": f"Live: found on {src} by Live Sync {today}", "source": "live_sync"}
             counts["confirmed"] += 1
             continue
@@ -1077,14 +1094,86 @@ def verify_homes(homes, results, status, ctx, today):
         if covered and prev.get("verdict") == "confirmed" and prev.get("date") == today:
             counts["unchanged"] += 1      # already seen live today by a fuller run; a thinner one cannot undo that
             continue
+        if h.get("hidden") == "gone":
+            continue
         if covered:
             last = prev.get("date") if prev.get("verdict") == "confirmed" else (prev.get("last_confirmed") if prev else None)
+            missed = (prev.get("missed_runs") or 0) + 1 if prev.get("verdict") == "not_seen" else 1
+            since = prev.get("missed_since") if prev.get("verdict") == "not_seen" and prev.get("missed_since") else now
             h["avail_check"] = {"date": today, "verdict": "not_seen",
                                 "summary": f"Not seen on {', '.join(sorted(covered))} by Live Sync {today}" + (f"; last confirmed {last}" if last else "") + " — check the listing before visiting",
-                                "last_confirmed": last, "source": "live_sync"}
+                                "last_confirmed": last, "source": "live_sync", "missed_runs": missed, "missed_since": since}
             counts["not_seen"] += 1
+            listed_on = home_sources(h)
+            if listed_on and listed_on <= complete and missed >= GONE_RUNS and hours_since(since, now) >= GONE_HOURS:
+                h["hidden"] = "gone"
+                h["gone"] = {"since": today, "summary": f"Off the market: not listed on {', '.join(sorted(listed_on))} in {missed} Live Sync sweeps since {since[:10]}" + (f" (last seen {last})" if last else "")}
+                counts["gone"] += 1
         else:
             counts["unchanged"] += 1
+    return counts
+
+
+def photo_key(u):
+    """The same picture at another size counts once (Zillow size suffixes, query strings)."""
+    u = (u or "").split("?")[0]
+    return re.sub(r"-[a-z]{1,3}_[a-z0-9_]+\.(jpg|jpeg|webp|png)$", "", u) if "zillowstatic.com" in u else u
+
+
+def primary_source(h):
+    u = h.get("listing_url") or ""
+    for name, host in SRC_HOSTS.items():
+        if host in u:
+            return name
+    return "AppFolio" if "appfolio.com" in u else None
+
+
+def update_homes(homes, results, now):
+    """Bring homes already on the site up to date from today's reads: more photos -> the fuller set;
+    rent / available date changed on the home's own listing site -> new value (old one kept in history).
+    Josh's fields (status, notes, facts_josh) are never touched."""
+    by_key = {}
+    for name, recs in results.items():
+        for r in recs:
+            if r.get("address"):
+                for k in cand_keys(r["address"]):
+                    by_key.setdefault(k, []).append(r)
+    counts = {"photos": 0, "rent": 0, "available": 0}
+    for h in homes:
+        if (h.get("hidden") and h.get("hidden") != "gone") or not h.get("address"):
+            continue
+        recs, seen = [], set()
+        for k in cand_keys(h["address"]):
+            for r in by_key.get(k, []):
+                if id(r) not in seen:
+                    seen.add(id(r))
+                    recs.append(r)
+        if not recs:
+            continue
+        changes = []
+        have = {photo_key(p) for p in h.get("photos") or []}
+        best = max(recs, key=lambda r: len({photo_key(p) for p in r.get("photos") or []}))
+        got = {photo_key(p) for p in best.get("photos") or []}
+        if len(got) > len(have):
+            changes.append(f"photos {len(have)} → {len(got)} ({best['source']})")
+            h["photos"] = best["photos"]
+            if best.get("photo_count_listing"):
+                h["photo_count_listing"] = best["photo_count_listing"]
+            counts["photos"] += 1
+        own = [r for r in recs if r.get("source") == primary_source(h)]
+        if own:
+            r = own[0]
+            if r.get("rent_min") and h.get("rent_min") and r["rent_min"] != h["rent_min"]:
+                h.setdefault("rent_history", []).append({"at": now, "from": h["rent_min"], "to": r["rent_min"], "source": r["source"]})
+                changes.append(f"rent ${h['rent_min']:,} → ${r['rent_min']:,}")
+                h["rent_min"], h["rent_max"] = r["rent_min"], r.get("rent_max") or r["rent_min"]
+                counts["rent"] += 1
+            if r.get("available") and r["available"] != h.get("available"):
+                changes.append(f"available {h.get('available') or '—'} → {r['available']}")
+                h["available"] = r["available"]
+                counts["available"] += 1
+        if changes:
+            h["listing_update"] = {"at": now, "changes": changes}
     return counts
 
 
@@ -1183,9 +1272,10 @@ def run(homes_path, write, log_path):
             r.pop(k, None)
         new.append(r)
 
-    verified = verify_homes(homes, results, status, ctx, today)
+    verified = verify_homes(homes, results, status, ctx, today, now)
+    updated = update_homes(homes, results, now)
     summary = {"ran_at": now, "sources": status, "candidates": sum(len(v) for v in results.values()),
-               "dropped": dropped, "new": len(new), "verified": verified,
+               "dropped": dropped, "new": len(new), "verified": verified, "updated": updated,
                "homes_total": len(homes) + (len(new) if write else 0),
                "added": [r["id"] for r in new] if write else [], "wrote": bool(write)}
 
@@ -1206,7 +1296,7 @@ def run(homes_path, write, log_path):
             json.dump(summary, f, indent=1)
             f.write("\n")
 
-    print(f"live_sync: {summary['candidates']} candidates, {len(new)} new, verified {verified} "
+    print(f"live_sync: {summary['candidates']} candidates, {len(new)} new, verified {verified}, updated {updated} "
           f"(dropped {dropped}) in {time.monotonic()-T0:.0f}s", file=sys.stderr)
     for name in list(dict(SOURCES)) + list(SKIPPED):
         s = status[name]

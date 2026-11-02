@@ -1,5 +1,6 @@
 # Install as .github/workflows/live-sync.yml in JBravvvv/nova-homes.
-# Scans rental sources for new houses/townhomes/duplexes, appends them to homes.json,
+# Full sweep of the rental sources: appends new houses/townhomes/duplexes, rechecks every home
+# (gone off the market -> hidden="gone", back -> shown again), refreshes photos, rent and move-in dates,
 # always rewrites data/live-sync.json (so the page can show "last checked"), commits
 # when homes.json changed, and then deploys Pages itself (pushes made with GITHUB_TOKEN
 # do not trigger deploy.yml).
@@ -59,7 +60,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add homes.json data/live-sync.json
-          git commit -m "live-sync: add new listings ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git commit -m "live-sync: full sweep ($(date -u +%Y-%m-%dT%H:%MZ))"
           git pull --rebase origin main
           git push origin HEAD:main
 
