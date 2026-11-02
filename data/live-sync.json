@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-02T09:32:04Z",
+ "ran_at": "2026-11-02T20:22:59Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 29,
+   "found": 26,
    "error": null
   },
   "AMH": {
@@ -28,20 +28,14 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 201,
+   "found": 199,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 92,
+   "found": 84,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "11 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -50,13 +44,19 @@
   },
   "Craigslist": {
    "ok": true,
-   "found": 5,
+   "found": 4,
    "error": null,
-   "note": "149 new postings seen, 15 detail pages fetched"
+   "note": "151 new postings seen, 15 detail pages fetched"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
   },
   "Redfin": {
    "ok": true,
-   "found": 2484,
+   "found": 2433,
    "error": null
   },
   "Realtor.com": {
@@ -75,20 +75,24 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3006,
+ "candidates": 2941,
  "dropped": {
-  "in_homes": 2130,
-  "bad": 62,
+  "in_homes": 2077,
+  "bad": 60,
   "merged": 0,
-  "under_floor": 814
+  "under_floor": 801
  },
- "new": 0,
+ "new": 3,
  "verified": {
-  "confirmed": 2617,
-  "not_seen": 96,
-  "unchanged": 1496
+  "confirmed": 2578,
+  "not_seen": 94,
+  "unchanged": 1537
  },
- "homes_total": 4461,
- "added": [],
+ "homes_total": 4464,
+ "added": [
+  "mesa-9528-e-travertine-ave",
+  "scottsdale-16831-n-62nd-pl",
+  "scottsdale-9324-n-87th-way"
+ ],
  "wrote": true
 }
