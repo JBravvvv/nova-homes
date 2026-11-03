@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-02T20:33:17Z",
+ "ran_at": "2026-11-03T03:28:40Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -8,7 +8,7 @@
   },
   "Invitation Homes": {
    "ok": true,
-   "found": 7,
+   "found": 6,
    "error": null
   },
   "Trulia": {
@@ -28,13 +28,13 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 200,
+   "found": 201,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 87,
+   "found": 74,
    "error": null
   },
   "Zumper": {
@@ -44,20 +44,20 @@
   },
   "Craigslist": {
    "ok": true,
-   "found": 4,
+   "found": 5,
    "error": null,
-   "note": "151 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2433,
-   "error": null
+   "note": "152 new postings seen, 15 detail pages fetched"
   },
   "Tricon Residential": {
    "ok": true,
-   "found": 3,
+   "found": 4,
    "error": null,
-   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
+   "note": "11 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2413,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,27 +75,34 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2946,
+ "candidates": 2915,
  "dropped": {
-  "in_homes": 2079,
+  "in_homes": 2058,
   "bad": 60,
   "merged": 0,
-  "under_floor": 807
+  "under_floor": 791
  },
- "new": 0,
+ "new": 6,
  "verified": {
-  "confirmed": 2582,
-  "not_seen": 94,
-  "unchanged": 1536,
+  "confirmed": 2551,
+  "not_seen": 268,
+  "unchanged": 1393,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 1185,
-  "rent": 65,
-  "available": 46
+  "photos": 109,
+  "rent": 17,
+  "available": 1
  },
- "homes_total": 4464,
- "added": [],
+ "homes_total": 4470,
+ "added": [
+  "arcadia-4651-n-alta-hacienda-dr",
+  "scottsdale-7345-e-keim-dr",
+  "chandler-3690-e-powell-pl",
+  "mesa-1011-w-pecos-ave",
+  "chandler-2310-w-tanque-verde-dr",
+  "chandler-147-s-fir-st"
+ ],
  "wrote": true
 }
