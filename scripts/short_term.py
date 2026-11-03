@@ -104,7 +104,9 @@ def zillow_lease(z):
         nums = [n_of(x) for x in re.findall(N, lt, re.I)]
         if re.search(r'month', lt, re.I) and nums and min(nums) < 12:
             return 'yes', f'Zillow lease term: {lt}'
-        if re.search(r'negotiable|contact|varies|other|call|ask', lt, re.I):
+        if re.search(r'^\s*contact for details\s*$', lt, re.I):
+            return None, ''  # Zillow's default when the landlord picked nothing
+        if re.search(r'negotiable|varies|other|flex', lt, re.I):
             return 'maybe', f'Zillow lease term: {lt}'
         if LT_LONG.search(lt) or re.search(r'year|12', lt, re.I):
             return 'no', f'Zillow lease term: {lt}'
