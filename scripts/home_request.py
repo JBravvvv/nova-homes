@@ -12,7 +12,7 @@ Every request is also logged in data/requests.json (status 'open' for sync, 'app
 import json, os, sys, time
 from pathlib import Path
 
-FACTS = {"private_pool", "single_level", "basement", "ground_living", "updated_interior", "dog_ground",
+FACTS = {"short_term", "private_pool", "single_level", "basement", "ground_living", "updated_interior", "dog_ground",
          "private_yard", "fenced_yard", "garage", "in_unit_wd", "community_pool", "gated"}
 WANTS = {"photos", "description", "renovated", "pool", "yard", "stories", "details", "other"}
 

@@ -49,6 +49,7 @@ import datetime as dt
 import html
 import http.client
 import json
+from pathlib import Path
 import re
 import sys
 import time
@@ -1282,6 +1283,12 @@ def run(homes_path, write, log_path):
 
     verified = verify_homes(homes, results, status, ctx, today, now)
     updated = update_homes(homes, results, now)
+    # Short-term rental check (scripts/short_term.py) for every home not checked yet, new ones included.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import short_term
+    for h in list(homes) + new:
+        if not h.get("short_term"):
+            h["short_term"] = dict(short_term.classify(h, short_term.home_texts(h, {})), at=today)
     summary = {"ran_at": now, "sources": status, "candidates": sum(len(v) for v in results.values()),
                "dropped": dropped, "new": len(new), "verified": verified, "updated": updated,
                "homes_total": len(homes) + (len(new) if write else 0),
