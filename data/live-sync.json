@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-04T09:13:48Z",
+ "ran_at": "2026-11-04T17:59:43Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,7 +8,12 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 25,
+   "found": 29,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 36,
    "error": null
   },
   "Trulia": {
@@ -16,14 +21,9 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "AMH": {
-   "ok": true,
-   "found": 35,
-   "error": null
-  },
   "Redfin": {
    "ok": true,
-   "found": 2405,
+   "found": 2406,
    "error": null
   },
   "Zillow": {
@@ -31,32 +31,32 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
+  },
   "AppFolio": {
    "ok": true,
-   "found": 201,
+   "found": 203,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Craigslist": {
    "ok": true,
-   "found": 6,
+   "found": 5,
    "error": null,
-   "note": "156 new postings seen, 15 detail pages fetched"
+   "note": "159 new postings seen, 15 detail pages fetched"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "14 in-area homes in sitemap, 5 not yet in homes.json"
-  },
   "Rentable": {
    "ok": true,
-   "found": 90,
+   "found": 82,
    "error": null
   },
   "Realtor.com": {
@@ -75,47 +75,34 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2922,
+ "candidates": 2921,
  "dropped": {
-  "in_homes": 2046,
+  "in_homes": 2059,
   "bad": 62,
-  "merged": 1,
+  "merged": 0,
   "under_floor": 794
  },
- "new": 19,
+ "new": 6,
  "verified": {
-  "confirmed": 2517,
+  "confirmed": 2519,
   "not_seen": 252,
-  "unchanged": 1405,
+  "unchanged": 1422,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 30,
-  "available": 1
+  "photos": 2,
+  "rent": 42,
+  "available": 0
  },
- "homes_total": 4524,
+ "homes_total": 4530,
  "added": [
-  "arcadia-3311-e-georgia-ave",
-  "ahwatukee-16828-s-blue-ct",
-  "scottsdale-7415-e-paraiso-dr",
-  "scottsdale-10516-e-mission-ln",
-  "scottsdale-7844-e-loma-land-dr",
-  "mesa-7463-e-nora-st",
-  "mesa-2351-w-nopal-ave",
-  "gilbert-3727-e-dublin-st",
-  "gilbert-3904-e-cloudburst-dr",
-  "chandler-300-n-gila-springs-blvd",
-  "chandler-2920-s-washington-st",
-  "chandler-1621-w-lynx-way",
-  "chandler-125-e-coconino-dr",
-  "tempe-220-s-roosevelt-st-unit-l",
-  "tempe-510-e-papago-dr",
-  "tempe-1530-s-river-dr",
-  "chandler-300-n-gila-springs-blvd-2",
-  "chandler-6143-w-harrison-st",
-  "scottsdale-6708-e-soaring-eagle-way"
+  "gilbert-1354-e-ivanhoe-st",
+  "chandler-1985-w-raven-dr",
+  "tempe-312-e-larkspur-ln",
+  "mesa-11418-e-peterson-avenue",
+  "mesa-2734-s-gordon",
+  "gilbert-955-e-cantebria-dr"
  ],
  "wrote": true
 }
