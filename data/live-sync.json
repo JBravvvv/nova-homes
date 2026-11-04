@@ -1,6 +1,16 @@
 {
- "ran_at": "2026-11-04T17:59:43Z",
+ "ran_at": "2026-11-04T23:40:51Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 7,
@@ -8,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 29,
+   "found": 28,
    "error": null
   },
   "AMH": {
@@ -16,20 +26,16 @@
    "found": 36,
    "error": null
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Redfin": {
+  "AppFolio": {
    "ok": true,
-   "found": 2406,
-   "error": null
+   "found": 205,
+   "error": null,
+   "note": "21 manager sites; 0 failed"
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
+  "Rentable": {
+   "ok": true,
+   "found": 79,
+   "error": null
   },
   "Tricon Residential": {
    "ok": true,
@@ -37,26 +43,20 @@
    "error": null,
    "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
   },
-  "AppFolio": {
-   "ok": true,
-   "found": 203,
-   "error": null,
-   "note": "21 manager sites; 0 failed"
-  },
   "Craigslist": {
    "ok": true,
-   "found": 5,
+   "found": 3,
    "error": null,
-   "note": "159 new postings seen, 15 detail pages fetched"
+   "note": "161 new postings seen, 15 detail pages fetched"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Rentable": {
+  "Redfin": {
    "ok": true,
-   "found": 82,
+   "found": 2385,
    "error": null
   },
   "Realtor.com": {
@@ -75,34 +75,27 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2921,
+ "candidates": 2896,
  "dropped": {
-  "in_homes": 2059,
+  "in_homes": 2046,
   "bad": 62,
   "merged": 0,
-  "under_floor": 794
+  "under_floor": 788
  },
- "new": 6,
+ "new": 0,
  "verified": {
-  "confirmed": 2519,
-  "not_seen": 252,
-  "unchanged": 1422,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2505,
+  "not_seen": 251,
+  "unchanged": 1444,
+  "gone": 87,
+  "back": 1
  },
  "updated": {
-  "photos": 2,
-  "rent": 42,
-  "available": 0
+  "photos": 3,
+  "rent": 24,
+  "available": 1
  },
  "homes_total": 4530,
- "added": [
-  "gilbert-1354-e-ivanhoe-st",
-  "chandler-1985-w-raven-dr",
-  "tempe-312-e-larkspur-ln",
-  "mesa-11418-e-peterson-avenue",
-  "mesa-2734-s-gordon",
-  "gilbert-955-e-cantebria-dr"
- ],
+ "added": [],
  "wrote": true
 }
