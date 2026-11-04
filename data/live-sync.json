@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-03T19:31:30Z",
+ "ran_at": "2026-11-04T00:37:28Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 20,
+   "found": 22,
    "error": null
   },
   "AMH": {
@@ -28,19 +28,13 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 199,
+   "found": 200,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
-  },
   "Rentable": {
    "ok": true,
-   "found": 81,
+   "found": 84,
    "error": null
   },
   "Zumper": {
@@ -48,16 +42,22 @@
    "found": 150,
    "error": null
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2440,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
    "found": 6,
    "error": null,
-   "note": "158 new postings seen, 15 detail pages fetched"
+   "note": "159 new postings seen, 15 detail pages fetched"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 4,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2407,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,36 +75,33 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2940,
+ "candidates": 2914,
  "dropped": {
-  "in_homes": 2058,
+  "in_homes": 2036,
   "bad": 62,
-  "merged": 1,
+  "merged": 0,
   "under_floor": 811
  },
- "new": 8,
+ "new": 5,
  "verified": {
-  "confirmed": 2569,
-  "not_seen": 229,
-  "unchanged": 1440,
-  "gone": 28,
+  "confirmed": 2525,
+  "not_seen": 310,
+  "unchanged": 1383,
+  "gone": 49,
   "back": 0
  },
  "updated": {
-  "photos": 6,
-  "rent": 33,
-  "available": 0
+  "photos": 5,
+  "rent": 29,
+  "available": 2
  },
- "homes_total": 4500,
+ "homes_total": 4505,
  "added": [
-  "arcadia-4220-n-32nd-st-35",
-  "ahwatukee-4558-e-chuckwalla-cyn",
-  "mesa-2330-n-acacia",
-  "scottsdale-2647-n-miller-rd-20",
-  "scottsdale-8650-e-virginia-ave",
-  "gilbert-4276-e-cullumber-ct",
-  "mesa-665-w-plata-ave",
-  "scottsdale-8701-e-montebello-ave-na"
+  "scottsdale-25555-n-windy-walk-dr-24",
+  "mesa-1843-s-hall",
+  "gilbert-3299-e-windsor-dr",
+  "gilbert-290-w-windsor-dr",
+  "gilbert-3423-e-wyatt-way"
  ],
  "wrote": true
 }
