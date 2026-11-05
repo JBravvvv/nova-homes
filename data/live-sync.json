@@ -1,12 +1,7 @@
 {
- "ran_at": "2026-11-05T06:47:08Z",
+ "ran_at": "2026-11-05T16:29:44Z",
  "sources": {
   "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
@@ -16,47 +11,52 @@
    "found": 7,
    "error": null
   },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Progress Residential": {
    "ok": true,
-   "found": 32,
+   "found": 33,
    "error": null
-  },
-  "AppFolio": {
-   "ok": true,
-   "found": 205,
-   "error": null,
-   "note": "21 manager sites; 0 failed"
   },
   "AMH": {
    "ok": true,
    "found": 36,
    "error": null
   },
+  "AppFolio": {
+   "ok": true,
+   "found": 207,
+   "error": null,
+   "note": "21 manager sites; 0 failed"
+  },
   "Rentable": {
    "ok": true,
-   "found": 92,
-   "error": null
-  },
-  "Craigslist": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "169 new postings seen, 15 detail pages fetched"
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2375,
+   "found": 85,
    "error": null
   },
   "Zumper": {
    "ok": true,
    "found": 150,
+   "error": null
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "12 in-area homes in sitemap, 3 not yet in homes.json"
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 5,
+   "error": null,
+   "note": "169 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2381,
    "error": null
   },
   "Realtor.com": {
@@ -75,38 +75,42 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2903,
+ "candidates": 2907,
  "dropped": {
-  "in_homes": 2039,
-  "bad": 62,
-  "merged": 1,
-  "under_floor": 791
+  "in_homes": 2029,
+  "bad": 61,
+  "merged": 3,
+  "under_floor": 800
  },
- "new": 10,
+ "new": 14,
  "verified": {
-  "confirmed": 2480,
-  "not_seen": 241,
-  "unchanged": 1392,
+  "confirmed": 2487,
+  "not_seen": 237,
+  "unchanged": 1399,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 8,
-  "rent": 36,
-  "available": 1
+  "photos": 2,
+  "rent": 25,
+  "available": 0
  },
- "homes_total": 4540,
+ "homes_total": 4554,
  "added": [
-  "arcadia-2439-e-lincoln-cir",
-  "ahwatukee-2302-e-rockledge-rd",
-  "scottsdale-4844-e-village-dr",
-  "scottsdale-10100-n-78th-pl",
-  "gilbert-821-w-silver-creek-rd",
-  "chandler-3195-e-azalea-dr",
-  "chandler-4729-w-monterey-st",
-  "tempe-1541-w-5th-pl",
-  "chandler-3195-e-azalea-dr-2",
-  "chandler-4729-w-monterey-st-2"
+  "ahwatukee-4720-e-summerhaven-dr",
+  "ahwatukee-16832-s-18th-way",
+  "mesa-3134-e-mckellips-rd-117",
+  "gilbert-1031-n-sparrow-dr",
+  "tempe-3411-s-siesta-ln",
+  "mesa-663-w-nopal-ave",
+  "gilbert-1720-e-toledo-st",
+  "chandler-390-w-musket-pl",
+  "tempe-1986-e-harvard-dr",
+  "mesa-9337-e-steno-ave",
+  "scottsdale-16143-e-lowden-rd",
+  "mesa-449-s-93rd-pl",
+  "scottsdale-8180-e-shea-blvd-1087",
+  "scottsdale-13450-east-v-a-linda"
  ],
  "wrote": true
 }
