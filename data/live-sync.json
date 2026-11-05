@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-04T23:40:51Z",
+ "ran_at": "2026-11-05T06:47:08Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,12 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 28,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 36,
+   "found": 32,
    "error": null
   },
   "AppFolio": {
@@ -32,31 +27,36 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
+  "AMH": {
    "ok": true,
-   "found": 79,
+   "found": 36,
    "error": null
   },
-  "Tricon Residential": {
+  "Rentable": {
    "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
+   "found": 92,
+   "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "161 new postings seen, 15 detail pages fetched"
+   "note": "169 new postings seen, 15 detail pages fetched"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2375,
+   "error": null
   },
   "Zumper": {
    "ok": true,
    "found": 150,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2385,
    "error": null
   },
   "Realtor.com": {
@@ -75,27 +75,38 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2896,
+ "candidates": 2903,
  "dropped": {
-  "in_homes": 2046,
+  "in_homes": 2039,
   "bad": 62,
-  "merged": 0,
-  "under_floor": 788
+  "merged": 1,
+  "under_floor": 791
  },
- "new": 0,
+ "new": 10,
  "verified": {
-  "confirmed": 2505,
-  "not_seen": 251,
-  "unchanged": 1444,
-  "gone": 87,
-  "back": 1
+  "confirmed": 2480,
+  "not_seen": 241,
+  "unchanged": 1392,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
-  "photos": 3,
-  "rent": 24,
+  "photos": 8,
+  "rent": 36,
   "available": 1
  },
- "homes_total": 4530,
- "added": [],
+ "homes_total": 4540,
+ "added": [
+  "arcadia-2439-e-lincoln-cir",
+  "ahwatukee-2302-e-rockledge-rd",
+  "scottsdale-4844-e-village-dr",
+  "scottsdale-10100-n-78th-pl",
+  "gilbert-821-w-silver-creek-rd",
+  "chandler-3195-e-azalea-dr",
+  "chandler-4729-w-monterey-st",
+  "tempe-1541-w-5th-pl",
+  "chandler-3195-e-azalea-dr-2",
+  "chandler-4729-w-monterey-st-2"
+ ],
  "wrote": true
 }
