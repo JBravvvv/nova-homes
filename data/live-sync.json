@@ -1,12 +1,7 @@
 {
- "ran_at": "2026-11-05T23:39:13Z",
+ "ran_at": "2026-11-06T06:47:36Z",
  "sources": {
   "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
@@ -15,6 +10,11 @@
    "ok": true,
    "found": 7,
    "error": null
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "Progress Residential": {
    "ok": true,
@@ -34,30 +34,30 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 80,
+   "found": 85,
    "error": null
   },
-  "Tricon Residential": {
+  "Craigslist": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "11 in-area homes in sitemap, 5 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2374,
-   "error": null
+   "note": "174 new postings seen, 15 detail pages fetched"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Craigslist": {
+  "Tricon Residential": {
    "ok": true,
-   "found": 4,
+   "found": 3,
    "error": null,
-   "note": "171 new postings seen, 15 detail pages fetched"
+   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2370,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -77,36 +77,31 @@
  },
  "candidates": 2888,
  "dropped": {
-  "in_homes": 2035,
+  "in_homes": 2034,
   "bad": 61,
-  "merged": 2,
-  "under_floor": 780
+  "merged": 0,
+  "under_floor": 788
  },
- "new": 10,
+ "new": 5,
  "verified": {
-  "confirmed": 2482,
-  "not_seen": 235,
-  "unchanged": 1420,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2478,
+  "not_seen": 274,
+  "unchanged": 1396,
+  "gone": 50,
+  "back": 1
  },
  "updated": {
-  "photos": 5,
-  "rent": 35,
-  "available": 1
+  "photos": 10,
+  "rent": 21,
+  "available": 0
  },
- "homes_total": 4564,
+ "homes_total": 4569,
  "added": [
-  "scottsdale-18425-n-94th-way",
-  "scottsdale-7553-e-buteo-dr",
-  "gilbert-3530-e-feather-ave",
-  "gilbert-2458-e-runaway-bay-pl",
-  "chandler-4890-w-geronimo-st",
-  "tempe-1345-e-orange-st",
-  "tempe-2211-s-kachina-dr",
-  "scottsdale-2820-n-71st-pl",
-  "tempe-2211-s-kachina-dr-2",
-  "scottsdale-7347-e-evening-glow-dr"
+  "ahwatukee-16001-s-38th-way",
+  "scottsdale-24709-n-75th-way",
+  "chandler-118-e-canyon-way",
+  "tempe-5007-s-birch-st",
+  "scottsdale-4879-e-paddock-pl"
  ],
  "wrote": true
 }
