@@ -1,6 +1,16 @@
 {
- "ran_at": "2026-11-06T15:56:10Z",
+ "ran_at": "2026-11-06T21:30:16Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 7,
@@ -8,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 19,
+   "found": 29,
    "error": null
   },
   "AMH": {
@@ -16,35 +26,20 @@
    "found": 37,
    "error": null
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "AppFolio": {
    "ok": true,
-   "found": 208,
+   "found": 205,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2389,
-   "error": null
-  },
   "Rentable": {
    "ok": true,
-   "found": 84,
+   "found": 86,
    "error": null
   },
   "Tricon Residential": {
    "ok": true,
-   "found": 3,
+   "found": 4,
    "error": null,
    "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
   },
@@ -57,7 +52,12 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "174 new postings seen, 15 detail pages fetched"
+   "note": "177 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2386,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,39 +75,35 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2900,
+ "candidates": 2907,
  "dropped": {
-  "in_homes": 2020,
+  "in_homes": 2029,
   "bad": 61,
-  "merged": 3,
-  "under_floor": 805
+  "merged": 2,
+  "under_floor": 808
  },
- "new": 11,
+ "new": 7,
  "verified": {
-  "confirmed": 2479,
-  "not_seen": 219,
-  "unchanged": 1406,
+  "confirmed": 2481,
+  "not_seen": 211,
+  "unchanged": 1431,
   "gone": 0,
-  "back": 1
+  "back": 8
  },
  "updated": {
-  "photos": 2,
-  "rent": 18,
+  "photos": 5,
+  "rent": 25,
   "available": 0
  },
- "homes_total": 4580,
+ "homes_total": 4587,
  "added": [
-  "scottsdale-24562-n-111th-pl",
-  "scottsdale-6925-e-montreal-pl",
-  "scottsdale-12411-n-133rd-pl",
-  "scottsdale-6818-n-72nd-pl",
-  "gilbert-831-w-sierra-madre-ave",
-  "gilbert-841-e-devon-rd",
-  "gilbert-4628-e-apricot-ln",
-  "gilbert-3853-e-derringer-way",
-  "tempe-1214-w-5th-st-7",
-  "mesa-7227-e-navarro-avenue",
-  "chandler-2412-n-evergreen-st"
+  "scottsdale-10447-e-morning-star-dr",
+  "gilbert-3913-e-edna-dr",
+  "mesa-548-w-elena-ave",
+  "gilbert-242-e-heather-ave",
+  "chandler-1930-e-horseshoe-dr",
+  "mesa-2729-n-ricardo",
+  "scottsdale-5704-e-aire-libre-ave-1038"
  ],
  "wrote": true
 }
