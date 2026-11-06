@@ -1,14 +1,19 @@
 {
- "ran_at": "2026-11-06T06:47:36Z",
+ "ran_at": "2026-11-06T15:56:10Z",
  "sources": {
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 7,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 19,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 37,
    "error": null
   },
   "Trulia": {
@@ -16,25 +21,36 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Progress Residential": {
-   "ok": true,
-   "found": 26,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 36,
-   "error": null
-  },
   "AppFolio": {
    "ok": true,
    "found": 208,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2389,
+   "error": null
+  },
   "Rentable": {
    "ok": true,
-   "found": 85,
+   "found": 84,
+   "error": null
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
    "error": null
   },
   "Craigslist": {
@@ -42,22 +58,6 @@
    "found": 3,
    "error": null,
    "note": "174 new postings seen, 15 detail pages fetched"
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
-   "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2370,
-   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,33 +75,39 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2888,
+ "candidates": 2900,
  "dropped": {
-  "in_homes": 2034,
+  "in_homes": 2020,
   "bad": 61,
-  "merged": 0,
-  "under_floor": 788
+  "merged": 3,
+  "under_floor": 805
  },
- "new": 5,
+ "new": 11,
  "verified": {
-  "confirmed": 2478,
-  "not_seen": 274,
-  "unchanged": 1396,
-  "gone": 50,
+  "confirmed": 2479,
+  "not_seen": 219,
+  "unchanged": 1406,
+  "gone": 0,
   "back": 1
  },
  "updated": {
-  "photos": 10,
-  "rent": 21,
+  "photos": 2,
+  "rent": 18,
   "available": 0
  },
- "homes_total": 4569,
+ "homes_total": 4580,
  "added": [
-  "ahwatukee-16001-s-38th-way",
-  "scottsdale-24709-n-75th-way",
-  "chandler-118-e-canyon-way",
-  "tempe-5007-s-birch-st",
-  "scottsdale-4879-e-paddock-pl"
+  "scottsdale-24562-n-111th-pl",
+  "scottsdale-6925-e-montreal-pl",
+  "scottsdale-12411-n-133rd-pl",
+  "scottsdale-6818-n-72nd-pl",
+  "gilbert-831-w-sierra-madre-ave",
+  "gilbert-841-e-devon-rd",
+  "gilbert-4628-e-apricot-ln",
+  "gilbert-3853-e-derringer-way",
+  "tempe-1214-w-5th-st-7",
+  "mesa-7227-e-navarro-avenue",
+  "chandler-2412-n-evergreen-st"
  ],
  "wrote": true
 }
