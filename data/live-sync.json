@@ -1,7 +1,12 @@
 {
- "ran_at": "2026-11-07T08:48:19Z",
+ "ran_at": "2026-11-07T16:28:01Z",
  "sources": {
   "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
@@ -11,14 +16,9 @@
    "found": 7,
    "error": null
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Progress Residential": {
    "ok": true,
-   "found": 28,
+   "found": 32,
    "error": null
   },
   "AMH": {
@@ -34,29 +34,29 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 87,
-   "error": null
-  },
-  "Craigslist": {
-   "ok": true,
-   "found": 1,
-   "error": null,
-   "note": "175 new postings seen, 15 detail pages fetched"
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
+   "found": 84,
    "error": null
   },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "14 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 2,
+   "error": null,
+   "note": "176 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2388,
+   "found": 2406,
    "error": null
   },
   "Realtor.com": {
@@ -75,37 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2908,
+ "candidates": 2928,
  "dropped": {
-  "in_homes": 2052,
+  "in_homes": 2053,
   "bad": 60,
   "merged": 0,
-  "under_floor": 787
+  "under_floor": 813
  },
- "new": 9,
+ "new": 2,
  "verified": {
-  "confirmed": 2482,
-  "not_seen": 250,
-  "unchanged": 1417,
-  "gone": 19,
-  "back": 1
+  "confirmed": 2501,
+  "not_seen": 230,
+  "unchanged": 1408,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 11,
-  "available": 2
+  "photos": 0,
+  "rent": 15,
+  "available": 1
  },
- "homes_total": 4606,
+ "homes_total": 4608,
  "added": [
-  "arcadia-3931-e-glenrosa-ave",
-  "ahwatukee-1560-w-satinwood-dr",
-  "mesa-4504-s-mole",
-  "tempe-1400-w-geneva-dr",
-  "scottsdale-13450-e-via-linda-1004",
-  "scottsdale-14343-n-frank-lloyd-wright-blvd-1007",
-  "scottsdale-5708-e-angela-dr",
-  "scottsdale-6263-e-helm-dr",
-  "scottsdale-9028-e-ludlow-dr"
+  "gilbert-1706-e-commerce-ave",
+  "chandler-343-n-newport-st"
  ],
  "wrote": true
 }
