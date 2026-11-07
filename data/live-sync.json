@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-06T21:30:16Z",
+ "ran_at": "2026-11-07T01:56:24Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 29,
+   "found": 25,
    "error": null
   },
   "AMH": {
@@ -28,20 +28,19 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 205,
+   "found": 207,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 86,
+   "found": 82,
    "error": null
   },
-  "Tricon Residential": {
+  "Redfin": {
    "ok": true,
-   "found": 4,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
+   "found": 2412,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -50,14 +49,15 @@
   },
   "Craigslist": {
    "ok": true,
-   "found": 3,
+   "found": 2,
    "error": null,
    "note": "177 new postings seen, 15 detail pages fetched"
   },
-  "Redfin": {
+  "Tricon Residential": {
    "ok": true,
-   "found": 2386,
-   "error": null
+   "found": 4,
+   "error": null,
+   "note": "24 in-area homes in sitemap, 14 not yet in homes.json"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,35 +75,38 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2907,
+ "candidates": 2926,
  "dropped": {
-  "in_homes": 2029,
-  "bad": 61,
-  "merged": 2,
-  "under_floor": 808
+  "in_homes": 2047,
+  "bad": 60,
+  "merged": 0,
+  "under_floor": 809
  },
- "new": 7,
+ "new": 10,
  "verified": {
-  "confirmed": 2481,
-  "not_seen": 211,
-  "unchanged": 1431,
+  "confirmed": 2499,
+  "not_seen": 256,
+  "unchanged": 1383,
   "gone": 0,
   "back": 8
  },
  "updated": {
-  "photos": 5,
-  "rent": 25,
-  "available": 0
+  "photos": 7,
+  "rent": 27,
+  "available": 2
  },
- "homes_total": 4587,
+ "homes_total": 4597,
  "added": [
-  "scottsdale-10447-e-morning-star-dr",
-  "gilbert-3913-e-edna-dr",
-  "mesa-548-w-elena-ave",
-  "gilbert-242-e-heather-ave",
-  "chandler-1930-e-horseshoe-dr",
-  "mesa-2729-n-ricardo",
-  "scottsdale-5704-e-aire-libre-ave-1038"
+  "ahwatukee-16630-s-15th-ln",
+  "scottsdale-6350-n-78th-st-315",
+  "scottsdale-6810-e-coronado-rd",
+  "scottsdale-6901-e-palm-ln",
+  "gilbert-3920-e-olive-ave",
+  "chandler-2336-e-winchester-pl",
+  "chandler-881-n-los-feliz-dr",
+  "tempe-1879-e-oasis-dr",
+  "tempe-1959-e-orion-st",
+  "tempe-825-w-19th-st"
  ],
  "wrote": true
 }
