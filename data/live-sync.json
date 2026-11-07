@@ -1,16 +1,6 @@
 {
- "ran_at": "2026-11-07T16:28:01Z",
+ "ran_at": "2026-11-07T21:52:39Z",
  "sources": {
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 7,
@@ -18,7 +8,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 32,
+   "found": 26,
    "error": null
   },
   "AMH": {
@@ -26,26 +16,41 @@
    "found": 37,
    "error": null
   },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 4,
+   "error": null,
+   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
+  },
   "AppFolio": {
    "ok": true,
    "found": 207,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
+  "Redfin": {
    "ok": true,
-   "found": 84,
+   "found": 2405,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "8 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
+   "error": null
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 79,
    "error": null
   },
   "Craigslist": {
@@ -53,11 +58,6 @@
    "found": 2,
    "error": null,
    "note": "176 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2406,
-   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,30 +75,29 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2928,
+ "candidates": 2917,
  "dropped": {
-  "in_homes": 2053,
+  "in_homes": 2045,
   "bad": 60,
   "merged": 0,
-  "under_floor": 813
+  "under_floor": 811
  },
- "new": 2,
+ "new": 1,
  "verified": {
-  "confirmed": 2501,
-  "not_seen": 230,
-  "unchanged": 1408,
+  "confirmed": 2499,
+  "not_seen": 229,
+  "unchanged": 1413,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 0,
-  "rent": 15,
-  "available": 1
+  "photos": 1,
+  "rent": 10,
+  "available": 0
  },
- "homes_total": 4608,
+ "homes_total": 4609,
  "added": [
-  "gilbert-1706-e-commerce-ave",
-  "chandler-343-n-newport-st"
+  "tempe-3710-s-terrace-rd"
  ],
  "wrote": true
 }
