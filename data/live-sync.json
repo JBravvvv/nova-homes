@@ -1,6 +1,16 @@
 {
- "ran_at": "2026-11-08T01:27:12Z",
+ "ran_at": "2026-11-08T09:00:01Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 7,
@@ -16,36 +26,15 @@
    "found": 37,
    "error": null
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "AppFolio": {
    "ok": true,
-   "found": 207,
+   "found": 208,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 5,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2405,
-   "error": null
-  },
   "Rentable": {
    "ok": true,
-   "found": 87,
+   "found": 92,
    "error": null
   },
   "Zumper": {
@@ -53,11 +42,22 @@
    "found": 150,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "13 in-area homes in sitemap, 6 not yet in homes.json"
+  },
   "Craigslist": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "177 new postings seen, 15 detail pages fetched"
+   "note": "175 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2383,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,27 +75,32 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2933,
+ "candidates": 2915,
  "dropped": {
-  "in_homes": 2056,
+  "in_homes": 2053,
   "bad": 60,
-  "merged": 0,
-  "under_floor": 817
+  "merged": 1,
+  "under_floor": 797
  },
- "new": 0,
+ "new": 4,
  "verified": {
-  "confirmed": 2504,
-  "not_seen": 256,
-  "unchanged": 1383,
-  "gone": 34,
-  "back": 1
+  "confirmed": 2482,
+  "not_seen": 218,
+  "unchanged": 1409,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
   "photos": 1,
-  "rent": 6,
+  "rent": 3,
   "available": 0
  },
- "homes_total": 4609,
- "added": [],
+ "homes_total": 4613,
+ "added": [
+  "gilbert-3106-e-patrick-st",
+  "chandler-1130-n-meadows-dr",
+  "chandler-3110-s-mingus-dr",
+  "mesa-4833-s-turbine"
+ ],
  "wrote": true
 }
