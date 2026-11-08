@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-08T09:00:01Z",
+ "ran_at": "2026-11-08T16:41:51Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 33,
+   "found": 32,
    "error": null
   },
   "AMH": {
@@ -34,7 +34,7 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 92,
+   "found": 83,
    "error": null
   },
   "Zumper": {
@@ -46,18 +46,18 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "13 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "14 in-area homes in sitemap, 6 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2389,
+   "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "175 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2383,
-   "error": null
+   "note": "174 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,32 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2915,
+ "candidates": 2911,
  "dropped": {
-  "in_homes": 2053,
+  "in_homes": 2056,
   "bad": 60,
-  "merged": 1,
-  "under_floor": 797
+  "merged": 0,
+  "under_floor": 793
  },
- "new": 4,
+ "new": 2,
  "verified": {
-  "confirmed": 2482,
-  "not_seen": 218,
-  "unchanged": 1409,
+  "confirmed": 2485,
+  "not_seen": 215,
+  "unchanged": 1413,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 3,
+  "photos": 0,
+  "rent": 2,
   "available": 0
  },
- "homes_total": 4613,
+ "homes_total": 4615,
  "added": [
-  "gilbert-3106-e-patrick-st",
-  "chandler-1130-n-meadows-dr",
-  "chandler-3110-s-mingus-dr",
-  "mesa-4833-s-turbine"
+  "scottsdale-12210-n-67th-st",
+  "scottsdale-16676-n-106th-way"
  ],
  "wrote": true
 }
