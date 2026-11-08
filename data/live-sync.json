@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-08T16:41:51Z",
+ "ran_at": "2026-11-08T22:06:15Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,12 +18,12 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 32,
+   "found": 29,
    "error": null
   },
   "AMH": {
    "ok": true,
-   "found": 37,
+   "found": 36,
    "error": null
   },
   "AppFolio": {
@@ -34,7 +34,7 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 83,
+   "found": 81,
    "error": null
   },
   "Zumper": {
@@ -46,7 +46,7 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "14 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "15 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Redfin": {
    "ok": true,
@@ -57,7 +57,7 @@
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "174 new postings seen, 15 detail pages fetched"
+   "note": "177 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,30 +75,35 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2911,
+ "candidates": 2905,
  "dropped": {
-  "in_homes": 2056,
-  "bad": 60,
-  "merged": 0,
-  "under_floor": 793
+  "in_homes": 2037,
+  "bad": 59,
+  "merged": 1,
+  "under_floor": 801
  },
- "new": 2,
+ "new": 7,
  "verified": {
-  "confirmed": 2485,
+  "confirmed": 2472,
   "not_seen": 215,
-  "unchanged": 1413,
-  "gone": 0,
-  "back": 0
+  "unchanged": 1429,
+  "gone": 12,
+  "back": 1
  },
  "updated": {
-  "photos": 0,
-  "rent": 2,
+  "photos": 1,
+  "rent": 23,
   "available": 0
  },
- "homes_total": 4615,
+ "homes_total": 4622,
  "added": [
-  "scottsdale-12210-n-67th-st",
-  "scottsdale-16676-n-106th-way"
+  "arcadia-4700-n-40th-st-unit-113",
+  "arcadia-3207-e-medlock-dr",
+  "ahwatukee-16926-s-16th-ln",
+  "ahwatukee-2904-e-windmere-dr",
+  "scottsdale-11605-e-sorrel-ln",
+  "mesa-4538-s-nageli",
+  "gilbert-24-n-sahuaro-dr"
  ],
  "wrote": true
 }
