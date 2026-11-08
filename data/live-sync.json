@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-07T21:52:39Z",
+ "ran_at": "2026-11-08T01:27:12Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,7 +8,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 26,
+   "found": 33,
    "error": null
   },
   "AMH": {
@@ -21,6 +21,12 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "AppFolio": {
+   "ok": true,
+   "found": 207,
+   "error": null,
+   "note": "21 manager sites; 0 failed"
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -28,19 +34,18 @@
   },
   "Tricon Residential": {
    "ok": true,
-   "found": 4,
+   "found": 5,
    "error": null,
-   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "AppFolio": {
-   "ok": true,
-   "found": 207,
-   "error": null,
-   "note": "21 manager sites; 0 failed"
+   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
   },
   "Redfin": {
    "ok": true,
    "found": 2405,
+   "error": null
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 87,
    "error": null
   },
   "Zumper": {
@@ -48,16 +53,11 @@
    "found": 150,
    "error": null
   },
-  "Rentable": {
-   "ok": true,
-   "found": 79,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "176 new postings seen, 15 detail pages fetched"
+   "note": "177 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,29 +75,27 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2917,
+ "candidates": 2933,
  "dropped": {
-  "in_homes": 2045,
+  "in_homes": 2056,
   "bad": 60,
   "merged": 0,
-  "under_floor": 811
+  "under_floor": 817
  },
- "new": 1,
+ "new": 0,
  "verified": {
-  "confirmed": 2499,
-  "not_seen": 229,
-  "unchanged": 1413,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2504,
+  "not_seen": 256,
+  "unchanged": 1383,
+  "gone": 34,
+  "back": 1
  },
  "updated": {
   "photos": 1,
-  "rent": 10,
+  "rent": 6,
   "available": 0
  },
  "homes_total": 4609,
- "added": [
-  "tempe-3710-s-terrace-rd"
- ],
+ "added": [],
  "wrote": true
 }
