@@ -1,63 +1,63 @@
 {
- "ran_at": "2026-11-09T09:49:30Z",
+ "ran_at": "2026-11-09T20:44:32Z",
  "sources": {
+  "Invitation Homes": {
+   "ok": true,
+   "found": 8,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 29,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 37,
+   "error": null
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Invitation Homes": {
-   "ok": true,
-   "found": 7,
-   "error": null
   },
   "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Progress Residential": {
-   "ok": true,
-   "found": 24,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 36,
-   "error": null
-  },
   "AppFolio": {
    "ok": true,
-   "found": 209,
+   "found": 210,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
+  "Redfin": {
    "ok": true,
-   "found": 88,
+   "found": 2363,
    "error": null
   },
-  "Craigslist": {
+  "Rentable": {
    "ok": true,
-   "found": 2,
-   "error": null,
-   "note": "172 new postings seen, 15 detail pages fetched"
+   "found": 84,
+   "error": null
   },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "10 in-area homes in sitemap, 3 not yet in homes.json"
+   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Redfin": {
+  "Craigslist": {
    "ok": true,
-   "found": 2373,
-   "error": null
+   "found": 2,
+   "error": null,
+   "note": "180 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,30 +75,34 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2892,
+ "candidates": 2886,
  "dropped": {
-  "in_homes": 2043,
+  "in_homes": 2028,
   "bad": 59,
-  "merged": 0,
-  "under_floor": 788
+  "merged": 2,
+  "under_floor": 791
  },
- "new": 2,
+ "new": 6,
  "verified": {
-  "confirmed": 2456,
-  "not_seen": 243,
-  "unchanged": 1414,
+  "confirmed": 2441,
+  "not_seen": 242,
+  "unchanged": 1432,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 4,
-  "rent": 4,
-  "available": 2
+  "photos": 1,
+  "rent": 17,
+  "available": 3
  },
- "homes_total": 4626,
+ "homes_total": 4632,
  "added": [
-  "scottsdale-6711-e-camelback-rd-3",
-  "gilbert-112-e-bernie-ln"
+  "scottsdale-7685-n-via-de-platina",
+  "gilbert-2268-e-marlene-dr",
+  "tempe-1893-e-bendix-dr",
+  "chandler-5905-w-chicago-st",
+  "gilbert-1288-e-eli-ct",
+  "scottsdale-10603-e-bahia-dr"
  ],
  "wrote": true
 }
