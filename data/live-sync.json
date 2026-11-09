@@ -1,19 +1,14 @@
 {
- "ran_at": "2026-11-09T01:44:39Z",
+ "ran_at": "2026-11-09T09:49:30Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 7,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 22,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 36,
    "error": null
   },
   "Trulia": {
@@ -21,42 +16,47 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
+  "Progress Residential": {
+   "ok": true,
+   "found": 24,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 36,
+   "error": null
   },
   "AppFolio": {
    "ok": true,
-   "found": 208,
+   "found": 209,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 78,
+   "found": 88,
    "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2394,
-   "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "15 in-area homes in sitemap, 7 not yet in homes.json"
   },
   "Craigslist": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "175 new postings seen, 15 detail pages fetched"
+   "note": "172 new postings seen, 15 detail pages fetched"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2373,
    "error": null
   },
   "Realtor.com": {
@@ -75,30 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2900,
+ "candidates": 2892,
  "dropped": {
-  "in_homes": 2048,
+  "in_homes": 2043,
   "bad": 59,
   "merged": 0,
-  "under_floor": 791
+  "under_floor": 788
  },
  "new": 2,
  "verified": {
-  "confirmed": 2476,
-  "not_seen": 249,
-  "unchanged": 1386,
+  "confirmed": 2456,
+  "not_seen": 243,
+  "unchanged": 1414,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 0,
-  "rent": 11,
-  "available": 0
+  "photos": 4,
+  "rent": 4,
+  "available": 2
  },
- "homes_total": 4624,
+ "homes_total": 4626,
  "added": [
-  "scottsdale-6824-e-eagle-feather-rd",
-  "scottsdale-5409-e-marconi-ave"
+  "scottsdale-6711-e-camelback-rd-3",
+  "gilbert-112-e-bernie-ln"
  ],
  "wrote": true
 }
