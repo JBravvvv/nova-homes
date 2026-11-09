@@ -1,16 +1,6 @@
 {
- "ran_at": "2026-11-08T22:06:15Z",
+ "ran_at": "2026-11-09T01:44:39Z",
  "sources": {
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 7,
@@ -18,13 +8,23 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 29,
+   "found": 22,
    "error": null
   },
   "AMH": {
    "ok": true,
    "found": 36,
    "error": null
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "AppFolio": {
    "ok": true,
@@ -34,30 +34,30 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 81,
+   "found": 78,
    "error": null
   },
-  "Zumper": {
+  "Redfin": {
    "ok": true,
-   "found": 150,
+   "found": 2394,
    "error": null
   },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "15 in-area homes in sitemap, 6 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2389,
-   "error": null
+   "note": "15 in-area homes in sitemap, 7 not yet in homes.json"
   },
   "Craigslist": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "177 new postings seen, 15 detail pages fetched"
+   "note": "175 new postings seen, 15 detail pages fetched"
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,35 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2905,
+ "candidates": 2900,
  "dropped": {
-  "in_homes": 2037,
+  "in_homes": 2048,
   "bad": 59,
-  "merged": 1,
-  "under_floor": 801
+  "merged": 0,
+  "under_floor": 791
  },
- "new": 7,
+ "new": 2,
  "verified": {
-  "confirmed": 2472,
-  "not_seen": 215,
-  "unchanged": 1429,
-  "gone": 12,
-  "back": 1
+  "confirmed": 2476,
+  "not_seen": 249,
+  "unchanged": 1386,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 23,
+  "photos": 0,
+  "rent": 11,
   "available": 0
  },
- "homes_total": 4622,
+ "homes_total": 4624,
  "added": [
-  "arcadia-4700-n-40th-st-unit-113",
-  "arcadia-3207-e-medlock-dr",
-  "ahwatukee-16926-s-16th-ln",
-  "ahwatukee-2904-e-windmere-dr",
-  "scottsdale-11605-e-sorrel-ln",
-  "mesa-4538-s-nageli",
-  "gilbert-24-n-sahuaro-dr"
+  "scottsdale-6824-e-eagle-feather-rd",
+  "scottsdale-5409-e-marconi-ave"
  ],
  "wrote": true
 }
