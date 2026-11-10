@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-10T04:08:15Z",
+ "ran_at": "2026-11-10T12:40:13Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 28,
+   "found": 34,
    "error": null
   },
   "AMH": {
@@ -34,8 +34,14 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 78,
+   "found": 89,
    "error": null
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "7 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -46,18 +52,12 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "178 new postings seen, 15 detail pages fetched"
+   "note": "177 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2359,
+   "found": 2336,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 4,
-   "error": null,
-   "note": "25 in-area homes in sitemap, 16 not yet in homes.json"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,35 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2875,
+ "candidates": 2868,
  "dropped": {
-  "in_homes": 2023,
+  "in_homes": 2018,
   "bad": 59,
   "merged": 0,
-  "under_floor": 786
+  "under_floor": 789
  },
- "new": 7,
+ "new": 2,
  "verified": {
-  "confirmed": 2434,
-  "not_seen": 298,
-  "unchanged": 1391,
-  "gone": 20,
-  "back": 2
+  "confirmed": 2421,
+  "not_seen": 274,
+  "unchanged": 1416,
+  "gone": 0,
+  "back": 1
  },
  "updated": {
-  "photos": 3,
-  "rent": 27,
+  "photos": 2,
+  "rent": 18,
   "available": 1
  },
- "homes_total": 4639,
+ "homes_total": 4641,
  "added": [
-  "mesa-8739-e-kiowa-ave",
-  "gilbert-139-e-lexington-ave",
-  "gilbert-2125-e-desoto-way",
-  "gilbert-3115-s-birch-st",
-  "chandler-270-e-azalea-dr",
-  "tempe-700-w-university-dr-unit-252",
-  "scottsdale-6821-e-palm-lane"
+  "scottsdale-10141-e-floriade-dr",
+  "pv-6900-n-highlands-dr"
  ],
  "wrote": true
 }
