@@ -1,14 +1,24 @@
 {
- "ran_at": "2026-11-09T20:44:32Z",
+ "ran_at": "2026-11-10T04:08:15Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 8,
    "error": null
   },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Progress Residential": {
    "ok": true,
-   "found": 29,
+   "found": 28,
    "error": null
   },
   "AMH": {
@@ -16,37 +26,16 @@
    "found": 37,
    "error": null
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "AppFolio": {
    "ok": true,
-   "found": 210,
+   "found": 208,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2363,
-   "error": null
-  },
   "Rentable": {
    "ok": true,
-   "found": 84,
+   "found": 78,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -55,9 +44,20 @@
   },
   "Craigslist": {
    "ok": true,
-   "found": 2,
+   "found": 3,
    "error": null,
-   "note": "180 new postings seen, 15 detail pages fetched"
+   "note": "178 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2359,
+   "error": null
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 4,
+   "error": null,
+   "note": "25 in-area homes in sitemap, 16 not yet in homes.json"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,34 +75,35 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2886,
+ "candidates": 2875,
  "dropped": {
-  "in_homes": 2028,
+  "in_homes": 2023,
   "bad": 59,
-  "merged": 2,
-  "under_floor": 791
+  "merged": 0,
+  "under_floor": 786
  },
- "new": 6,
+ "new": 7,
  "verified": {
-  "confirmed": 2441,
-  "not_seen": 242,
-  "unchanged": 1432,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2434,
+  "not_seen": 298,
+  "unchanged": 1391,
+  "gone": 20,
+  "back": 2
  },
  "updated": {
-  "photos": 1,
-  "rent": 17,
-  "available": 3
+  "photos": 3,
+  "rent": 27,
+  "available": 1
  },
- "homes_total": 4632,
+ "homes_total": 4639,
  "added": [
-  "scottsdale-7685-n-via-de-platina",
-  "gilbert-2268-e-marlene-dr",
-  "tempe-1893-e-bendix-dr",
-  "chandler-5905-w-chicago-st",
-  "gilbert-1288-e-eli-ct",
-  "scottsdale-10603-e-bahia-dr"
+  "mesa-8739-e-kiowa-ave",
+  "gilbert-139-e-lexington-ave",
+  "gilbert-2125-e-desoto-way",
+  "gilbert-3115-s-birch-st",
+  "chandler-270-e-azalea-dr",
+  "tempe-700-w-university-dr-unit-252",
+  "scottsdale-6821-e-palm-lane"
  ],
  "wrote": true
 }
