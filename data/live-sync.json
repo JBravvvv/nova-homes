@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-10T20:49:53Z",
+ "ran_at": "2026-11-11T01:57:00Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,13 +8,18 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 31,
+   "found": 28,
    "error": null
   },
   "AMH": {
    "ok": true,
-   "found": 36,
+   "found": 35,
    "error": null
+  },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "Trulia": {
    "ok": false,
@@ -23,28 +28,18 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 204,
+   "found": 203,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
+  "Rentable": {
+   "ok": true,
+   "found": 83,
+   "error": null
   },
   "Redfin": {
    "ok": true,
-   "found": 2337,
-   "error": null
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 86,
-   "error": null
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
+   "found": 2333,
    "error": null
   },
   "Craigslist": {
@@ -53,11 +48,16 @@
    "error": null,
    "note": "181 new postings seen, 15 detail pages fetched"
   },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
+  },
   "Tricon Residential": {
    "ok": true,
-   "found": 3,
+   "found": 4,
    "error": null,
-   "note": "13 in-area homes in sitemap, 9 not yet in homes.json"
+   "note": "22 in-area homes in sitemap, 13 not yet in homes.json"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,38 +75,31 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2859,
+ "candidates": 2848,
  "dropped": {
-  "in_homes": 2007,
-  "bad": 60,
+  "in_homes": 2017,
+  "bad": 61,
   "merged": 1,
-  "under_floor": 781
+  "under_floor": 766
  },
- "new": 10,
+ "new": 3,
  "verified": {
-  "confirmed": 2413,
-  "not_seen": 270,
-  "unchanged": 1430,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2417,
+  "not_seen": 318,
+  "unchanged": 1389,
+  "gone": 34,
+  "back": 1
  },
  "updated": {
-  "photos": 0,
-  "rent": 24,
-  "available": 1
+  "photos": 2,
+  "rent": 28,
+  "available": 0
  },
- "homes_total": 4651,
+ "homes_total": 4654,
  "added": [
-  "arcadia-3655-e-piccadilly-rd",
-  "scottsdale-6833-e-osborn-rd-unit-e",
-  "mesa-1244-n-106th-pl",
-  "chandler-2406-e-winchester-pl",
-  "gilbert-1451-e-peartree-ln",
-  "gilbert-3497-e-sierra-madre-ave",
-  "tempe-1519-s-wilson-st",
-  "scottsdale-8602-e-roanoke-ave",
-  "scottsdale-7970-e-las-piedras-way",
-  "scottsdale-5924-e-woodridge-dr"
+  "scottsdale-8702-e-sells-dr",
+  "gilbert-7958-s-sorrell-ln",
+  "scottsdale-5331-n-81st-pl-1"
  ],
  "wrote": true
 }
