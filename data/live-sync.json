@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-11T01:57:00Z",
+ "ran_at": "2026-11-11T09:27:10Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,12 +8,12 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 28,
+   "found": 34,
    "error": null
   },
   "AMH": {
    "ok": true,
-   "found": 35,
+   "found": 34,
    "error": null
   },
   "Zillow": {
@@ -28,36 +28,36 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 203,
+   "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 83,
+   "found": 86,
    "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2333,
-   "error": null
-  },
-  "Craigslist": {
-   "ok": true,
-   "found": 4,
-   "error": null,
-   "note": "181 new postings seen, 15 detail pages fetched"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
+  "Redfin": {
+   "ok": true,
+   "found": 2317,
+   "error": null
+  },
   "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "11 in-area homes in sitemap, 6 not yet in homes.json"
+  },
+  "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "22 in-area homes in sitemap, 13 not yet in homes.json"
+   "note": "183 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,31 +75,32 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2848,
+ "candidates": 2838,
  "dropped": {
-  "in_homes": 2017,
+  "in_homes": 2010,
   "bad": 61,
-  "merged": 1,
-  "under_floor": 766
+  "merged": 0,
+  "under_floor": 763
  },
- "new": 3,
+ "new": 4,
  "verified": {
-  "confirmed": 2417,
-  "not_seen": 318,
-  "unchanged": 1389,
-  "gone": 34,
-  "back": 1
+  "confirmed": 2400,
+  "not_seen": 276,
+  "unchanged": 1417,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
   "photos": 2,
-  "rent": 28,
-  "available": 0
+  "rent": 10,
+  "available": 1
  },
- "homes_total": 4654,
+ "homes_total": 4658,
  "added": [
-  "scottsdale-8702-e-sells-dr",
-  "gilbert-7958-s-sorrell-ln",
-  "scottsdale-5331-n-81st-pl-1"
+  "mesa-1339-w-obispo-ave",
+  "scottsdale-7023-e-monte-vista-rd",
+  "tempe-1885-e-geneva-dr",
+  "scottsdale-7023-e-monte-vista-rd-2"
  ],
  "wrote": true
 }
