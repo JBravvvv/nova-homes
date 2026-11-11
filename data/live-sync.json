@@ -1,40 +1,51 @@
 {
- "ran_at": "2026-11-11T09:27:10Z",
+ "ran_at": "2026-11-11T17:54:24Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
-   "found": 8,
+   "found": 9,
    "error": null
   },
   "Progress Residential": {
    "ok": true,
-   "found": 34,
+   "found": 25,
    "error": null
   },
   "AMH": {
    "ok": true,
-   "found": 34,
+   "found": 35,
    "error": null
-  },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "7 in-area homes in sitemap, 3 not yet in homes.json"
+  },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 203,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 86,
+   "found": 83,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2320,
    "error": null
   },
   "Zumper": {
@@ -42,22 +53,11 @@
    "found": 150,
    "error": null
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2317,
-   "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "11 in-area homes in sitemap, 6 not yet in homes.json"
-  },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "183 new postings seen, 15 detail pages fetched"
+   "note": "181 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,32 +75,34 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2838,
+ "candidates": 2832,
  "dropped": {
-  "in_homes": 2010,
-  "bad": 61,
-  "merged": 0,
-  "under_floor": 763
+  "in_homes": 1991,
+  "bad": 60,
+  "merged": 1,
+  "under_floor": 774
  },
- "new": 4,
+ "new": 6,
  "verified": {
-  "confirmed": 2400,
+  "confirmed": 2397,
   "not_seen": 276,
-  "unchanged": 1417,
+  "unchanged": 1424,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 2,
-  "rent": 10,
-  "available": 1
+  "photos": 4,
+  "rent": 15,
+  "available": 2
  },
- "homes_total": 4658,
+ "homes_total": 4664,
  "added": [
-  "mesa-1339-w-obispo-ave",
-  "scottsdale-7023-e-monte-vista-rd",
-  "tempe-1885-e-geneva-dr",
-  "scottsdale-7023-e-monte-vista-rd-2"
+  "scottsdale-8409-e-fairmount-ave",
+  "scottsdale-3543-n-pueblo-way",
+  "mesa-3060-n-ridgecrest-71",
+  "gilbert-2471-e-jasper-dr",
+  "tempe-1015-w-janice-dr",
+  "scottsdale-8409-e-fairmount-ave-2"
  ],
  "wrote": true
 }
