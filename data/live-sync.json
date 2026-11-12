@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-12T09:51:04Z",
+ "ran_at": "2026-11-12T18:20:18Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 26,
+   "found": 23,
    "error": null
   },
   "AMH": {
@@ -28,7 +28,7 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 203,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
@@ -36,28 +36,28 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "7 in-area homes in sitemap, 3 not yet in homes.json"
+   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
   },
   "Rentable": {
    "ok": true,
-   "found": 87,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2313,
-   "error": null
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
+   "found": 86,
    "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "182 new postings seen, 15 detail pages fetched"
+   "note": "181 new postings seen, 15 detail pages fetched"
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2319,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,33 +75,34 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2829,
+ "candidates": 2832,
  "dropped": {
-  "in_homes": 1993,
-  "bad": 60,
+  "in_homes": 1990,
+  "bad": 61,
   "merged": 0,
-  "under_floor": 771
+  "under_floor": 775
  },
- "new": 5,
+ "new": 6,
  "verified": {
-  "confirmed": 2393,
-  "not_seen": 285,
-  "unchanged": 1418,
+  "confirmed": 2394,
+  "not_seen": 284,
+  "unchanged": 1423,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 17,
-  "available": 0
+  "photos": 0,
+  "rent": 7,
+  "available": 3
  },
- "homes_total": 4682,
+ "homes_total": 4688,
  "added": [
-  "chandler-1656-e-hawken-pl",
-  "tempe-490-e-krista-way",
-  "tempe-1132-n-rose-st",
-  "tempe-522-w-9th-st",
-  "scottsdale-8507-e-montebello-ave"
+  "scottsdale-9139-e-pershing-ave",
+  "mesa-2647-s-stewart",
+  "gilbert-3941-e-esplanade-ave",
+  "mesa-10653-e-pantera-avenue",
+  "mesa-9930-e-timpani-ln",
+  "scottsdale-7870-e-camelback-rd-206"
  ],
  "wrote": true
 }
