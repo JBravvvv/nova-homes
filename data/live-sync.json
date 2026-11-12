@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-11T17:54:24Z",
+ "ran_at": "2026-11-12T00:44:49Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -8,7 +8,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 25,
+   "found": 26,
    "error": null
   },
   "AMH": {
@@ -16,36 +16,25 @@
    "found": 35,
    "error": null
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "7 in-area homes in sitemap, 3 not yet in homes.json"
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "AppFolio": {
    "ok": true,
-   "found": 203,
+   "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 83,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2320,
+   "found": 90,
    "error": null
   },
   "Zumper": {
@@ -53,11 +42,22 @@
    "found": 150,
    "error": null
   },
-  "Craigslist": {
+  "Tricon Residential": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "181 new postings seen, 15 detail pages fetched"
+   "note": "11 in-area homes in sitemap, 7 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2323,
+   "error": null
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "183 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,34 +75,41 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2832,
+ "candidates": 2842,
  "dropped": {
-  "in_homes": 1991,
+  "in_homes": 1992,
   "bad": 60,
   "merged": 1,
-  "under_floor": 774
+  "under_floor": 776
  },
- "new": 6,
+ "new": 13,
  "verified": {
-  "confirmed": 2397,
-  "not_seen": 276,
-  "unchanged": 1424,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2401,
+  "not_seen": 308,
+  "unchanged": 1395,
+  "gone": 21,
+  "back": 1
  },
  "updated": {
-  "photos": 4,
-  "rent": 15,
-  "available": 2
+  "photos": 3,
+  "rent": 14,
+  "available": 3
  },
- "homes_total": 4664,
+ "homes_total": 4677,
  "added": [
-  "scottsdale-8409-e-fairmount-ave",
-  "scottsdale-3543-n-pueblo-way",
-  "mesa-3060-n-ridgecrest-71",
-  "gilbert-2471-e-jasper-dr",
-  "tempe-1015-w-janice-dr",
-  "scottsdale-8409-e-fairmount-ave-2"
+  "chandler-1371-n-alison-way",
+  "scottsdale-11640-n-91st-ln",
+  "scottsdale-6635-e-1st-st",
+  "mesa-7337-e-ivyglen-st",
+  "tempe-2402-e-5th-st-1515",
+  "mesa-921-s-val-vista-dr-60",
+  "gilbert-349-s-golden-key-dr",
+  "chandler-2319-w-el-alba-way",
+  "tempe-609-e-la-donna-dr",
+  "tempe-1220-e-broadmor-dr",
+  "ahwatukee-1637-w-lacewood-pl",
+  "scottsdale-16320-e-skinner-dr",
+  "scottsdale-7616-n-via-del-elemental"
  ],
  "wrote": true
 }
