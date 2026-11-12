@@ -1,6 +1,16 @@
 {
- "ran_at": "2026-11-12T00:44:49Z",
+ "ran_at": "2026-11-12T09:51:04Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 9,
@@ -16,25 +26,26 @@
    "found": 35,
    "error": null
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "AppFolio": {
    "ok": true,
    "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "7 in-area homes in sitemap, 3 not yet in homes.json"
+  },
   "Rentable": {
    "ok": true,
-   "found": 90,
+   "found": 87,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2313,
    "error": null
   },
   "Zumper": {
@@ -42,22 +53,11 @@
    "found": 150,
    "error": null
   },
-  "Tricon Residential": {
+  "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "11 in-area homes in sitemap, 7 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2323,
-   "error": null
-  },
-  "Craigslist": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "183 new postings seen, 15 detail pages fetched"
+   "note": "182 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,41 +75,33 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2842,
+ "candidates": 2829,
  "dropped": {
-  "in_homes": 1992,
+  "in_homes": 1993,
   "bad": 60,
-  "merged": 1,
-  "under_floor": 776
+  "merged": 0,
+  "under_floor": 771
  },
- "new": 13,
+ "new": 5,
  "verified": {
-  "confirmed": 2401,
-  "not_seen": 308,
-  "unchanged": 1395,
-  "gone": 21,
-  "back": 1
+  "confirmed": 2393,
+  "not_seen": 285,
+  "unchanged": 1418,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
-  "photos": 3,
-  "rent": 14,
-  "available": 3
+  "photos": 1,
+  "rent": 17,
+  "available": 0
  },
- "homes_total": 4677,
+ "homes_total": 4682,
  "added": [
-  "chandler-1371-n-alison-way",
-  "scottsdale-11640-n-91st-ln",
-  "scottsdale-6635-e-1st-st",
-  "mesa-7337-e-ivyglen-st",
-  "tempe-2402-e-5th-st-1515",
-  "mesa-921-s-val-vista-dr-60",
-  "gilbert-349-s-golden-key-dr",
-  "chandler-2319-w-el-alba-way",
-  "tempe-609-e-la-donna-dr",
-  "tempe-1220-e-broadmor-dr",
-  "ahwatukee-1637-w-lacewood-pl",
-  "scottsdale-16320-e-skinner-dr",
-  "scottsdale-7616-n-via-del-elemental"
+  "chandler-1656-e-hawken-pl",
+  "tempe-490-e-krista-way",
+  "tempe-1132-n-rose-st",
+  "tempe-522-w-9th-st",
+  "scottsdale-8507-e-montebello-ave"
  ],
  "wrote": true
 }
