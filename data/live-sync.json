@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-13T09:32:31Z",
+ "ran_at": "2026-11-13T17:46:31Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -28,36 +28,36 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 201,
+   "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 85,
-   "error": null
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
+   "found": 81,
    "error": null
   },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "7 in-area homes in sitemap, 3 not yet in homes.json"
+   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2575,
+   "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "182 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2560,
-   "error": null
+   "note": "181 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,41 +75,36 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3074,
+ "candidates": 3086,
  "dropped": {
-  "in_homes": 2118,
+  "in_homes": 2131,
   "bad": 63,
-  "merged": 1,
-  "under_floor": 879
+  "merged": 0,
+  "under_floor": 884
  },
- "new": 13,
+ "new": 8,
  "verified": {
-  "confirmed": 2539,
-  "not_seen": 198,
-  "unchanged": 1392,
+  "confirmed": 2545,
+  "not_seen": 197,
+  "unchanged": 1400,
   "gone": 0,
-  "back": 5
+  "back": 0
  },
  "updated": {
-  "photos": 6,
-  "rent": 14,
-  "available": 2
+  "photos": 1,
+  "rent": 10,
+  "available": 3
  },
- "homes_total": 4722,
+ "homes_total": 4730,
  "added": [
-  "tempe-307-e-embassy-st",
-  "scottsdale-2623-n-68th-st",
-  "tempe-280-s-evergreen-rd-1297",
-  "mesa-564-w-kilarea-ave",
-  "gilbert-139-s-cobblestone-dr",
-  "gilbert-354-w-amoroso-dr",
-  "gilbert-4547-e-oxford-ln",
-  "gilbert-2256-s-ponderosa-dr",
-  "chandler-1442-w-glenmere-dr",
-  "chandler-1625-w-gunstock-loop",
-  "tempe-609-e-ln",
-  "scottsdale-39530-n-106th-st",
-  "scottsdale-8232-e-granada-rd"
+  "ahwatukee-2743-e-verbena-dr",
+  "scottsdale-8330-e-monte-vista-rd",
+  "gilbert-3914-e-mesquite-st",
+  "mesa-2233-s-elm",
+  "gilbert-2200-s-jacana-ct",
+  "chandler-888-e-jacob-st",
+  "gilbert-723-e-country-plaza-s",
+  "scottsdale-11531-e-juan-tabo-rd"
  ],
  "wrote": true
 }
