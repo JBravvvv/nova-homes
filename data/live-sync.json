@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-12T18:20:18Z",
+ "ran_at": "2026-11-13T01:06:11Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 23,
+   "found": 33,
    "error": null
   },
   "AMH": {
@@ -28,36 +28,36 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 203,
+   "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
-  },
   "Rentable": {
    "ok": true,
-   "found": 86,
+   "found": 84,
    "error": null
-  },
-  "Craigslist": {
-   "ok": true,
-   "found": 4,
-   "error": null,
-   "note": "181 new postings seen, 15 detail pages fetched"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 3,
+   "error": null,
+   "note": "11 in-area homes in sitemap, 7 not yet in homes.json"
+  },
   "Redfin": {
    "ok": true,
-   "found": 2319,
+   "found": 2543,
    "error": null
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 4,
+   "error": null,
+   "note": "180 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,34 +75,49 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 2832,
+ "candidates": 3063,
  "dropped": {
-  "in_homes": 1990,
-  "bad": 61,
-  "merged": 0,
-  "under_floor": 775
+  "in_homes": 2088,
+  "bad": 63,
+  "merged": 3,
+  "under_floor": 888
  },
- "new": 6,
+ "new": 21,
  "verified": {
-  "confirmed": 2394,
-  "not_seen": 284,
-  "unchanged": 1423,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2510,
+  "not_seen": 222,
+  "unchanged": 1389,
+  "gone": 18,
+  "back": 14
  },
  "updated": {
-  "photos": 0,
-  "rent": 7,
-  "available": 3
+  "photos": 7,
+  "rent": 26,
+  "available": 0
  },
- "homes_total": 4688,
+ "homes_total": 4709,
  "added": [
-  "scottsdale-9139-e-pershing-ave",
-  "mesa-2647-s-stewart",
-  "gilbert-3941-e-esplanade-ave",
-  "mesa-10653-e-pantera-avenue",
-  "mesa-9930-e-timpani-ln",
-  "scottsdale-7870-e-camelback-rd-206"
+  "scottsdale-9589-e-nittany-dr",
+  "scottsdale-15240-n-clubgate-dr-138",
+  "scottsdale-24066-n-76th-pl",
+  "scottsdale-7700-e-gainey-ranch-rd-unit-101",
+  "scottsdale-5725-e-marilyn-rd",
+  "gilbert-3830-e-derringer-way",
+  "chandler-1672-w-armstrong-way",
+  "tempe-1539-e-hudson-dr",
+  "tempe-1125-e-marigold-ln",
+  "tempe-1503-e-del-rio-dr",
+  "tempe-1604-e-el-parque-dr",
+  "tempe-945-e-playa-del-norte-dr-3013",
+  "tempe-1212-e-tempe-dr",
+  "tempe-22-e-fairmont-dr",
+  "tempe-1727-n-la-rosa-dr",
+  "tempe-140-e-rio-salado-pkwy",
+  "tempe-5253-s-deborah-dr",
+  "tempe-1031-w-hermosa-dr",
+  "scottsdale-8337-e-cypress-street",
+  "scottsdale-10215-e-hillery-dr",
+  "scottsdale-7638-e-camelback-rd"
  ],
  "wrote": true
 }
