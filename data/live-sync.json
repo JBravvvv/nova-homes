@@ -1,6 +1,21 @@
 {
- "ran_at": "2026-11-13T01:06:11Z",
+ "ran_at": "2026-11-13T09:32:31Z",
  "sources": {
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 27,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 35,
+   "error": null
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -11,30 +26,15 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 33,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 35,
-   "error": null
-  },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 201,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 84,
+   "found": 85,
    "error": null
   },
   "Zumper": {
@@ -46,18 +46,18 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "11 in-area homes in sitemap, 7 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2543,
-   "error": null
+   "note": "7 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "180 new postings seen, 15 detail pages fetched"
+   "note": "182 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2560,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,49 +75,41 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3063,
+ "candidates": 3074,
  "dropped": {
-  "in_homes": 2088,
+  "in_homes": 2118,
   "bad": 63,
-  "merged": 3,
-  "under_floor": 888
+  "merged": 1,
+  "under_floor": 879
  },
- "new": 21,
+ "new": 13,
  "verified": {
-  "confirmed": 2510,
-  "not_seen": 222,
-  "unchanged": 1389,
-  "gone": 18,
-  "back": 14
+  "confirmed": 2539,
+  "not_seen": 198,
+  "unchanged": 1392,
+  "gone": 0,
+  "back": 5
  },
  "updated": {
-  "photos": 7,
-  "rent": 26,
-  "available": 0
+  "photos": 6,
+  "rent": 14,
+  "available": 2
  },
- "homes_total": 4709,
+ "homes_total": 4722,
  "added": [
-  "scottsdale-9589-e-nittany-dr",
-  "scottsdale-15240-n-clubgate-dr-138",
-  "scottsdale-24066-n-76th-pl",
-  "scottsdale-7700-e-gainey-ranch-rd-unit-101",
-  "scottsdale-5725-e-marilyn-rd",
-  "gilbert-3830-e-derringer-way",
-  "chandler-1672-w-armstrong-way",
-  "tempe-1539-e-hudson-dr",
-  "tempe-1125-e-marigold-ln",
-  "tempe-1503-e-del-rio-dr",
-  "tempe-1604-e-el-parque-dr",
-  "tempe-945-e-playa-del-norte-dr-3013",
-  "tempe-1212-e-tempe-dr",
-  "tempe-22-e-fairmont-dr",
-  "tempe-1727-n-la-rosa-dr",
-  "tempe-140-e-rio-salado-pkwy",
-  "tempe-5253-s-deborah-dr",
-  "tempe-1031-w-hermosa-dr",
-  "scottsdale-8337-e-cypress-street",
-  "scottsdale-10215-e-hillery-dr",
-  "scottsdale-7638-e-camelback-rd"
+  "tempe-307-e-embassy-st",
+  "scottsdale-2623-n-68th-st",
+  "tempe-280-s-evergreen-rd-1297",
+  "mesa-564-w-kilarea-ave",
+  "gilbert-139-s-cobblestone-dr",
+  "gilbert-354-w-amoroso-dr",
+  "gilbert-4547-e-oxford-ln",
+  "gilbert-2256-s-ponderosa-dr",
+  "chandler-1442-w-glenmere-dr",
+  "chandler-1625-w-gunstock-loop",
+  "tempe-609-e-ln",
+  "scottsdale-39530-n-106th-st",
+  "scottsdale-8232-e-granada-rd"
  ],
  "wrote": true
 }
