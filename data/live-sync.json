@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-13T17:46:31Z",
+ "ran_at": "2026-11-13T23:35:22Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 27,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 35,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,6 +11,21 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 30,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 36,
+   "error": null
+  },
   "AppFolio": {
    "ok": true,
    "found": 202,
@@ -34,14 +34,8 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 81,
+   "found": 84,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -50,14 +44,20 @@
   },
   "Redfin": {
    "ok": true,
-   "found": 2575,
+   "found": 2608,
    "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "181 new postings seen, 15 detail pages fetched"
+   "note": "183 new postings seen, 15 detail pages fetched"
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 6,
+   "error": null,
+   "note": "12 in-area homes in sitemap, 7 not yet in homes.json"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,36 +75,40 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3086,
+ "candidates": 3129,
  "dropped": {
-  "in_homes": 2131,
-  "bad": 63,
+  "in_homes": 2141,
+  "bad": 64,
   "merged": 0,
-  "under_floor": 884
+  "under_floor": 912
  },
- "new": 8,
+ "new": 12,
  "verified": {
-  "confirmed": 2545,
-  "not_seen": 197,
-  "unchanged": 1400,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2548,
+  "not_seen": 194,
+  "unchanged": 1416,
+  "gone": 19,
+  "back": 8
  },
  "updated": {
-  "photos": 1,
-  "rent": 10,
-  "available": 3
+  "photos": 4,
+  "rent": 55,
+  "available": 4
  },
- "homes_total": 4730,
+ "homes_total": 4742,
  "added": [
-  "ahwatukee-2743-e-verbena-dr",
-  "scottsdale-8330-e-monte-vista-rd",
-  "gilbert-3914-e-mesquite-st",
-  "mesa-2233-s-elm",
-  "gilbert-2200-s-jacana-ct",
-  "chandler-888-e-jacob-st",
-  "gilbert-723-e-country-plaza-s",
-  "scottsdale-11531-e-juan-tabo-rd"
+  "mesa-3004-e-pearl-st",
+  "mesa-2648-e-harmony-ave",
+  "mesa-2848-e-emelita-ave",
+  "chandler-1419-w-rosal-pl",
+  "gilbert-1723-e-galveston-st",
+  "chandler-155-n-lakeview-blvd-250",
+  "chandler-4081-e-augusta-ave",
+  "tempe-907-acorn-avenue",
+  "tempe-1954-e-fremont-dr",
+  "scottsdale-7641-e-verde-ln",
+  "scottsdale-8787-e-mountain-view-rd-1055",
+  "scottsdale-28301-n-154th-st-na"
  ],
  "wrote": true
 }
