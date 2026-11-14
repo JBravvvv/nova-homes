@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-14T15:05:57Z",
+ "ran_at": "2026-11-14T20:43:32Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 28,
+   "found": 27,
    "error": null
   },
   "AMH": {
@@ -40,7 +40,7 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 87,
+   "found": 90,
    "error": null
   },
   "Zumper": {
@@ -48,16 +48,16 @@
    "found": 150,
    "error": null
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2674,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "183 new postings seen, 15 detail pages fetched"
+   "note": "185 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2675,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,36 +75,29 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3193,
+ "candidates": 3196,
  "dropped": {
-  "in_homes": 2184,
-  "bad": 65,
-  "merged": 4,
-  "under_floor": 932
+  "in_homes": 2192,
+  "bad": 66,
+  "merged": 0,
+  "under_floor": 937
  },
- "new": 8,
+ "new": 1,
  "verified": {
-  "confirmed": 2581,
-  "not_seen": 211,
+  "confirmed": 2590,
+  "not_seen": 210,
   "unchanged": 1385,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 6,
-  "available": 2
+  "photos": 0,
+  "rent": 9,
+  "available": 0
  },
- "homes_total": 4773,
+ "homes_total": 4774,
  "added": [
-  "scottsdale-8643-n-84th-pl",
-  "scottsdale-7961-e-solano-dr",
-  "mesa-11519-e-elton-ave",
-  "gilbert-874-s-porter-st",
-  "gilbert-1008-e-princeton-ave",
-  "chandler-4111-e-colonial-dr",
-  "chandler-1012-n-blackstone-dr",
-  "pv-5403-e-cannon-dr"
+  "mesa-2935-s-mollera"
  ],
  "wrote": true
 }
