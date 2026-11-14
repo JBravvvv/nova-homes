@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-14T06:24:27Z",
+ "ran_at": "2026-11-14T15:05:57Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 25,
+   "found": 28,
    "error": null
   },
   "AMH": {
@@ -32,16 +32,16 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 91,
-   "error": null
-  },
-  "Craigslist": {
+  "Tricon Residential": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "181 new postings seen, 15 detail pages fetched"
+   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 87,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -50,14 +50,14 @@
   },
   "Redfin": {
    "ok": true,
-   "found": 2656,
+   "found": 2674,
    "error": null
   },
-  "Tricon Residential": {
+  "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "22 in-area homes in sitemap, 13 not yet in homes.json"
+   "note": "183 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,51 +75,36 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3176,
+ "candidates": 3193,
  "dropped": {
-  "in_homes": 2168,
+  "in_homes": 2184,
   "bad": 65,
-  "merged": 0,
-  "under_floor": 920
+  "merged": 4,
+  "under_floor": 932
  },
- "new": 23,
+ "new": 8,
  "verified": {
-  "confirmed": 2556,
-  "not_seen": 221,
-  "unchanged": 1377,
+  "confirmed": 2581,
+  "not_seen": 211,
+  "unchanged": 1385,
   "gone": 0,
-  "back": 3
+  "back": 0
  },
  "updated": {
-  "photos": 14,
-  "rent": 25,
-  "available": 6
+  "photos": 1,
+  "rent": 6,
+  "available": 2
  },
- "homes_total": 4765,
+ "homes_total": 4773,
  "added": [
-  "chandler-6713-w-linda-ln",
-  "chandler-6914-w-harrison-st",
-  "tempe-907-s-acorn-ave",
-  "mesa-522-n-saguaro",
-  "mesa-790-leisure-world",
-  "mesa-9302-e-sequence-ave",
-  "chandler-706-w-mission-dr",
-  "gilbert-2118-s-martingale-rd",
-  "gilbert-4345-e-gail-ct",
-  "gilbert-4090-e-jones-st",
-  "gilbert-4166-e-jesse-st",
-  "gilbert-2519-s-quaintance-st",
-  "gilbert-745-e-sheffield-ave",
-  "gilbert-3370-e-pinot-noir-ave",
-  "gilbert-2330-e-meadowview-dr",
-  "gilbert-4213-e-bonanza-rd",
-  "chandler-4719-e-firestone-dr",
-  "gilbert-882-e-furness-dr",
-  "gilbert-1290-e-marcella-ln",
-  "chandler-3964-w-geronimo-st",
-  "chandler-601-s-los-feliz-dr",
-  "tempe-1309-e-orange-st",
-  "scottsdale-6021-n-79th-st"
+  "scottsdale-8643-n-84th-pl",
+  "scottsdale-7961-e-solano-dr",
+  "mesa-11519-e-elton-ave",
+  "gilbert-874-s-porter-st",
+  "gilbert-1008-e-princeton-ave",
+  "chandler-4111-e-colonial-dr",
+  "chandler-1012-n-blackstone-dr",
+  "pv-5403-e-cannon-dr"
  ],
  "wrote": true
 }
