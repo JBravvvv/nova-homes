@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-13T23:35:22Z",
+ "ran_at": "2026-11-14T06:24:27Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 30,
+   "found": 25,
    "error": null
   },
   "AMH": {
@@ -28,14 +28,20 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 201,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 84,
+   "found": 91,
    "error": null
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 4,
+   "error": null,
+   "note": "181 new postings seen, 15 detail pages fetched"
   },
   "Zumper": {
    "ok": true,
@@ -44,20 +50,14 @@
   },
   "Redfin": {
    "ok": true,
-   "found": 2608,
+   "found": 2656,
    "error": null
-  },
-  "Craigslist": {
-   "ok": true,
-   "found": 4,
-   "error": null,
-   "note": "183 new postings seen, 15 detail pages fetched"
   },
   "Tricon Residential": {
    "ok": true,
-   "found": 6,
+   "found": 4,
    "error": null,
-   "note": "12 in-area homes in sitemap, 7 not yet in homes.json"
+   "note": "22 in-area homes in sitemap, 13 not yet in homes.json"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,40 +75,51 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3129,
+ "candidates": 3176,
  "dropped": {
-  "in_homes": 2141,
-  "bad": 64,
+  "in_homes": 2168,
+  "bad": 65,
   "merged": 0,
-  "under_floor": 912
+  "under_floor": 920
  },
- "new": 12,
+ "new": 23,
  "verified": {
-  "confirmed": 2548,
-  "not_seen": 194,
-  "unchanged": 1416,
-  "gone": 19,
-  "back": 8
+  "confirmed": 2556,
+  "not_seen": 221,
+  "unchanged": 1377,
+  "gone": 0,
+  "back": 3
  },
  "updated": {
-  "photos": 4,
-  "rent": 55,
-  "available": 4
+  "photos": 14,
+  "rent": 25,
+  "available": 6
  },
- "homes_total": 4742,
+ "homes_total": 4765,
  "added": [
-  "mesa-3004-e-pearl-st",
-  "mesa-2648-e-harmony-ave",
-  "mesa-2848-e-emelita-ave",
-  "chandler-1419-w-rosal-pl",
-  "gilbert-1723-e-galveston-st",
-  "chandler-155-n-lakeview-blvd-250",
-  "chandler-4081-e-augusta-ave",
-  "tempe-907-acorn-avenue",
-  "tempe-1954-e-fremont-dr",
-  "scottsdale-7641-e-verde-ln",
-  "scottsdale-8787-e-mountain-view-rd-1055",
-  "scottsdale-28301-n-154th-st-na"
+  "chandler-6713-w-linda-ln",
+  "chandler-6914-w-harrison-st",
+  "tempe-907-s-acorn-ave",
+  "mesa-522-n-saguaro",
+  "mesa-790-leisure-world",
+  "mesa-9302-e-sequence-ave",
+  "chandler-706-w-mission-dr",
+  "gilbert-2118-s-martingale-rd",
+  "gilbert-4345-e-gail-ct",
+  "gilbert-4090-e-jones-st",
+  "gilbert-4166-e-jesse-st",
+  "gilbert-2519-s-quaintance-st",
+  "gilbert-745-e-sheffield-ave",
+  "gilbert-3370-e-pinot-noir-ave",
+  "gilbert-2330-e-meadowview-dr",
+  "gilbert-4213-e-bonanza-rd",
+  "chandler-4719-e-firestone-dr",
+  "gilbert-882-e-furness-dr",
+  "gilbert-1290-e-marcella-ln",
+  "chandler-3964-w-geronimo-st",
+  "chandler-601-s-los-feliz-dr",
+  "tempe-1309-e-orange-st",
+  "scottsdale-6021-n-79th-st"
  ],
  "wrote": true
 }
