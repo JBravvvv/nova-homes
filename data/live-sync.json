@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-15T17:12:12Z",
+ "ran_at": "2026-11-15T22:49:53Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 26,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 36,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,6 +11,21 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Progress Residential": {
+   "ok": true,
+   "found": 25,
+   "error": null
+  },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 36,
+   "error": null
+  },
   "AppFolio": {
    "ok": true,
    "found": 201,
@@ -34,30 +34,30 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 79,
-   "error": null
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
+   "found": 84,
    "error": null
   },
   "Redfin": {
    "ok": true,
-   "found": 2660,
+   "found": 2666,
    "error": null
   },
   "Tricon Residential": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "14 in-area homes in sitemap, 8 not yet in homes.json"
+   "note": "15 in-area homes in sitemap, 9 not yet in homes.json"
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "184 new postings seen, 15 detail pages fetched"
+   "note": "185 new postings seen, 15 detail pages fetched"
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,30 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3169,
+ "candidates": 3179,
  "dropped": {
-  "in_homes": 2182,
+  "in_homes": 2184,
   "bad": 65,
   "merged": 0,
-  "under_floor": 920
+  "under_floor": 928
  },
  "new": 2,
  "verified": {
-  "confirmed": 2572,
+  "confirmed": 2576,
   "not_seen": 199,
-  "unchanged": 1412,
-  "gone": 0,
+  "unchanged": 1410,
+  "gone": 3,
   "back": 0
  },
  "updated": {
-  "photos": 2,
-  "rent": 2,
-  "available": 0
+  "photos": 0,
+  "rent": 13,
+  "available": 1
  },
- "homes_total": 4792,
+ "homes_total": 4794,
  "added": [
-  "scottsdale-16420-n-thompson-peak-pkwy-2026",
-  "scottsdale-6228-e-nisbet-rd"
+  "chandler-1090-e-indigo-dr",
+  "pv-5101-n-casa-blanca-dr-13"
  ],
  "wrote": true
 }
