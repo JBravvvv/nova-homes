@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-14T20:43:32Z",
+ "ran_at": "2026-11-15T01:56:29Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 27,
+   "found": 18,
    "error": null
   },
   "AMH": {
@@ -32,16 +32,16 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
+  "Rentable": {
+   "ok": true,
+   "found": 81,
+   "error": null
+  },
   "Tricon Residential": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 90,
-   "error": null
+   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -52,11 +52,11 @@
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "185 new postings seen, 15 detail pages fetched"
+   "note": "186 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2675,
+   "found": 2681,
    "error": null
   },
   "Realtor.com": {
@@ -75,29 +75,36 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3196,
+ "candidates": 3184,
  "dropped": {
-  "in_homes": 2192,
+  "in_homes": 2181,
   "bad": 66,
   "merged": 0,
-  "under_floor": 937
+  "under_floor": 929
  },
- "new": 1,
+ "new": 8,
  "verified": {
-  "confirmed": 2590,
-  "not_seen": 210,
-  "unchanged": 1385,
+  "confirmed": 2585,
+  "not_seen": 218,
+  "unchanged": 1383,
   "gone": 0,
   "back": 0
  },
  "updated": {
   "photos": 0,
-  "rent": 9,
-  "available": 0
+  "rent": 12,
+  "available": 1
  },
- "homes_total": 4774,
+ "homes_total": 4782,
  "added": [
-  "mesa-2935-s-mollera"
+  "pv-4228-e-highlands-dr",
+  "scottsdale-9463-e-sonoran-sunset-pass",
+  "mesa-4541-s-mole",
+  "mesa-10923-e-flower-ave",
+  "chandler-3951-e-balsam-dr",
+  "chandler-1705-e-coconino-dr",
+  "chandler-1960-w-park-pl",
+  "gilbert-2070-e-palomino-dr"
  ],
  "wrote": true
 }
