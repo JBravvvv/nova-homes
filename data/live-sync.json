@@ -1,24 +1,24 @@
 {
- "ran_at": "2026-11-15T01:56:29Z",
+ "ran_at": "2026-11-15T09:27:22Z",
  "sources": {
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Trulia": {
    "ok": false,
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "Progress Residential": {
    "ok": true,
-   "found": 18,
+   "found": 23,
+   "error": null
+  },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
    "error": null
   },
   "AMH": {
@@ -32,16 +32,21 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 81,
-   "error": null
-  },
   "Tricon Residential": {
    "ok": true,
-   "found": 4,
+   "found": 5,
    "error": null,
-   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "11 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 89,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2661,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -52,12 +57,7 @@
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "186 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2681,
-   "error": null
+   "note": "184 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,36 +75,36 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3184,
+ "candidates": 3178,
  "dropped": {
-  "in_homes": 2181,
-  "bad": 66,
+  "in_homes": 2183,
+  "bad": 65,
   "merged": 0,
-  "under_floor": 929
+  "under_floor": 922
  },
  "new": 8,
  "verified": {
-  "confirmed": 2585,
+  "confirmed": 2568,
   "not_seen": 218,
-  "unchanged": 1383,
-  "gone": 0,
+  "unchanged": 1408,
+  "gone": 19,
   "back": 0
  },
  "updated": {
   "photos": 0,
-  "rent": 12,
-  "available": 1
+  "rent": 4,
+  "available": 0
  },
- "homes_total": 4782,
+ "homes_total": 4790,
  "added": [
-  "pv-4228-e-highlands-dr",
-  "scottsdale-9463-e-sonoran-sunset-pass",
-  "mesa-4541-s-mole",
-  "mesa-10923-e-flower-ave",
-  "chandler-3951-e-balsam-dr",
-  "chandler-1705-e-coconino-dr",
-  "chandler-1960-w-park-pl",
-  "gilbert-2070-e-palomino-dr"
+  "scottsdale-6928-e-coronado-rd-unit-2b",
+  "gilbert-4356-e-gail-ct",
+  "chandler-1415-e-firestone-dr",
+  "mesa-511-n-pecan",
+  "gilbert-4356-e-gail-ct-2",
+  "tempe-1317-w-romo-jones-st",
+  "scottsdale-5640-e-bell-rd-1084",
+  "scottsdale-9637-e-gold-dust-ave"
  ],
  "wrote": true
 }
