@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-16T06:30:51Z",
+ "ran_at": "2026-11-16T18:33:51Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 21,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 36,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,14 +11,24 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Rentable": {
+  "Invitation Homes": {
    "ok": true,
-   "found": 89,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 20,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 37,
    "error": null
   },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 199,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
@@ -41,7 +36,12 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "14 in-area homes in sitemap, 8 not yet in homes.json"
+   "note": "13 in-area homes in sitemap, 7 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 86,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -50,14 +50,14 @@
   },
   "Redfin": {
    "ok": true,
-   "found": 2641,
+   "found": 2648,
    "error": null
   },
   "Craigslist": {
    "ok": true,
-   "found": 4,
+   "found": 3,
    "error": null,
-   "note": "189 new postings seen, 15 detail pages fetched"
+   "note": "183 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -77,30 +77,31 @@
  },
  "candidates": 3155,
  "dropped": {
-  "in_homes": 2168,
+  "in_homes": 2171,
   "bad": 65,
   "merged": 0,
-  "under_floor": 918
+  "under_floor": 914
  },
- "new": 4,
+ "new": 5,
  "verified": {
-  "confirmed": 2550,
-  "not_seen": 249,
-  "unchanged": 1385,
+  "confirmed": 2548,
+  "not_seen": 247,
+  "unchanged": 1393,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 2,
-  "rent": 17,
-  "available": 0
+  "photos": 4,
+  "rent": 7,
+  "available": 5
  },
- "homes_total": 4798,
+ "homes_total": 4803,
  "added": [
-  "mesa-2401-leisure-world",
-  "gilbert-2429-e-brigadier-dr",
-  "tempe-5301-s-marine-dr",
-  "gilbert-3229-e-joseph-way"
+  "scottsdale-7424-n-via-camello-del-norte-unit-190",
+  "mesa-7925-e-des-moines-st",
+  "mesa-3033-e-laurel-st",
+  "chandler-1022-w-estrella-dr",
+  "gilbert-4106-e-bethena-st"
  ],
  "wrote": true
 }
