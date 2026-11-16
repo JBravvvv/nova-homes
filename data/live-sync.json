@@ -1,6 +1,21 @@
 {
- "ran_at": "2026-11-15T22:49:53Z",
+ "ran_at": "2026-11-16T06:30:51Z",
  "sources": {
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 21,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 36,
+   "error": null
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -11,53 +26,38 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Progress Residential": {
+  "Rentable": {
    "ok": true,
-   "found": 25,
-   "error": null
-  },
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 36,
+   "found": 89,
    "error": null
   },
   "AppFolio": {
    "ok": true,
-   "found": 201,
+   "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 84,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2666,
-   "error": null
-  },
   "Tricon Residential": {
    "ok": true,
-   "found": 4,
+   "found": 3,
    "error": null,
-   "note": "15 in-area homes in sitemap, 9 not yet in homes.json"
-  },
-  "Craigslist": {
-   "ok": true,
-   "found": 4,
-   "error": null,
-   "note": "185 new postings seen, 15 detail pages fetched"
+   "note": "14 in-area homes in sitemap, 8 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2641,
+   "error": null
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 4,
+   "error": null,
+   "note": "189 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,30 +75,32 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3179,
+ "candidates": 3155,
  "dropped": {
-  "in_homes": 2184,
+  "in_homes": 2168,
   "bad": 65,
   "merged": 0,
-  "under_floor": 928
+  "under_floor": 918
  },
- "new": 2,
+ "new": 4,
  "verified": {
-  "confirmed": 2576,
-  "not_seen": 199,
-  "unchanged": 1410,
-  "gone": 3,
+  "confirmed": 2550,
+  "not_seen": 249,
+  "unchanged": 1385,
+  "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 0,
-  "rent": 13,
-  "available": 1
+  "photos": 2,
+  "rent": 17,
+  "available": 0
  },
- "homes_total": 4794,
+ "homes_total": 4798,
  "added": [
-  "chandler-1090-e-indigo-dr",
-  "pv-5101-n-casa-blanca-dr-13"
+  "mesa-2401-leisure-world",
+  "gilbert-2429-e-brigadier-dr",
+  "tempe-5301-s-marine-dr",
+  "gilbert-3229-e-joseph-way"
  ],
  "wrote": true
 }
