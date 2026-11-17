@@ -1,6 +1,16 @@
 {
- "ran_at": "2026-11-17T13:27:48Z",
+ "ran_at": "2026-11-17T22:25:46Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 9,
@@ -8,44 +18,29 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 26,
+   "found": 32,
    "error": null
-  },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
   },
   "AMH": {
    "ok": true,
    "found": 37,
    "error": null
   },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
+  "AppFolio": {
+   "ok": true,
+   "found": 202,
+   "error": null,
+   "note": "21 manager sites; 0 failed"
   },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "AppFolio": {
-   "ok": true,
-   "found": 203,
-   "error": null,
-   "note": "21 manager sites; 0 failed"
+   "note": "11 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Rentable": {
    "ok": true,
-   "found": 81,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2681,
+   "found": 86,
    "error": null
   },
   "Zumper": {
@@ -53,11 +48,16 @@
    "found": 150,
    "error": null
   },
+  "Redfin": {
+   "ok": true,
+   "found": 2683,
+   "error": null
+  },
   "Craigslist": {
    "ok": true,
-   "found": 3,
+   "found": 5,
    "error": null,
-   "note": "181 new postings seen, 15 detail pages fetched"
+   "note": "177 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,42 +75,35 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3193,
+ "candidates": 3207,
  "dropped": {
-  "in_homes": 2173,
+  "in_homes": 2189,
   "bad": 65,
-  "merged": 5,
-  "under_floor": 936
+  "merged": 0,
+  "under_floor": 946
  },
- "new": 14,
+ "new": 7,
  "verified": {
-  "confirmed": 2557,
+  "confirmed": 2561,
   "not_seen": 226,
-  "unchanged": 1400,
+  "unchanged": 1411,
   "gone": 0,
   "back": 1
  },
  "updated": {
-  "photos": 6,
-  "rent": 19,
+  "photos": 9,
+  "rent": 26,
   "available": 4
  },
- "homes_total": 4835,
+ "homes_total": 4842,
  "added": [
-  "arcadia-4516-e-turney-ave",
-  "scottsdale-8520-e-sandalwood-dr",
-  "scottsdale-2353-n-79th-pl",
-  "gilbert-3449-e-robin-ln",
-  "gilbert-4333-e-dennisport-ave",
-  "chandler-291-n-laura-dr",
-  "gilbert-3275-e-lafayette-ave",
-  "chandler-2263-e-longhorn-pl",
-  "chandler-4240-s-amber-st",
-  "chandler-72-w-mahogany-pl",
-  "gilbert-4090-e-rustler-way",
-  "gilbert-4333-e-dennisport-ave-2",
-  "gilbert-3474-e-coconino-way",
-  "scottsdale-2353-n-79th-pl-2"
+  "ahwatukee-3228-e-silverwood-dr",
+  "scottsdale-8433-e-cholla-st",
+  "scottsdale-2613-n-74th-pl",
+  "mesa-3060-n-ridgecrest-196",
+  "gilbert-4046-e-brisa-dr",
+  "gilbert-502-e-saratoga-st",
+  "tempe-1937-e-don-carlos-ave"
  ],
  "wrote": true
 }
