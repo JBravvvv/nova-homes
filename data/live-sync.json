@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-16T18:33:51Z",
+ "ran_at": "2026-11-17T02:56:32Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 20,
+   "found": 25,
    "error": null
   },
   "AMH": {
@@ -26,21 +26,26 @@
    "found": 37,
    "error": null
   },
-  "AppFolio": {
-   "ok": true,
-   "found": 199,
-   "error": null,
-   "note": "21 manager sites; 0 failed"
-  },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "13 in-area homes in sitemap, 7 not yet in homes.json"
+   "note": "9 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "AppFolio": {
+   "ok": true,
+   "found": 203,
+   "error": null,
+   "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 86,
+   "found": 79,
+   "error": null
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2673,
    "error": null
   },
   "Zumper": {
@@ -48,16 +53,11 @@
    "found": 150,
    "error": null
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2648,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "183 new postings seen, 15 detail pages fetched"
+   "note": "179 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,33 +75,46 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3155,
+ "candidates": 3182,
  "dropped": {
-  "in_homes": 2171,
+  "in_homes": 2168,
   "bad": 65,
-  "merged": 0,
-  "under_floor": 914
+  "merged": 2,
+  "under_floor": 929
  },
- "new": 5,
+ "new": 18,
  "verified": {
-  "confirmed": 2548,
-  "not_seen": 247,
-  "unchanged": 1393,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2551,
+  "not_seen": 257,
+  "unchanged": 1386,
+  "gone": 30,
+  "back": 1
  },
  "updated": {
-  "photos": 4,
-  "rent": 7,
-  "available": 5
+  "photos": 7,
+  "rent": 30,
+  "available": 4
  },
- "homes_total": 4803,
+ "homes_total": 4821,
  "added": [
-  "scottsdale-7424-n-via-camello-del-norte-unit-190",
-  "mesa-7925-e-des-moines-st",
-  "mesa-3033-e-laurel-st",
-  "chandler-1022-w-estrella-dr",
-  "gilbert-4106-e-bethena-st"
+  "arcadia-4220-n-32nd-st-37",
+  "ahwatukee-11844-s-45th-st",
+  "ahwatukee-226-e-redwood-ln",
+  "ahwatukee-1638-w-cottonwood-ln",
+  "scottsdale-7725-e-journey-ln",
+  "scottsdale-7341-e-whistling-wind-way-unit-2c",
+  "scottsdale-12904-n-93rd-way",
+  "mesa-1514-n-balboa",
+  "gilbert-2032-e-palomino-dr",
+  "chandler-926-n-jesse-st",
+  "chandler-1155-e-harrison-st",
+  "gilbert-1841-e-dubois-ave",
+  "gilbert-4263-e-cassia-ln",
+  "chandler-1203-w-park-ct",
+  "chandler-259-e-sagittarius-pl",
+  "tempe-1007-e-campus-dr",
+  "tempe-714-e-vista-del-cerro-dr",
+  "tempe-579-w-sesame-st"
  ],
  "wrote": true
 }
