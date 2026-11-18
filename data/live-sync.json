@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-18T07:29:31Z",
+ "ran_at": "2026-11-18T17:16:09Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 22,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 37,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,9 +11,14 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Rentable": {
+  "Invitation Homes": {
    "ok": true,
-   "found": 93,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 18,
    "error": null
   },
   "AppFolio": {
@@ -37,11 +27,21 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
+  "AMH": {
+   "ok": true,
+   "found": 37,
+   "error": null
+  },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
+   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 85,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -50,14 +50,14 @@
   },
   "Redfin": {
    "ok": true,
-   "found": 2646,
+   "found": 2642,
    "error": null
   },
   "Craigslist": {
    "ok": true,
-   "found": 4,
+   "found": 5,
    "error": null,
-   "note": "177 new postings seen, 15 detail pages fetched"
+   "note": "174 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,39 +75,35 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3166,
+ "candidates": 3151,
  "dropped": {
-  "in_homes": 2149,
+  "in_homes": 2141,
   "bad": 65,
-  "merged": 0,
-  "under_floor": 941
+  "merged": 3,
+  "under_floor": 935
  },
- "new": 11,
+ "new": 7,
  "verified": {
-  "confirmed": 2522,
-  "not_seen": 295,
-  "unchanged": 1390,
-  "gone": 9,
-  "back": 2
+  "confirmed": 2514,
+  "not_seen": 284,
+  "unchanged": 1411,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
-  "photos": 9,
-  "rent": 24,
+  "photos": 6,
+  "rent": 10,
   "available": 2
  },
- "homes_total": 4853,
+ "homes_total": 4860,
  "added": [
-  "scottsdale-7314-e-gallego-ln",
-  "scottsdale-5548-e-campo-bello-dr",
-  "scottsdale-12069-n-80th-pl",
-  "scottsdale-6123-e-hearn-rd",
-  "scottsdale-6842-e-orion-dr",
-  "gilbert-250-e-arabian-dr",
-  "gilbert-1447-e-mia-ln",
-  "chandler-1254-s-bogle-ct",
-  "tempe-4828-s-roberts-rd",
-  "gilbert-47-w-dublin-st",
-  "scottsdale-8029-e-monte-vista-rd"
+  "ahwatukee-3602-e-briarwood-ter",
+  "ahwatukee-1545-w-satinwood-dr",
+  "mesa-645-s-balboa",
+  "mesa-1367-s-country-club-dr-1115",
+  "chandler-3240-s-ambrosia-dr",
+  "tempe-1530-e-northshore-dr",
+  "gilbert-829-s-adam-way"
  ],
  "wrote": true
 }
