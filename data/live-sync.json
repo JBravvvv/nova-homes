@@ -1,6 +1,21 @@
 {
- "ran_at": "2026-11-17T22:25:46Z",
+ "ran_at": "2026-11-18T07:29:31Z",
  "sources": {
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 22,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 37,
+   "error": null
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -11,19 +26,9 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Invitation Homes": {
+  "Rentable": {
    "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 32,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 37,
+   "found": 93,
    "error": null
   },
   "AppFolio": {
@@ -36,12 +41,7 @@
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "11 in-area homes in sitemap, 6 not yet in homes.json"
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 86,
-   "error": null
+   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -50,12 +50,12 @@
   },
   "Redfin": {
    "ok": true,
-   "found": 2683,
+   "found": 2646,
    "error": null
   },
   "Craigslist": {
    "ok": true,
-   "found": 5,
+   "found": 4,
    "error": null,
    "note": "177 new postings seen, 15 detail pages fetched"
   },
@@ -75,35 +75,39 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3207,
+ "candidates": 3166,
  "dropped": {
-  "in_homes": 2189,
+  "in_homes": 2149,
   "bad": 65,
   "merged": 0,
-  "under_floor": 946
+  "under_floor": 941
  },
- "new": 7,
+ "new": 11,
  "verified": {
-  "confirmed": 2561,
-  "not_seen": 226,
-  "unchanged": 1411,
-  "gone": 0,
-  "back": 1
+  "confirmed": 2522,
+  "not_seen": 295,
+  "unchanged": 1390,
+  "gone": 9,
+  "back": 2
  },
  "updated": {
   "photos": 9,
-  "rent": 26,
-  "available": 4
+  "rent": 24,
+  "available": 2
  },
- "homes_total": 4842,
+ "homes_total": 4853,
  "added": [
-  "ahwatukee-3228-e-silverwood-dr",
-  "scottsdale-8433-e-cholla-st",
-  "scottsdale-2613-n-74th-pl",
-  "mesa-3060-n-ridgecrest-196",
-  "gilbert-4046-e-brisa-dr",
-  "gilbert-502-e-saratoga-st",
-  "tempe-1937-e-don-carlos-ave"
+  "scottsdale-7314-e-gallego-ln",
+  "scottsdale-5548-e-campo-bello-dr",
+  "scottsdale-12069-n-80th-pl",
+  "scottsdale-6123-e-hearn-rd",
+  "scottsdale-6842-e-orion-dr",
+  "gilbert-250-e-arabian-dr",
+  "gilbert-1447-e-mia-ln",
+  "chandler-1254-s-bogle-ct",
+  "tempe-4828-s-roberts-rd",
+  "gilbert-47-w-dublin-st",
+  "scottsdale-8029-e-monte-vista-rd"
  ],
  "wrote": true
 }
