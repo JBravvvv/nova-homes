@@ -1,16 +1,6 @@
 {
- "ran_at": "2026-11-19T10:22:00Z",
+ "ran_at": "2026-11-19T20:38:03Z",
  "sources": {
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 9,
@@ -18,39 +8,44 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 16,
+   "found": 22,
    "error": null
   },
   "AMH": {
    "ok": true,
-   "found": 36,
+   "found": 37,
+   "error": null
+  },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "AppFolio": {
+   "ok": true,
+   "found": 197,
+   "error": null,
+   "note": "21 manager sites; 0 failed"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 91,
    "error": null
   },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "AppFolio": {
-   "ok": true,
-   "found": 199,
-   "error": null,
-   "note": "21 manager sites; 0 failed"
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 83,
-   "error": null
+   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2645,
    "error": null
   },
   "Craigslist": {
@@ -58,6 +53,11 @@
    "found": 4,
    "error": null,
    "note": "172 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2640,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,39 +75,39 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3145,
+ "candidates": 3153,
  "dropped": {
-  "in_homes": 2144,
-  "bad": 65,
-  "merged": 1,
-  "under_floor": 924
+  "in_homes": 2146,
+  "bad": 67,
+  "merged": 0,
+  "under_floor": 929
  },
  "new": 11,
  "verified": {
-  "confirmed": 2511,
-  "not_seen": 308,
-  "unchanged": 1413,
-  "gone": 44,
+  "confirmed": 2510,
+  "not_seen": 262,
+  "unchanged": 1429,
+  "gone": 21,
   "back": 2
  },
  "updated": {
-  "photos": 5,
-  "rent": 25,
-  "available": 4
+  "photos": 9,
+  "rent": 19,
+  "available": 10
  },
- "homes_total": 4885,
+ "homes_total": 4896,
  "added": [
-  "scottsdale-23998-n-73rd-pl",
-  "scottsdale-3600-hayden-rd-unit-1",
-  "mesa-1162-leisure-world",
-  "gilbert-425-e-century-ave",
-  "gilbert-4102-e-milky-way-unit-12",
-  "chandler-155-n-lakeview-blvd-248",
-  "gilbert-3962-e-ironhorse-rd",
-  "chandler-3180-w-baylor-ln",
-  "tempe-1659-e-bishop-dr",
-  "tempe-518-e-julie",
-  "scottsdale-7329-north-v-a-camello-del-norte-1"
+  "mesa-1748-w-auburn-st",
+  "mesa-3433-n-almar",
+  "mesa-10427-e-diamond-ave",
+  "mesa-8216-e-osage-ave",
+  "mesa-2835-s-luther",
+  "gilbert-1839-e-milky-way",
+  "tempe-1214-w-5th-st-1",
+  "tempe-518-e-julie-dr",
+  "gilbert-3631-e-flamingo-way",
+  "mesa-10463-e-obispo-avenue",
+  "scottsdale-3901-n-83rd-st"
  ],
  "wrote": true
 }
