@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-18T17:16:09Z",
+ "ran_at": "2026-11-19T00:24:01Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,25 +18,19 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 18,
+   "found": 25,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 36,
    "error": null
   },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 200,
    "error": null,
    "note": "21 manager sites; 0 failed"
-  },
-  "AMH": {
-   "ok": true,
-   "found": 37,
-   "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 5 not yet in homes.json"
   },
   "Rentable": {
    "ok": true,
@@ -48,16 +42,22 @@
    "found": 150,
    "error": null
   },
-  "Redfin": {
+  "Tricon Residential": {
    "ok": true,
-   "found": 2642,
-   "error": null
+   "found": 3,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Craigslist": {
    "ok": true,
-   "found": 5,
+   "found": 4,
    "error": null,
-   "note": "174 new postings seen, 15 detail pages fetched"
+   "note": "175 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2653,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,35 +75,42 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3151,
+ "candidates": 3165,
  "dropped": {
-  "in_homes": 2141,
+  "in_homes": 2152,
   "bad": 65,
-  "merged": 3,
-  "under_floor": 935
+  "merged": 2,
+  "under_floor": 932
  },
- "new": 7,
+ "new": 14,
  "verified": {
-  "confirmed": 2514,
-  "not_seen": 284,
-  "unchanged": 1411,
+  "confirmed": 2519,
+  "not_seen": 310,
+  "unchanged": 1387,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 6,
-  "rent": 10,
-  "available": 2
+  "photos": 4,
+  "rent": 42,
+  "available": 4
  },
- "homes_total": 4860,
+ "homes_total": 4874,
  "added": [
-  "ahwatukee-3602-e-briarwood-ter",
-  "ahwatukee-1545-w-satinwood-dr",
-  "mesa-645-s-balboa",
-  "mesa-1367-s-country-club-dr-1115",
-  "chandler-3240-s-ambrosia-dr",
-  "tempe-1530-e-northshore-dr",
-  "gilbert-829-s-adam-way"
+  "arcadia-4200-n-19th-st",
+  "mesa-3515-n-barron",
+  "mesa-346-n-sycamore",
+  "mesa-9922-e-wavelength-ave",
+  "mesa-934-s-bristol",
+  "mesa-8421-e-main-st-lot-11",
+  "gilbert-396-w-gary-ave",
+  "mesa-2254-s-gaucho",
+  "chandler-3929-e-tonto-pl",
+  "tempe-9749-s-grandview-dr",
+  "tempe-1213-e-riviera-dr",
+  "tempe-3929-s-pine-st",
+  "tempe-2350-w-desiree-ln",
+  "scottsdale-34418-n-99th-st"
  ],
  "wrote": true
 }
