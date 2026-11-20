@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-19T20:38:03Z",
+ "ran_at": "2026-11-20T03:18:08Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 22,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 37,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,22 +11,37 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Progress Residential": {
+   "ok": true,
+   "found": 22,
+   "error": null
+  },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 35,
+   "error": null
+  },
   "AppFolio": {
    "ok": true,
    "found": 197,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 91,
-   "error": null
-  },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "10 in-area homes in sitemap, 4 not yet in homes.json"
+   "note": "9 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2654,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -52,11 +52,11 @@
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "172 new postings seen, 15 detail pages fetched"
+   "note": "174 new postings seen, 15 detail pages fetched"
   },
-  "Redfin": {
+  "Rentable": {
    "ok": true,
-   "found": 2640,
+   "found": 82,
    "error": null
   },
   "Realtor.com": {
@@ -75,39 +75,41 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3153,
+ "candidates": 3156,
  "dropped": {
-  "in_homes": 2146,
-  "bad": 67,
-  "merged": 0,
-  "under_floor": 929
+  "in_homes": 2150,
+  "bad": 68,
+  "merged": 1,
+  "under_floor": 924
  },
- "new": 11,
+ "new": 13,
  "verified": {
-  "confirmed": 2510,
-  "not_seen": 262,
-  "unchanged": 1429,
-  "gone": 21,
-  "back": 2
+  "confirmed": 2513,
+  "not_seen": 283,
+  "unchanged": 1396,
+  "gone": 0,
+  "back": 1
  },
  "updated": {
-  "photos": 9,
-  "rent": 19,
-  "available": 10
+  "photos": 3,
+  "rent": 32,
+  "available": 2
  },
- "homes_total": 4896,
+ "homes_total": 4909,
  "added": [
-  "mesa-1748-w-auburn-st",
-  "mesa-3433-n-almar",
-  "mesa-10427-e-diamond-ave",
-  "mesa-8216-e-osage-ave",
-  "mesa-2835-s-luther",
-  "gilbert-1839-e-milky-way",
-  "tempe-1214-w-5th-st-1",
-  "tempe-518-e-julie-dr",
-  "gilbert-3631-e-flamingo-way",
-  "mesa-10463-e-obispo-avenue",
-  "scottsdale-3901-n-83rd-st"
+  "ahwatukee-15055-s-14th-pl",
+  "ahwatukee-2046-e-saltsage-dr",
+  "pv-4813-e-turquoise-ave",
+  "scottsdale-6717-e-1st-ave",
+  "gilbert-2764-e-highland-ct",
+  "tempe-1831-s-torre-molinos-cir",
+  "gilbert-605-s-monterey-st",
+  "gilbert-120-w-sagebrush-st",
+  "gilbert-1691-w-stanford-ave",
+  "chandler-2606-e-la-costa-dr",
+  "chandler-1308-e-weatherby-way",
+  "tempe-7144-s-juniper-st",
+  "pv-4813-e-turquoise-ave-2"
  ],
  "wrote": true
 }
