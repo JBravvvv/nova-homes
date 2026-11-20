@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-20T12:54:15Z",
+ "ran_at": "2026-11-20T21:49:47Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 24,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 35,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,9 +11,24 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Progress Residential": {
+   "ok": true,
+   "found": 17,
+   "error": null
+  },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 33,
+   "error": null
+  },
   "AppFolio": {
    "ok": true,
-   "found": 197,
+   "found": 199,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
@@ -39,25 +39,25 @@
   },
   "Tricon Residential": {
    "ok": true,
-   "found": 3,
+   "found": 4,
    "error": null,
-   "note": "9 in-area homes in sitemap, 4 not yet in homes.json"
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2659,
-   "error": null
+   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
    "note": "173 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2674,
+   "error": null
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,41 +75,36 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3168,
+ "candidates": 3177,
  "dropped": {
-  "in_homes": 2154,
+  "in_homes": 2171,
   "bad": 68,
-  "merged": 2,
-  "under_floor": 931
+  "merged": 1,
+  "under_floor": 929
  },
- "new": 13,
+ "new": 8,
  "verified": {
-  "confirmed": 2512,
-  "not_seen": 282,
-  "unchanged": 1411,
+  "confirmed": 2533,
+  "not_seen": 280,
+  "unchanged": 1407,
   "gone": 0,
-  "back": 0
+  "back": 2
  },
  "updated": {
-  "photos": 9,
-  "rent": 14,
-  "available": 1
+  "photos": 2,
+  "rent": 21,
+  "available": 3
  },
- "homes_total": 4922,
+ "homes_total": 4930,
  "added": [
-  "scottsdale-5009-e-laurel-ln",
-  "scottsdale-8709-e-virginia-ave",
-  "mesa-2423-s-brighton-cir",
-  "mesa-8251-e-impala-ave",
-  "mesa-9637-e-olla-ave",
-  "mesa-1852-w-portobello-ave",
-  "gilbert-3335-e-windsor-dr",
-  "chandler-2600-e-springfield-pl-80",
-  "chandler-728-n-entrada-st",
-  "chandler-374-w-azalea-dr",
-  "tempe-1204-w-11th-st",
-  "tempe-4920-s-taylor-dr",
-  "gilbert-3335-e-windsor-dr-2"
+  "scottsdale-10040-e-happy-valley-rd-2",
+  "scottsdale-15825-n-61st-st",
+  "scottsdale-12525-e-jenan-dr",
+  "mesa-9250-e-kiowa-ave",
+  "chandler-1530-w-thompson-way",
+  "chandler-2600-w-shannon-ct",
+  "scottsdale-6850-e-mcdowell-rd-2",
+  "scottsdale-7700-e-gainey-ranch-rd-120"
  ],
  "wrote": true
 }
