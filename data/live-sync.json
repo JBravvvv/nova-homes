@@ -1,6 +1,21 @@
 {
- "ran_at": "2026-11-20T21:49:47Z",
+ "ran_at": "2026-11-21T03:14:11Z",
  "sources": {
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 24,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 33,
+   "error": null
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -11,52 +26,37 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Progress Residential": {
-   "ok": true,
-   "found": 17,
-   "error": null
-  },
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 33,
-   "error": null
-  },
   "AppFolio": {
    "ok": true,
-   "found": 199,
+   "found": 201,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 87,
+   "found": 82,
    "error": null
   },
   "Tricon Residential": {
    "ok": true,
-   "found": 4,
+   "found": 3,
    "error": null,
-   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 4,
    "error": null,
-   "note": "173 new postings seen, 15 detail pages fetched"
+   "note": "165 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2674,
-   "error": null
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
+   "found": 2715,
    "error": null
   },
   "Realtor.com": {
@@ -75,36 +75,51 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3177,
+ "candidates": 3221,
  "dropped": {
-  "in_homes": 2171,
+  "in_homes": 2182,
   "bad": 68,
-  "merged": 1,
-  "under_floor": 929
+  "merged": 0,
+  "under_floor": 948
  },
- "new": 8,
+ "new": 23,
  "verified": {
-  "confirmed": 2533,
-  "not_seen": 280,
-  "unchanged": 1407,
-  "gone": 0,
-  "back": 2
+  "confirmed": 2541,
+  "not_seen": 303,
+  "unchanged": 1385,
+  "gone": 25,
+  "back": 1
  },
  "updated": {
-  "photos": 2,
-  "rent": 21,
-  "available": 3
+  "photos": 7,
+  "rent": 17,
+  "available": 5
  },
- "homes_total": 4930,
+ "homes_total": 4953,
  "added": [
-  "scottsdale-10040-e-happy-valley-rd-2",
-  "scottsdale-15825-n-61st-st",
-  "scottsdale-12525-e-jenan-dr",
-  "mesa-9250-e-kiowa-ave",
-  "chandler-1530-w-thompson-way",
-  "chandler-2600-w-shannon-ct",
-  "scottsdale-6850-e-mcdowell-rd-2",
-  "scottsdale-7700-e-gainey-ranch-rd-120"
+  "ahwatukee-13819-s-41st-way",
+  "scottsdale-8013-e-del-laton-dr",
+  "scottsdale-1051-n-70th-way",
+  "scottsdale-4600-n-68th-st-330",
+  "gilbert-860-s-adam-way",
+  "mesa-11146-e-rafael-ave",
+  "mesa-2753-s-85th-way",
+  "mesa-9227-e-smith-ave",
+  "gilbert-1441-e-bruce-ave",
+  "gilbert-644-s-jacob-st",
+  "chandler-1111-n-monte-vista-st",
+  "chandler-1392-e-shannon-st",
+  "gilbert-5041-s-barley-ct",
+  "gilbert-3361-s-martingale-rd",
+  "chandler-893-s-comanche-ct",
+  "chandler-2100-w-musket-pl",
+  "chandler-1312-w-crane-dr",
+  "chandler-1201-w-goldfinch-way",
+  "tempe-1937-e-don-carlos-unit-1605356p",
+  "tempe-4700-s-grandview-ave",
+  "tempe-807-w-oxford-dr",
+  "chandler-1355-e-aloe-dr",
+  "scottsdale-8353-e-via"
  ],
  "wrote": true
 }
