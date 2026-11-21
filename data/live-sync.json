@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-21T12:40:19Z",
+ "ran_at": "2026-11-21T20:32:25Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -11,24 +11,19 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Progress Residential": {
-   "ok": true,
-   "found": 23,
-   "error": null
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 9,
    "error": null
   },
+  "Progress Residential": {
+   "ok": true,
+   "found": 22,
+   "error": null
+  },
   "AMH": {
    "ok": true,
    "found": 33,
-   "error": null
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 88,
    "error": null
   },
   "AppFolio": {
@@ -39,9 +34,14 @@
   },
   "Tricon Residential": {
    "ok": true,
-   "found": 3,
+   "found": 0,
    "error": null,
-   "note": "11 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "4 in-area homes in sitemap, 2 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 83,
+   "error": null
   },
   "Zumper": {
    "ok": true,
@@ -50,13 +50,13 @@
   },
   "Craigslist": {
    "ok": true,
-   "found": 4,
+   "found": 3,
    "error": null,
-   "note": "165 new postings seen, 15 detail pages fetched"
+   "note": "162 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2691,
+   "found": 2700,
    "error": null
   },
   "Realtor.com": {
@@ -75,31 +75,29 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3202,
+ "candidates": 3201,
  "dropped": {
   "in_homes": 2184,
   "bad": 68,
   "merged": 0,
-  "under_floor": 947
+  "under_floor": 948
  },
- "new": 3,
+ "new": 1,
  "verified": {
-  "confirmed": 2542,
+  "confirmed": 2551,
   "not_seen": 277,
-  "unchanged": 1408,
+  "unchanged": 1402,
   "gone": 0,
   "back": 0
  },
  "updated": {
   "photos": 2,
-  "rent": 3,
-  "available": 1
+  "rent": 14,
+  "available": 6
  },
- "homes_total": 4956,
+ "homes_total": 4957,
  "added": [
-  "gilbert-4025-e-arabian-dr",
-  "gilbert-4025-e-arabian-dr-2",
-  "scottsdale-9898-e-graythorn-dr"
+  "ahwatukee-4125-e-silverwood-dr"
  ],
  "wrote": true
 }
