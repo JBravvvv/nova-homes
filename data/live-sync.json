@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-21T03:14:11Z",
+ "ran_at": "2026-11-21T12:40:19Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 24,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 33,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,22 +11,37 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Progress Residential": {
+   "ok": true,
+   "found": 23,
+   "error": null
+  },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 33,
+   "error": null
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 88,
+   "error": null
+  },
   "AppFolio": {
    "ok": true,
    "found": 201,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 82,
-   "error": null
-  },
   "Tricon Residential": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "8 in-area homes in sitemap, 4 not yet in homes.json"
+   "note": "11 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
@@ -56,7 +56,7 @@
   },
   "Redfin": {
    "ok": true,
-   "found": 2715,
+   "found": 2691,
    "error": null
   },
   "Realtor.com": {
@@ -75,51 +75,31 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3221,
+ "candidates": 3202,
  "dropped": {
-  "in_homes": 2182,
+  "in_homes": 2184,
   "bad": 68,
   "merged": 0,
-  "under_floor": 948
+  "under_floor": 947
  },
- "new": 23,
+ "new": 3,
  "verified": {
-  "confirmed": 2541,
-  "not_seen": 303,
-  "unchanged": 1385,
-  "gone": 25,
-  "back": 1
+  "confirmed": 2542,
+  "not_seen": 277,
+  "unchanged": 1408,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
-  "photos": 7,
-  "rent": 17,
-  "available": 5
+  "photos": 2,
+  "rent": 3,
+  "available": 1
  },
- "homes_total": 4953,
+ "homes_total": 4956,
  "added": [
-  "ahwatukee-13819-s-41st-way",
-  "scottsdale-8013-e-del-laton-dr",
-  "scottsdale-1051-n-70th-way",
-  "scottsdale-4600-n-68th-st-330",
-  "gilbert-860-s-adam-way",
-  "mesa-11146-e-rafael-ave",
-  "mesa-2753-s-85th-way",
-  "mesa-9227-e-smith-ave",
-  "gilbert-1441-e-bruce-ave",
-  "gilbert-644-s-jacob-st",
-  "chandler-1111-n-monte-vista-st",
-  "chandler-1392-e-shannon-st",
-  "gilbert-5041-s-barley-ct",
-  "gilbert-3361-s-martingale-rd",
-  "chandler-893-s-comanche-ct",
-  "chandler-2100-w-musket-pl",
-  "chandler-1312-w-crane-dr",
-  "chandler-1201-w-goldfinch-way",
-  "tempe-1937-e-don-carlos-unit-1605356p",
-  "tempe-4700-s-grandview-ave",
-  "tempe-807-w-oxford-dr",
-  "chandler-1355-e-aloe-dr",
-  "scottsdale-8353-e-via"
+  "gilbert-4025-e-arabian-dr",
+  "gilbert-4025-e-arabian-dr-2",
+  "scottsdale-9898-e-graythorn-dr"
  ],
  "wrote": true
 }
