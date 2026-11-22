@@ -1,6 +1,21 @@
 {
- "ran_at": "2026-11-22T09:51:05Z",
+ "ran_at": "2026-11-22T17:50:18Z",
  "sources": {
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 20,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 32,
+   "error": null
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -11,26 +26,16 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Invitation Homes": {
-   "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 30,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 32,
-   "error": null
-  },
   "Tricon Residential": {
    "ok": true,
    "found": 0,
    "error": null,
-   "note": "3 in-area homes in sitemap, 2 not yet in homes.json"
+   "note": "4 in-area homes in sitemap, 3 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 87,
+   "error": null
   },
   "AppFolio": {
    "ok": true,
@@ -43,21 +48,16 @@
    "found": 150,
    "error": null
   },
-  "Rentable": {
-   "ok": true,
-   "found": 93,
-   "error": null
-  },
   "Redfin": {
    "ok": true,
-   "found": 2667,
+   "found": 2669,
    "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "160 new postings seen, 15 detail pages fetched"
+   "note": "161 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,31 +75,31 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3185,
+ "candidates": 3171,
  "dropped": {
-  "in_homes": 2174,
+  "in_homes": 2172,
   "bad": 68,
   "merged": 0,
-  "under_floor": 940
+  "under_floor": 928
  },
  "new": 3,
  "verified": {
-  "confirmed": 2526,
-  "not_seen": 282,
-  "unchanged": 1413,
+  "confirmed": 2523,
+  "not_seen": 279,
+  "unchanged": 1422,
   "gone": 0,
   "back": 0
  },
  "updated": {
   "photos": 0,
-  "rent": 4,
-  "available": 0
+  "rent": 5,
+  "available": 3
  },
- "homes_total": 4961,
+ "homes_total": 4964,
  "added": [
-  "tempe-2305-e-obregon-st",
-  "scottsdale-7329-north-v-a-camello-del-norte-1-2",
-  "scottsdale-7329-north-via-camello-del-norte-1"
+  "chandler-4462-s-wildflower-pl",
+  "mesa-15-leisure-world",
+  "scottsdale-6583-n-79th-pl"
  ],
  "wrote": true
 }
