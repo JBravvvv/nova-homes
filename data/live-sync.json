@@ -1,14 +1,14 @@
 {
- "ran_at": "2026-11-22T17:50:18Z",
+ "ran_at": "2026-11-22T23:37:07Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
-   "found": 9,
+   "found": 8,
    "error": null
   },
   "Progress Residential": {
    "ok": true,
-   "found": 20,
+   "found": 19,
    "error": null
   },
   "AMH": {
@@ -30,12 +30,7 @@
    "ok": true,
    "found": 0,
    "error": null,
-   "note": "4 in-area homes in sitemap, 3 not yet in homes.json"
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 87,
-   "error": null
+   "note": "3 in-area homes in sitemap, 2 not yet in homes.json"
   },
   "AppFolio": {
    "ok": true,
@@ -43,21 +38,26 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
+  "Redfin": {
+   "ok": true,
+   "found": 2672,
+   "error": null
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 81,
+   "error": null
+  },
   "Zumper": {
    "ok": true,
    "found": 150,
-   "error": null
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2669,
    "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 3,
    "error": null,
-   "note": "161 new postings seen, 15 detail pages fetched"
+   "note": "166 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,31 +75,29 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3171,
+ "candidates": 3166,
  "dropped": {
-  "in_homes": 2172,
-  "bad": 68,
-  "merged": 0,
-  "under_floor": 928
+  "in_homes": 2159,
+  "bad": 70,
+  "merged": 1,
+  "under_floor": 935
  },
- "new": 3,
+ "new": 1,
  "verified": {
-  "confirmed": 2523,
+  "confirmed": 2520,
   "not_seen": 279,
-  "unchanged": 1422,
-  "gone": 0,
+  "unchanged": 1428,
+  "gone": 8,
   "back": 0
  },
  "updated": {
   "photos": 0,
-  "rent": 5,
-  "available": 3
+  "rent": 12,
+  "available": 0
  },
- "homes_total": 4964,
+ "homes_total": 4965,
  "added": [
-  "chandler-4462-s-wildflower-pl",
-  "mesa-15-leisure-world",
-  "scottsdale-6583-n-79th-pl"
+  "scottsdale-6426-n-85th-st"
  ],
  "wrote": true
 }
