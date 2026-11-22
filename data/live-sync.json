@@ -1,6 +1,21 @@
 {
- "ran_at": "2026-11-21T20:32:25Z",
+ "ran_at": "2026-11-22T02:15:03Z",
  "sources": {
+  "Invitation Homes": {
+   "ok": true,
+   "found": 9,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 23,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 33,
+   "error": null
+  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -11,20 +26,11 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Invitation Homes": {
+  "Tricon Residential": {
    "ok": true,
-   "found": 9,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 22,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 33,
-   "error": null
+   "found": 0,
+   "error": null,
+   "note": "5 in-area homes in sitemap, 3 not yet in homes.json"
   },
   "AppFolio": {
    "ok": true,
@@ -32,15 +38,14 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Tricon Residential": {
+  "Redfin": {
    "ok": true,
-   "found": 0,
-   "error": null,
-   "note": "4 in-area homes in sitemap, 2 not yet in homes.json"
+   "found": 2703,
+   "error": null
   },
   "Rentable": {
    "ok": true,
-   "found": 83,
+   "found": 86,
    "error": null
   },
   "Zumper": {
@@ -53,11 +58,6 @@
    "found": 3,
    "error": null,
    "note": "162 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2700,
-   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,29 +75,29 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3201,
+ "candidates": 3208,
  "dropped": {
-  "in_homes": 2184,
+  "in_homes": 2197,
   "bad": 68,
   "merged": 0,
-  "under_floor": 948
+  "under_floor": 942
  },
  "new": 1,
  "verified": {
-  "confirmed": 2551,
-  "not_seen": 277,
-  "unchanged": 1402,
-  "gone": 0,
-  "back": 0
+  "confirmed": 2557,
+  "not_seen": 294,
+  "unchanged": 1381,
+  "gone": 12,
+  "back": 1
  },
  "updated": {
-  "photos": 2,
-  "rent": 14,
-  "available": 6
+  "photos": 1,
+  "rent": 10,
+  "available": 0
  },
- "homes_total": 4957,
+ "homes_total": 4958,
  "added": [
-  "ahwatukee-4125-e-silverwood-dr"
+  "tempe-1123-e-bell-de-mar-dr"
  ],
  "wrote": true
 }
