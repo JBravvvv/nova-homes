@@ -1,14 +1,24 @@
 {
- "ran_at": "2026-11-22T23:37:07Z",
+ "ran_at": "2026-11-23T07:39:53Z",
  "sources": {
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 8,
    "error": null
   },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "Progress Residential": {
    "ok": true,
-   "found": 19,
+   "found": 26,
    "error": null
   },
   "AMH": {
@@ -16,21 +26,10 @@
    "found": 32,
    "error": null
   },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Tricon Residential": {
+  "Rentable": {
    "ok": true,
-   "found": 0,
-   "error": null,
-   "note": "3 in-area homes in sitemap, 2 not yet in homes.json"
+   "found": 96,
+   "error": null
   },
   "AppFolio": {
    "ok": true,
@@ -38,26 +37,27 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2672,
-   "error": null
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 81,
-   "error": null
-  },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 0,
+   "error": null,
+   "note": "5 in-area homes in sitemap, 4 not yet in homes.json"
+  },
   "Craigslist": {
    "ok": true,
-   "found": 3,
+   "found": 6,
    "error": null,
-   "note": "166 new postings seen, 15 detail pages fetched"
+   "note": "169 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2642,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,29 +75,33 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3166,
+ "candidates": 3161,
  "dropped": {
-  "in_homes": 2159,
+  "in_homes": 2147,
   "bad": 70,
-  "merged": 1,
-  "under_floor": 935
+  "merged": 0,
+  "under_floor": 939
  },
- "new": 1,
+ "new": 5,
  "verified": {
-  "confirmed": 2520,
-  "not_seen": 279,
-  "unchanged": 1428,
-  "gone": 8,
+  "confirmed": 2497,
+  "not_seen": 329,
+  "unchanged": 1394,
+  "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 0,
-  "rent": 12,
-  "available": 0
+  "photos": 2,
+  "rent": 9,
+  "available": 1
  },
- "homes_total": 4965,
+ "homes_total": 4970,
  "added": [
-  "scottsdale-6426-n-85th-st"
+  "mesa-11065-e-sonrisa-ave",
+  "gilbert-329-e-vaughn-ave",
+  "chandler-4628-e-county-down-dr",
+  "chandler-700-w-powell-way",
+  "tempe-539-w-19th-st"
  ],
  "wrote": true
 }
