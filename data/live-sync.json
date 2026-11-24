@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-23T20:14:36Z",
+ "ran_at": "2026-11-24T04:49:40Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,46 +18,46 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 28,
+   "found": 25,
    "error": null
   },
   "AMH": {
    "ok": true,
-   "found": 33,
+   "found": 32,
    "error": null
   },
   "AppFolio": {
    "ok": true,
-   "found": 203,
+   "found": 204,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 94,
+   "found": 84,
    "error": null
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 1,
+   "error": null,
+   "note": "9 in-area homes in sitemap, 7 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
+  "Redfin": {
+   "ok": true,
+   "found": 2652,
+   "error": null
+  },
   "Craigslist": {
    "ok": true,
    "found": 9,
    "error": null,
-   "note": "159 new postings seen, 15 detail pages fetched"
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 3,
-   "error": null,
-   "note": "16 in-area homes in sitemap, 9 not yet in homes.json"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2645,
-   "error": null
+   "note": "162 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,36 +75,40 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3174,
+ "candidates": 3166,
  "dropped": {
-  "in_homes": 2158,
+  "in_homes": 2146,
   "bad": 70,
   "merged": 2,
   "under_floor": 936
  },
- "new": 8,
+ "new": 12,
  "verified": {
-  "confirmed": 2497,
-  "not_seen": 327,
-  "unchanged": 1402,
-  "gone": 0,
+  "confirmed": 2490,
+  "not_seen": 347,
+  "unchanged": 1398,
+  "gone": 38,
   "back": 1
  },
  "updated": {
-  "photos": 0,
-  "rent": 12,
+  "photos": 6,
+  "rent": 24,
   "available": 3
  },
- "homes_total": 4978,
+ "homes_total": 4990,
  "added": [
-  "scottsdale-7913-e-pepper-tree-ln",
-  "scottsdale-6433-e-calle-camelia",
-  "chandler-606-s-rio-dr",
-  "chandler-1840-w-lark-dr",
-  "tempe-1020-w-10th-pl",
-  "chandler-899-e-elgin-street",
-  "chandler-3113-e-bluebird-pl",
-  "scottsdale-5105-n-granite-reef-rd"
+  "scottsdale-7781-e-buteo-dr",
+  "mesa-4310-e-hope-st",
+  "mesa-2652-e-sylvan-ave",
+  "gilbert-3439-e-juanita-ave",
+  "mesa-8223-e-plata-ave",
+  "mesa-1849-s-spruce",
+  "gilbert-937-e-dumbarton-ave",
+  "chandler-841-e-tonto-pl",
+  "chandler-4405-e-cherry-hills-dr",
+  "tempe-1236-e-loyola-dr",
+  "tempe-6504-s-forest-ave",
+  "arcadia-2933-e-fairmount-ave"
  ],
  "wrote": true
 }
