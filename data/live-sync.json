@@ -1,16 +1,6 @@
 {
- "ran_at": "2026-11-24T04:49:40Z",
+ "ran_at": "2026-11-24T17:45:50Z",
  "sources": {
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 9,
@@ -26,38 +16,48 @@
    "found": 32,
    "error": null
   },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "AppFolio": {
    "ok": true,
-   "found": 204,
+   "found": 205,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 84,
+   "found": 82,
    "error": null
-  },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 1,
-   "error": null,
-   "note": "9 in-area homes in sitemap, 7 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 1,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 7 not yet in homes.json"
+  },
   "Redfin": {
    "ok": true,
-   "found": 2652,
+   "found": 2616,
    "error": null
   },
   "Craigslist": {
    "ok": true,
    "found": 9,
    "error": null,
-   "note": "162 new postings seen, 15 detail pages fetched"
+   "note": "163 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,40 +75,39 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3166,
+ "candidates": 3129,
  "dropped": {
-  "in_homes": 2146,
+  "in_homes": 2134,
   "bad": 70,
-  "merged": 2,
-  "under_floor": 936
+  "merged": 3,
+  "under_floor": 911
  },
- "new": 12,
+ "new": 11,
  "verified": {
-  "confirmed": 2490,
-  "not_seen": 347,
-  "unchanged": 1398,
-  "gone": 38,
-  "back": 1
+  "confirmed": 2469,
+  "not_seen": 309,
+  "unchanged": 1431,
+  "gone": 0,
+  "back": 0
  },
  "updated": {
-  "photos": 6,
-  "rent": 24,
+  "photos": 1,
+  "rent": 34,
   "available": 3
  },
- "homes_total": 4990,
+ "homes_total": 5001,
  "added": [
-  "scottsdale-7781-e-buteo-dr",
-  "mesa-4310-e-hope-st",
-  "mesa-2652-e-sylvan-ave",
-  "gilbert-3439-e-juanita-ave",
-  "mesa-8223-e-plata-ave",
-  "mesa-1849-s-spruce",
-  "gilbert-937-e-dumbarton-ave",
-  "chandler-841-e-tonto-pl",
-  "chandler-4405-e-cherry-hills-dr",
-  "tempe-1236-e-loyola-dr",
-  "tempe-6504-s-forest-ave",
-  "arcadia-2933-e-fairmount-ave"
+  "ahwatukee-4323-e-windsong-dr",
+  "scottsdale-5909-e-kelton-ln",
+  "scottsdale-12048-n-111th-way",
+  "gilbert-3450-e-terrace-ave",
+  "mesa-1915-s-39th-st-22",
+  "gilbert-2530-e-kent-ave",
+  "gilbert-6756-s-seton-ave",
+  "scottsdale-4246-n-79th-st",
+  "gilbert-8-s-pueblo-street",
+  "gilbert-6756-s-seton-ave-2",
+  "scottsdale-20750-n-87th-st-1060"
  ],
  "wrote": true
 }
