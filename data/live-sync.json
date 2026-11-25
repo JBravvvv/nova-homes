@@ -1,24 +1,14 @@
 {
- "ran_at": "2026-11-25T02:30:32Z",
+ "ran_at": "2026-11-25T14:23:15Z",
  "sources": {
-  "Trulia": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Zillow": {
-   "ok": false,
-   "found": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 26,
-   "error": null
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 10,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 28,
    "error": null
   },
   "AMH": {
@@ -26,11 +16,31 @@
    "found": 33,
    "error": null
   },
+  "Zillow": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  "Trulia": {
+   "ok": false,
+   "found": 0,
+   "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
   "AppFolio": {
    "ok": true,
    "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 86,
+   "error": null
+  },
+  "Zumper": {
+   "ok": true,
+   "found": 150,
+   "error": null
   },
   "Tricon Residential": {
    "ok": true,
@@ -38,25 +48,15 @@
    "error": null,
    "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 90,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
    "found": 9,
    "error": null,
-   "note": "163 new postings seen, 15 detail pages fetched"
+   "note": "162 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2632,
-   "error": null
-  },
-  "Zumper": {
-   "ok": true,
-   "found": 150,
+   "found": 2619,
    "error": null
   },
   "Realtor.com": {
@@ -75,43 +75,32 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3154,
+ "candidates": 3139,
  "dropped": {
   "in_homes": 2144,
-  "bad": 69,
-  "merged": 2,
-  "under_floor": 924
+  "bad": 68,
+  "merged": 0,
+  "under_floor": 923
  },
- "new": 15,
+ "new": 4,
  "verified": {
-  "confirmed": 2474,
-  "not_seen": 354,
-  "unchanged": 1392,
-  "gone": 11,
-  "back": 0
+  "confirmed": 2462,
+  "not_seen": 343,
+  "unchanged": 1420,
+  "gone": 0,
+  "back": 1
  },
  "updated": {
-  "photos": 8,
-  "rent": 35,
-  "available": 3
+  "photos": 3,
+  "rent": 9,
+  "available": 4
  },
- "homes_total": 5016,
+ "homes_total": 5020,
  "added": [
-  "arcadia-4002-n-32nd-pl",
-  "ahwatukee-1216-e-wildwood-dr",
-  "scottsdale-7599-e-nestling-way",
-  "scottsdale-6845-n-rocking-rd",
-  "gilbert-902-s-pheasant-dr",
-  "mesa-2078-e-sylvan-ave",
-  "mesa-2225-e-pueblo-ave",
-  "gilbert-519-e-devon-dr",
-  "chandler-1114-w-el-alba-way",
-  "gilbert-1839-e-lafayette-ave",
-  "gilbert-5487-s-sandstone-st",
-  "chandler-3059-e-hazeltine-way",
-  "chandler-180-e-horseshoe-dr",
-  "tempe-1501-e-laguna-dr",
-  "tempe-1719-e-diamond-dr"
+  "mesa-1204-e-kramer-cir",
+  "mesa-802-e-grandview-st",
+  "mesa-1817-w-isleta-ave",
+  "chandler-1185-n-woodburne-dr"
  ],
  "wrote": true
 }
