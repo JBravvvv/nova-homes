@@ -1,21 +1,6 @@
 {
- "ran_at": "2026-11-26T00:21:32Z",
+ "ran_at": "2026-11-26T10:54:53Z",
  "sources": {
-  "Invitation Homes": {
-   "ok": true,
-   "found": 10,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 28,
-   "error": null
-  },
-  "AMH": {
-   "ok": true,
-   "found": 33,
-   "error": null
-  },
   "Zillow": {
    "ok": false,
    "found": 0,
@@ -26,37 +11,52 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Invitation Homes": {
+   "ok": true,
+   "found": 10,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 23,
+   "error": null
+  },
+  "AMH": {
+   "ok": true,
+   "found": 33,
+   "error": null
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 86,
+   "error": null
+  },
   "AppFolio": {
    "ok": true,
    "found": 200,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 90,
-   "error": null
-  },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Craigslist": {
-   "ok": true,
-   "found": 9,
-   "error": null,
-   "note": "161 new postings seen, 15 detail pages fetched"
-  },
   "Tricon Residential": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "9 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 10,
+   "error": null,
+   "note": "159 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2620,
+   "found": 2617,
    "error": null
   },
   "Realtor.com": {
@@ -75,41 +75,36 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3142,
+ "candidates": 3131,
  "dropped": {
-  "in_homes": 2138,
+  "in_homes": 2122,
   "bad": 69,
   "merged": 0,
-  "under_floor": 922
+  "under_floor": 932
  },
- "new": 13,
+ "new": 8,
  "verified": {
-  "confirmed": 2458,
-  "not_seen": 381,
-  "unchanged": 1392,
-  "gone": 29,
-  "back": 2
+  "confirmed": 2464,
+  "not_seen": 349,
+  "unchanged": 1403,
+  "gone": 0,
+  "back": 1
  },
  "updated": {
-  "photos": 3,
-  "rent": 34,
-  "available": 6
+  "photos": 4,
+  "rent": 10,
+  "available": 1
  },
- "homes_total": 5033,
+ "homes_total": 5041,
  "added": [
-  "scottsdale-10796-e-betony-dr",
-  "scottsdale-18221-n-53rd-st",
-  "scottsdale-5402-e-laurel-ln",
-  "scottsdale-6035-e-calle-del-paisano",
-  "mesa-7044-e-inglewood-st",
-  "mesa-1040-s-vineyard",
-  "gilbert-3854-e-flower-st",
-  "chandler-5321-w-linda-ln",
-  "chandler-5243-w-whitten-st",
-  "chandler-3983-w-tara-dr",
-  "chandler-5463-w-geronimo-st",
-  "tempe-1284-e-alameda-cir",
-  "gilbert-2626-s-sulley-dr-unit-109"
+  "tempe-2021-e-10th-st",
+  "gilbert-602-s-neely-st",
+  "chandler-3416-e-waterview-dr",
+  "tempe-316-e-dunbar-dr",
+  "mesa-7121-e-greenway-st",
+  "tempe-316-e-dunbar-dr-2",
+  "tempe-914-w-harvard-dr",
+  "scottsdale-11673-n-136th-st-2025"
  ],
  "wrote": true
 }
