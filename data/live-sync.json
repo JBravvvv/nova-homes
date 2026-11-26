@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-25T14:23:15Z",
+ "ran_at": "2026-11-26T00:21:32Z",
  "sources": {
   "Invitation Homes": {
    "ok": true,
@@ -28,13 +28,13 @@
   },
   "AppFolio": {
    "ok": true,
-   "found": 202,
+   "found": 200,
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
   "Rentable": {
    "ok": true,
-   "found": 86,
+   "found": 90,
    "error": null
   },
   "Zumper": {
@@ -42,21 +42,21 @@
    "found": 150,
    "error": null
   },
+  "Craigslist": {
+   "ok": true,
+   "found": 9,
+   "error": null,
+   "note": "161 new postings seen, 15 detail pages fetched"
+  },
   "Tricon Residential": {
    "ok": true,
    "found": 2,
    "error": null,
    "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
   },
-  "Craigslist": {
-   "ok": true,
-   "found": 9,
-   "error": null,
-   "note": "162 new postings seen, 15 detail pages fetched"
-  },
   "Redfin": {
    "ok": true,
-   "found": 2619,
+   "found": 2620,
    "error": null
   },
   "Realtor.com": {
@@ -75,32 +75,41 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3139,
+ "candidates": 3142,
  "dropped": {
-  "in_homes": 2144,
-  "bad": 68,
+  "in_homes": 2138,
+  "bad": 69,
   "merged": 0,
-  "under_floor": 923
+  "under_floor": 922
  },
- "new": 4,
+ "new": 13,
  "verified": {
-  "confirmed": 2462,
-  "not_seen": 343,
-  "unchanged": 1420,
-  "gone": 0,
-  "back": 1
+  "confirmed": 2458,
+  "not_seen": 381,
+  "unchanged": 1392,
+  "gone": 29,
+  "back": 2
  },
  "updated": {
   "photos": 3,
-  "rent": 9,
-  "available": 4
+  "rent": 34,
+  "available": 6
  },
- "homes_total": 5020,
+ "homes_total": 5033,
  "added": [
-  "mesa-1204-e-kramer-cir",
-  "mesa-802-e-grandview-st",
-  "mesa-1817-w-isleta-ave",
-  "chandler-1185-n-woodburne-dr"
+  "scottsdale-10796-e-betony-dr",
+  "scottsdale-18221-n-53rd-st",
+  "scottsdale-5402-e-laurel-ln",
+  "scottsdale-6035-e-calle-del-paisano",
+  "mesa-7044-e-inglewood-st",
+  "mesa-1040-s-vineyard",
+  "gilbert-3854-e-flower-st",
+  "chandler-5321-w-linda-ln",
+  "chandler-5243-w-whitten-st",
+  "chandler-3983-w-tara-dr",
+  "chandler-5463-w-geronimo-st",
+  "tempe-1284-e-alameda-cir",
+  "gilbert-2626-s-sulley-dr-unit-109"
  ],
  "wrote": true
 }
