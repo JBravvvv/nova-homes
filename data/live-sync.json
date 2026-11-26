@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-26T10:54:53Z",
+ "ran_at": "2026-11-26T21:32:38Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -18,7 +18,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 23,
+   "found": 27,
    "error": null
   },
   "AMH": {
@@ -26,37 +26,37 @@
    "found": 33,
    "error": null
   },
-  "Rentable": {
-   "ok": true,
-   "found": 86,
-   "error": null
-  },
   "AppFolio": {
    "ok": true,
-   "found": 200,
+   "found": 202,
    "error": null,
    "note": "21 manager sites; 0 failed"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 87,
+   "error": null
+  },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 1,
+   "error": null,
+   "note": "11 in-area homes in sitemap, 7 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 2,
-   "error": null,
-   "note": "9 in-area homes in sitemap, 5 not yet in homes.json"
-  },
   "Craigslist": {
    "ok": true,
-   "found": 10,
+   "found": 9,
    "error": null,
-   "note": "159 new postings seen, 15 detail pages fetched"
+   "note": "160 new postings seen, 15 detail pages fetched"
   },
   "Redfin": {
    "ok": true,
-   "found": 2617,
+   "found": 2626,
    "error": null
   },
   "Realtor.com": {
@@ -75,36 +75,33 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3131,
+ "candidates": 3145,
  "dropped": {
-  "in_homes": 2122,
+  "in_homes": 2143,
   "bad": 69,
-  "merged": 0,
-  "under_floor": 932
+  "merged": 2,
+  "under_floor": 926
  },
- "new": 8,
+ "new": 5,
  "verified": {
-  "confirmed": 2464,
+  "confirmed": 2474,
   "not_seen": 349,
-  "unchanged": 1403,
-  "gone": 0,
-  "back": 1
+  "unchanged": 1401,
+  "gone": 26,
+  "back": 0
  },
  "updated": {
   "photos": 4,
-  "rent": 10,
-  "available": 1
+  "rent": 8,
+  "available": 5
  },
- "homes_total": 5041,
+ "homes_total": 5046,
  "added": [
-  "tempe-2021-e-10th-st",
-  "gilbert-602-s-neely-st",
-  "chandler-3416-e-waterview-dr",
-  "tempe-316-e-dunbar-dr",
-  "mesa-7121-e-greenway-st",
-  "tempe-316-e-dunbar-dr-2",
-  "tempe-914-w-harvard-dr",
-  "scottsdale-11673-n-136th-st-2025"
+  "ahwatukee-16419-s-38th-pl",
+  "mesa-2942-e-dover-st",
+  "mesa-2322-e-evergreen-st",
+  "gilbert-4125-e-trigger-way",
+  "chandler-157-w-linda-ln"
  ],
  "wrote": true
 }
