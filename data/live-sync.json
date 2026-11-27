@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-27T13:57:44Z",
+ "ran_at": "2026-11-27T22:43:12Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -11,19 +11,19 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Progress Residential": {
+   "ok": true,
+   "found": 25,
+   "error": null
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 10,
    "error": null
   },
-  "Progress Residential": {
-   "ok": true,
-   "found": 28,
-   "error": null
-  },
   "AMH": {
    "ok": true,
-   "found": 33,
+   "found": 32,
    "error": null
   },
   "AppFolio": {
@@ -32,32 +32,32 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 91,
-   "error": null
-  },
   "Tricon Residential": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "9 in-area homes in sitemap, 6 not yet in homes.json"
+   "note": "9 in-area homes in sitemap, 5 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 86,
+   "error": null
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Craigslist": {
-   "ok": true,
-   "found": 9,
-   "error": null,
-   "note": "155 new postings seen, 15 detail pages fetched"
-  },
   "Redfin": {
    "ok": true,
-   "found": 2626,
+   "found": 2616,
    "error": null
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 6,
+   "error": null,
+   "note": "111 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,30 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3151,
+ "candidates": 3129,
  "dropped": {
-  "in_homes": 2142,
+  "in_homes": 2138,
   "bad": 69,
-  "merged": 2,
-  "under_floor": 936
+  "merged": 0,
+  "under_floor": 920
  },
  "new": 2,
  "verified": {
-  "confirmed": 2466,
-  "not_seen": 334,
-  "unchanged": 1404,
+  "confirmed": 2463,
+  "not_seen": 333,
+  "unchanged": 1410,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 0,
-  "rent": 2,
+  "photos": 1,
+  "rent": 7,
   "available": 3
  },
- "homes_total": 5049,
+ "homes_total": 5051,
  "added": [
-  "scottsdale-12202-n-62nd-pl",
-  "gilbert-1150-n-saint-elena-st"
+  "ahwatukee-2914-e-muirwood-dr",
+  "scottsdale-6132-e-janice-way"
  ],
  "wrote": true
 }
