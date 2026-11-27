@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-26T21:32:38Z",
+ "ran_at": "2026-11-27T04:16:32Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -11,14 +11,14 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
+  "Progress Residential": {
+   "ok": true,
+   "found": 26,
+   "error": null
+  },
   "Invitation Homes": {
    "ok": true,
    "found": 10,
-   "error": null
-  },
-  "Progress Residential": {
-   "ok": true,
-   "found": 27,
    "error": null
   },
   "AMH": {
@@ -32,32 +32,32 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Rentable": {
-   "ok": true,
-   "found": 87,
-   "error": null
-  },
   "Tricon Residential": {
    "ok": true,
-   "found": 1,
+   "found": 2,
    "error": null,
    "note": "11 in-area homes in sitemap, 7 not yet in homes.json"
+  },
+  "Rentable": {
+   "ok": true,
+   "found": 84,
+   "error": null
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Craigslist": {
-   "ok": true,
-   "found": 9,
-   "error": null,
-   "note": "160 new postings seen, 15 detail pages fetched"
-  },
   "Redfin": {
    "ok": true,
-   "found": 2626,
+   "found": 2631,
    "error": null
+  },
+  "Craigslist": {
+   "ok": true,
+   "found": 12,
+   "error": null,
+   "note": "115 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,33 +75,29 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3145,
+ "candidates": 3150,
  "dropped": {
-  "in_homes": 2143,
+  "in_homes": 2131,
   "bad": 69,
-  "merged": 2,
-  "under_floor": 926
+  "merged": 0,
+  "under_floor": 949
  },
- "new": 5,
+ "new": 1,
  "verified": {
-  "confirmed": 2474,
-  "not_seen": 349,
-  "unchanged": 1401,
-  "gone": 26,
+  "confirmed": 2475,
+  "not_seen": 335,
+  "unchanged": 1393,
+  "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 4,
+  "photos": 1,
   "rent": 8,
-  "available": 5
+  "available": 0
  },
- "homes_total": 5046,
+ "homes_total": 5047,
  "added": [
-  "ahwatukee-16419-s-38th-pl",
-  "mesa-2942-e-dover-st",
-  "mesa-2322-e-evergreen-st",
-  "gilbert-4125-e-trigger-way",
-  "chandler-157-w-linda-ln"
+  "chandler-1421-west-rosal-place"
  ],
  "wrote": true
 }
