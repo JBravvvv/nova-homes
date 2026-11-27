@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-27T04:16:32Z",
+ "ran_at": "2026-11-27T13:57:44Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -11,14 +11,14 @@
    "found": 0,
    "error": "HTTPError: HTTP Error 403: Forbidden"
   },
-  "Progress Residential": {
-   "ok": true,
-   "found": 26,
-   "error": null
-  },
   "Invitation Homes": {
    "ok": true,
    "found": 10,
+   "error": null
+  },
+  "Progress Residential": {
+   "ok": true,
+   "found": 28,
    "error": null
   },
   "AMH": {
@@ -32,32 +32,32 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
+  "Rentable": {
+   "ok": true,
+   "found": 91,
+   "error": null
+  },
   "Tricon Residential": {
    "ok": true,
    "found": 2,
    "error": null,
-   "note": "11 in-area homes in sitemap, 7 not yet in homes.json"
-  },
-  "Rentable": {
-   "ok": true,
-   "found": 84,
-   "error": null
+   "note": "9 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Zumper": {
    "ok": true,
    "found": 150,
    "error": null
   },
-  "Redfin": {
-   "ok": true,
-   "found": 2631,
-   "error": null
-  },
   "Craigslist": {
    "ok": true,
-   "found": 12,
+   "found": 9,
    "error": null,
-   "note": "115 new postings seen, 15 detail pages fetched"
+   "note": "155 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2626,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,29 +75,30 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3150,
+ "candidates": 3151,
  "dropped": {
-  "in_homes": 2131,
+  "in_homes": 2142,
   "bad": 69,
-  "merged": 0,
-  "under_floor": 949
+  "merged": 2,
+  "under_floor": 936
  },
- "new": 1,
+ "new": 2,
  "verified": {
-  "confirmed": 2475,
-  "not_seen": 335,
-  "unchanged": 1393,
+  "confirmed": 2466,
+  "not_seen": 334,
+  "unchanged": 1404,
   "gone": 0,
   "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 8,
-  "available": 0
+  "photos": 0,
+  "rent": 2,
+  "available": 3
  },
- "homes_total": 5047,
+ "homes_total": 5049,
  "added": [
-  "chandler-1421-west-rosal-place"
+  "scottsdale-12202-n-62nd-pl",
+  "gilbert-1150-n-saint-elena-st"
  ],
  "wrote": true
 }
