@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-27T22:43:12Z",
+ "ran_at": "2026-11-28T07:50:03Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -13,7 +13,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 25,
+   "found": 26,
    "error": null
   },
   "Invitation Homes": {
@@ -32,15 +32,9 @@
    "error": null,
    "note": "21 manager sites; 0 failed"
   },
-  "Tricon Residential": {
-   "ok": true,
-   "found": 2,
-   "error": null,
-   "note": "9 in-area homes in sitemap, 5 not yet in homes.json"
-  },
   "Rentable": {
    "ok": true,
-   "found": 86,
+   "found": 92,
    "error": null
   },
   "Zumper": {
@@ -48,16 +42,22 @@
    "found": 150,
    "error": null
   },
-  "Redfin": {
+  "Tricon Residential": {
    "ok": true,
-   "found": 2616,
-   "error": null
+   "found": 2,
+   "error": null,
+   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
   },
   "Craigslist": {
    "ok": true,
-   "found": 6,
+   "found": 8,
    "error": null,
-   "note": "111 new postings seen, 15 detail pages fetched"
+   "note": "152 new postings seen, 15 detail pages fetched"
+  },
+  "Redfin": {
+   "ok": true,
+   "found": 2595,
+   "error": null
   },
   "Realtor.com": {
    "ok": false,
@@ -75,30 +75,35 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3129,
+ "candidates": 3117,
  "dropped": {
-  "in_homes": 2138,
+  "in_homes": 2132,
   "bad": 69,
   "merged": 0,
-  "under_floor": 920
+  "under_floor": 909
  },
- "new": 2,
+ "new": 7,
  "verified": {
-  "confirmed": 2463,
-  "not_seen": 333,
-  "unchanged": 1410,
-  "gone": 0,
+  "confirmed": 2441,
+  "not_seen": 371,
+  "unchanged": 1396,
+  "gone": 7,
   "back": 0
  },
  "updated": {
-  "photos": 1,
-  "rent": 7,
-  "available": 3
+  "photos": 0,
+  "rent": 6,
+  "available": 2
  },
- "homes_total": 5051,
+ "homes_total": 5058,
  "added": [
-  "ahwatukee-2914-e-muirwood-dr",
-  "scottsdale-6132-e-janice-way"
+  "mesa-7532-e-sierra-morena-cir",
+  "mesa-2550-e-butte-st",
+  "mesa-2150-w-isthmus-loop",
+  "tempe-1015-e-loyola-dr",
+  "tempe-1412-e-laguna-dr",
+  "tempe-1904-e-laguna-dr",
+  "tempe-631-e-manhatton-dr"
  ],
  "wrote": true
 }
