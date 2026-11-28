@@ -1,5 +1,5 @@
 {
- "ran_at": "2026-11-28T07:50:03Z",
+ "ran_at": "2026-11-28T16:53:54Z",
  "sources": {
   "Zillow": {
    "ok": false,
@@ -13,7 +13,7 @@
   },
   "Progress Residential": {
    "ok": true,
-   "found": 26,
+   "found": 29,
    "error": null
   },
   "Invitation Homes": {
@@ -26,6 +26,12 @@
    "found": 32,
    "error": null
   },
+  "Tricon Residential": {
+   "ok": true,
+   "found": 2,
+   "error": null,
+   "note": "9 in-area homes in sitemap, 5 not yet in homes.json"
+  },
   "AppFolio": {
    "ok": true,
    "found": 202,
@@ -34,7 +40,7 @@
   },
   "Rentable": {
    "ok": true,
-   "found": 92,
+   "found": 82,
    "error": null
   },
   "Zumper": {
@@ -42,22 +48,16 @@
    "found": 150,
    "error": null
   },
-  "Tricon Residential": {
+  "Redfin": {
    "ok": true,
-   "found": 2,
-   "error": null,
-   "note": "10 in-area homes in sitemap, 6 not yet in homes.json"
+   "found": 2598,
+   "error": null
   },
   "Craigslist": {
    "ok": true,
-   "found": 8,
+   "found": 9,
    "error": null,
-   "note": "152 new postings seen, 15 detail pages fetched"
-  },
-  "Redfin": {
-   "ok": true,
-   "found": 2595,
-   "error": null
+   "note": "123 new postings seen, 15 detail pages fetched"
   },
   "Realtor.com": {
    "ok": false,
@@ -75,35 +75,32 @@
    "error": "skipped: client-rendered, no public JSON"
   }
  },
- "candidates": 3117,
+ "candidates": 3114,
  "dropped": {
   "in_homes": 2132,
-  "bad": 69,
-  "merged": 0,
+  "bad": 68,
+  "merged": 1,
   "under_floor": 909
  },
- "new": 7,
+ "new": 4,
  "verified": {
-  "confirmed": 2441,
-  "not_seen": 371,
-  "unchanged": 1396,
-  "gone": 7,
-  "back": 0
+  "confirmed": 2448,
+  "not_seen": 364,
+  "unchanged": 1398,
+  "gone": 0,
+  "back": 2
  },
  "updated": {
-  "photos": 0,
-  "rent": 6,
-  "available": 2
+  "photos": 2,
+  "rent": 4,
+  "available": 4
  },
- "homes_total": 5058,
+ "homes_total": 5062,
  "added": [
-  "mesa-7532-e-sierra-morena-cir",
-  "mesa-2550-e-butte-st",
-  "mesa-2150-w-isthmus-loop",
-  "tempe-1015-e-loyola-dr",
-  "tempe-1412-e-laguna-dr",
-  "tempe-1904-e-laguna-dr",
-  "tempe-631-e-manhatton-dr"
+  "mesa-1151-n-estrada",
+  "gilbert-750-e-eagle-ln",
+  "tempe-3722-s-grandview-ave",
+  "tempe-317-s-beck"
  ],
  "wrote": true
 }
